@@ -6,7 +6,7 @@ function PantoneCard() {
     return (
         <div className="pantoneComponent">
             <div className="pantoneCard">
-                <div className="swatchColour lightBlue"></div>
+                <div className="swatchColour burgundy"></div>
                 <div className="pantoneName">
                     <h3>Colour Name</h3>
                     <h4>Pantone™</h4>
