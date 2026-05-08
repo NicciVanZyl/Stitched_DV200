@@ -2,6 +2,17 @@ import '../App.css';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PantoneCardPink from '../components/PantoneCardPink';
+import PantoneCardLightPink from '../components/PantoneCardLightPink';
+import PantoneCardBlue from '../components/PantoneCardBlue';
+import PantoneCardLightBlue from '../components/PantoneCardLightBlue';
+import PantoneCardGreen from '../components/PantoneCardGreen';
+import PantoneCardLightGreen from '../components/PantoneCardLightGreen';
+import PantoneCardYellow from '../components/PantoneCardYellow';
+import PantoneCardOrange from '../components/PantoneCardOrange';
+import PantoneCardPurple from '../components/PantoneCardPurple';
+import PantoneCardLightPurple from '../components/PantoneCardLightPurple';
+import PantoneCardBurgundy from '../components/PantoneCardBurgundy';
+import PantoneCardRed from '../components/PantoneCardRed';
 import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
 import Container from 'react-bootstrap/Container';
@@ -11,9 +22,6 @@ import Col from 'react-bootstrap/Col';
 function SignUp() {
     return (
         <Container className="signUpContainer">
-            <div className="signUpHeader">
-                <h1>Sign Up</h1>
-            </div>
 
             <Row className='pantoneCardsContainer'>
                 {/* 12 Pantone Card Grid */}
@@ -24,53 +32,60 @@ function SignUp() {
                         </Col>
 
                         <Col lg={3} md={4}>
-                            <PantoneCardPink />
+                            <PantoneCardLightPink />
                         </Col>
 
                         <Col lg={3} md={4}>
-                            <PantoneCardPink />
+                            <PantoneCardBlue />
                         </Col>
 
                         <Col lg={3} md={4}>
-                            <PantoneCardPink />
+                            <PantoneCardLightBlue />
                         </Col>
 
                         <Col lg={3} md={4}>
-                            <PantoneCardPink />
+                            <PantoneCardGreen />
                         </Col>
 
                         <Col lg={3} md={4}>
-                            <PantoneCardPink />
+                            <PantoneCardLightGreen />
                         </Col>
 
                         <Col lg={3} md={4}>
-                            <PantoneCardPink />
+                            <PantoneCardYellow />
                         </Col>
 
                         <Col lg={3} md={4}>
-                            <PantoneCardPink />
+                            <PantoneCardOrange />
                         </Col>
 
                         <Col lg={3} md={4}>
-                            <PantoneCardPink />
+                            <PantoneCardPurple />
                         </Col>
 
                         <Col lg={3} md={4}>
-                            <PantoneCardPink />
+                            <PantoneCardLightPurple />
                         </Col>
 
                         <Col lg={3} md={4}>
-                            <PantoneCardPink />
+                            <PantoneCardBurgundy />
                         </Col>
 
                         <Col lg={3} md={4}>
-                            <PantoneCardPink />
+                            <PantoneCardRed />
                         </Col>
+
                     </Row>
                 </Col>
 
-                <Col>
-                    
+                <Col lg={6} md={12} className='signUpTextContainer'>
+                    <h1>Welcome to</h1>
+                    <img src='../images/Stitched Logo.png'></img>
+                    <p>Email</p>
+                    <input type="email"></input>
+
+                    <p>Password</p>
+                    <input type="password"></input>
                 </Col>
             </Row>
 
