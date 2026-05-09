@@ -8,9 +8,9 @@ function PantoneCard() {
             <div className="pantoneCard">
                 <div className="swatchColour burgundy"></div>
                 <div className="pantoneName">
-                    <h3>Colour Name</h3>
-                    <h4>Pantone™</h4>
-                    <h4>Hex Code</h4>
+                    <h3>Burgundy</h3>
+                    <h4 style={{fontSize: "0.8rem"}}>Pantone™</h4>
+                    <h4>#8B1A1A</h4>
                 </div>
             </div>
         
