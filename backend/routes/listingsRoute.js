@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const User = require ('../models/user');
+const Listing = require ('../models/listing');
 
-//add new user
+
+//add new listing
 router.post('/', async (req, res) => {
    try {
-    const newUser = new User (req.body);
-    const saved = await newUser.save();
+    const newListing = new Listing (req.body);
+    const saved = await newListing.save();
 
     res.status(201).json(saved);
 }catch (error) {
@@ -14,60 +15,60 @@ router.post('/', async (req, res) => {
 }
 });
 
-//get all Users
+//get all listings
 
 router.get('/', async (req, res) => {
     try {
-        const users = await User.find();
-        res.status(200).json(users);
+        const listings = await Listing.find();
+        res.status(200).json(listings);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 });
 
-//get specific user
+//get a specific listing
 
 router.get('/:id', async (req, res) => {
     try {
-        const user = await User.findById(req.params.id);
+        const listing = await Listing.findById(req.params.id);
         if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+            return res.status(404).json({ message: 'Listing not found' });
         }
-        res.status(200).json(dog);
+        res.status(200).json(listing);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 });
 
-//Update user
+//Update Listing
 
 router.put('/:id', async (req, res) => {
     try {
-        const updatedUser = await User.findByIdAndUpdate(
+        const updatedListing = await Listing.findByIdAndUpdate(
             req.params.id, 
             req.body, 
             { new: true, runValidators: true });
 
-        if (!updatedUser) {
-            return res.status(404).json({ message: 'User not found' });
+        if (!updatedListing) {
+            return res.status(404).json({ message: 'Listing not found' });
         }
-        res.status(200).json(updatedUser);
+        res.status(200).json(updatedListing);
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
 });
 
-//Delete user
+//Delete Listing
 
 router.delete('/:id', async (req, res) => {
     try {
-        const deletedUser = await User.findByIdAndDelete(req.params.id);
+        const deletedListing = await Listing.findByIdAndDelete(req.params.id);
 
-        if (!deletedUser) {
-            return res.status(404).json({ message: 'User not found' });
+        if (!deletedListing) {
+            return res.status(404).json({ message: 'Listing not found' });
         }
 
-        res.status(200).json({ message: 'User deleted successfully' });
+        res.status(200).json({ message: 'Listing deleted successfully' });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
