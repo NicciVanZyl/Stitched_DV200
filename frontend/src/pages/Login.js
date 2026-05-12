@@ -22,9 +22,17 @@ import StitchedRedLogo from "../images/StitchedRedLogo.png";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Footer from "../components/footer";
+import axios from "axios";
 
 function Login() {
   const [currentPage, setCurrentPage] = useState("signup");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
+  
+  const Register = async () => {
+    const res = await axios.post("http://localhost:5000/")
+  }
 
   const renderPage = (activePage) => {
     if (activePage == "login") {
