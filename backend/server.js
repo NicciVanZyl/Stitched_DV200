@@ -17,13 +17,25 @@ app.get("/", (req, res) => {
 
 // Connect MongoDB
 mongoose.connect(process.env.MONGO_URI)
-.then(() => console.log("MongoDB Connected"))
-.catch(err => console.log(err));
+    .then(() => console.log("MongoDB Connected"))
+    .catch(err => console.log(err));
 
 app.listen(5000, () => {
     console.log("Server running on port 5000");
 });
 
-const dogsRoutes = require("./routes/dogs");
+const commentsRoutes = require("./routes/commentsRoute");
 
-app.use("/api/dogs", dogsRoutes);
+app.use("/api/comment", commentsRoutes);
+
+const flagRoutes = require("./routes/flagRoute");
+
+app.use("/api/flag", flagRoutes);
+
+const userRoutes = require("./routes/users");
+
+app.use("/api/user", userRoutes);
+
+const listingRoutes = require("./routes/listingsRoute");
+
+app.use("/api/listing", listingRoutes);
