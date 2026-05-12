@@ -210,7 +210,7 @@
   font-weight: 500;
   font-size: 0.9rem;
   color: #421918;
-  margin-bottom: 3rem;
+  margin-bottom: 7%;
 }
 
 .signUpTextContainer {
@@ -246,8 +246,8 @@
 .customBtn {
   background: #ffce71;
   background: linear-gradient(180deg,
-      rgba(255, 206, 113, 1) 0%,
-      rgba(241, 160, 9, 1) 100%);
+    rgba(255, 206, 113, 1) 0%,
+    rgba(241, 160, 9, 1) 100%);
   outline: none;
   border: none;
   border-radius: 0.5rem;
@@ -286,6 +286,15 @@
   width: 100%;
 }
 
+.customBtn:active {
+  top: 2px;
+}
+
+.heroBtn{
+  display: block;
+  margin: 0;
+}
+
 .lightPurple{
   background-color: #b79cdb;
 }
@@ -299,14 +308,8 @@
   border-radius: 24px;
 }
 
-.pdDetails{
-  
-}
-
 .pdImage{
   padding-right: 1em;
-.customBtn:active {
-  top: 2px;
 }
 
 .loginDivider {
@@ -362,6 +365,7 @@
   border-color: #ed7849;
 }
 
+
 .textFieldsContainer p {
   margin: none;
 }
@@ -372,13 +376,20 @@
   align-items: center;
   gap: 2rem;
   margin-top: 20px;
+  width: 100%;
 }
 
 .signUpPrompts p {
   margin-bottom: 0;
 }
 
-/* Footer */
+#heroSignUpBtn{
+  display: flex;
+  justify-content: flex-start;
+  margin: 0;
+}
+
+/* Red Footer */
 .footerContainer {
   color: white;
   padding: 4rem 0;
@@ -429,24 +440,100 @@
   margin-top: 2rem;
 }
 
-/* Home Page */
-.homeContainer{
-  background: #EFE3C7;
-  background: linear-gradient(180deg, rgba(239, 227, 199, 1) 0%, rgba(237, 120, 73, 1) 100%);
-  min-height: 100vh;
+/* Orange Footer */
+.orngfooterContainer {
+  color: #421918;
+  padding: 4rem 0;
+  margin-top: 1rem;
 }
 
-.homeHeroImg{
-  width: 70%;
-  max-width: 800px;
+.orngfooterHeading {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.2rem;
+  margin-bottom: 2rem;
+  color: #421918;
+}
+
+.orngfooterLinkGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.orngsocial-icon img {
+  width: 2.5rem;
   height: auto;
 }
 
-.homeHero{
+.orngsocialIcons {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  text-align: flex-start;
-  padding: 4rem 2rem;
+  gap: 1rem;
+}
+
+.orngfooterLink {
+  color: #421918;
+  text-decoration: none;
+  font-size: 1rem;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.orngfooterLink:hover {
+  opacity: 1;
+  padding-left: 0.5rem;
+  color: #8b1a1a;
+  font-weight: 600;
+}
+
+.orngfooterLogo {
+  width: 15rem;
+  margin-top: 2rem;
+}
+
+
+/* Home Page */
+.homeContainer {
+  background: #EFE3C7;
+  background: linear-gradient(180deg, rgba(239, 227, 199, 1) 0%, rgba(237, 120, 73, 1) 100%);
+  min-height: 100vh;
+  padding-top: 7%;
+  padding-bottom: 4rem; /* ADD THIS — stops gradient cutting short */
+}
+
+.homeHeroCard {
+  background: #B73E3A;
+  background: linear-gradient(180deg, rgba(183, 62, 58, 1) 0%, rgba(119, 8, 6, 1) 100%);
+  border-radius: 2.5rem;
+  padding: 3rem 1rem 0 3rem;
+  color: white;
+  overflow: hidden;
+    box-shadow: 0.2rem 0.5rem 0.8rem rgba(0, 0, 0, 0.5);
+}
+
+.homeHeroTagline {
+  width: 100%;
+  max-width: 35rem;
+  height: auto;
+  margin-bottom: 2rem;
+}
+
+.homeTitle {
+  font-size: 1.25rem;
+  font-weight: 400;
+  font-family: 'Montserrat', sans-serif;
+  color: #ffffff;
+  max-width: 26rem;
+  line-height: 1.4;
+}
+
+.homeHeroImg {
+  width: 100%;
+  max-width: 30rem;
+  height: auto;
+  align-self: flex-end;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0;
 }

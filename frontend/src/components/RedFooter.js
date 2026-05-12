@@ -14,7 +14,7 @@ import XIcon from '../images/XIcon.png';
 import IGIcon from '../images/IGIcon.png';
 import FBIcon from '../images/FBIcon.png';
 
-function Footer() {
+function RedFooter() {
     return (
         <div className='footerContainer'>
             <Container>
@@ -60,4 +60,4 @@ function Footer() {
     );
 } 
 
-export default Footer;
+export default RedFooter;
