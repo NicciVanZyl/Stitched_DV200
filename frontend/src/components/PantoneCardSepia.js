@@ -6,11 +6,11 @@ function PantoneCard() {
     return (
         <div className="pantoneComponent">
             <div className="pantoneCard">
-                <div className="swatchColour lightGreen"></div>
+                <div className="swatchColour sepia"></div>
                 <div className="pantoneName">
-                    <h3>Colour Name</h3>
-                    <h4>Pantone™</h4>
-                    <h4>Hex Code</h4>
+                    <h3>Sepia</h3>
+                    <h4 style={{fontSize: "0.8rem"}}>Pantone™</h4>
+                    <h4>#E3AC2C</h4>
                 </div>
             </div>
         
