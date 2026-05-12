@@ -286,6 +286,25 @@
   width: 100%;
 }
 
+.lightPurple{
+  background-color: #b79cdb;
+}
+
+.productDetails{
+  background-color: #FBF1DA;
+  /* margin: 1em 5em; */
+  margin-top: 2em;
+  padding: 2em;
+   
+  border-radius: 24px;
+}
+
+.pdDetails{
+  
+}
+
+.pdImage{
+  padding-right: 1em;
 .customBtn:active {
   top: 2px;
 }
