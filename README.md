@@ -18,7 +18,7 @@ This project is built with Node.js and React, as well as Javascript and appropri
 Stitched is a pre-loved thrifting online website, wherein users can post their second hand clothing and accessories for a little side cash 
 
 ### ERD:
-<p align="center"><img src="https://github.com/NicciVanZyl/Stiched/blob/main/src/Github_assets/ERD.png" width="600" /></p>
+<p align="center"><img src="https://github.com/NicciVanZyl/Stitched_DV200/blob/main/frontend/src/Github_assets/ERD.png" width="600" /></p>
 
 ## Getting Started:
 
