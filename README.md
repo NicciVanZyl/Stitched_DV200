@@ -2,7 +2,7 @@
 
 ## <p align="center" style="text-decoration: none !important;padding:0;margin:0;">Dashboard</p>
 
-<p align="center"><img src="https://github.com/NicciVanZyl/Stiched_DV200/blob/main/frontend/src/Github_assets/StitchedLogoBg.jpg" width="600" /></p>
+<p align="center"><img src="https://github.com/NicciVanZyl/Stitched_DV200/blob/main/frontend/src/Github_assets/StitchedLogoBg.jpg" width="600" /></p>
 
 ### <p align="center" style="text-decoration: none !important;padding:0;margin:0;">Eunice van Zyl 251023, Kiera Poley 251197, Leandre Nel 251139 & Danika Rood 251165</p>
 
