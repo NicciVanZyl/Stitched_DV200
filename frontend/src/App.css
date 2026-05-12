@@ -32,13 +32,31 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
 
+/* Navbar */
+.navbarLogo {
+  width: 8rem;
+}
+
+.navBackground {
+  background: #ffce71;
+  background: linear-gradient(180deg,
+      rgba(255, 206, 113, 1) 0%,
+      rgba(255, 206, 113, 0) 100%);
+}
+
+.navIcons{
+  width: 1.3rem;
+  height: auto;
+}
+
 /* Pantone Cards */
-.signUpContainer{
+.signUpContainer {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -55,7 +73,7 @@
 }
 
 .pantoneCard {
-  width: 9rem;
+  width: 100%;
   height: 15rem;
   background-color: #ffffff;
   border-radius: 0.5rem;
@@ -64,14 +82,14 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  margin-bottom: 1rem;
-  font-family: 'Montserrat', sans-serif;
+  /* margin-bottom: 1rem; */
+  font-family: "Montserrat", sans-serif;
   font-weight: 500;
   color: #421918;
 }
 
 .swatchColour {
-  width:100%;
+  width: 100%;
   height: 70%;
   border-radius: 0.5rem 0.5rem 0 0;
 }
@@ -82,74 +100,78 @@
 }
 
 /* Pantone Colours */
-.slateSilk{
-  background-color: #4A5D66;
+.slateSilk {
+  background-color: #4a5d66;
 }
 
-.mutedClay{
-  background-color: #A66353;
+.mutedClay {
+  background-color: #a66353;
 }
 
-.softPeach{
-  background-color: #F4C2A1;
+.softPeach {
+  background-color: #f4c2a1;
 }
 
-.burgundy{
-  background-color: #8B1A1A;
+.burgundy {
+  background-color: #8b1a1a;
 }
 
-.paleHaze{
-  background-color: #A9BDC4;
+.paleHaze {
+  background-color: #a9bdc4;
 }
 
-.sunset{
-  background-color: #E58E49;
+.sunset {
+  background-color: #e58e49;
 }
 
-.terracotta{
-  background-color: #D15433;
+.terracotta {
+  background-color: #d15433;
 }
 
-.denim{
-  background-color: #708BA3;
+.denim {
+  background-color: #708ba3;
 }
 
-.petal{
+.petal {
   background-color: #e96384;
 }
 
-.mocha{
-  background-color: #3D1F1F;
+.mocha {
+  background-color: #3d1f1f;
 }
 
-.sepia{
+.sepia {
   background-color: #e3ac2c;
 }
 
-.dustRose{
+.dustRose {
   background-color: #c3587f;
 }
 
-.pantoneCardsContainer{
+.pantoneCardsContainer {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  /* align-items: center; */
+  height: 100%;
 }
 
 /* LOGIN/REGISTER PAGE */
-.loginContainer{
-  background: #E6A5A4;
-  background: linear-gradient(180deg, rgba(230, 165, 164, 1) 0%, rgba(183, 62, 58, 1) 100%);
+.loginContainer {
+  background: #e6a5a4;
+  background: linear-gradient(180deg,
+      rgba(230, 165, 164, 1) 0%,
+      rgba(183, 62, 58, 1) 100%);
   min-height: 94vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-top: 1rem;
+  padding-top: 5.5rem;
 }
 
 .loginText {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 400;
   font-size: 2rem;
   color: #421918;
@@ -157,16 +179,16 @@
 }
 
 .stitchedLogo {
-  width: 50%; 
+  width: 50%;
   max-width: 70%;
-  height: auto; 
+  height: auto;
   margin: 0 auto;
 }
 
-.loginHeader{
+.loginHeader {
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center;
   text-align: center;
 }
 
@@ -174,19 +196,24 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between; 
+  justify-content: space-between;
   padding: 3rem 2rem;
   background-color: #ffffff;
   border-radius: 2rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-  min-height: 600px; 
+  /* height: 100%; */
+  min-height: 100%;
 }
 
-.loginInputsContainer {
-  margin-left: 2rem;
+.passwordPaletteText{
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: #421918;
+  margin-bottom: 3rem;
 }
 
-.signUpTextContainer{
+.signUpTextContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -202,32 +229,35 @@
   height: 3rem;
   color: #421918;
   padding: 0.5rem 1rem;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   background: transparent;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
   display: inline-block;
-  box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
-  7px 7px 20px 0px rgba(0,0,0,.1),
-  4px 4px 5px 0px rgba(0,0,0,.1);
+  box-shadow:
+    inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+    7px 7px 20px 0px rgba(0, 0, 0, 0.1),
+    4px 4px 5px 0px rgba(0, 0, 0, 0.1);
   outline: none;
 }
 
-.loginBtn {
-  background: #FFCE71;
-  background: linear-gradient(180deg, rgba(255, 206, 113, 1) 0%, rgba(241, 160, 9, 1) 100%);
+.customBtn {
+  background: #ffce71;
+  background: linear-gradient(180deg,
+      rgba(255, 206, 113, 1) 0%,
+      rgba(241, 160, 9, 1) 100%);
   outline: none;
   border: none;
   border-radius: 0.5rem;
   z-index: 1;
   margin: 0 auto;
-  display: block; 
+  display: block;
   width: 12rem;
 }
 
-.loginBtn:after {
+.customBtn:after {
   position: absolute;
   content: "";
   width: 0;
@@ -236,21 +266,27 @@
   right: 0;
   z-index: -1;
   border-radius: 0.5rem;
-  background: #ED7849;
-  background: linear-gradient(180deg, rgba(237, 120, 73, 1) 0%, rgba(211, 89, 40, 1) 100%);
-  box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
-  7px 7px 20px 0px rgba(0,0,0,.1),
-  4px 4px 5px 0px rgba(0,0,0,.1);
+  background: #ed7849;
+  background: linear-gradient(180deg,
+      rgba(237, 120, 73, 1) 0%,
+      rgba(211, 89, 40, 1) 100%);
+  box-shadow:
+    inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+    7px 7px 20px 0px rgba(0, 0, 0, 0.1),
+    4px 4px 5px 0px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 }
-.loginBtn:hover {
+
+.customBtn:hover {
   color: #fff;
 }
-.loginBtn:hover:after {
+
+.customBtn:hover:after {
   left: 0;
   width: 100%;
 }
-.loginBtn:active {
+
+.customBtn:active {
   top: 2px;
 }
 
@@ -264,7 +300,7 @@
 
 .loginDivider::before,
 .loginDivider::after {
-  content: '';
+  content: "";
   flex: 1;
   border-bottom: 1px solid #421918;
 }
@@ -274,7 +310,7 @@
 }
 
 .loginDivider:not(:empty)::after {
-  margin-left: .75em;
+  margin-left: 0.75em;
 }
 
 .loginDivider span {
@@ -282,7 +318,7 @@
   font-size: 0.9rem;
 }
 
-.textFieldsContainer{
+.textFieldsContainer {
   width: 80%;
   color: #421918;
 }
@@ -293,18 +329,21 @@
   height: 2rem;
   color: #421918;
   padding: 0.5rem 1rem;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 500;
   line-height: 1;
 }
 
 #signUpBtnOutline:hover {
-  background: #ED7849;
-  background: linear-gradient(180deg, rgba(237, 120, 73, 1) 0%, rgba(211, 89, 40, 1) 100%);  color: #fff;
-  border-color: #ED7849;
+  background: #ed7849;
+  background: linear-gradient(180deg,
+      rgba(237, 120, 73, 1) 0%,
+      rgba(211, 89, 40, 1) 100%);
+  color: #fff;
+  border-color: #ed7849;
 }
 
-.textFieldsContainer p{
+.textFieldsContainer p {
   margin: none;
 }
 
@@ -332,7 +371,7 @@
   font-weight: 700;
   letter-spacing: 0.2rem;
   margin-bottom: 2rem;
-  color: #ffffff; 
+  color: #ffffff;
 }
 
 .footerLinkGroup {
@@ -341,12 +380,12 @@
   gap: 0.5rem;
 }
 
-.social-icon img{
+.social-icon img {
   width: 2.5rem;
   height: auto;
 }
 
-.socialIcons{
+.socialIcons {
   display: flex;
   gap: 1rem;
 }
@@ -362,11 +401,33 @@
 .footerLink:hover {
   opacity: 1;
   padding-left: 0.5rem;
-  color: #FFCE71;
+  color: #ffce71;
   font-weight: 600;
 }
 
 .footerLogo {
   width: 15rem;
   margin-top: 2rem;
+}
+
+/* Home Page */
+.homeContainer{
+  background: #EFE3C7;
+  background: linear-gradient(180deg, rgba(239, 227, 199, 1) 0%, rgba(237, 120, 73, 1) 100%);
+  min-height: 100vh;
+}
+
+.homeHeroImg{
+  width: 70%;
+  max-width: 800px;
+  height: auto;
+}
+
+.homeHero{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: flex-start;
+  padding: 4rem 2rem;
 }
