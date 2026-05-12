@@ -1,97 +1,209 @@
-import '../App.css';
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import PantoneCardPink from '../components/PantoneCardPink';
-import PantoneCardLightPink from '../components/PantoneCardLightPink';
-import PantoneCardBlue from '../components/PantoneCardBlue';
-import PantoneCardLightBlue from '../components/PantoneCardLightBlue';
-import PantoneCardGreen from '../components/PantoneCardGreen';
-import PantoneCardLightGreen from '../components/PantoneCardLightGreen';
-import PantoneCardYellow from '../components/PantoneCardYellow';
-import PantoneCardOrange from '../components/PantoneCardOrange';
-import PantoneCardPurple from '../components/PantoneCardPurple';
-import PantoneCardLightPurple from '../components/PantoneCardLightPurple';
-import PantoneCardBurgundy from '../components/PantoneCardBurgundy';
-import PantoneCardRed from '../components/PantoneCardRed';
-import Button from 'react-bootstrap/Button';
-import Stack from 'react-bootstrap/Stack';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import "../App.css";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import PantoneCardSlateSilk from "../components/PantoneCardSlateSilk";
+import PantoneCardMutedClay from "../components/PantoneCardMutedClay";
+import PantoneCardSoftPeach from "../components/PantoneCardSoftPeach";
+import PantoneCardBurgundy from "../components/PantoneCardBurgundy";
+import PantoneCardPaleHaze from "../components/PantoneCardPaleHaze";
+import PantoneCardSunset from "../components/PantoneCardSunset";
+import PantoneCardTerracotta from "../components/PantoneCardTerracotta";
+import PantoneCardDenim from "../components/PantoneCardDenim";
+import PantoneCardPetal from "../components/PantoneCardPetal";
+import PantoneCardMocha from "../components/PantoneCardMocha";
+import PantoneCardSepia from "../components/PantoneCardSepia";
+import PantoneCardDustRose from "../components/PantoneCardDustRose";
+import Button from "react-bootstrap/Button";
+import Stack from "react-bootstrap/Stack";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import StitchedRedLogo from "../images/StitchedRedLogo.png";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Footer from "../components/footer";
 
-function SignUp() {
-    return (
-        <Container className="signUpContainer">
+function Login() {
+  const [currentPage, setCurrentPage] = useState("signup");
 
-            <Row className='pantoneCardsContainer'>
-                {/* 12 Pantone Card Grid */}
-                <Col lg={6} md={12}>
-                    <Row className='mx-1'>
-                        <Col lg={3} md={4}>
-                            <PantoneCardPink />
-                        </Col>
+  const renderPage = (activePage) => {
+    if (activePage == "login") {
+      return (
+        <>
+          <div className="loginHeader">
+            <h1 className="loginText">Welcome Back!</h1>
+            <img
+              src={StitchedRedLogo}
+              alt="Stitched Logo"
+              className="stitchedLogo"
+            />
+          </div>
 
-                        <Col lg={3} md={4}>
-                            <PantoneCardLightPink />
-                        </Col>
+          <div className="textFieldsContainer">
+            <Box>
+              <TextField
+                id="outlined-basic"
+                label="Email"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+              />
+              <TextField
+                id="outlined-basic"
+                label="Password"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                type="password"
+              />
+              <p className="passwordPaletteText">Select your unique colour palette~</p>
 
-                        <Col lg={3} md={4}>
-                            <PantoneCardBlue />
-                        </Col>
+              <button className="customBtn loginBtn">Login</button>
+            </Box>
+          </div>
 
-                        <Col lg={3} md={4}>
-                            <PantoneCardLightBlue />
-                        </Col>
+          <div className="loginFooter w-100">
+            <div className="loginDivider">
+              <span>OR</span>
+            </div>
 
-                        <Col lg={3} md={4}>
-                            <PantoneCardGreen />
-                        </Col>
+            <div className="signUpPrompts">
+              <p>Not yet a member?</p>
+              <Button
+                onClick={() => setCurrentPage("signup")}
+                variant="outline-dark"
+                id="signUpBtnOutline">Sign Up</Button>
+            </div>
+          </div>
+        </>
+      );
+    } else if (activePage == "signup") {
+      return (
+        <>
+          <div className="loginHeader">
+            <h1 className="loginText">Welcome Back!</h1>
+            <img
+              src={StitchedRedLogo}
+              alt="Stitched Logo"
+              className="stitchedLogo"
+            />
+          </div>
 
-                        <Col lg={3} md={4}>
-                            <PantoneCardLightGreen />
-                        </Col>
+          <div className="textFieldsContainer">
+            <Box>
+              <TextField
+                id="outlined-basic"
+                label="Name"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+              />
+              <TextField
+                id="outlined-basic"
+                label="Email"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+              />
+              <TextField
+                id="outlined-basic"
+                label="Password"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                type="password"
+              />
+              <p className="passwordPaletteText">Select your unique colour palette~</p>
 
-                        <Col lg={3} md={4}>
-                            <PantoneCardYellow />
-                        </Col>
+              <button className="customBtn loginBtn">Sign Up</button>
+            </Box>
+          </div>
 
-                        <Col lg={3} md={4}>
-                            <PantoneCardOrange />
-                        </Col>
+          <div className="loginFooter w-100">
+            <div className="loginDivider">
+              <span>OR</span>
+            </div>
 
-                        <Col lg={3} md={4}>
-                            <PantoneCardPurple />
-                        </Col>
+            <div className="signUpPrompts">
+              <p>Already a member?</p>
+              <Button
+                onClick={() => setCurrentPage("login")}
+                variant="outline-dark"
+                id="signUpBtnOutline">Login</Button>
+            </div>
+          </div>
+        </>
+      );
+    }
+  };
 
-                        <Col lg={3} md={4}>
-                            <PantoneCardLightPurple />
-                        </Col>
+  return (
+    <div className="loginContainer">
+      <Container fluid>
+        {/* Pantone Cards */}
+        <Row className="pantoneCardsContainer mx-2">
+          <Col lg={6} md={12}>
+            <Row className="mx-2">
+              <Col lg={3} md={4} className="mb-lg-3 mb-md-3 mb-4">
+                <PantoneCardSlateSilk />
+              </Col>
 
-                        <Col lg={3} md={4}>
-                            <PantoneCardBurgundy />
-                        </Col>
+              <Col lg={3} md={4} className="mb-lg-3 mb-md-3 mb-4">
+                <PantoneCardMutedClay />
+              </Col>
 
-                        <Col lg={3} md={4}>
-                            <PantoneCardRed />
-                        </Col>
+              <Col lg={3} md={4} className="mb-lg-3 mb-md-3 mb-4">
+                <PantoneCardSoftPeach />
+              </Col>
 
-                    </Row>
-                </Col>
+              <Col lg={3} md={4} className="mb-lg-3 mb-md-3 mb-4">
+                <PantoneCardBurgundy />
+              </Col>
 
-                <Col lg={6} md={12} className='signUpTextContainer'>
-                    <h1>Welcome to</h1>
-                    <img src='../images/Stitched Logo.png'></img>
-                    <p>Email</p>
-                    <input type="email"></input>
+              <Col lg={3} md={4} className="mb-lg-3 mb-md-3 mb-4">
+                <PantoneCardSunset />
+              </Col>
 
-                    <p>Password</p>
-                    <input type="password"></input>
-                </Col>
+              <Col lg={3} md={4} className="mb-lg-3 mb-md-3 mb-4">
+                <PantoneCardPaleHaze />
+              </Col>
+
+              <Col lg={3} md={4} className="mb-lg-3 mb-md-3 mb-4">
+                <PantoneCardTerracotta />
+              </Col>
+
+              <Col lg={3} md={4} className="mb-lg-3 mb-md-3 mb-4">
+                <PantoneCardDustRose />
+              </Col>
+
+              <Col lg={3} md={4} className="mb-lg-0 mb-md-3 mb-4">
+                <PantoneCardPetal />
+              </Col>
+
+              <Col lg={3} md={4} className="mb-lg-0 mb-md-3 mb-4">
+                <PantoneCardMocha />
+              </Col>
+
+              <Col lg={3} md={4} className="mb-lg-0 mb-md-3 mb-4">
+                <PantoneCardSepia />
+              </Col>
+
+              <Col lg={3} md={4} className="mb-lg-0 mb-md-3 mb-4">
+                <PantoneCardDenim />
+              </Col>
             </Row>
+          </Col>
 
-        </Container>
-    );
+          {/* Login/Sign Up */}
+          <Col lg={5} md={12} className=" loginInputsContainer">
+            {renderPage(currentPage)}
+          </Col>
+        </Row>
 
+        <Footer />
+      </Container>
+    </div>
+  );
 }
 
-export default SignUp;
+export default Login;
