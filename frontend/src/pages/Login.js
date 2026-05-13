@@ -21,10 +21,52 @@ import Col from "react-bootstrap/Col";
 import StitchedRedLogo from "../images/StitchedRedLogo.png";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import Footer from "../components/footer";
+import RedFooter from "../components/RedFooter";
+import axios from "axios";
 
 function Login() {
   const [currentPage, setCurrentPage] = useState("signup");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+
+  const Register = async () => {
+    // try {
+    //   console.log(name);
+    //   console.log(password);
+    //   console.log(email);
+    
+    //   const res = await fetch("http://localhost:5000/api/user/register", {
+    //     method: "POST",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify({ name: name, email: email, password: password }),
+    //   });
+    //   if (!res.ok) {
+    //     const e = await res.json();
+    //     throw new Error(e.message);
+    //   }
+    //   setMessage(res.data);
+    // } catch (e) {
+    //   console.log(e);
+    // }
+     const res = await axios.post("http://localhost:5000/api/user/register", {
+        name,
+        email,
+        password
+    });
+
+    setMessage(res.data);
+  };
+
+  const Login = async () => {
+    const res = await axios.post("http://localhost:5000/api/user/login", {
+      email,
+      password,
+    });
+
+    setMessage(res.data);
+  };
 
   const renderPage = (activePage) => {
     if (activePage == "login") {
@@ -47,6 +89,7 @@ function Login() {
                 variant="outlined"
                 fullWidth
                 margin="normal"
+                onChange={(e) => setEmail(e.target.value)}
               />
               <TextField
                 id="outlined-basic"
@@ -55,10 +98,15 @@ function Login() {
                 fullWidth
                 margin="normal"
                 type="password"
+                onChange={(e) => setPassword(e.target.value)}
               />
-              <p className="passwordPaletteText">Select your unique colour palette~</p>
-
-              <button className="customBtn loginBtn">Login</button>
+              <p className="passwordPaletteText">
+                Select your unique colour palette~
+              </p>
+              <p className="passwordPaletteText">{message}</p>
+              <button onClick={() => Login()} className="customBtn loginBtn">
+                Login
+              </button>
             </Box>
           </div>
 
@@ -72,7 +120,10 @@ function Login() {
               <Button
                 onClick={() => setCurrentPage("signup")}
                 variant="outline-dark"
-                id="signUpBtnOutline">Sign Up</Button>
+                id="signUpBtnOutline"
+              >
+                Sign Up
+              </Button>
             </div>
           </div>
         </>
@@ -97,6 +148,7 @@ function Login() {
                 variant="outlined"
                 fullWidth
                 margin="normal"
+                onChange={(e) => setName(e.target.value)}
               />
               <TextField
                 id="outlined-basic"
@@ -104,6 +156,7 @@ function Login() {
                 variant="outlined"
                 fullWidth
                 margin="normal"
+                onChange={(e) => setEmail(e.target.value)}
               />
               <TextField
                 id="outlined-basic"
@@ -112,10 +165,15 @@ function Login() {
                 fullWidth
                 margin="normal"
                 type="password"
+                onChange={(e) => setPassword(e.target.value)}
               />
-              <p className="passwordPaletteText">Select your unique colour palette~</p>
-
-              <button className="customBtn loginBtn">Sign Up</button>
+              <p className="passwordPaletteText">
+                Select your unique colour palette~
+              </p>
+              <p className="passwordPaletteText">{message}</p>
+              <button onClick={() => Register()} className="customBtn loginBtn">
+                Sign Up
+              </button>
             </Box>
           </div>
 
@@ -129,7 +187,10 @@ function Login() {
               <Button
                 onClick={() => setCurrentPage("login")}
                 variant="outline-dark"
-                id="signUpBtnOutline">Login</Button>
+                id="signUpBtnOutline"
+              >
+                Login
+              </Button>
             </div>
           </div>
         </>
@@ -200,7 +261,7 @@ function Login() {
           </Col>
         </Row>
 
-        <Footer />
+        <RedFooter />
       </Container>
     </div>
   );

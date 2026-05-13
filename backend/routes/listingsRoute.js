@@ -4,7 +4,7 @@ const Listing = require ('../models/listing');
 
 
 //add new listing
-router.post('/', async (req, res) => {
+router.post('/add', async (req, res) => {
    try {
     const newListing = new Listing (req.body);
     const saved = await newListing.save();
@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
 
 //get all listings
 
-router.get('/', async (req, res) => {
+router.get('/all', async (req, res) => {
     try {
         const listings = await Listing.find();
         res.status(200).json(listings);
