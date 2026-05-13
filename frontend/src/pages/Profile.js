@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Profile.css";
 
 export default function Profile() {
+  const [activePage, setActivePage] = useState(1);
+  const [hoverListing1, setHoverListing1] = useState(false);
+  const [hoverListing2, setHoverListing2] = useState(false);
   <div
     id="unused-container"
     style={{
@@ -71,7 +74,6 @@ export default function Profile() {
               lineHeight: "normal",
             }}
           >
-            {" "}
             <p
               style={{
                 marginTop: "0.25rem",
@@ -369,47 +371,34 @@ export default function Profile() {
                 R00 000
               </div>
             </div>
-            <div
-              id="listing-1-yellow"
+            <button
+              onClick={() => console.log("View Listing clicked")}
+              onMouseEnter={() => setHoverListing1(true)}
+              onMouseLeave={() => setHoverListing1(false)}
               style={{
-                width: "14.125rem",
-                height: "4.4375rem",
-                background: "linear-gradient(180deg, #FFCE71 0%, #F1A009 100%)",
+                width: "12rem",
+                height: "3rem",
+                background: hoverListing1
+                  ? "linear-gradient(180deg, rgba(237, 120, 73, 1) 0%, rgba(211, 89, 40, 1) 100%)"
+                  : "linear-gradient(180deg, rgba(255, 206, 113, 1) 0%, rgba(241, 160, 9, 1) 100%)",
                 borderRadius: "0.5rem",
                 marginRight: "1.5rem",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
+                border: "none",
+                cursor: "pointer",
+                color: hoverListing1 ? "#fff" : "#421918",
+                fontFamily: "Montserrat",
+                fontSize: "1rem",
+                fontWeight: "600",
+                transition: "all 0.3s ease",
+                boxShadow:
+                  "inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5), 7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1)",
               }}
             >
-              <button
-                onClick={() => console.log("View Listing clicked")}
-                style={{
-                  width: "14.125rem",
-                  height: "4.4375rem",
-                  background:
-                    "linear-gradient(180deg, #FFCE71 0%, #F1A009 100%)",
-                  borderRadius: "0.5rem",
-                  marginRight: "1.5rem",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  border: "none",
-                  cursor: "pointer",
-                }}
-              >
-                <div
-                  style={{
-                    color: "#421918",
-                    fontFamily: "Montserrat",
-                    fontSize: "1rem",
-                    fontWeight: "600",
-                  }}
-                >
-                  View Listing
-                </div>
-              </button>
-            </div>
+              View Listing
+            </button>
           </div>
           <div
             id="listing-row-2"
@@ -468,130 +457,102 @@ export default function Profile() {
                 R00 000
               </div>
             </div>
-            <div
-              id="listing-2-yellow"
+            <button
+              onClick={() => console.log("View Listing clicked")}
+              onMouseEnter={() => setHoverListing2(true)}
+              onMouseLeave={() => setHoverListing2(false)}
               style={{
-                width: "14.125rem",
-                height: "4.4375rem",
-                background: "linear-gradient(180deg, #FFCE71 0%, #F1A009 100%)",
+                width: "12rem",
+                height: "3rem",
+                background: hoverListing2
+                  ? "linear-gradient(180deg, rgba(237, 120, 73, 1) 0%, rgba(211, 89, 40, 1) 100%)"
+                  : "linear-gradient(180deg, rgba(255, 206, 113, 1) 0%, rgba(241, 160, 9, 1) 100%)",
                 borderRadius: "0.5rem",
                 marginRight: "1.5rem",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
+                border: "none",
+                cursor: "pointer",
+                color: hoverListing2 ? "#fff" : "#421918",
+                fontFamily: "Montserrat",
+                fontSize: "1rem",
+                fontWeight: "600",
+                transition: "all 0.3s ease",
+                boxShadow:
+                  "inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5), 7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1)",
               }}
             >
-              <button
-                onClick={() => console.log("View Listing clicked")}
-                style={{
-                  width: "14.125rem",
-                  height: "4.4375rem",
-                  background:
-                    "linear-gradient(180deg, #FFCE71 0%, #F1A009 100%)",
-                  borderRadius: "0.5rem",
-                  marginRight: "1.5rem",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  border: "none",
-                  cursor: "pointer",
-                }}
-              >
-                <div
-                  style={{
-                    color: "#421918",
-                    fontFamily: "Montserrat",
-                    fontSize: "1rem",
-                    fontWeight: "600",
-                  }}
-                >
-                  View Listing
-                </div>
-              </button>
-            </div>
+              View Listing
+            </button>
           </div>
           <div
             id="pageContainer"
-            style={{ display: "flex", flexDirection: "row" }}
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "1.5rem",
+            }}
           >
-            <div
+            <button
               id="pageOne"
+              onClick={() => setActivePage(1)}
               style={{
                 width: "3.9375rem",
                 height: "3.9375rem",
-                background: "#B73E3A",
+                background: activePage === 1 ? "#B73E3A" : "#E6A5A4",
                 marginTop: "1.12rem",
-                marginLeft: "31.94rem",
+                border: "none",
+                cursor: "pointer",
+                color: "#FFF",
+                fontFamily: "Montserrat",
+                fontSize: "2.61813rem",
+                fontWeight: "700",
+                transition: "background-color 0.3s ease",
               }}
             >
-              <div
-                id="PageOneNumber"
-                style={{
-                  color: "#FFF",
-                  fontFamily: "Montserrat",
-                  fontSize: "2.61813rem",
-                  fontStyle: "normal",
-                  fontWeight: "700",
-                  lineHeight: "normal",
-                  marginLeft: "1.5rem",
-                  marginTop: "0.5rem",
-                }}
-              >
-                1
-              </div>
-            </div>
-            <div
+              1
+            </button>
+            <button
               id="pageTwo"
+              onClick={() => setActivePage(2)}
               style={{
                 width: "3.9375rem",
                 height: "3.9375rem",
-                background: "#E6A5A4",
+                background: activePage === 2 ? "#B73E3A" : "#E6A5A4",
                 marginTop: "1.12rem",
-                marginLeft: "1.5rem",
+                border: "none",
+                cursor: "pointer",
+                color: "#FFF",
+                fontFamily: "Montserrat",
+                fontSize: "2.61813rem",
+                fontWeight: "700",
+                transition: "background-color 0.3s ease",
               }}
             >
-              <div
-                id="PageTwoNumber"
-                style={{
-                  color: "#FFF",
-                  fontFamily: "Montserrat",
-                  fontSize: "2.61813rem",
-                  fontStyle: "normal",
-                  fontWeight: "700",
-                  lineHeight: "normal",
-                  marginLeft: "1.2rem",
-                  marginTop: "0.5rem",
-                }}
-              >
-                2
-              </div>
-            </div>
-            <div
+              2
+            </button>
+            <button
               id="pageThree"
+              onClick={() => setActivePage(3)}
               style={{
                 width: "3.9375rem",
                 height: "3.9375rem",
-                background: "#E6A5A4",
+                background: activePage === 3 ? "#B73E3A" : "#E6A5A4",
                 marginTop: "1.12rem",
-                marginLeft: "1.5rem",
+                border: "none",
+                cursor: "pointer",
+                color: "#FFF",
+                fontFamily: "Montserrat",
+                fontSize: "2.61813rem",
+                fontWeight: "700",
+                transition: "background-color 0.3s ease",
               }}
             >
-              <div
-                id="PageThreeNumber"
-                style={{
-                  color: "#FFF",
-                  fontFamily: "Montserrat",
-                  fontSize: "2.61813rem",
-                  fontStyle: "normal",
-                  fontWeight: "700",
-                  lineHeight: "normal",
-                  marginLeft: "1.2rem",
-                  marginTop: "0.5rem",
-                }}
-              >
-                3
-              </div>
-            </div>
+              3
+            </button>
             <img
               id="arrowBottom"
               src="/arrow.png"
@@ -600,7 +561,6 @@ export default function Profile() {
                 height: "3rem",
                 width: "4rem",
                 marginTop: "1.5rem",
-                marginLeft: "1rem",
               }}
             />
           </div>
