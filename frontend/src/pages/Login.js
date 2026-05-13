@@ -51,9 +51,9 @@ function Login() {
     //   console.log(e);
     // }
      const res = await axios.post("http://localhost:5000/api/user/register", {
-      email,
-      password,
-      name,
+        name,
+        email,
+        password
     });
 
     setMessage(res.data);

@@ -10,6 +10,13 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import StitchedWhiteLogo from "../images/StitchedWhiteLogo.png";
 import HeroTagline from "../images/HeroTagline.png";
 import OrangeFooter from "../components/OrangeFooter";
+import NewCtgryImg from "../images/NewCtgryImg.png";
+import WomenCtgryImg from "../images/WomenCtgryImg.png";
+import MenCtgryImg from "../images/MenCtgryImg.png";
+import KidsCtgryImg from "../images/KidsCtgryImg.png";
+import AccessCtgryImg from "../images/AccessCtgryImg.png";
+import ShoeCtgryImg from "../images/ShoeCtgryImg.png";
+import ProductCard from "../components/ProductCard";
 
 function Home() {
   
@@ -50,17 +57,65 @@ function Home() {
             <Row>
               <Col lg={12} className="categoryContainer mt-3 ms-mx-5">
                 <Row className="align-items-center">
-                  <Col lg={6} className="shopByCategory">
-                    <h2 className="categoryTitle">Shop by Category</h2>
+                  <Row className="mt-5">
+                    <Col lg={12}>
+                      <h2 className="categoryTitle mb-4">Shop by Category</h2>
+                      
+                      <Row className="justify-content-between g-3"> 
+                        <Col xs={6} md={4} lg={2} className="d-flex flex-column align-items-center">
+                          <div className="categoryImgWrapper">
+                            <img src={NewCtgryImg} alt="New In" className="categoryImg"/>
+                          </div>
+                          <p className="categoryLabel">New</p>
+                        </Col>
 
-                    <div className="categoriesWrapper">
-                      {/* <img src={} alt="Category 1" className="categoryImg"/>
-                      <img src={} alt="Category 2" className="categoryImg"/> */}
-                    </div>
-                  </Col> 
+                        <Col xs={6} md={4} lg={2} className="d-flex flex-column align-items-center">
+                          <div className="categoryImgWrapper">
+                            <img src={WomenCtgryImg} alt="Women" className="categoryImg"/>
+                          </div>
+                          <p className="categoryLabel">Women</p>
+                        </Col>
+
+                        <Col xs={6} md={4} lg={2} className="d-flex flex-column align-items-center">
+                          <div className="categoryImgWrapper">
+                            <img src={MenCtgryImg} alt="Men" className="categoryImg"/>
+                          </div>
+                          <p className="categoryLabel">Men</p>
+                        </Col>
+
+                        <Col xs={6} md={4} lg={2} className="d-flex flex-column align-items-center">
+                          <div className="categoryImgWrapper">
+                            <img src={KidsCtgryImg} alt="Kids" className="categoryImg"/>
+                          </div>
+                          <p className="categoryLabel">Kids</p>
+                        </Col>
+
+                        <Col xs={6} md={4} lg={2} className="d-flex flex-column align-items-center">
+                          <div className="categoryImgWrapper">
+                            <img src={ShoeCtgryImg} alt="Shoes" className="categoryImg"/>
+                          </div>
+                          <p className="categoryLabel">Shoes</p>
+                        </Col>
+
+                        <Col xs={6} md={4} lg={2} className="d-flex flex-column align-items-center">
+                          <div className="categoryImgWrapper">
+                            <img src={AccessCtgryImg} alt="Accessories" className="categoryImg"/>
+                          </div>
+                          <p className="categoryLabel">Accessories</p>
+                        </Col>
+                      </Row>
+                    </Col>
+                  </Row>
                 </Row>
               </Col>
             </Row>
+
+            <Row className="justify-content-center mt-5">
+              <Col>
+                <ProductCard />
+              </Col>
+            </Row>
+
             <OrangeFooter />
           </Container> 
         </div>
