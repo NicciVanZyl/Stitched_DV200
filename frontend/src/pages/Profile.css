@@ -395,11 +395,11 @@
   justify-content: center;
   align-items: center;
   width: 25rem;
-  height: 3.5rem;
+  height: 4.5rem;
   background: transparent;
   overflow: hidden;
   border: none;
-  cursor: "pointer";
+  cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
 }
@@ -412,18 +412,8 @@
   background: rgba(237, 120, 73, 0.5);
 }
 
-.tab-button.active::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 1.5rem;
-  height: 100%;
-  background: #ed7849;
-}
-
 .tab-label {
-  color: #fff;
+  color: #421918;
   font-family: "Montserrat", sans-serif;
   font-size: 1.1rem;
   font-style: normal;
@@ -432,6 +422,10 @@
   overflow: hidden;
   text-align: center;
   flex: 1;
+}
+
+.tab-button.active .tab-label {
+  color: #fff;
 }
 
 #right-panel {
