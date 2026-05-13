@@ -9,6 +9,7 @@ import ProductDetails from "./pages/PDP";
 import ProductListing from "./pages/PLP";
 import Profile from "./pages/Profile";
 import Admin from "./pages/Admin";
+import Test from './pages/componentTest'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <Route path='/ProductListing' element={<ProductListing />}></Route>
         <Route path='/Profile' element={<Profile />}></Route>
         <Route path='/Admin' element={<Admin />}></Route>
+        {/* <Route path='/test' element={<Test />}></Route> */}
       </Routes>
 
     </BrowserRouter>
