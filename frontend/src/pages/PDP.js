@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import placeholderImage from '../images/product image placeholder.png';
-import Footer from "../components/footer";
+import Footer from "../components/RedFooter";
 import Button from "react-bootstrap/Button";
 import Rating from '@mui/material/Rating';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -12,6 +12,7 @@ import IconButton from '@mui/material/IconButton';
 import FlagIcon from '@mui/icons-material/Flag';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react'
+import './PDP.css'
 
 //Custom styling for Icon Buttons
 const theme = createTheme({
@@ -56,7 +57,7 @@ function ProductDetails() {
     <div className='loginContainer'>
 
       <Container fluid>
-        <Row  >
+        <Row>
           <Col sm={12} className='mx-auto productDetails' >
             <Row>
               <Col lg={6} md={12} className='mb-3 mb-lg-0 pdImageContainer'>
