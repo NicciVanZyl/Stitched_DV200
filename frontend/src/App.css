@@ -45,12 +45,14 @@
 
 .navBackground {
   background: #ffce71;
-  background: linear-gradient(180deg,
-      rgba(255, 206, 113, 1) 0%,
-      rgba(255, 206, 113, 0) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 206, 113, 1) 0%,
+    rgba(255, 206, 113, 0) 100%
+  );
 }
 
-.navIcons{
+.navIcons {
   width: 1.3rem;
   height: auto;
 }
@@ -159,9 +161,11 @@
 /* LOGIN/REGISTER PAGE */
 .loginContainer {
   background: #e6a5a4;
-  background: linear-gradient(180deg,
-      rgba(230, 165, 164, 1) 0%,
-      rgba(183, 62, 58, 1) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(230, 165, 164, 1) 0%,
+    rgba(183, 62, 58, 1) 100%
+  );
   min-height: 94vh;
   display: flex;
   flex-direction: column;
@@ -205,7 +209,7 @@
   min-height: 100%;
 }
 
-.passwordPaletteText{
+.passwordPaletteText {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 0.9rem;
@@ -245,9 +249,11 @@
 
 .customBtn {
   background: #ffce71;
-  background: linear-gradient(180deg,
-      rgba(255, 206, 113, 1) 0%,
-      rgba(241, 160, 9, 1) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 206, 113, 1) 0%,
+    rgba(241, 160, 9, 1) 100%
+  );
   outline: none;
   border: none;
   border-radius: 0.5rem;
@@ -267,9 +273,11 @@
   z-index: -1;
   border-radius: 0.5rem;
   background: #ed7849;
-  background: linear-gradient(180deg,
-      rgba(237, 120, 73, 1) 0%,
-      rgba(211, 89, 40, 1) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(237, 120, 73, 1) 0%,
+    rgba(211, 89, 40, 1) 100%
+  );
   box-shadow:
     inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
     7px 7px 20px 0px rgba(0, 0, 0, 0.1),
@@ -286,25 +294,25 @@
   width: 100%;
 }
 
-.lightPurple{
+.lightPurple {
   background-color: #b79cdb;
 }
 
-.productDetails{
-  background-color: #FBF1DA;
+.productDetails {
+  background-color: #fbf1da;
   /* margin: 1em 5em; */
   margin-top: 2em;
   padding: 2em;
-   
+
   border-radius: 24px;
 }
 
-.pdDetails{
-  
+.pdDetails {
 }
 
-.pdImage{
+.pdImage {
   padding-right: 1em;
+}
 .customBtn:active {
   top: 2px;
 }
@@ -355,9 +363,11 @@
 
 #signUpBtnOutline:hover {
   background: #ed7849;
-  background: linear-gradient(180deg,
-      rgba(237, 120, 73, 1) 0%,
-      rgba(211, 89, 40, 1) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(237, 120, 73, 1) 0%,
+    rgba(211, 89, 40, 1) 100%
+  );
   color: #fff;
   border-color: #ed7849;
 }
@@ -430,19 +440,23 @@
 }
 
 /* Home Page */
-.homeContainer{
-  background: #EFE3C7;
-  background: linear-gradient(180deg, rgba(239, 227, 199, 1) 0%, rgba(237, 120, 73, 1) 100%);
+.homeContainer {
+  background: #efe3c7;
+  background: linear-gradient(
+    180deg,
+    rgba(239, 227, 199, 1) 0%,
+    rgba(237, 120, 73, 1) 100%
+  );
   min-height: 100vh;
 }
 
-.homeHeroImg{
+.homeHeroImg {
   width: 70%;
   max-width: 800px;
   height: auto;
 }
 
-.homeHero{
+.homeHero {
   display: flex;
   flex-direction: column;
   align-items: center;
