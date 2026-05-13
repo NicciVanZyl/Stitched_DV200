@@ -110,8 +110,8 @@ function ProductDetails() {
           </Col>
 
         </Row>
+        <Footer />
       </Container>
-      <Footer />
     </div>
   );
 }
