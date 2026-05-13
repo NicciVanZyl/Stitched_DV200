@@ -4,7 +4,7 @@ const Flag = require ('../models/flags');
 
 
 //add new flag
-router.post('/', async (req, res) => {
+router.post('/add', async (req, res) => {
    try {
     const newFlag = new Flag (req.body);
     const saved = await newFlag.save();
@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
 
 //Get all flags 
 
-router.get('/', async (req, res) => {
+router.get('/all', async (req, res) => {
     try {
         const flags = await Flag.find();
         res.status(200).json(flags);

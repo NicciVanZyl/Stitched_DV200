@@ -4,7 +4,7 @@ const Comment = require ('../models/comment');
 
 
 //add new comment
-router.post('/', async (req, res) => {
+router.post('/add', async (req, res) => {
    try {
     const newComment = new Comment (req.body);
     const saved = await newComment.save();
@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
 
 //get all comments 
 
-router.get('/', async (req, res) => {
+router.get('/all', async (req, res) => {
     try {
         const comments = await Comment.find();
         res.status(200).json(comments);
