@@ -299,19 +299,6 @@
   background-color: #b79cdb;
 }
 
-.productDetails{
-  background-color: #FBF1DA;
-  /* margin: 1em 5em; */
-  margin-top: 2em;
-  padding: 2em;
-   
-  border-radius: 24px;
-}
-
-.pdImage{
-  padding-right: 1em;
-}
-
 .loginDivider {
   display: flex;
   align-items: center;
@@ -584,6 +571,7 @@
   font-family: 'Montserrat', sans-serif;
   border: none;
   border-radius: 1.25rem;
+  box-shadow: 0.2rem 0.5rem 1rem rgba(0, 0, 0, 0.3);
 }
 
 #cardTitle{
@@ -594,4 +582,88 @@
 #cardPrice{
   font-size: 1.25rem;
   font-weight: 500;
+}
+
+.productCardBtn{
+  display: block;
+  margin: 0;
+}
+
+.promoBanner{
+  background: #B73E3A;
+  background: linear-gradient(180deg, rgba(183, 62, 58, 1) 0%, rgba(119, 8, 6, 1) 100%);
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+  border-radius: 1.25rem;
+  padding: 2.5rem 4rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.promoSubtext{
+  font-size: 1.25rem;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.promoTitle{
+  font-size: 3rem;
+  font-weight: 400;
+  font-family: 'Pinyon Script', cursive;
+}
+
+.bannerBtn{
+  display: block;
+}
+
+/* Back to Top Button */
+.backToTopBtn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background: #ffce71;
+  background: linear-gradient(180deg, rgba(255, 206, 113, 1) 0%, rgba(241, 160, 9, 1) 100%);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease;
+  pointer-events: none;
+}
+
+.backToTopBtn.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+
+.backToTopBtn:hover {
+  background: #ed7849;
+  background: linear-gradient(180deg, rgba(237, 120, 73, 1) 0%, rgba(211, 89, 40, 1) 100%);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  transform: translateY(-3px);
+}
+
+.backToTopBtn:active {
+  transform: translateY(0);
+}
+
+.backToTopArrow {
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 9px solid #421918;
+  margin-top: -2px;
 }
