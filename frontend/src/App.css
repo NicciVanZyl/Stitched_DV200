@@ -45,14 +45,12 @@
 
 .navBackground {
   background: #ffce71;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 206, 113, 1) 0%,
-    rgba(255, 206, 113, 0) 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(255, 206, 113, 1) 0%,
+      rgba(255, 206, 113, 0) 100%);
 }
 
-.navIcons {
+.navIcons{
   width: 1.3rem;
   height: auto;
 }
@@ -161,11 +159,9 @@
 /* LOGIN/REGISTER PAGE */
 .loginContainer {
   background: #e6a5a4;
-  background: linear-gradient(
-    180deg,
-    rgba(230, 165, 164, 1) 0%,
-    rgba(183, 62, 58, 1) 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(230, 165, 164, 1) 0%,
+      rgba(183, 62, 58, 1) 100%);
   min-height: 94vh;
   display: flex;
   flex-direction: column;
@@ -209,7 +205,7 @@
   min-height: 100%;
 }
 
-.passwordPaletteText {
+.passwordPaletteText{
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 0.9rem;
@@ -271,11 +267,9 @@
   z-index: -1;
   border-radius: 0.5rem;
   background: #ed7849;
-  background: linear-gradient(
-    180deg,
-    rgba(237, 120, 73, 1) 0%,
-    rgba(211, 89, 40, 1) 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(237, 120, 73, 1) 0%,
+      rgba(211, 89, 40, 1) 100%);
   box-shadow:
     inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
     7px 7px 20px 0px rgba(0, 0, 0, 0.1),
@@ -292,12 +286,6 @@
   width: 100%;
 }
 
-.lightPurple {
-  background-color: #b79cdb;
-}
-
-.customBtn:active {
-  top: 2px;
 .customBtn:active {
   top: 2px;
 }
@@ -309,19 +297,6 @@
 
 .lightPurple{
   background-color: #b79cdb;
-}
-
-.productDetails {
-  background-color: #fbf1da;
-  /* margin: 1em 5em; */
-  margin-top: 2em;
-  padding: 2em;
-
-  border-radius: 24px;
-}
-
-.pdImage{
-  padding-right: 1em;
 }
 
 .loginDivider {
@@ -370,11 +345,9 @@
 
 #signUpBtnOutline:hover {
   background: #ed7849;
-  background: linear-gradient(
-    180deg,
-    rgba(237, 120, 73, 1) 0%,
-    rgba(211, 89, 40, 1) 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(237, 120, 73, 1) 0%,
+      rgba(211, 89, 40, 1) 100%);
   color: #fff;
   border-color: #ed7849;
 }
@@ -552,9 +525,6 @@
   margin-bottom: 0;
 }
 
-.homeHeroImg {
-  width: 70%;
-  max-width: 800px;
 .categoryTitle{
   font-size: 2rem;
   font-weight: 500;
@@ -570,7 +540,6 @@
   box-shadow: 0.2rem 0.5rem 0.5rem rgba(0, 0, 0, 0.25);
 }
 
-.homeHero {
 .categoryImgWrapper {
   width: 150px;
   height: 150px;
@@ -580,82 +549,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  justify-content: flex-start;
-  text-align: flex-start;
-  padding: 4rem 2rem;
-}
-
-
-/* Product details page */
-.pdButton {
-  margin: 0;
-  width: 15em;
-  height: 4em;
-  margin-right: 2em;
-}
-
-.wishlistButton {
-  background-color: transparent;
-  border: none;
-
-  .buttonImage {
-    max-width: 3em;
-    /* filter: brightness(0) saturate(100%) invert(29%) sepia(24%) saturate(2732%) hue-rotate(309deg) brightness(93%) contrast(90%); */
-  }
-}
-
-.flagButton {
-  background-color: transparent;
-  border: none;
-
-  .buttonImage {
-    max-width: 3em;
-  }
-}
-
-.productDetails {
-  background-color: #FBF1DA;
-  border-radius: 24px;
-  width: 92% !important;
-  padding: 4em;
-}
-
-.pdDetails {
-  font-family: "Montserrat", sans-serif;
-  font-weight: 500;
-
-  h1 {
-    font-weight: 600;
-  }
-
-  h3 {
-    color: #8b1a1a;
-
-  }
-
-  h4 {
-    color: #8b1a1a;
-  }
-}
-
-.pdImageContainer {
-  display: flex;
-  justify-content: center;
-  max-height: 42em;
-}
-
-.pdImage {
-  object-fit: contain;
-  max-width: 100%;
-}
-
-.test {
-  margin-top: 5em;
-}
-
-.iconButtons {
-  margin-left: 1em;
-}
   box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.1);
   margin-bottom: 10px;
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
@@ -678,6 +571,7 @@
   font-family: 'Montserrat', sans-serif;
   border: none;
   border-radius: 1.25rem;
+  box-shadow: 0.2rem 0.5rem 1rem rgba(0, 0, 0, 0.3);
 }
 
 #cardTitle{
@@ -858,4 +752,28 @@
   .order-summary {
     width: 100%;
   }
+.productCardBtn{
+  display: block;
+  margin: 0;
+}
+
+.promoBanner{
+  background: #B73E3A;
+  background: linear-gradient(180deg, rgba(183, 62, 58, 1) 0%, rgba(119, 8, 6, 1) 100%);
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+  border-radius: 1.25rem;
+  padding: 2.5rem 2rem;
+}
+
+.promoSubtext{
+  font-size: 1.25rem;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.promoTitle{
+  font-size: 3rem;
+  font-weight: 400;
+  font-family: 'Pinyon Script', cursive;
 }
