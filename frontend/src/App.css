@@ -584,6 +584,11 @@
   font-weight: 500;
 }
 
+.productCardBtn{
+  display: block;
+  margin: 0;
+}
+
 .promoBanner{
   background: #B73E3A;
   background: linear-gradient(180deg, rgba(183, 62, 58, 1) 0%, rgba(119, 8, 6, 1) 100%);
