@@ -294,6 +294,15 @@
   width: 100%;
 }
 
+.customBtn:active {
+  top: 2px;
+}
+
+.heroBtn {
+  display: block;
+  margin: 0;
+}
+
 .lightPurple {
   background-color: #b79cdb;
 }
@@ -307,14 +316,8 @@
   border-radius: 24px;
 }
 
-.pdDetails {
-}
-
 .pdImage {
   padding-right: 1em;
-}
-.customBtn:active {
-  top: 2px;
 }
 
 .loginDivider {
@@ -439,28 +442,68 @@
   margin-top: 2rem;
 }
 
-/* Home Page */
-.homeContainer {
-  background: #efe3c7;
-  background: linear-gradient(
-    180deg,
-    rgba(239, 227, 199, 1) 0%,
-    rgba(237, 120, 73, 1) 100%
-  );
-  min-height: 100vh;
+/* Orange Footer */
+.orngfooterContainer {
+  color: #421918;
+  padding: 4rem 0;
+  margin-top: 1rem;
 }
 
-.homeHeroImg {
-  width: 70%;
-  max-width: 800px;
+.orngfooterHeading {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.2rem;
+  margin-bottom: 2rem;
+  color: #421918;
+}
+
+.orngfooterLinkGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.orngsocial-icon img {
+  width: 2.5rem;
   height: auto;
 }
 
-.homeHero {
+.orngsocialIcons {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  text-align: flex-start;
-  padding: 4rem 2rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  transition:
+    transform 0.3s ease-in-out,
+    box-shadow 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.categoryImgWrapper:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.categoryImgWrapper:hover .categoryImg {
+  transform: scale(1.1);
+  transition: transform 0.4s ease-in-out;
+}
+
+#productCard {
+  background-color: #b73e3a;
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  border: none;
+  border-radius: 1.25rem;
+}
+
+#cardTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+#cardPrice {
+  font-size: 1.25rem;
+  font-weight: 500;
 }
