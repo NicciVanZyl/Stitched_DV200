@@ -39,17 +39,20 @@
 }
 
 /* Navbar */
+.navbar {
+  position: absolute;
+}
 .navbarLogo {
   width: 8rem;
 }
 
 .navBackground {
-  background: #ffce71;
-  background: linear-gradient(
+  background: #f5bd54;
+  /* background: linear-gradient(
     180deg,
     rgba(255, 206, 113, 1) 0%,
     rgba(255, 206, 113, 0) 100%
-  );
+  ); */
 }
 
 .navIcons {
@@ -249,9 +252,11 @@
 
 .customBtn {
   background: #ffce71;
-  background: linear-gradient(180deg,
+  background: linear-gradient(
+    180deg,
     rgba(255, 206, 113, 1) 0%,
-    rgba(241, 160, 9, 1) 100%);
+    rgba(241, 160, 9, 1) 100%
+  );
   outline: none;
   border: none;
   border-radius: 0.5rem;
@@ -296,12 +301,12 @@
   top: 2px;
 }
 
-.heroBtn{
+.heroBtn {
   display: block;
   margin: 0;
 }
 
-.lightPurple{
+.lightPurple {
   background-color: #b79cdb;
 }
 
@@ -314,7 +319,7 @@
   border-radius: 24px;
 }
 
-.pdImage{
+.pdImage {
   padding-right: 1em;
 }
 
@@ -373,7 +378,6 @@
   border-color: #ed7849;
 }
 
-
 .textFieldsContainer p {
   margin: none;
 }
@@ -391,7 +395,7 @@
   margin-bottom: 0;
 }
 
-#heroSignUpBtn{
+#heroSignUpBtn {
   display: flex;
   justify-content: flex-start;
   margin: 0;
@@ -499,24 +503,31 @@
   margin-top: 2rem;
 }
 
-
 /* Home Page */
 .homeContainer {
-  background: #EFE3C7;
-  background: linear-gradient(180deg, rgba(239, 227, 199, 1) 0%, rgba(237, 120, 73, 1) 100%);
+  background: #efe3c7;
+  background: linear-gradient(
+    180deg,
+    rgba(239, 227, 199, 1) 0%,
+    rgba(237, 120, 73, 1) 100%
+  );
   min-height: 100vh;
   padding-top: 7%;
   padding-bottom: 4rem; /* ADD THIS — stops gradient cutting short */
 }
 
 .homeHeroCard {
-  background: #B73E3A;
-  background: linear-gradient(180deg, rgba(183, 62, 58, 1) 0%, rgba(119, 8, 6, 1) 100%);
+  background: #b73e3a;
+  background: linear-gradient(
+    180deg,
+    rgba(183, 62, 58, 1) 0%,
+    rgba(119, 8, 6, 1) 100%
+  );
   border-radius: 2.5rem;
   padding: 3rem 1rem 0 3rem;
   color: white;
   overflow: hidden;
-    box-shadow: 0.2rem 0.5rem 0.8rem rgba(0, 0, 0, 0.5);
+  box-shadow: 0.2rem 0.5rem 0.8rem rgba(0, 0, 0, 0.5);
 }
 
 .homeHeroTagline {
@@ -529,7 +540,7 @@
 .homeTitle {
   font-size: 1.25rem;
   font-weight: 400;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   color: #ffffff;
   max-width: 26rem;
   line-height: 1.4;
@@ -546,14 +557,14 @@
   margin-bottom: 0;
 }
 
-.categoryTitle{
+.categoryTitle {
   font-size: 2rem;
   font-weight: 500;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   color: #421918;
 }
 
-.categoryImg{
+.categoryImg {
   width: 100%;
   max-width: 10rem;
   height: auto;
@@ -570,15 +581,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.1);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
   margin-bottom: 10px;
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  transition:
+    transform 0.3s ease-in-out,
+    box-shadow 0.3s ease-in-out;
   cursor: pointer;
 }
 
 .categoryImgWrapper:hover {
-  transform: scale(1.05); 
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .categoryImgWrapper:hover .categoryImg {
@@ -586,20 +599,20 @@
   transition: transform 0.4s ease-in-out;
 }
 
-#productCard{
-  background-color: #B73E3A;
+#productCard {
+  background-color: #b73e3a;
   color: white;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   border: none;
   border-radius: 1.25rem;
 }
 
-#cardTitle{
+#cardTitle {
   font-size: 1.5rem;
   font-weight: 600;
 }
 
-#cardPrice{
+#cardPrice {
   font-size: 1.25rem;
   font-weight: 500;
 }
