@@ -90,47 +90,15 @@ export default function Profile() {
               Doe
             </p>
           </div>
-          <div
-            id="profile-button"
+          <button
+            className="tab-button active"
             style={{
-              display: "flex",
-              alignItems: "center",
-              marginTop: "3.37rem",
               width: "25rem",
-              height: "5.9375rem",
-              background: "rgba(237, 120, 73, 0.50)",
-              overflow: "hidden",
-              alignItems: "center",
+              marginTop: "3.37rem",
             }}
           >
-            <div
-              id="profile-bar"
-              style={{
-                width: "1.5rem",
-                height: "5.9375rem",
-                background: "#ED7849",
-                overflow: "hidden",
-              }}
-            ></div>
-            <div
-              id="profile-text"
-              className="profileSection"
-              style={{
-                width: "12.125rem",
-                height: "3.0625rem",
-                color: "#FFF",
-                fontFamily: "Montserrat",
-                fontSize: "2.61813rem",
-                fontStyle: "normal",
-                fontWeight: "400",
-                lineHeight: "normal",
-                overflow: "hidden",
-                marginLeft: "6.44rem",
-              }}
-            >
-              Profile
-            </div>
-          </div>
+            <div className="tab-label">Profile</div>
+          </button>
         </div>
         <div
           id="right-panel"
