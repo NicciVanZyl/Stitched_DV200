@@ -17,6 +17,7 @@ import KidsCtgryImg from "../images/KidsCtgryImg.png";
 import AccessCtgryImg from "../images/AccessCtgryImg.png";
 import ShoeCtgryImg from "../images/ShoeCtgryImg.png";
 import ProductCard from "../components/ProductCard";
+import BackToTop from "../components/btt";
 
 function Home() {
   
@@ -111,10 +112,44 @@ function Home() {
             </Row>
 
             <Row className="justify-content-center mt-5">
-              <Col>
+              <Col lg={4} md={6} className="mb-4">
+                <ProductCard />
+              </Col>
+
+              <Col lg={4} md={6} className="mb-4">
+                <ProductCard />
+              </Col>
+
+              <Col lg={4} md={6} className="mb-4">
+                <ProductCard />
+              </Col>
+
+              <Col lg={4} md={6} className="mb-4">
+                <ProductCard />
+              </Col>
+
+              <Col lg={4} md={6} className="mb-4">
+                <ProductCard />
+              </Col>
+
+              <Col lg={4} md={6} className="mb-4">
                 <ProductCard />
               </Col>
             </Row>
+
+            <Row>
+              <Col lg={12} className="align-items-center mt-5">
+                <div className="promoBanner">
+                  <div className="promoTextWrapper">
+                    <p className="promoSubtext">Limited time offer</p>
+                    <h3 className="promoTitle">First Purchase 20% Off</h3>
+                  </div>
+                  <button className="customBtn bannerBtn m-0">Shop</button>
+                </div>
+              </Col>
+            </Row>
+
+            <BackToTop />
 
             <OrangeFooter />
           </Container> 

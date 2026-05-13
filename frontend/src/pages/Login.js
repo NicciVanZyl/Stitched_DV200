@@ -23,6 +23,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import RedFooter from "../components/RedFooter";
 import axios from "axios";
+import BackToTop from "../components/btt";
 
 function Login() {
   const [currentPage, setCurrentPage] = useState("signup");
@@ -260,6 +261,8 @@ function Login() {
             {renderPage(currentPage)}
           </Col>
         </Row>
+
+        <BackToTop />
 
         <RedFooter />
       </Container>
