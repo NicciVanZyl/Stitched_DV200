@@ -32,6 +32,7 @@ function Navigation() {
             <Nav.Link as={Link} to="/Cart"><img src={CartIcon} alt='Cart Icon' className='navIcons'/></Nav.Link>
             <Nav.Link as={Link} to="/Profile"><img src={ProfileIcon} alt='Profile Icon' className='navIcons'/></Nav.Link>
             <Nav.Link as={Link} to="/Admin">Admin</Nav.Link>
+            <Nav.Link as={Link} to="/test">Test</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
