@@ -48,9 +48,9 @@
 
 .navBackground {
   background: #ffce71;
-  background: linear-gradient(180deg,
+  /* background: linear-gradient(180deg,
       rgba(255, 206, 113, 1) 0%,
-      rgba(255, 206, 113, 0) 100%);
+      rgba(255, 206, 113, 0) 100%); */
 }
 
 .navIcons{
