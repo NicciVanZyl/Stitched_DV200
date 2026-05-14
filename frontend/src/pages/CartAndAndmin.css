@@ -1,12 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap');
+
 .cart-page {
   width: 100%;
   min-height: 100vh;
-  background-color: #f5f1eb;
-  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(180deg, #ead4a8 0%, #9b2e25 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #2b2118;
 }
 
-/* CENTER CONTENT */
 .cart-wrapper {
   max-width: 1250px;
   margin: 0 auto;
@@ -14,150 +15,156 @@
 }
 
 .cart-title {
-  font-size: 42px;
-  font-weight: 600;
+  font-size: 85px;
+  font-family: "Pinyon Script", cursive;
+  font-weight: 400;
   margin-bottom: 40px;
+  line-height: 1;
 }
 
-/* MAIN LAYOUT */
+.logo-stitched {
+  font-family: "Pinyon Script", cursive;
+  font-size: 48px;
+  font-weight: 400;
+}
+
 .cart-content {
   display: flex;
   gap: 40px;
   align-items: flex-start;
 }
 
-/* LEFT SIDE */
 .cart-items {
   flex: 2;
-  background: #d9bba0;
-  padding: 30px;
-  border-radius: 28px;
+  background: transparent;
+  padding: 0;
 }
 
-/* HEADER */
 .cart-header {
   display: grid;
-  grid-template-columns: 100px 1fr 120px 60px;
-  padding-bottom: 18px;
-  margin-bottom: 20px;
-  font-weight: 600;
-  font-size: 16px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  grid-template-columns: 150px 1fr 120px 80px;
+  padding: 12px 30px;
+  margin-bottom: 25px;
+  font-weight: 500;
+  font-size: 18px;
+  background-color: #e27a58;
+  color: white;
+  border-radius: 50px;
+  border: none;
+  text-align: center;
 }
 
-/* CART ITEM */
 .cart-item {
   display: grid;
-  grid-template-columns: 100px 1fr 120px 60px;
+  grid-template-columns: 150px 1fr 120px 80px;
   align-items: center;
-  padding: 20px 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  background: linear-gradient(90deg, #f7f0d2 0%, #f7bc54 100%);
+  border-radius: 35px;
+  border: none;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* PRODUCT IMAGE */
 .product-image {
-  width: 80px;
-  height: 80px;
-  border-radius: 18px;
-  background-color: #f5f1eb;
+  width: 120px;
+  height: 120px;
+  border-radius: 12px;
+  background-color: #ffffff;
+  justify-self: center;
 }
 
-/* TEXT */
 .product-name {
-  padding: 0 15px;
-  font-size: 15px;
-}
-
-.product-price {
-  font-size: 15px;
+  padding: 0 25px;
+  font-size: 22px;
   font-weight: 500;
 }
 
-/* DELETE BUTTON */
+.product-price {
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+}
+
 .delete-btn {
   background: none;
   border: none;
   cursor: pointer;
   color: #2b2118;
+  font-size: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: 0.2s ease;
 }
 
-.delete-btn:hover {
-  transform: scale(1.1);
-  opacity: 0.7;
-}
-
-/* RIGHT SIDE */
 .order-summary {
   flex: 1;
-  background: #d9bba0;
-  padding: 30px;
-  border-radius: 28px;
-  min-width: 320px;
+  background: linear-gradient(180deg, #f6f1e8 0%, #dbba9e 100%);
+  padding: 40px 30px;
+  border-radius: 40px;
+  min-width: 380px;
+  box-shadow: 15px 15px 40px rgba(0, 0, 0, 0.3);
 }
 
 .order-summary h3 {
-  font-size: 24px;
-  margin-bottom: 20px;
+  font-size: 26px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: 600;
 }
 
-/* INPUT */
 .discount-input {
   width: 100%;
-  padding: 14px;
-  border: none;
-  border-radius: 12px;
-  margin: 10px 0 30px 0;
-  font-size: 14px;
+  padding: 14px 20px;
+  border: 1.5px solid #2b2118;
+  background: transparent;
+  border-radius: 30px;
+  margin: 10px 0 40px 0;
+  font-size: 16px;
   outline: none;
+  box-sizing: border-box;
 }
 
-/* SUMMARY */
 .summary-row {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 18px;
-  font-size: 15px;
+  margin-bottom: 25px;
+  font-size: 18px;
 }
 
 .summary-total {
   display: flex;
   justify-content: space-between;
-  margin: 25px 0;
-  font-size: 20px;
-  font-weight: 600;
+  margin: 30px 0;
+  font-size: 24px;
+  font-weight: 700;
 }
 
-/* LINE */
 .order-summary hr {
   border: none;
-  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  border-top: 2px solid #2b2118;
   margin: 20px 0;
 }
 
-/* BUTTON */
 .checkout-btn {
   width: 100%;
-  padding: 15px;
+  padding: 18px;
   border: none;
-  border-radius: 999px;
-  background-color: #2b2118;
-  color: white;
-  font-size: 15px;
-  font-weight: 500;
+  border-radius: 50px;
+  background: linear-gradient(90deg, #f7bc54 0%, #e27a58 100%);
+  color: #2b2118;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
-  transition: 0.2s ease;
+  transition: 0.3s ease;
 }
 
 .checkout-btn:hover {
-  opacity: 0.9;
+  filter: brightness(1.1);
   transform: translateY(-2px);
 }
 
-/* RESPONSIVE */
 @media (max-width: 900px) {
   .cart-content {
     flex-direction: column;
@@ -165,232 +172,255 @@
 
   .order-summary {
     width: 100%;
+    min-width: unset;
   }
 }
-
 .admin-page {
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(
-    to bottom,
-    #f5d8c8 0%,
-    #d46a5d 100%
-  );
-  font-family: Arial, Helvetica, sans-serif;
-  color: #3b1f1f;
-}
-
-.admin-wrapper {
-  max-width: 1300px;
-  margin: 0 auto;
-  padding: 40px 30px;
-
-  display: flex;
-  gap: 30px;
-  align-items: flex-start;
-}
-
-.admin-sidebar {
-  width: 240px;
-  background: rgba(255, 255, 255, 0.18);
-  backdrop-filter: blur(6px);
-
-  border-radius: 25px;
-  padding: 30px 20px;
-
+  background: linear-gradient(180deg, #ead4a8 0%, #9b2e25 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2b2118;
   display: flex;
   flex-direction: column;
-  align-items: center;
-}
-
-.admin-profile-img {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  background: #fff;
-  margin-bottom: 15px;
-}
-
-.admin-name {
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 35px;
 }
 
 .admin-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #2b2118;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.logo-stitched {
+  font-family: 'Apple Chancery', cursive;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.admin-wrapper {
+  display: flex;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px;
+  gap: 50px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.main-content {
+  flex: 1;
+}
+
+.admin-sidebar {
+  width: 350px;
+  background: linear-gradient(180deg, #f6f1e8 0%, #dbba9e 100%);
+  border-radius: 40px;
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 15px 15px 40px rgba(0, 0, 0, 0.2);
+  height: fit-content;
+}
+
+.profile-pic {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 8px solid #e27a58;
+  margin-bottom: 20px;
+  object-fit: cover;
+}
+
+.admin-name {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.sidebar-menu {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-}
-
-.admin-nav button {
-  border: none;
-  border-radius: 999px;
-  padding: 12px;
-  font-size: 14px;
-
-  cursor: pointer;
-  transition: 0.2s ease;
-}
-
-.admin-nav button:hover {
-  transform: translateY(-2px);
-  opacity: 0.9;
-}
-
-.active-admin-btn {
-  background: #8e2b45;
-  color: white;
-}
-
-.admin-nav button:not(.active-admin-btn) {
-  background: #f0b86d;
-  color: #3b1f1f;
-}
-
-.admin-content {
-  flex: 1;
-
-  background: rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(6px);
-
-  border-radius: 30px;
-  padding: 35px;
-}
-
-.admin-title {
-  font-size: 34px;
-  margin-bottom: 30px;
-  font-weight: 600;
-}
-
-.listings-container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.listing-card {
-  background: rgba(255, 255, 255, 0.4);
-
-  border-radius: 20px;
-  padding: 18px 20px;
-
-  display: grid;
-  grid-template-columns: 90px 1fr 120px;
-  align-items: center;
-  gap: 20px;
-}
-
-.listing-image {
-  width: 80px;
-  height: 80px;
-  border-radius: 15px;
-  background: white;
-}
-
-.listing-info h3 {
-  font-size: 16px;
-  margin-bottom: 8px;
-}
-
-.listing-info p {
-  font-size: 14px;
-}
-
-.listing-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.listing-actions button {
-  border: none;
-  border-radius: 999px;
-  padding: 10px;
-
-  font-size: 13px;
-  cursor: pointer;
-
-  transition: 0.2s ease;
-}
-
-.listing-actions button:hover {
-  transform: scale(1.03);
-}
-
-.approve-btn {
-  background: #f0b86d;
-  color: #3b1f1f;
-}
-
-.delete-btn {
-  background: #8e2b45;
-  color: white;
-}
-
-.edit-profile-form {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-.form-row {
-  display: flex;
   gap: 15px;
 }
 
-.form-group {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+.menu-item {
+  width: 100%;
+  padding: 15px 25px;
+  background: transparent;
+  border: 2px solid #2b2118;
+  border-radius: 50px;
+  color: #2b2118;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  transition: 0.3s;
 }
 
-.form-group input {
-  padding: 14px;
+.menu-item.active, .menu-item:hover {
+  background: #2b2118;
+  color: #ffffff;
+}
+
+.dashboard-title {
+  font-family: 'Apple Chancery', cursive;
+  font-size: 54px;
+  margin-bottom: 30px;
+  color: #2b2118;
+}
+
+.listing-card, .flag-card {
+  background: linear-gradient(90deg, #f7f0d2 0%, #f7bc54 100%);
+  border-radius: 35px;
+  padding: 30px;
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-info {
+  flex: 1;
+}
+
+.card-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.card-desc, .flag-reason {
+  font-size: 16px;
+  color: #4a3f35;
+  line-height: 1.4;
+}
+
+.flag-category {
+  display: inline-block;
+  background: #e27a58;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 14px;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+.card-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  max-width: 300px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
   border: none;
-  border-radius: 999px;
-
-  background: rgba(255, 255, 255, 0.7);
-
-  outline: none;
+  transition: 0.2s;
   font-size: 14px;
 }
 
-.save-btn {
-  margin-top: 15px;
+.btn-approve { background: #4CAF50; color: white; }
+.btn-reject { background: #f44336; color: white; }
+.btn-edit { background: #2b2118; color: white; }
+.btn-view { background: #e27a58; color: white; }
+.btn-ban { background: #000000; color: white; }
+.btn-delete { background: #9b2e25; color: white; }
 
-  border: none;
-  border-radius: 999px;
-
-  padding: 15px;
-  background: #f0b86d;
-
-  font-size: 15px;
-  cursor: pointer;
+.profile-form-container {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  padding: 40px;
+  border-radius: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-@media (max-width: 950px) {
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
 
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group.full-width {
+  grid-column: span 2;
+}
+
+.form-group label {
+  font-weight: 700;
+  font-size: 16px;
+  color: #2b2118;
+}
+
+.form-group input {
+  padding: 15px 20px;
+  border-radius: 15px;
+  border: 2px solid #2b2118;
+  background: #f6f1e8;
+  font-size: 16px;
+  outline: none;
+}
+
+.form-actions {
+  margin-top: 40px;
+  display: flex;
+  gap: 20px;
+  justify-content: flex-end;
+}
+
+.btn-save {
+  background: linear-gradient(90deg, #f7bc54 0%, #e27a58 100%);
+  padding: 15px 40px;
+  font-size: 18px;
+  border-radius: 50px;
+  color: #2b2118;
+}
+
+.btn-cancel {
+  background: transparent;
+  border: 2px solid #2b2118;
+  padding: 15px 40px;
+  font-size: 18px;
+  border-radius: 50px;
+}
+
+@media (max-width: 1100px) {
   .admin-wrapper {
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
-
   .admin-sidebar {
     width: 100%;
   }
-
-  .listing-card {
+  .form-grid {
     grid-template-columns: 1fr;
-    text-align: center;
   }
-
-  .listing-actions {
-    flex-direction: row;
-  }
-
-  .form-row {
-    flex-direction: column;
+  .form-group.full-width {
+    grid-column: span 1;
   }
 }
+

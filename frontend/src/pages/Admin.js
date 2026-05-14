@@ -11,11 +11,8 @@ function AdminPage() {
 
         {/* SIDEBAR */}
         <div className="admin-sidebar">
-
           <div className="admin-profile-img"></div>
-
           <h2 className="admin-name">Jane Doe</h2>
-
           <div className="admin-nav">
             <button>View Flags</button>
 
