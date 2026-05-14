@@ -332,7 +332,7 @@
 }
 
 #name-container {
-  textalign: center;
+  text-align: center;
   width: 11.3125rem;
   height: 9.5625rem;
   color: #fff;
