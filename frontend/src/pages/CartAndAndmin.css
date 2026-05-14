@@ -167,3 +167,230 @@
     width: 100%;
   }
 }
+
+.admin-page {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(
+    to bottom,
+    #f5d8c8 0%,
+    #d46a5d 100%
+  );
+  font-family: Arial, Helvetica, sans-serif;
+  color: #3b1f1f;
+}
+
+.admin-wrapper {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 40px 30px;
+
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.admin-sidebar {
+  width: 240px;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(6px);
+
+  border-radius: 25px;
+  padding: 30px 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.admin-profile-img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: #fff;
+  margin-bottom: 15px;
+}
+
+.admin-name {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 35px;
+}
+
+.admin-nav {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.admin-nav button {
+  border: none;
+  border-radius: 999px;
+  padding: 12px;
+  font-size: 14px;
+
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.admin-nav button:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.active-admin-btn {
+  background: #8e2b45;
+  color: white;
+}
+
+.admin-nav button:not(.active-admin-btn) {
+  background: #f0b86d;
+  color: #3b1f1f;
+}
+
+.admin-content {
+  flex: 1;
+
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(6px);
+
+  border-radius: 30px;
+  padding: 35px;
+}
+
+.admin-title {
+  font-size: 34px;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+.listings-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.listing-card {
+  background: rgba(255, 255, 255, 0.4);
+
+  border-radius: 20px;
+  padding: 18px 20px;
+
+  display: grid;
+  grid-template-columns: 90px 1fr 120px;
+  align-items: center;
+  gap: 20px;
+}
+
+.listing-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 15px;
+  background: white;
+}
+
+.listing-info h3 {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.listing-info p {
+  font-size: 14px;
+}
+
+.listing-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.listing-actions button {
+  border: none;
+  border-radius: 999px;
+  padding: 10px;
+
+  font-size: 13px;
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.listing-actions button:hover {
+  transform: scale(1.03);
+}
+
+.approve-btn {
+  background: #f0b86d;
+  color: #3b1f1f;
+}
+
+.delete-btn {
+  background: #8e2b45;
+  color: white;
+}
+
+.edit-profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-row {
+  display: flex;
+  gap: 15px;
+}
+
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group input {
+  padding: 14px;
+  border: none;
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.7);
+
+  outline: none;
+  font-size: 14px;
+}
+
+.save-btn {
+  margin-top: 15px;
+
+  border: none;
+  border-radius: 999px;
+
+  padding: 15px;
+  background: #f0b86d;
+
+  font-size: 15px;
+  cursor: pointer;
+}
+
+@media (max-width: 950px) {
+
+  .admin-wrapper {
+    flex-direction: column;
+  }
+
+  .admin-sidebar {
+    width: 100%;
+  }
+
+  .listing-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .listing-actions {
+    flex-direction: row;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+}
