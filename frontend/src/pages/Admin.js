@@ -7,9 +7,6 @@ import './CartAndAndmin.css';
 function AdminPage() {
   return (
     <div className="admin-page">
-      
-      <Navbar />
-
       <div className="admin-wrapper">
 
         {/* SIDEBAR */}

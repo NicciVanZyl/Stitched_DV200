@@ -6,10 +6,6 @@ import './CartAndAndmin.css';
 function Cart() {
   return (
    <div className="cart-page">
-
-      {/* Navbar */}
-      <Navbar />
-
       <div className="cart-wrapper">
         <h1 className="cart-title">Your Cart</h1>
 
