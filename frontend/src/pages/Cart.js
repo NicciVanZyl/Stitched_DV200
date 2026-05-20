@@ -71,7 +71,7 @@ function Cart() {
               <strong>R0.00</strong>
             </div>
 
-            <button className="checkout-btn">
+            <button className="customBtn">
               Checkout
             </button>
           </div>
