@@ -5,56 +5,22 @@ export default function Profile() {
   const [activePage, setActivePage] = useState(1);
   const [activeTab, setActiveTab] = useState("activeListing");
   const [hoverTab, setHoverTab] = useState(null);
-  const [hoverAddButton, setHoverAddButton] = useState(false);
 
   return (
     <div id="main-wrapper">
       <div id="content-container">
         <div id="yellow-section">
           <div id="profile-circle"></div>
-          <button
-            className="add-listing-circle-btn"
-            style={{
-              width: "60px",
-              height: "60px",
-              borderRadius: "50%",
-              backgroundColor: hoverAddButton
-                ? "rgba(237, 120, 73, 0.35)"
-                : "#FFD700",
-              border: "none",
-              fontSize: "32px",
-              color: "#333",
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              margin: "10px auto 0 auto",
-              fontWeight: "bold",
-              transition: "all 0.3s ease",
-            }}
-            onMouseEnter={() => setHoverAddButton(true)}
-            onMouseLeave={() => setHoverAddButton(false)}
-          >
-            +
-          </button>
           <div id="name-container">
             <p>Jane</p>
             <p>Doe</p>
           </div>
           <div id="profile-button">
-            {[
-              "activeListing",
-              "previousListing",
-              "viewLiked",
-              "editProfile",
-              "signOut",
-            ].map((tab) => {
+            {["activeListing", "previousListing", "viewLiked"].map((tab) => {
               const tabLabels = {
                 activeListing: "Active Listings",
                 previousListing: "Previous Listings",
                 viewLiked: "View Liked",
-                editProfile: "Edit Profile Details",
-                signOut: "Sign Out",
               };
               const isActive = activeTab === tab;
 

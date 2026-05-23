@@ -1,324 +1,25 @@
-@media (max-width: 767px) {
-  #main-wrapper {
-    padding: 1rem;
-    min-height: 100vh;
-  }
-
-  #content-container {
-    flex-direction: column !important;
-    width: 100% !important;
-    overflow: visible !important;
-  }
-
-  #yellow-section {
-    width: 100% !important;
-    height: auto !important;
-    max-height: none !important;
-    margin: 0 !important;
-    margin-bottom: 1.5rem !important;
-    border-radius: 1rem !important;
-  }
-
-  #profile-circle {
-    width: 5rem !important;
-    height: 5rem !important;
-    margin-top: 1.5rem !important;
-  }
-
-  #name-container {
-    font-size: 1.5rem !important;
-    width: 100% !important;
-    height: auto !important;
-    margin-top: 0.75rem !important;
-  }
-
-  #profile-button {
-    height: 5rem !important;
-    width: 100% !important;
-    margin: 1rem auto !important;
-    margin-bottom: 0rem !important;
-    border-radius: 1rem !important;
-  }
-
-  #profile-text {
-    margin-top: 0.5rem !important;
-    font-size: 2rem !important;
-  }
-
-  #right-panel {
-    width: 100% !important;
-    height: auto !important;
-    flex: none !important;
-    margin: 0 !important;
-    border-radius: 1rem !important;
-    box-shadow: none !important;
-  }
-
-  #profile-details-title,
-  #active-listings-title {
-    font-size: 1.75rem !important;
-    margin-left: 1rem !important;
-    margin-top: 1.5rem !important;
-    text-align: center !important;
-  }
-
-  #name-field-row,
-  #surname-field-row {
-    flex-direction: column !important;
-    height: auto !important;
-    width: 100% !important;
-  }
-
-  #name-label,
-  #surname-label {
-    width: calc(100% - 2rem) !important;
-    margin: 0 1rem !important;
-    margin-top: 1rem !important;
-  }
-
-  #name-input,
-  #surname-input {
-    width: calc(100% - 2rem) !important;
-    margin: 0.5rem 1rem 1rem 1rem !important;
-  }
-
-  #listing-row-1,
-  #listing-row-2 {
-    width: 100% !important;
-  }
-
-  #listing-1-image,
-  #listing-2-image {
-    width: 40% !important;
-    height: 70% !important;
-  }
-
-  #listing-1-title,
-  #listing-2-title {
-    width: 50% !important;
-    margin-top: -1rem !important;
-    margin-left: 40% !important;
-    font-size: 1.25rem !important;
-  }
-
-  #listing-1-price,
-  #listing-2-price {
-    width: 30% !important;
-    margin-top: 2.3rem !important;
-    margin-left: 40% !important;
-    font-size: 1.25rem !important;
-  }
-
-  /* Button full width */
-  #listing-1-yellow,
-  #listing-2-yellow {
-    margin-top: 4.5rem !important;
-    width: 47% !important;
-    height: 3rem !important;
-  }
-
-  #listing-1-yellow button,
-  #listing-2-yellow button {
-    width: 100% !important;
-    height: 3rem !important;
-  }
-
-  #pageOne {
-    margin: 0rem !important;
-    margin-top: 1.5rem !important;
-    margin-left: 1rem !important;
-    margin-bottom: 1.5rem !important;
-  }
-
-  #pageTwo {
-    margin: 0rem !important;
-    margin-top: 1.5rem !important;
-    margin-left: 1rem !important;
-    margin-bottom: 1.5rem !important;
-  }
-
-  #pageThree {
-    margin: 0rem !important;
-    margin-top: 1.5rem !important;
-    margin-left: 1rem !important;
-    margin-bottom: 1.5rem !important;
-  }
-
-  #arrowBottom {
-    margin: 0rem !important;
-    margin-top: 2rem !important;
-    margin-left: 1rem !important;
-    margin-bottom: 1.5rem !important;
-  }
+* {
+  box-sizing: border-box;
 }
 
-/*Tablet*/
-@media (min-width: 768px) and (max-width: 1024px) {
-  #main-wrapper {
-    padding: 2rem 1.5rem;
-  }
-
-  #content-container {
-    flex-direction: column !important;
-    width: 100% !important;
-    overflow: visible !important;
-  }
-
-  #yellow-section {
-    width: 100% !important;
-    height: auto !important;
-    max-height: none !important;
-    margin: 0 !important;
-    margin-bottom: 2rem !important;
-    border-radius: 2rem !important;
-  }
-
-  #profile-circle {
-    width: 7rem !important;
-    height: 7rem !important;
-    margin-top: 2rem !important;
-  }
-
-  /* Name text */
-  #name-container {
-    font-size: 2.5rem !important;
-    width: 100% !important;
-    height: auto !important;
-    margin-top: 1rem !important;
-  }
-
-  #profile-button {
-    width: 100% !important;
-    margin: 1.5rem auto !important;
-    margin-bottom: 0rem !important;
-    border-radius: 2rem !important;
-  }
-
-  #right-panel {
-    width: 100% !important;
-    height: auto !important;
-    margin: 0 !important;
-    border-radius: 2rem !important;
-    box-shadow: none !important;
-  }
-
-  #profile-details-title,
-  #active-listings-title {
-    font-size: 2.5rem !important;
-    margin-left: 1.5rem !important;
-    margin-top: 1.5rem !important;
-    text-align: center !important;
-  }
-
-  /* Form fields */
-  #name-field-row,
-  #surname-field-row {
-    flex-direction: column !important;
-    height: auto !important;
-    width: 70% !important;
-    margin-left: 5.5rem !important;
-  }
-
-  #name-label,
-  #surname-label {
-    width: auto !important;
-    margin-left: 1.5rem !important;
-    margin-top: 1.5rem !important;
-  }
-
-  #name-input,
-  #surname-input {
-    margin-left: 1rem !important;
-    margin-right: 1.5rem !important;
-    margin-top: 1.5rem !important;
-    height: 4rem !important;
-  }
-
-  /* Listing cards */
-  #listing-row-1,
-  #listing-row-2 {
-    width: 100% !important;
-  }
-
-  #listing-1-image,
-  #listing-2-image {
-    width: 20% !important;
-    height: 8rem !important;
-  }
-
-  #listing-1-title,
-  #listing-2-title {
-    margin-left: 20rem 0 !important;
-    width: 100% !important;
-  }
-
-  #listing-1-price,
-  #listing-2-price {
-    margin-left: 20rem 0 !important;
-    width: 100% !important;
-  }
-
-  #listing-1-yellow,
-  #listing-2-yellow {
-    width: 20% !important;
-    margin: 1rem 0 0 0 !important;
-    height: 6rem !important;
-  }
-
-  #listing-1-yellow button,
-  #listing-2-yellow button {
-    width: 20% !important;
-    height: 6rem !important;
-    margin-left: 1.5rem !important;
-  }
-
-  #pageOne {
-    margin-right: 0rem !important;
-    margin: 1.5rem !important;
-  }
-
-  #pageTwo {
-    margin-left: 0.5rem !important;
-    margin-top: 1.5rem !important;
-  }
-
-  #pageThree {
-    margin-left: 2rem !important;
-    margin-top: 1.5rem !important;
-  }
-
-  #arrowBottom {
-    margin-left: 1.5rem !important;
-    margin-top: 2rem !important;
-  }
+#main-wrapper {
+  background: linear-gradient(
+    180deg,
+    rgba(239, 227, 199, 1),
+    rgba(237, 120, 73, 1)
+  );
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
-/*desktop*/
-@media (min-width: 1025px) {
-  #main-wrapper {
-    padding: 2rem;
-    padding-bottom: 6rem;
-  }
-
-  #content-container {
-    width: fit-content;
-    overflow: hidden;
-  }
-
-  #yellow-section {
-    margin-top: 5rem !important;
-    margin-left: 3rem !important;
-    width: 25rem !important;
-    height: 58rem !important;
-    border-bottom-left-radius: 2rem !important;
-  }
-
-  #right-panel {
-    margin-top: 5rem !important;
-    height: 58rem !important;
-    margin-right: 2rem !important;
-    border-bottom-right-radius: 2rem !important;
-  }
+#content-container {
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  width: fit-content;
+  max-width: 100%;
 }
 
 #profile-circle {
@@ -328,23 +29,31 @@
   border-radius: 50%;
   background: #ffffff;
   overflow: hidden;
+  display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 #name-container {
-  textalign: center;
+  text-align: center;
   width: 11.3125rem;
-  height: 9.5625rem;
+  height: auto;
   color: #fff;
   font-family: Montserrat;
   font-size: 4.23613rem;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  margin-top: 1rem;
+}
+
+#name-container p {
+  margin: 0.1rem 0;
+  padding: 0;
 }
 
 #profile-button {
-  display: "flex";
+  display: flex;
   flex-direction: column;
   align-items: stretch;
   margin-top: 3.37rem;
@@ -365,29 +74,6 @@
   align-items: center;
   flex-shrink: 0;
 }
-
-/* .tab-button {
-  display: flex;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  width: 25rem;
-  height: 3.5rem;
-  background: none;
-  overflow: hidden;
-  align-items: center;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.tab-button:hover {
-  background: rgba(237, 120, 73, 0.35);
-}
-
-.tab-button:active {
-  background: rgba(237, 120, 73, 0.5);
-} */
 
 .tab-button {
   display: flex;
@@ -430,6 +116,7 @@
 
 #right-panel {
   margin-top: 5rem;
+  width: 90rem;
   flex: 1;
   height: 58rem;
   border-radius: 0 2rem 0 0;
@@ -437,9 +124,14 @@
   display: flex;
   flex-direction: column;
   box-shadow: -5px 0 40px 0 rgba(0, 0, 0, 0.15);
+  overflow-y: hidden;
+  padding-right: 0;
 }
 
-#active-listings-title {
+#active-listings-title,
+#previous-listings-title,
+#view-liked-title,
+#edit-profile-title {
   color: #421918;
   font-family: "Pinyon Script", sans-serif;
   font-size: 3.75rem;
@@ -447,7 +139,8 @@
   font-weight: 400;
   line-height: normal;
   margin-top: 1.62rem;
-  margin-left: 16.5rem;
+  margin-left: 0rem;
+  text-align: center;
 }
 
 .viewlistingBtn {
@@ -456,82 +149,11 @@
   margin-right: 1.5rem;
 }
 
-#listing-row-1 {
-  width: 53rem;
-  height: 10.375rem;
-  background: linear-gradient(90deg, #e8b098 0%, #b73e3a 100%);
-  margin-top: 1.56rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 1rem;
-}
-
-#listing-1-image {
-  width: 8.375rem;
-  height: 8.375rem;
-  border-radius: 2rem;
-  background: #fff;
-}
-
-#listing-1-title {
-  width: 20rem;
-  margin-top: 1rem;
-  margin-left: 9.375rem;
-  color: #421918;
-  font-family: "Montserrat", sans-serif;
-  font-size: 1.618rem;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  position: absolute;
-}
-
-#listing-1-price {
-  width: 20rem;
-  margin-top: 3.2rem;
-  margin-left: 9.375rem;
-  color: #ffffff;
-  font-family: "Montserrat", sans-serif;
-  font-size: 2.61813rem;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  position: absolute;
-}
-
-/* . {
-  width: 12rem;
-  height: 3rem;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 206, 113, 1) 0%,
-    rgba(241, 160, 9, 1) 100%
-  ); */
-/* hoverListing1
-                      ? "linear-gradient(180deg, rgba(237, 120, 73, 1) 0%, rgba(211, 89, 40, 1) 100%)" */
-
-/* border-radius: 0.5rem;
-  margin-right: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  cursor: pointer;
-  color: #421918; */
-/* hoverListing1 ? "#fff" : */
-/* font-family: "Montserrat", sans-serif;
-  font-size: 1rem;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  box-shadow:
-    inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
-    7px 7px 20px 0px rgba(0, 0, 0, 0.1),
-    4px 4px 5px 0px rgba(0, 0, 0, 0.1);
-} */
-
-#listing-row-2 {
-  width: 53rem;
+#listing-row-1,
+#listing-row-2,
+#listing-row-3,
+#listing-row-4 {
+  width: 100%;
   height: 10.375rem;
   background: linear-gradient(90deg, #e8b098 0%, #b73e3a 100%);
   margin-top: 1.25rem;
@@ -539,18 +161,30 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 1rem;
+  position: relative;
 }
 
-#listing-2-image {
+#listing-row-1 {
+  margin-top: 1.56rem;
+}
+
+#listing-1-image,
+#listing-2-image,
+#listing-3-image,
+#listing-4-image {
   width: 8.375rem;
   height: 8.375rem;
   border-radius: 2rem;
   background: #fff;
+  flex-shrink: 0;
 }
 
-#listing-2-title {
+#listing-1-title,
+#listing-2-title,
+#listing-3-title,
+#listing-4-title {
   width: 20rem;
-  margin-top: 1rem;
+  margin-top: -3rem;
   margin-left: 9.375rem;
   color: #421918;
   font-family: "Montserrat", sans-serif;
@@ -561,7 +195,10 @@
   position: absolute;
 }
 
-#listing-2-price {
+#listing-1-price,
+#listing-2-price,
+#listing-3-price,
+#listing-4-price {
   width: 20rem;
   margin-top: 3.2rem;
   margin-left: 9.375rem;
@@ -572,4 +209,343 @@
   font-weight: 600;
   line-height: normal;
   position: absolute;
+}
+
+#pageContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  padding-bottom: 2rem;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+#pageOne,
+#pageTwo,
+#pageThree {
+  width: 3.9375rem;
+  height: 3.9375rem;
+  margin-top: 1.12rem;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  font-family: Montserrat;
+  font-size: 2.61813rem;
+  font-weight: 700;
+  transition: background-color 0.3s ease;
+}
+
+#pageOne {
+  background: #e6a5a4;
+}
+
+#pageOne.active {
+  background: #b73e3a;
+}
+
+#pageTwo {
+  background: #e6a5a4;
+}
+
+#pageTwo.active {
+  background: #b73e3a;
+}
+
+#pageThree {
+  background: #e6a5a4;
+}
+
+#pageThree.active {
+  background: #b73e3a;
+}
+
+#arrowBottom {
+  height: 3rem;
+  width: 4rem;
+  margin-top: 1.5rem;
+  cursor: pointer;
+}
+
+@media (max-width: 767px) {
+  #main-wrapper {
+    padding: 1rem;
+    justify-content: center;
+  }
+
+  #content-container {
+    flex-direction: column !important;
+    width: 100% !important;
+    overflow: visible !important;
+  }
+
+  #yellow-section {
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    margin: 0 !important;
+    margin-bottom: 1.5rem !important;
+    border-radius: 1rem !important;
+    margin-top: 0 !important;
+    margin-left: 0 !important;
+  }
+
+  #profile-circle {
+    width: 5rem !important;
+    height: 5rem !important;
+    margin-top: 1.5rem !important;
+  }
+
+  #name-container {
+    font-size: 1.5rem !important;
+    width: 100% !important;
+    height: auto !important;
+    margin-top: 0.75rem !important;
+  }
+
+  #profile-button {
+    height: auto !important;
+    width: 100% !important;
+    margin: 1rem auto !important;
+    margin-bottom: 0rem !important;
+    border-radius: 1rem !important;
+    padding: 0 1rem;
+  }
+
+  #right-panel {
+    width: 100% !important;
+    height: auto !important;
+    flex: none !important;
+    margin: 0 !important;
+    border-radius: 1rem !important;
+    box-shadow: none !important;
+    margin-top: 0 !important;
+  }
+
+  #active-listings-title,
+  #previous-listings-title,
+  #view-liked-title,
+  #edit-profile-title {
+    font-size: 1.75rem !important;
+    margin-left: 0rem !important;
+    margin-top: 1.5rem !important;
+    text-align: center !important;
+  }
+
+  #listing-row-1,
+  #listing-row-2,
+  #listing-row-3,
+  #listing-row-4 {
+    width: 100% !important;
+    height: auto !important;
+    margin-top: 1rem !important;
+    padding: 1rem !important;
+    flex-wrap: wrap;
+  }
+
+  #listing-1-image,
+  #listing-2-image,
+  #listing-3-image,
+  #listing-4-image {
+    width: 40% !important;
+    height: auto !important;
+    aspect-ratio: 1;
+  }
+
+  #listing-1-title,
+  #listing-2-title,
+  #listing-3-title,
+  #listing-4-title {
+    width: 50% !important;
+    margin-top: 0rem !important;
+    margin-left: 0 !important;
+    font-size: 1.25rem !important;
+    position: static !important;
+    padding: 0.5rem 0 0 1rem;
+  }
+
+  #listing-1-price,
+  #listing-2-price,
+  #listing-3-price,
+  #listing-4-price {
+    width: 50% !important;
+    margin-top: 0 !important;
+    margin-left: 0 !important;
+    font-size: 1.25rem !important;
+    position: static !important;
+    padding: 0 0 0.5rem 1rem;
+  }
+
+  #pageOne,
+  #pageTwo,
+  #pageThree {
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+    font-size: 1.5rem !important;
+    margin-top: 1rem !important;
+  }
+
+  #arrowBottom {
+    height: 2rem !important;
+    width: 2.5rem !important;
+    margin-top: 1rem !important;
+  }
+
+  #pageContainer {
+    padding-bottom: 1rem !important;
+    margin-top: 1rem !important;
+  }
+}
+
+/*Tablet*/
+@media (min-width: 768px) and (max-width: 1024px) {
+  #main-wrapper {
+    padding: 2rem 1.5rem;
+    justify-content: center;
+  }
+
+  #content-container {
+    flex-direction: column !important;
+    width: 100% !important;
+    overflow: visible !important;
+  }
+
+  #yellow-section {
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    margin: 0 !important;
+    margin-bottom: 2rem !important;
+    border-radius: 2rem !important;
+    margin-top: 0 !important;
+    margin-left: 0 !important;
+  }
+
+  #profile-circle {
+    width: 7rem !important;
+    height: 7rem !important;
+    margin-top: 2rem !important;
+  }
+
+  #name-container {
+    font-size: 2.5rem !important;
+    width: 100% !important;
+    height: auto !important;
+    margin-top: 1rem !important;
+  }
+
+  #profile-button {
+    width: 100% !important;
+    margin: 1.5rem auto !important;
+    margin-bottom: 0rem !important;
+    border-radius: 2rem !important;
+    padding: 0 1rem;
+  }
+
+  #right-panel {
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    border-radius: 2rem !important;
+    box-shadow: none !important;
+    margin-top: 0 !important;
+  }
+
+  #active-listings-title,
+  #previous-listings-title,
+  #view-liked-title,
+  #edit-profile-title {
+    font-size: 2.5rem !important;
+    margin-left: 1.5rem !important;
+    margin-top: 1.5rem !important;
+    text-align: center !important;
+  }
+
+  #listing-row-1,
+  #listing-row-2,
+  #listing-row-3,
+  #listing-row-4 {
+    width: 100% !important;
+    height: auto !important;
+    margin-top: 1.5rem !important;
+    padding: 1rem !important;
+    flex-wrap: wrap;
+  }
+
+  #listing-1-image,
+  #listing-2-image,
+  #listing-3-image,
+  #listing-4-image {
+    width: 20% !important;
+    height: 8rem !important;
+  }
+
+  #listing-1-title,
+  #listing-2-title,
+  #listing-3-title,
+  #listing-4-title {
+    width: 100% !important;
+    margin-left: 0 !important;
+    position: static !important;
+    padding: 0.5rem 0 0 1rem;
+  }
+
+  #listing-1-price,
+  #listing-2-price,
+  #listing-3-price,
+  #listing-4-price {
+    width: 100% !important;
+    margin-left: 0 !important;
+    position: static !important;
+    padding: 0 0 0.5rem 1rem;
+  }
+
+  #pageOne,
+  #pageTwo,
+  #pageThree {
+    width: 3rem !important;
+    height: 3rem !important;
+    font-size: 2rem !important;
+    margin-top: 1rem !important;
+  }
+
+  #arrowBottom {
+    height: 2.5rem !important;
+    width: 3rem !important;
+    margin-top: 1rem !important;
+  }
+
+  #pageContainer {
+    padding-bottom: 1.5rem !important;
+    margin-top: 1.5rem !important;
+  }
+}
+
+/*Desktop - Centered layout*/
+@media (min-width: 1025px) {
+  #main-wrapper {
+    padding: 2rem;
+    padding-bottom: 6rem;
+  }
+
+  #content-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  #yellow-section {
+    margin-top: 5rem !important;
+    margin-left: 3rem !important;
+    width: 25rem !important;
+    height: 58rem !important;
+    border-bottom-left-radius: 2rem !important;
+  }
+
+  #right-panel {
+    margin-top: 5rem !important;
+    height: 58rem !important;
+    margin-right: 2rem !important;
+    border-bottom-right-radius: 2rem !important;
+  }
 }

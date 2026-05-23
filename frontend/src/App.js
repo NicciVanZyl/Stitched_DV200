@@ -7,7 +7,7 @@ import Login from "./pages/Login";
 import Cart from "./pages/Cart";
 import ProductDetails from "./pages/PDP";
 import ProductListing from "./pages/PLP";
-import Profile from "./pages/Profile";
+import Profile from "./pages/ViewProfile";
 import PersonalProfile from "./pages/personalProfile";
 import Admin from "./pages/Admin";
 import "bootstrap/dist/css/bootstrap.min.css";
