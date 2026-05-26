@@ -42,9 +42,10 @@ const theme = createTheme({
         option: {
           borderRadius: '6px',
           fontSize: '16px',
-          color: '#fff',
+          color: '#000',
           '&:hover': {
             background: 'linear-gradient(180deg,rgba(237, 120, 73, 1) 0%,rgba(211, 89, 40, 1) 100%)',
+            color: '#fff',
           },
 
           '&.Mui-focused': {
@@ -63,7 +64,7 @@ const theme = createTheme({
           },
 
           '&[aria-selected="true"].Mui-focused': {
-            background: 'linear-gradient(180deg,rgba(237, 120, 73, 1) 0%,rgba(211, 89, 40, 1) 100%)',
+            background: '#ED7849',
           },
         },
 
@@ -111,7 +112,7 @@ const theme = createTheme({
           '&.Mui-error fieldset': {
             borderColor: 'rgb(233, 56, 56)',
           },
-          background: 'linear-gradient(180deg,rgba(237, 120, 73, 1) 0%,rgba(211, 89, 40, 1) 100%)',
+          background: '#ED7849',
         },
       },
     },
@@ -121,7 +122,10 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           color: '#fff',
-          '&.Mui-focused': { color: '#fff', background:'rgba(237, 120, 73, 1)',borderRadius:'12px 12px 0 0', paddingLeft:'5px', paddingRight:'5px',},
+          background:'#ED7849',
+          borderRadius:'12px 12px 0 0',
+          paddingLeft:'5px', paddingRight:'5px',
+          '&.Mui-focused': { color: '#fff', background:'#ED7849',borderRadius:'12px 12px 0 0', paddingLeft:'5px', paddingRight:'5px',},
           '&.Mui-error': { color: 'rgb(255, 125, 125)' },
         },
       },

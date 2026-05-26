@@ -15,16 +15,22 @@ const theme = createTheme({
             styleOverrides: {
 
                 paper: {
-                    width: 280,
-                    background: 'linear-gradient(180deg,rgba(255, 206, 113, 1) 0%,rgba(241, 160, 9, 1) 100%)',
+                    width: 320,
+                    overflow: 'hidden',
+                    paddingLeft: 20,
+                    paddingRight: 20,
+                    paddingTop: 20,
+                    background: 'linear-gradient(180deg,#F5BD54 0%,#ffffff 100%)',
                     boxShadow: '4px 0 24px rgba(124,58,237,0.10)',
                     borderRadius: '0 32px 32px 0',
                 },
 
 
                 root: {
+                    textAlign: 'center',
+
                     '& .MuiBackdrop-root': {
-                        backgroundColor: 'rgba(31,18,53,0.35)',
+                        backgroundColor: 'rgba(98, 43, 193, 0.1)',
                         backdropFilter: 'blur(2px)',
                     },
                 },
@@ -45,6 +51,7 @@ const theme = createTheme({
                 root: {
                     padding: '0 8px',
                     marginBottom: '2px',
+                    paddingTop:20,
                 },
             },
         },
@@ -56,8 +63,8 @@ const theme = createTheme({
 function FilterBar({ children }) {
     const DRAWER_WIDTH = 280;
     const FilterContent = (
-        <Box sx={{ width: DRAWER_WIDTH, p: 2 }}>
-            <h5>Filters</h5>
+        <Box sx={{ width: DRAWER_WIDTH, p: 3, marginTop:3}}>
+            <h5 className='filterTitle'>Filter</h5>
             <Divider sx={{ mb: 2 }} />
             {children}
         </Box>
@@ -70,7 +77,7 @@ function FilterBar({ children }) {
     return (
         <ThemeProvider theme={theme}>
 
-            <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', textAlign: 'center', }}>
 
 
                 {!isDesktop && (
@@ -88,7 +95,8 @@ function FilterBar({ children }) {
                             background: 'linear-gradient(180deg,rgba(255, 206, 113, 1) 0%,rgba(241, 160, 9, 1) 100%)',
                             userSelect: 'none',
                             borderRadius: '8px',
-
+                            width: '100%',
+                            textAlign: 'center',
                             '&:hover': {
                                 background: 'linear-gradient(180deg,rgba(237, 120, 73, 1) 0%,rgba(211, 89, 40, 1) 100%)',
                                 color: '#fff',
@@ -108,7 +116,7 @@ function FilterBar({ children }) {
                         </Typography>
                     </Box>
                 )}
-                <Box sx={{ display: 'flex', flexGrow: 1 }}>
+                <Box sx={{ display: 'flex', flexGrow: 1, textAlign: 'center', }}>
 
                     {!isDesktop && (
                         <Drawer
@@ -128,11 +136,12 @@ function FilterBar({ children }) {
                             sx={{
                                 width: 'fit-content',
                                 flexShrink: 0,
-                                background: 'linear-gradient(180deg,rgba(255, 206, 113, 1) 0%,rgba(241, 160, 9, 1) 100%)',
+                                background: 'linear-gradient(180deg,#F5BD54 0%,#ffffff 100%)',
                                 boxshadow: '0.2rem 0.5rem 0.8rem rgba(0, 0, 0, 0.5)',
                                 borderRadius: 8,
                                 padding: 2,
-                                height:'45em'
+                                height: '45em',
+                                textAlign: 'center',
                             }}
                         >
                             {FilterContent}

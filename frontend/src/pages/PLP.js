@@ -4,13 +4,15 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import placeholderImage from '../images/product image placeholder.png';
-import Footer from "../components/RedFooter";
+import Footer from "../components/OrangeFooter";
 import Button from "react-bootstrap/Button";
 import Box from '@mui/material/Box';
 import FilterBar from "../components/filterBar";
 import ProductCard from "../components/ProductCard";
 import Slider from '@mui/material/Slider'
 import Selector from '../components/selectors';
+import SearchField from '../components/searchField';
+import './PDP.css';
 
 function valueLabelFormat(value1, value2) {
   const units = "R";
@@ -32,20 +34,20 @@ function ProductListing() {
   };
 
   return (
-    <div className='loginContainer'>
+    <div className='homeContainer'>
       <Container fluid>
         <Row>
           <Col lg={4}>
             <FilterBar>
-              <div>
-                <input type="text" placeholder="Search..." className="form-control mb-2" />
-                <button className="customBtn">Search</button>
+              <div className='searchContainer'>
+                <SearchField></SearchField>
+                <button className="customBtnPLP">Search</button>
               </div>
 
               <Selector onSelectItem={setSelectedItemCategory} defaultVal={'Category'} options={categoryList} />
               <Selector onSelectItem={setSelectedItemRating} defaultVal={'Seller Rating'} options={ratingList} />
               <Selector onSelectItem={setSelectedItemSize} defaultVal={'Size'} options={sizeList} />
-              <div>
+              <div className='sliderContainer'>
                 <p>Price Range {valueLabelFormat(value[0], value[1])}</p>
                 <Slider
                   min={0}
@@ -56,21 +58,21 @@ function ProductListing() {
                   onChange={handleChange}
                   valueLabelDisplay="auto"
                   sx={{
-                    color:'linear-gradient(180deg,rgba(237, 120, 73, 1) 0%,rgba(211, 89, 40, 1) 100%)',
+                    color:'#ED7849',
                   }}
                 />
               </div>
             </FilterBar>
 
           </Col>
-          <Col lg={8}>
-            <h1>Our Products</h1>
-            <Row className="justify-content-center mt-5">
+          <Col lg={8} className='productCardsContainer'>
+            <h1 className='plpTitle mt-lg-0 mt-4'>Our Products</h1>
+            <Row className="justify-content-center mt-5 me-lg-4">
               <Col lg={4} md={6} className="mb-4">
                 <ProductCard />
               </Col>
 
-              <Col lg={4} md={6} className="mb-4">
+              <Col lg={4} md={6} className="mb-4 ">
                 <ProductCard />
               </Col>
 
@@ -92,6 +94,7 @@ function ProductListing() {
             </Row>
           </Col>
         </Row>
+        <Footer></Footer>
       </Container>
 
     </div>

@@ -68,3 +68,92 @@
 .iconButtons {
   margin-left: 1em;
 }
+
+.customBtnPLP {
+  width: 9rem;
+  height: 3rem;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  box-shadow:
+    inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+    7px 7px 20px 0px rgba(0, 0, 0, 0.1),
+    4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+  outline: none;
+  border-radius: 24px;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.customBtnPLP {
+  background: #ed7849;
+  background: linear-gradient(180deg,
+      rgba(237, 120, 73, 1) 0%,
+      rgba(211, 89, 40, 1) 100%);
+  outline: none;
+  border: none;
+  border-radius: 24px;
+  z-index: 1;
+  margin: 0 auto;
+  display: block;
+  width: 12rem;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.customBtnPLP:after {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 100%;
+  top: 0;
+  right: 0;
+  z-index: -1;
+  border-radius: 24px;
+  background: #ffce71;
+  background: linear-gradient(180deg,
+      rgba(255, 206, 113, 1) 0%,
+      rgba(241, 160, 9, 1) 100%);
+
+  box-shadow:
+    inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+    7px 7px 20px 0px rgba(0, 0, 0, 0.1),
+    4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+
+}
+
+.customBtnPLP:hover {
+  color: #421918;
+}
+
+.customBtnPLP:hover:after {
+  left: 0;
+  width: 100%;
+}
+
+.customBtnPLP:active {
+  top: 2px;
+}
+
+.sliderContainer {
+  margin-top: 30px;
+}
+
+.plpTitle {
+  font-size: 4rem;
+  font-weight: 500;
+  font-family: 'Pinyon Script', cursive;
+  text-align: center;
+}
+
+.filterTitle{
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+}
