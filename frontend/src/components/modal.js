@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import "../App.css";
 
-function NotificationModal({ show, message, onClose }) {
+function NotificationModal({ show, message, userName, onClose }) {
   useEffect(() => {
     if (show) {
       const timer = setTimeout(() => {
         onClose();
-      }, 3000);
+      }, 3500);
       return () => clearTimeout(timer);
     }
   }, [show, onClose]);
@@ -24,7 +24,7 @@ function NotificationModal({ show, message, onClose }) {
             <div className="iconFix"></div>
           </div>
         </div>
-        <h3>Hi There!</h3>
+        <h3>Hi {userName}!</h3>
         <p>{message}</p>
       </div>
     </div>

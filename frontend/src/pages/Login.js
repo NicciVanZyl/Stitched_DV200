@@ -34,6 +34,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [userName, setUserName] = useState("");
   const [selectedColours, setSelectedColours] = useState([]);
   const [showModal, setShowModal] = useState(false);
   
@@ -69,7 +70,8 @@ function Login() {
       localStorage.setItem("token", res.data.token);
       console.log("JWT Token:", token);
 
-      setMessage("Your registration details have been saved");
+      setUserName(name);
+      setMessage("You're all set! Your account has been created.");
       setShowModal(true);
     } catch (error) {
       setMessage(error.response?.data?.message || "Registration failed. Please try again.");
@@ -89,7 +91,8 @@ function Login() {
       localStorage.setItem("token", res.data.token);
       console.log("JWT Token:", token);
 
-      setMessage("Welcome back!");
+      setUserName(res.data.user.name);
+      setMessage(`Welcome back, we're happy to see you!`);
       setShowModal(true);
     } catch (error) {
       setMessage(error.response?.data?.message || "Login failed. Please try again.");
@@ -114,10 +117,10 @@ function Login() {
   // Modal
   const handleModalClose = () => {
   setShowModal(false);
-  if (currentPage === "signup" && message.includes("saved")) {
+  if (currentPage === "signup" && message.includes("all set")) {
     setCurrentPage("login");
     setSelectedColours([]);
-  } else if (currentPage === "login" && message.includes("Happy shopping.")) {
+  } else if (currentPage === "login" && message.includes("happy to see you")) {
     navigate("/Home");
   }
 };
@@ -332,6 +335,7 @@ function Login() {
       <NotificationModal 
         show={showModal} 
         message={message} 
+        userName={userName}
         onClose={handleModalClose} />
 
     </div>
