@@ -42,8 +42,7 @@ function Home() {
                         <p>Not yet a member?</p>
                         <Button
                           as={Link} to="/signup"
-                          variant="outline-light"
-                          id="signUpBtnOutline" style={{color: '#ffffff'}}>Sign Up</Button>
+                          variant="outline-light" className="customBtn" id="signUpBtnOutline" style={{color: '#ffffff'}}>Sign Up</Button>
                       </div>
                     </div>
                   </Col>
