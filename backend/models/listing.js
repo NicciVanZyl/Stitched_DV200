@@ -9,6 +9,7 @@ const listingSchema = new mongoose.Schema(
         isActive: { type: Boolean, default: false },
         customerID: { type: String, required: true },
         likes: { type: String, default: 0 },
+        isSold:{type: Boolean, default:false },
     },
 );
 

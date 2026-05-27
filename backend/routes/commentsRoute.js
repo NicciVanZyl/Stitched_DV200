@@ -26,4 +26,15 @@ router.get('/all', async (req, res) => {
     }
 });
 
+//get all comments tied to a specific seller
+
+router.get('/seller/:id', async (req, res) => {
+    try {
+        const comments = await Comment.find({"sellerID":req.params.id})
+        res.status(200).json(comments);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
 module.exports = router;
