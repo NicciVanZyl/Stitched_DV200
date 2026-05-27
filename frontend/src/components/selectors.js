@@ -1,13 +1,55 @@
 import react, { useState, useEffect, use } from "react";
 import Autocomplete from '@mui/material/Autocomplete'
 import TextField from "@mui/material/TextField";
+import Chip from '@mui/material/Chip';
 import '../App.css';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
   components: {
 
+    MuiChip: {
+      styleOverrides: {
+        root: {
+          //Background
+          background: 'linear-gradient(180deg,rgba(255, 206, 113, 1) 0%,rgba(241, 160, 9, 1) 100%)',
+          borderRadius: '32px',
+          height: '28px',
 
+          // Text
+          color: '#fff',
+          fontSize: '14px',
+          fontWeight: 500,
+          fontFamily: '"Montserrat", sans-serif',
+
+          // Hover 
+          '&:hover': {
+            background: 'linear-gradient(180deg,rgba(211, 89, 40, 1) 0%,rgba(180, 60, 20, 1) 100%)',
+          },
+
+          //Focused
+          '&.Mui-focusVisible': {
+            background: 'linear-gradient(180deg,rgba(211, 89, 40, 1) 0%,rgba(180, 60, 20, 1) 100%)',
+          },
+        },
+
+        //label text
+        label: {
+          color: '#000',
+          paddingLeft: '16px',
+          paddingRight: '12px',
+        },
+
+        //x icon
+        deleteIcon: {
+          color: 'rgba(255,255,255,0.7)',
+          fontSize: '16px',
+          '&:hover': {
+            color: '#fff',
+          },
+        },
+      },
+    },
     MuiAutocomplete: {
       styleOverrides: {
         //label colours
@@ -42,7 +84,7 @@ const theme = createTheme({
         option: {
           borderRadius: '6px',
           fontSize: '16px',
-          color: '#000',
+          color: '#421918',
           '&:hover': {
             background: 'linear-gradient(180deg,rgba(237, 120, 73, 1) 0%,rgba(211, 89, 40, 1) 100%)',
             color: '#fff',
@@ -73,7 +115,7 @@ const theme = createTheme({
           color: '#fff',
           '&:hover': {
             background: 'linear-gradient(180deg,rgba(255, 206, 113, 1) 0%,rgba(241, 160, 9, 1) 100%)',
-            color: '#000'
+            color: '#421918'
           },
         },
 
@@ -82,7 +124,7 @@ const theme = createTheme({
           color: '#fff',
           '&:hover': {
             background: 'linear-gradient(180deg,rgba(255, 206, 113, 1) 0%,rgba(241, 160, 9, 1) 100%)',
-            color: '#000'
+            color: '#421918'
           },
         },
         //input 
@@ -107,7 +149,7 @@ const theme = createTheme({
             borderColor: 'transparent',
           },
           '&.Mui-focused fieldset': {
-             borderColor: 'transparent',
+            borderColor: 'transparent',
           },
           '&.Mui-error fieldset': {
             borderColor: 'rgb(233, 56, 56)',
@@ -122,10 +164,10 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           color: '#fff',
-          background:'#ED7849',
-          borderRadius:'12px 12px 0 0',
-          paddingLeft:'5px', paddingRight:'5px',
-          '&.Mui-focused': { color: '#fff', background:'#ED7849',borderRadius:'12px 12px 0 0', paddingLeft:'5px', paddingRight:'5px',},
+          background: '#ED7849',
+          borderRadius: '12px 12px 0 0',
+          paddingLeft: '5px', paddingRight: '5px',
+          '&.Mui-focused': { color: '#fff', background: '#ED7849', borderRadius: '12px 12px 0 0', paddingLeft: '5px', paddingRight: '5px', },
           '&.Mui-error': { color: 'rgb(255, 125, 125)' },
         },
       },
@@ -140,22 +182,30 @@ function Selector({ defaultVal, onSelectItem, options }) {
     <ThemeProvider theme={theme}>
 
       <Autocomplete className="selector"
-        defaultValue={defaultVal}
+        defaultValue={[]}
+        multiple
+        limitTags={1}
         onChange={(event, value) => {
           if (!value) return;
-          if (onSelectItem) {
-            onSelectItem = value;
-          }
+          if (onSelectItem) onSelectItem(value);
         }}
         disablePortal
         options={options}
-        getOptionLabel={(option) => option.label || ""}
-        sx={{ 
+        getOptionLabel={(option) => option.label}
+        sx={{
           width: '100%',
-          marginBottom:'1em',
-          marginTop:'2em',
-         }}
-        renderInput={(params) => <TextField {...params} label={defaultVal} />}
+          marginBottom: '1em',
+          marginTop: '2em',
+        }}
+        isOptionEqualToValue={(option, value) => option.label === value.label}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label={defaultVal}
+            placeholder={defaultVal}
+
+          />
+        )}
 
       />
     </ThemeProvider>

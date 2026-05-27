@@ -153,7 +153,68 @@
   text-align: center;
 }
 
-.filterTitle{
+.filterTitle {
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
+}
+
+#btnOutline {
+  border-radius: 0.5rem;
+  width: 7rem;
+  height: 2rem;
+  color: #421918;
+  border-color: #421918;
+  border-width: 2px;
+  padding: 0.5rem 1rem;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  line-height: 1;
+  width: 8rem;
+  height: 2.5rem;
+}
+
+#btnOutline:hover {
+  background: #ed7849;
+  background: linear-gradient(180deg,
+      rgba(237, 120, 73, 1) 0%,
+      rgba(211, 89, 40, 1) 100%);
+  color: #fff;
+  border-color: #ed7849;
+}
+
+.flagModalBtn {
+  color: #421918 !important;
+  border: transparent !important;
+  text-transform: none !important;
+  width: 8rem;
+  height: 2.5rem;
+  font-weight: 500;
+}
+
+.flagModalBtn:hover {
+  color: #fff !important;
+  text-transform: none !important;
+
+}
+
+#flagTextarea {
+  border-color: #421918 !important;
+  border-width: 2px;
+  resize: none;
+  border-radius: 0.5rem;
+}
+
+#flagTextarea:active {
+  border-color: #421918 !important;
+  outline: none !important;
+}
+
+#flagTextarea:hover {
+  border-color: #421918 !important;
+  outline: 0 none !important;
+}
+
+#flagTextarea:focus {
+  border-color: #421918 !important;
+  outline: 0 none !important;
 }
