@@ -1,83 +1,26 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import "./Profile.css";
-import "../App.css";
-import ProfileTextFields from "../components/textField";
 
 export default function Profile() {
-  const navigate = useNavigate();
   const [activePage, setActivePage] = useState(1);
   const [activeTab, setActiveTab] = useState("activeListing");
   const [hoverTab, setHoverTab] = useState(null);
-  const [hoverAddButton, setHoverAddButton] = useState(false);
-  const [profileData, setProfileData] = useState({
-    // firstName: "Jane",
-    // lastName: "Doe",
-    // email: "janedoe@gmail.com",
-    // phone: "067 676 6767",
-    // address: "Unknown 123",
-    // city: "Cape Town",
-    // postalCode: "8000",
-    // birthDate: "",
-    // password: "",
-  });
-  const handleProfileChange = (e) => {
-    const { name, value } = e.target;
-    setProfileData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
 
   return (
     <div id="main-wrapper">
       <div id="content-container">
         <div id="yellow-section">
           <div id="profile-circle"></div>
-          <button
-            className="add-listing-circle-btn"
-            onClick={() => navigate("/addListing")}
-            style={{
-              width: "60px",
-              height: "60px",
-              borderRadius: "50%",
-              backgroundColor: hoverAddButton
-                ? "rgba(237, 120, 73, 0.35)"
-                : "#FFD700",
-              border: "none",
-              fontSize: "32px",
-              color: "#333",
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              margin: "10px auto 0 auto",
-              fontWeight: "bold",
-              transition: "all 0.3s ease",
-            }}
-            onMouseEnter={() => setHoverAddButton(true)}
-            onMouseLeave={() => setHoverAddButton(false)}
-          >
-            +
-          </button>
           <div id="name-container">
             <p>Jane</p>
             <p>Doe</p>
           </div>
           <div id="profile-button">
-            {[
-              "activeListing",
-              "previousListing",
-              "viewLiked",
-              "editProfile",
-              "signOut",
-            ].map((tab) => {
+            {["activeListing", "previousListing", "viewLiked"].map((tab) => {
               const tabLabels = {
                 activeListing: "Active Listings",
                 previousListing: "Previous Listings",
                 viewLiked: "View Liked",
-                editProfile: "Edit Profile Details",
-                signOut: "Sign Out",
               };
               const isActive = activeTab === tab;
 
@@ -207,87 +150,6 @@ export default function Profile() {
                 <div id="listing-4-price">R00 000</div>
                 <button className="customBtn viewlistingBtn">
                   View Listing
-                </button>
-              </div>
-            </>
-          ) : activeTab === "editProfile" ? (
-            <>
-              <div
-                id="edit-profile-title"
-                className="editProfile"
-                style={{ marginBottom: "2rem" }}
-              >
-                Profile Details
-              </div>
-
-              <div className="profile-fields" style={{ color: "#ffff" }}>
-                {[
-                  {
-                    label: "Address",
-                    name: "address",
-                    type: "text",
-                    placeholder: "Your address",
-                  },
-                  {
-                    label: "Name",
-                    name: "firstName",
-                    type: "text",
-                    placeholder: "Your name",
-                  },
-                  {
-                    label: "Surname",
-                    name: "lastName",
-                    type: "text",
-                    placeholder: "Your surname",
-                  },
-                  {
-                    label: "Birth Date",
-                    name: "birthDate",
-                    type: "text",
-                    placeholder: "DD/MM/YYYY",
-                  },
-                  {
-                    label: "Email",
-                    name: "email",
-                    type: "email",
-                    placeholder: "Your email",
-                  },
-                  {
-                    label: "Mobile Number",
-                    name: "phone",
-                    type: "text",
-                    placeholder: "Your mobile number",
-                  },
-                  {
-                    label: "Password",
-                    name: "password",
-                    type: "password",
-                    placeholder: "Your password",
-                  },
-                ].map(({ label, name, type, placeholder }) => (
-                  <div className="profile-field-row" key={name}>
-                    <span className="profile-field-label">{label}</span>
-                    <ProfileTextFields label={label}></ProfileTextFields>
-                  </div>
-                ))}
-              </div>
-
-              <div id="form-buttons">
-                <button
-                  className="btn-cancel"
-                  style={{
-                    marginLeft: "5.5rem",
-                    width: "11.75rem",
-                    height: "4.44rem",
-                  }}
-                >
-                  Cancel
-                </button>
-                <button
-                  className="btn-post"
-                  style={{ width: "21.5rem", height: "4.44rem" }}
-                >
-                  Save Details
                 </button>
               </div>
             </>

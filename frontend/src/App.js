@@ -7,8 +7,9 @@ import Login from "./pages/Login";
 import Cart from "./pages/Cart";
 import ProductDetails from "./pages/PDP";
 import ProductListing from "./pages/PLP";
-import Profile from "./pages/Profile";
+import Profile from "./pages/ViewProfile";
 import PersonalProfile from "./pages/personalProfile";
+import AddListing from "./pages/addListing";
 import Admin from "./pages/Admin";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -24,6 +25,7 @@ function App() {
         <Route path="/ProductListing" element={<ProductListing />}></Route>
         <Route path="/Profile" element={<Profile />}></Route>
         <Route path="/personalProfile" element={<PersonalProfile />}></Route>
+        <Route path="/addListing" element={<AddListing />}></Route>
         <Route path="/Admin" element={<Admin />}></Route>
       </Routes>
     </BrowserRouter>

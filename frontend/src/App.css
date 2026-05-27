@@ -14,7 +14,7 @@
   background: #ffce71;
 }
 
-.navIcons{
+.navIcons {
   width: 1.3rem;
   height: auto;
 }
@@ -179,7 +179,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
-.passwordPaletteText{
+.passwordPaletteText {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 0.9rem;
@@ -628,15 +628,19 @@
   font-weight: 500;
 }
 
-.productCardBtn{
+.productCardBtn {
   display: block;
   margin: 0;
 }
 
-.promoBanner{
-  background: #B73E3A;
-  background: linear-gradient(180deg, rgba(183, 62, 58, 1) 0%, rgba(119, 8, 6, 1) 100%);
-  font-family: 'Montserrat', sans-serif;
+.promoBanner {
+  background: #b73e3a;
+  background: linear-gradient(
+    180deg,
+    rgba(183, 62, 58, 1) 0%,
+    rgba(119, 8, 6, 1) 100%
+  );
+  font-family: "Montserrat", sans-serif;
   color: white;
   border-radius: 1.25rem;
   padding: 2.5rem 4rem;
@@ -647,19 +651,19 @@
   gap: 2rem;
 }
 
-.promoSubtext{
+.promoSubtext {
   font-size: 1.25rem;
   font-weight: 400;
   font-style: italic;
 }
 
-.promoTitle{
+.promoTitle {
   font-size: 3rem;
   font-weight: 400;
-  font-family: 'Pinyon Script', cursive;
+  font-family: "Pinyon Script", cursive;
 }
 
-.bannerBtn{
+.bannerBtn {
   display: block;
 }
 
@@ -674,7 +678,11 @@
   border: none;
   cursor: pointer;
   background: #ffce71;
-  background: linear-gradient(180deg, rgba(255, 206, 113, 1) 0%, rgba(241, 160, 9, 1) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 206, 113, 1) 0%,
+    rgba(241, 160, 9, 1) 100%
+  );
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
   display: flex;
   align-items: center;
@@ -682,7 +690,10 @@
   z-index: 999;
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    background 0.3s ease;
   pointer-events: none;
 }
 
@@ -694,7 +705,11 @@
 
 .backToTopBtn:hover {
   background: #ed7849;
-  background: linear-gradient(180deg, rgba(237, 120, 73, 1) 0%, rgba(211, 89, 40, 1) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(237, 120, 73, 1) 0%,
+    rgba(211, 89, 40, 1) 100%
+  );
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
   transform: translateY(-3px);
 }
