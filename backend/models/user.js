@@ -9,8 +9,9 @@ const userSchema = new mongoose.Schema(
         address: { type: String, },
         number: { type: String, },
         likedListings: { type: Array, },
-        rating: { type: Float, default: 0 },
+        rating: { type: String, default: 0 },
         isAdmin: { type: Boolean, default: false },
+        creativePassword: { type: String, required: true }
     },
 );
 
