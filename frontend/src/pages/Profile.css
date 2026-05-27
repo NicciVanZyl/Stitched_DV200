@@ -133,7 +133,7 @@
 #view-liked-title,
 #edit-profile-title,
 #product-information-title {
-  color: #421918;
+  color: #763433;
   font-family: "Pinyon Script", sans-serif;
   font-size: 3.75rem;
   font-style: normal;
@@ -764,6 +764,8 @@
 .profile-field-row {
   display: flex;
   align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
   gap: 1rem;
 }
 
@@ -773,11 +775,10 @@
   color: white;
   font-weight: 600;
   font-size: 0.9rem;
-  border-radius: 2rem;
   flex-shrink: 0;
   display: flex;
   width: 11.75rem;
-  height: 4.4375rem;
+  height: 3.75rem;
   padding: 0.625rem;
   justify-content: center;
   align-items: center;
@@ -787,7 +788,7 @@
 .profile-field-input-wrapper {
   flex: 1;
   border-radius: 2rem;
-  background: #421918;
+  background: #ed77499d;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -799,7 +800,11 @@
   padding: 0.625rem 1.25rem;
   border: none;
   border-radius: 2rem;
-  background: #421918 !important;
+  background: linear-gradient(
+    180deg,
+    rgba(239, 227, 199, 1),
+    rgba(237, 120, 73, 1)
+  ) !important;
   background-image: none !important;
   color: white;
   font-size: 0.95rem;

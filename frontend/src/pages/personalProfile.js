@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Profile.css";
-import { TextField } from "@mui/material";
+import "../App.css";
+import ProfileTextFields from "../components/textField";
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -20,7 +21,6 @@ export default function Profile() {
     // birthDate: "",
     // password: "",
   });
-
   const handleProfileChange = (e) => {
     const { name, value } = e.target;
     setProfileData((prev) => ({
@@ -267,15 +267,7 @@ export default function Profile() {
                 ].map(({ label, name, type, placeholder }) => (
                   <div className="profile-field-row" key={name}>
                     <span className="profile-field-label">{label}</span>
-                    <input
-                      className="profile-field-input"
-                      type={type}
-                      name={name}
-                      value={profileData[name] || ""}
-                      placeholder={placeholder || ""}
-                      onChange={handleProfileChange}
-                      autoComplete="off"
-                    />
+                    <ProfileTextFields label={label}></ProfileTextFields>
                   </div>
                 ))}
               </div>
