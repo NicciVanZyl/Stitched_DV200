@@ -1,192 +1,212 @@
-import React, { useState } from "react";
-import Navbar from "../components/navbar";
+import React, { useState } from 'react';
 import './CartAndAndmin.css';
 
-function AdminPage() {
-  // State to track which view is selected: "flags", "approve", or "profile"
-  const [activeTab, setActiveTab] = useState("approve");
-  
-  // States to track which dropdown index is currently open
-  const [openDropdown, setOpenDropdown] = useState(null);
+const AdminProfile = () => {
+  const [profile, setProfile] = useState({
+    firstName: 'Admin',
+    lastName: 'User',
+    email: 'admin@system.com',
+    phone: '+1 (555) 019-2834',
+    currentPassword: '',
+    newPassword: '',
+    confirmPassword: '',
+  });
 
-  const toggleDropdown = (index) => {
-    setOpenDropdown(openDropdown === index ? null : index);
+  const [avatar, setAvatar] = useState(null);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setProfile((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleAvatarChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setAvatar(URL.createObjectURL(file));
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle your admin profile update API logic here
+    console.log('Saved Admin Profile Data:', profile);
+    alert('Admin profile updated successfully!');
   };
 
   return (
-    <div className="admin-page">
-
-      <div className="admin-wrapper">
-        
-        {/* SIDEBAR */}
-        <div className="admin-sidebar">
-          <div className="admin-profile-container">
-            <img 
-              src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop" 
-              alt="Jane Doe" 
-              className="admin-profile-img"
-            />
+    <div className="admin-dashboard-container">
+      
+      {/* LEFT PANEL (matches personal profile visual structure) */}
+      <aside className="admin-sidebar">
+        <div className="admin-sidebar-inner">
+          <div className="admin-profile-top">
+            <div className="admin-avatar-circle">🛡️</div>
+            <div className="admin-name-block">
+              <div className="admin-name">Admin</div>
+              <div className="admin-subtitle">System Admin</div>
+            </div>
           </div>
-          <h2 className="admin-name">Jane Doe</h2>
-          
-          <div className="admin-nav">
-            <button 
-              className="customBtn"
-              onClick={() => { setActiveTab("flags"); setOpenDropdown(null); }}
-            >
-              View Flags
-            </button>
 
-            <button 
-              className="customBtn"
-              onClick={() => { setActiveTab("approve"); setOpenDropdown(null); }}
-            >
-              Approve Listings
-            </button>
+          <nav className="admin-sidebar-nav" aria-label="Admin navigation">
+            <a href="#approve" className="nav-item">
+              <span className="nav-icon">📋</span>
+              <span className="nav-text">Approve Listings</span>
+            </a>
+            <a href="#flags" className="nav-item">
+              <span className="nav-icon">🚩</span>
+              <span className="nav-text">View Flags</span>
+            </a>
+            <a href="#profile" className="nav-item active">
+              <span className="nav-icon">⚙️</span>
+              <span className="nav-text">Edit Profile</span>
+            </a>
+          </nav>
 
-            <button 
-              className="customBtn"
-              onClick={() => { setActiveTab("profile"); setOpenDropdown(null); }}
-            >
-              Edit Profile
+          <div className="sidebar-footer">
+            <button className="logout-btn" type="button">
+              <span>🚪</span> Log Out
             </button>
-
-            <button className="customBtn">Sign Out</button>
           </div>
         </div>
+      </aside>
 
-        {/* MAIN CONTENT AREA */}
-        <div className="admin-content">
-          
-          {/* DYNAMIC TITLE */}
-          <h1 className="admin-title">
-            {activeTab === "profile" ? "Profile Details" : "Admin Dashboard"}
-          </h1>
 
-          {/* VIEW FLAGS TAB */}
-          {activeTab === "flags" && (
-            <div className="listings-container flags-view">
-              {[
-                { name: "Product Listing Name", tags: ["Counterfeit", "Misleading"] },
-                { name: "Product Listing Name", tags: ["Prohibited Item"] },
-                { name: "Product Listing Name", tags: ["Harassment"] },
-                { name: "Product Listing Name", tags: ["Misleading", "Counterfeit"] }
-              ].map((item, idx) => (
-                <div className="listing-card flag-card" key={idx}>
-                  <div className="listing-info">
-                    <h3>{item.name}</h3>
-                    <p className="reporter-text">Reporter comment and a small snippet of why they reported it...</p>
-                    <div className="flag-tags">
-                      {item.tags.map((tag, tagIdx) => (
-                        <span key={tagIdx} className={`flag-badge ${tag.toLowerCase().replace(" ", "-")}`}>
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
+      {/* MAIN CONTENT WORKSPACE */}
+      <main className="admin-main-content">
+        <div className="profile-header">
+          <h1>Edit Profile Details</h1>
+          <p>Manage your administrative account settings and credentials.</p>
+        </div>
 
-                  <div className="listing-actions">
-                    <button className="customBtn" onClick={() => toggleDropdown(idx)}>
-                      Actions <span className="arrow-down">▼</span>
-                    </button>
-                    {openDropdown === idx && (
-                      <div className="custom-dropdown-menu">
-                        <button className="customBtn">Dismiss</button>
-                        <button className="customBtn">Ban User</button>
-                        <button className="customBtn">More Info</button>
-                        <div className="dropdown-divider"></div>
-                        <button className="customBtn">Delete Listing</button>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              ))}
+        <div className="profile-card">
+          <form onSubmit={handleSubmit} className="profile-form">
+            
+            {/* AVATAR SECTION */}
+            <div className="avatar-section">
+              <div className="avatar-wrapper">
+                {avatar ? (
+                  <img src={avatar} alt="Admin Avatar" className="avatar-img" />
+                ) : (
+                  <div className="avatar-fallback">AD</div>
+                )}
+                <label htmlFor="avatarUpload" className="avatar-upload-label">
+                  📷
+                  <input 
+                    type="file" 
+                    id="avatarUpload" 
+                    accept="image/*" 
+                    onChange={handleAvatarChange} 
+                    hidden 
+                  />
+                </label>
+              </div>
+              <div className="avatar-meta">
+                <h2>Administrator Account</h2>
+                <span className="admin-badge">System Admin</span>
+                <p className="upload-hint">Allowed JPG, GIF or PNG. Max size of 2MB</p>
+              </div>
             </div>
-          )}
 
-          {/* APPROVE LISTINGS TAB */}
-          {activeTab === "approve" && (
-            <div className="listings-container approve-view">
-              {[
-                { img: "https://images.unsplash.com/photo-1624242971730-ea36111754a4?q=80&w=150&auto=format&fit=crop", name: "Product Listing Name" },
-                { img: "https://images.unsplash.com/photo-1621454537170-a31525d88f98?q=80&w=150&auto=format&fit=crop", name: "Product Listing Name" },
-                { img: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=150&auto=format&fit=crop", name: "Product Listing Name" }
-              ].map((item, idx) => (
-                <div className="listing-card" key={idx}>
-                  <div className="listing-img-wrapper">
-                    <img src={item.img} alt={item.name} className="listing-image" />
-                  </div>
-                  
-                  <div className="listing-info">
-                    <h3>{item.name}</h3>
-                    <p className="product-desc">Product Description...</p>
-                    <p className="product-price">R000,00</p>
-                  </div>
+            <hr className="form-divider" />
 
-                  <div className="listing-actions">
-                    <button className="customBtn" onClick={() => toggleDropdown(idx)}>
-                      Actions <span className="arrow-down">▼</span>
-                    </button>
-                    {openDropdown === idx && (
-                      <div className="custom-dropdown-menu">
-                        <button className="customBtn">Reject</button>
-                        <button className="customBtn">Edit</button>
-                        <button className="customBtn">View Full</button>
-                        <div className="dropdown-divider"></div>
-                        <button className="customBtn">Approve</button>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {/* EDIT PROFILE TAB */}
-          {activeTab === "profile" && (
-            <div className="profile-form-container">
+            {/* PERSONAL INFO SECTION */}
+            <div className="form-section">
+              <h3>Personal Information</h3>
               <div className="form-grid">
-                <div className="form-row">
-                  <div className="form-label-box">Address</div>
-                  <input type="text" className="form-input-box" defaultValue="Unknown 123" />
+                <div className="input-group">
+                  <label>First Name</label>
+                  <input 
+                    type="text" 
+                    name="firstName" 
+                    value={profile.firstName} 
+                    onChange={handleInputChange} 
+                    required 
+                  />
                 </div>
-                <div className="form-row">
-                  <div className="form-label-box">Name</div>
-                  <input type="text" className="form-input-box" defaultValue="Jane" />
+                <div className="input-group">
+                  <label>Last Name</label>
+                  <input 
+                    type="text" 
+                    name="lastName" 
+                    value={profile.lastName} 
+                    onChange={handleInputChange} 
+                    required 
+                  />
                 </div>
-                <div className="form-row">
-                  <div className="form-label-box">Surname</div>
-                  <input type="text" className="form-input-box" defaultValue="Doe" />
+                <div className="input-group">
+                  <label>Email Address</label>
+                  <input 
+                    type="email" 
+                    name="email" 
+                    value={profile.email} 
+                    onChange={handleInputChange} 
+                    required 
+                  />
                 </div>
-                <div className="form-row">
-                  <div className="form-label-box">Birth Date</div>
-                  <input type="text" className="form-input-box" defaultValue="67/67/6767" />
+                <div className="input-group">
+                  <label>Phone Number</label>
+                  <input 
+                    type="tel" 
+                    name="phone" 
+                    value={profile.phone} 
+                    onChange={handleInputChange} 
+                  />
                 </div>
-                <div className="form-row">
-                  <div className="form-label-box">Email</div>
-                  <input type="email" className="form-input-box" defaultValue="janedoe@gmail.com" />
-                </div>
-                <div className="form-row">
-                  <div className="form-label-box">Mobile Number</div>
-                  <input type="text" className="form-input-box" defaultValue="067 676 6767" />
-                </div>
-                <div className="form-row">
-                  <div className="form-label-box">Password</div>
-                  <input type="text" className="form-input-box" defaultValue="Supersecret******" />
-                </div>
-              </div>
-
-              <div className="form-button-group">
-                <button className="customBtn">Cancel</button>
-                <button className="customBtn">Save Details</button>
               </div>
             </div>
-          )}
 
+            <hr className="form-divider" />
+
+            {/* SECURITY SECTION */}
+            <div className="form-section">
+              <h3>Security & Password</h3>
+              <div className="form-grid secondary">
+                <div className="input-group">
+                  <label>Current Password</label>
+                  <input 
+                    type="password" 
+                    name="currentPassword" 
+                    placeholder="••••••••" 
+                    value={profile.currentPassword} 
+                    onChange={handleInputChange} 
+                  />
+                </div>
+                <div className="input-group">
+                  <label>New Password</label>
+                  <input 
+                    type="password" 
+                    name="newPassword" 
+                    placeholder="••••••••" 
+                    value={profile.newPassword} 
+                    onChange={handleInputChange} 
+                  />
+                </div>
+                <div className="input-group">
+                  <label>Confirm New Password</label>
+                  <input 
+                    type="password" 
+                    name="confirmPassword" 
+                    placeholder="••••••••" 
+                    value={profile.confirmPassword} 
+                    onChange={handleInputChange} 
+                  />
+                </div>
+              </div>
+            </div>
+
+            <hr className="form-divider" />
+
+            {/* FORM ACTIONS */}
+            <div className="form-actions">
+              <button type="button" className="btn-secondary">Cancel</button>
+              <button type="submit" className="btn-primary">Save Changes</button>
+            </div>
+
+          </form>
         </div>
-      </div>
+      </main>
     </div>
   );
-}
+};
 
-export default AdminPage;
+export default AdminProfile;
