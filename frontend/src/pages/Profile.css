@@ -131,7 +131,8 @@
 #active-listings-title,
 #previous-listings-title,
 #view-liked-title,
-#edit-profile-title {
+#edit-profile-title,
+#product-information-title {
   color: #421918;
   font-family: "Pinyon Script", sans-serif;
   font-size: 3.75rem;
@@ -326,7 +327,8 @@
   #active-listings-title,
   #previous-listings-title,
   #view-liked-title,
-  #edit-profile-title {
+  #edit-profile-title,
+  #product-information-title {
     font-size: 1.75rem !important;
     margin-left: 0rem !important;
     margin-top: 1.5rem !important;
@@ -548,4 +550,254 @@
     margin-right: 2rem !important;
     border-bottom-right-radius: 2rem !important;
   }
+}
+
+#image-upload-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#upload-area {
+  display: flex;
+  height: 8rem;
+  padding: 1rem 1rem 0.9375rem 1rem;
+  align-items: center;
+  background-color: #f5f0e8;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  margin: 0 5rem;
+  border: 0.09rem solid #c4b49a;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+#upload-plus-box {
+  width: 5.625rem;
+  height: 5.625rem;
+  border: 0.125rem dashed #a89880;
+  border-radius: 0.5rem;
+  background-color: #d5c8a8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  color: #7a6a58;
+  flex-shrink: 0;
+}
+
+#listing-preview-image {
+  width: 5.625rem;
+  height: 5.625rem;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+#image-input {
+  display: none;
+}
+
+/* FORM FIELD STYLING */
+
+.field-row .field-group {
+  flex: 1;
+  margin: 0;
+}
+
+.field-input:focus,
+.field-select:focus {
+  outline: none;
+  border-color: #b73e3a;
+  box-shadow: 0 0 5px rgba(183, 62, 58, 0.2);
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  flex: 1;
+}
+
+.field-label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #3b2a1a;
+}
+
+.field-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 0.09rem solid #c4b49a;
+  border-radius: 0.75rem;
+  background-color: transparent;
+  font-size: 1rem;
+  color: #421918;
+  box-sizing: border-box;
+  outline: none;
+  appearance: none;
+}
+
+.field-select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 0.09rem solid #c4b49a;
+  border-radius: 0.75rem;
+  background-color: transparent;
+  font-size: 1rem;
+  color: #421918;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%233b2a1a' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+.field-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%233b2a1a' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+.field-row {
+  display: flex;
+  gap: 1.5rem;
+}
+
+#form-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  align-items: center;
+}
+
+.btn-cancel {
+  padding: 0.75rem 1.5rem;
+  border: 1.5px solid #3b2a1a;
+  border-radius: 2rem;
+  background-color: transparent;
+  font-size: 1rem;
+  color: #3b2a1a;
+  cursor: pointer;
+}
+
+.btn-save,
+.btn-post {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 2rem;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  box-shadow:
+    inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+    7px 7px 20px 0px rgba(0, 0, 0, 0.1),
+    4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+  outline: none;
+  z-index: 1;
+  background: #ffce71;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 206, 113, 1) 0%,
+    rgba(241, 160, 9, 1) 100%
+  );
+  color: #421918;
+  width: auto;
+  min-width: 8rem;
+}
+
+.btn-save:after,
+.btn-post:after {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 100%;
+  top: 0;
+  right: 0;
+  z-index: -1;
+  border-radius: 0.5rem;
+  background: #ed7849;
+  background: linear-gradient(
+    180deg,
+    rgba(237, 120, 73, 1) 0%,
+    rgba(211, 89, 40, 1) 100%
+  );
+  box-shadow:
+    inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+    7px 7px 20px 0px rgba(0, 0, 0, 0.1),
+    4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.btn-save:hover,
+.btn-post:hover {
+  color: #fff;
+}
+
+.btn-save:hover:after,
+.btn-post:hover:after {
+  left: 0;
+  width: 100%;
+}
+
+.btn-save:active,
+.btn-post:active {
+  top: 2px;
+}
+
+.profile-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0 5rem 1.5rem 5rem;
+}
+
+.profile-field-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.profile-field-label {
+  border-radius: 2rem;
+  background: var(--Color-13, #ed7849);
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: 2rem;
+  flex-shrink: 0;
+  display: flex;
+  width: 11.75rem;
+  height: 4.4375rem;
+  padding: 0.625rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.profile-field-input {
+  flex: 1;
+  padding: 0.625rem 1.25rem;
+  border: none;
+  border-radius: 2rem;
+  background: linear-gradient(90deg, #e8b098 0%, #b73e3a 100%);
+  appearance: none;
+  color: white;
+  font-size: 0.95rem;
+  outline: none;
+  height: 4.4375rem;
+  display: flex;
+  align-items: center;
+}
+
+#add-listing-content {
+  padding: 0 2rem;
 }

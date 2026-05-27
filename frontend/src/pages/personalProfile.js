@@ -1,11 +1,32 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Profile.css";
 
 export default function Profile() {
+  const navigate = useNavigate();
   const [activePage, setActivePage] = useState(1);
   const [activeTab, setActiveTab] = useState("activeListing");
   const [hoverTab, setHoverTab] = useState(null);
   const [hoverAddButton, setHoverAddButton] = useState(false);
+  const [profileData, setProfileData] = useState({
+    firstName: "Jane",
+    lastName: "Doe",
+    email: "janedoe@gmail.com",
+    phone: "067 676 6767",
+    address: "Unknown 123",
+    city: "Cape Town",
+    postalCode: "8000",
+    birthDate: "",
+    password: "",
+  });
+
+  const handleProfileChange = (e) => {
+    const { name, value } = e.target;
+    setProfileData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   return (
     <div id="main-wrapper">
@@ -14,6 +35,7 @@ export default function Profile() {
           <div id="profile-circle"></div>
           <button
             className="add-listing-circle-btn"
+            onClick={() => navigate("/addListing")}
             style={{
               width: "60px",
               height: "60px",
@@ -184,6 +206,65 @@ export default function Profile() {
                 <div id="listing-4-price">R00 000</div>
                 <button className="customBtn viewlistingBtn">
                   View Listing
+                </button>
+              </div>
+            </>
+          ) : activeTab === "editProfile" ? (
+            <>
+              <div
+                id="edit-profile-title"
+                className="editProfile"
+                style={{ marginBottom: "2rem" }}
+              >
+                Profile Details
+              </div>
+
+              <div className="profile-fields">
+                {[
+                  { label: "Address", name: "address", type: "text" },
+                  { label: "Name", name: "firstName", type: "text" },
+                  { label: "Surname", name: "lastName", type: "text" },
+                  {
+                    label: "Birth Date",
+                    name: "birthDate",
+                    type: "text",
+                    placeholder: "DD/MM/YYYY",
+                  },
+                  { label: "Email", name: "email", type: "email" },
+                  { label: "Mobile Number", name: "phone", type: "tel" },
+                  { label: "Password", name: "password", type: "password" },
+                ].map(({ label, name, type, placeholder }) => (
+                  <div className="profile-field-row" key={name}>
+                    <span className="profile-field-label">{label}</span>
+                    <input
+                      className="profile-field-input"
+                      type={type}
+                      name={name}
+                      value={profileData[name] || ""}
+                      placeholder={placeholder || ""}
+                      onChange={handleProfileChange}
+                      autoComplete="off"
+                    />
+                  </div>
+                ))}
+              </div>
+
+              <div id="form-buttons">
+                <button
+                  className="btn-cancel"
+                  style={{
+                    marginLeft: "5.5rem",
+                    width: "11.75rem",
+                    height: "4.44rem",
+                  }}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="btn-post"
+                  style={{ width: "21.5rem", height: "4.44rem" }}
+                >
+                  Save Details
                 </button>
               </div>
             </>
