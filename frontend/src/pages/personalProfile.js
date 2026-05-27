@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Profile.css";
+import { TextField } from "@mui/material";
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -9,15 +10,15 @@ export default function Profile() {
   const [hoverTab, setHoverTab] = useState(null);
   const [hoverAddButton, setHoverAddButton] = useState(false);
   const [profileData, setProfileData] = useState({
-    firstName: "Jane",
-    lastName: "Doe",
-    email: "janedoe@gmail.com",
-    phone: "067 676 6767",
-    address: "Unknown 123",
-    city: "Cape Town",
-    postalCode: "8000",
-    birthDate: "",
-    password: "",
+    // firstName: "Jane",
+    // lastName: "Doe",
+    // email: "janedoe@gmail.com",
+    // phone: "067 676 6767",
+    // address: "Unknown 123",
+    // city: "Cape Town",
+    // postalCode: "8000",
+    // birthDate: "",
+    // password: "",
   });
 
   const handleProfileChange = (e) => {
@@ -219,20 +220,50 @@ export default function Profile() {
                 Profile Details
               </div>
 
-              <div className="profile-fields">
+              <div className="profile-fields" style={{ color: "#ffff" }}>
                 {[
-                  { label: "Address", name: "address", type: "text" },
-                  { label: "Name", name: "firstName", type: "text" },
-                  { label: "Surname", name: "lastName", type: "text" },
+                  {
+                    label: "Address",
+                    name: "address",
+                    type: "text",
+                    placeholder: "Your address",
+                  },
+                  {
+                    label: "Name",
+                    name: "firstName",
+                    type: "text",
+                    placeholder: "Your name",
+                  },
+                  {
+                    label: "Surname",
+                    name: "lastName",
+                    type: "text",
+                    placeholder: "Your surname",
+                  },
                   {
                     label: "Birth Date",
                     name: "birthDate",
                     type: "text",
                     placeholder: "DD/MM/YYYY",
                   },
-                  { label: "Email", name: "email", type: "email" },
-                  { label: "Mobile Number", name: "phone", type: "tel" },
-                  { label: "Password", name: "password", type: "password" },
+                  {
+                    label: "Email",
+                    name: "email",
+                    type: "email",
+                    placeholder: "Your email",
+                  },
+                  {
+                    label: "Mobile Number",
+                    name: "phone",
+                    type: "text",
+                    placeholder: "Your mobile number",
+                  },
+                  {
+                    label: "Password",
+                    name: "password",
+                    type: "password",
+                    placeholder: "Your password",
+                  },
                 ].map(({ label, name, type, placeholder }) => (
                   <div className="profile-field-row" key={name}>
                     <span className="profile-field-label">{label}</span>

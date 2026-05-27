@@ -754,6 +754,7 @@
 }
 
 .profile-fields {
+  color: #ffff;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -783,19 +784,40 @@
   gap: 0.625rem;
 }
 
-.profile-field-input {
+.profile-field-input-wrapper {
   flex: 1;
+  border-radius: 2rem;
+  background: #421918;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.profile-field-input {
+  width: 100%;
+  height: 100%;
   padding: 0.625rem 1.25rem;
   border: none;
   border-radius: 2rem;
-  background: linear-gradient(90deg, #e8b098 0%, #b73e3a 100%);
-  appearance: none;
+  background: #421918 !important;
+  background-image: none !important;
   color: white;
   font-size: 0.95rem;
   outline: none;
-  height: 4.4375rem;
-  display: flex;
-  align-items: center;
+  appearance: none;
+}
+
+.profile-field-input:-webkit-autofill,
+.profile-field-input:-webkit-autofill:hover,
+.profile-field-input:-webkit-autofill:focus,
+.profile-field-input:-webkit-autofill:active {
+  -webkit-text-fill-color: white !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+input::placeholder {
+  color: #ffff;
+  opacity: 1;
 }
 
 #add-listing-content {
