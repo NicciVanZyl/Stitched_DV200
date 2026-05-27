@@ -1,5 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
@@ -20,6 +22,7 @@ import ProductCard from "../components/ProductCard";
 import BackToTop from "../components/btt";
 
 function Home() {
+  const navigate = useNavigate();
   
     return(
       <>
@@ -36,19 +39,20 @@ function Home() {
                         Online thrift store connecting closets, helping you curate your personal style!
                       </h1>
                       
-                      <button className="customBtn heroBtn mt-4">Discover Shop</button>
+                      <button onClick={() => navigate('/ProductListing')} className="customBtn heroBtn mt-4">
+                        Discover Shop
+                      </button>
                       
-                      <div className="signUpPrompts mt-4" id="heroSignUpBtn">
+                      <div className="signUpPrompts my-4" id="heroSignUpBtn">
                         <p>Not yet a member?</p>
                         <Button
-                          as={Link} to="/signup"
-                          variant="outline-light"
-                          id="signUpBtnOutline" style={{color: '#ffffff'}}>Sign Up</Button>
+                          as={Link} to="/"
+                          variant="outline-light" className="customBtn" id="signUpBtnOutline" style={{color: '#ffffff'}}>Sign Up</Button>
                       </div>
                     </div>
                   </Col>
 
-                  <Col lg={6} md={12}>
+                  <Col lg={6} md={12} className="align-self-end pb-0">
                     <img src={HomeHeroImg} alt="Home Hero" className="homeHeroImg"></img>
                   </Col>
                 </Row>
@@ -144,7 +148,7 @@ function Home() {
                     <p className="promoSubtext">Limited time offer</p>
                     <h3 className="promoTitle">First Purchase 20% Off</h3>
                   </div>
-                  <button className="customBtn bannerBtn m-0">Shop</button>
+                  <button onClick={() => navigate('/ProductListing')}className="customBtn bannerBtn m-0">Shop</button>
                 </div>
               </Col>
             </Row>

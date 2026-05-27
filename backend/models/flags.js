@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const flagSchema = new mongoose.Schema(
     {
-        reason: { type: String, required: true },
+        reason: { type: Array, required: true },
         listingId: { type: String, required: true },
         flagBody: { type: String, required: true }
     },
