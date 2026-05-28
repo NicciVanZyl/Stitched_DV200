@@ -993,3 +993,20 @@ input::placeholder {
 #add-listing-content {
   padding: 0 2rem;
 }
+
+#upload-area {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+}
+
+.field-error {
+  color: #b73e3a;
+  font-size: 0.8rem;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  margin-top: 0.25rem;
+}

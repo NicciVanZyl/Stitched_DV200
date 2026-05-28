@@ -5,36 +5,51 @@ export default function Profile() {
   const [activePage, setActivePage] = useState(1);
   const [activeTab, setActiveTab] = useState("addListing");
   const [hoverTab, setHoverTab] = useState(null);
-  const [uploadedImage, setUploadedImage] = useState(null);
+  const [uploadedImages, setUploadedImages] = useState([]);
+  const [submitStatus, setSubmitStatus] = useState(null);
+  const [errors, setErrors] = useState({});
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [size, setSize] = useState("");
   const [category, setCategory] = useState("");
   const [subCategory, setSubCategory] = useState("");
-  const [uploadedImageFile, setUploadedImageFile] = useState(null);
+  const [uploadedImageFiles, setUploadedImageFiles] = useState([]);
 
   const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      setUploadedImageFile(file);
+    const files = Array.from(event.target.files);
+    files.forEach((file) => {
       const reader = new FileReader();
-      reader.onload = (e) => setUploadedImage(e.target.result);
+      reader.onload = (e) => {
+        setUploadedImages((prev) => [...prev, e.target.result]);
+      };
       reader.readAsDataURL(file);
-    }
+    });
+    setUploadedImageFiles((prev) => [...prev, ...files]);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!uploadedImageFile) {
-      alert("Please upload an image");
+    const newErrors = {};
+    if (!uploadedImageFiles.length) newErrors.image = "Please upload an image";
+    if (!name.trim()) newErrors.name = "Name is required";
+    if (!description.trim()) newErrors.description = "Description is required";
+    if (!price) newErrors.price = "Price is required";
+    if (!size) newErrors.size = "Size is required";
+    if (!category) newErrors.category = "Category is required";
+    if (!subCategory) newErrors.subCategory = "Sub category is required";
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
       return;
     }
 
+    setErrors({});
+
     try {
       const formData = new FormData();
-      formData.append("image", uploadedImageFile);
+      formData.append("image", uploadedImageFiles[0]);
       const response = await fetch("/api/listing/image", {
         method: "POST",
         body: formData,
@@ -67,7 +82,7 @@ export default function Profile() {
 
       const listingData = await responsePost.json();
       console.log("Listing created successfully:", listingData);
-      alert("Listing posted successfully!");
+      setSubmitStatus("success");
       // Reset form
       setName("");
       setPrice("");
@@ -75,11 +90,11 @@ export default function Profile() {
       setSize("");
       setCategory("");
       setSubCategory("");
-      setUploadedImage(null);
-      setUploadedImageFile(null);
+      setUploadedImages([]);
+      setUploadedImageFiles([]);
     } catch (error) {
       console.error("Error:", error);
-      alert(`Error: ${error.message}`);
+      setSubmitStatus("error");
     }
   };
   return (
@@ -122,6 +137,43 @@ export default function Profile() {
                 >
                   Product Information
                 </div>
+                {submitStatus === "success" && (
+                  <div
+                    style={{
+                      margin: "0 5.5rem 1rem 5.5rem",
+                      padding: "0.75rem 1.5rem",
+                      borderRadius: "0.75rem",
+                      backgroundColor: "#d5c8a8",
+                      border: "0.09rem solid #c4b49a",
+                      color: "#421918",
+                      fontFamily: "Montserrat, sans-serif",
+                      fontWeight: "600",
+                      fontSize: "1rem",
+                      textAlign: "center",
+                    }}
+                  >
+                    ✓ Listing posted successfully!
+                  </div>
+                )}
+
+                {submitStatus === "error" && (
+                  <div
+                    style={{
+                      margin: "0 5.5rem 1rem 5.5rem",
+                      padding: "0.75rem 1.5rem",
+                      borderRadius: "0.75rem",
+                      backgroundColor: "#e6a5a4",
+                      border: "0.09rem solid #b73e3a",
+                      color: "#421918",
+                      fontFamily: "Montserrat, sans-serif",
+                      fontWeight: "600",
+                      fontSize: "1rem",
+                      textAlign: "center",
+                    }}
+                  >
+                    ✗ Upload unsuccessful. Please try again.
+                  </div>
+                )}
                 <form onSubmit={handleSubmit} id="addListingForm">
                   <div
                     id="image-upload-container"
@@ -140,40 +192,47 @@ export default function Profile() {
                       Image
                     </label>
 
-                    <label htmlFor="image-input" id="upload-area">
-                      <div id="upload-plus-box">
+                    <div
+                      id="upload-area"
+                      style={
+                        errors.image ? { border: "0.09rem solid #b73e3a" } : {}
+                      }
+                    >
+                      {uploadedImages.map((img, index) => (
+                        <img
+                          key={index}
+                          src={img}
+                          alt={`upload-${index}`}
+                          style={{
+                            width: "5.625rem",
+                            height: "5.625rem",
+                            objectFit: "cover",
+                            borderRadius: "0.5rem",
+                            flexShrink: 0,
+                          }}
+                        />
+                      ))}
+                      <label htmlFor="image-input" id="upload-plus-box">
                         <span>+</span>
-                      </div>
-                    </label>
+                      </label>
+                      {errors.image && (
+                        <span
+                          className="field-error"
+                          style={{ marginLeft: "5.5rem" }}
+                        >
+                          {errors.image}
+                        </span>
+                      )}
+                    </div>
 
                     <input
                       id="image-input"
                       type="file"
                       accept="image/*"
+                      multiple
                       onChange={handleImageUpload}
                       style={{ display: "none" }}
                     />
-
-                    {uploadedImage && (
-                      <div
-                        id="image-preview-container"
-                        style={{ marginTop: "15px" }}
-                      >
-                        <p style={{ fontSize: "14px", marginBottom: "10px" }}>
-                          Preview:
-                        </p>
-                        <img
-                          id="listing-preview-image"
-                          src={uploadedImage}
-                          alt="Listing preview"
-                          style={{
-                            maxWidth: "100%",
-                            maxHeight: "300px",
-                            border: "1px solid #ccc",
-                          }}
-                        />
-                      </div>
-                    )}
                   </div>
 
                   <div className="field-group">
@@ -182,7 +241,13 @@ export default function Profile() {
                       className="field-input"
                       type="text"
                       onChange={(e) => setName(e.target.value)}
+                      style={
+                        errors.name ? { border: "0.09rem solid #b73e3a" } : {}
+                      }
                     />
+                    {errors.name && (
+                      <span className="field-error">{errors.name}</span>
+                    )}
                   </div>
 
                   <div className="field-group">
@@ -191,7 +256,15 @@ export default function Profile() {
                       className="field-input"
                       type="text"
                       onChange={(e) => setDescription(e.target.value)}
+                      style={
+                        errors.description
+                          ? { border: "0.09rem solid #b73e3a" }
+                          : {}
+                      }
                     />
+                    {errors.description && (
+                      <span className="field-error">{errors.description}</span>
+                    )}
                   </div>
 
                   <div className="field-row">
@@ -202,13 +275,24 @@ export default function Profile() {
                         type="number"
                         placeholder="R"
                         onChange={(e) => setPrice(e.target.value)}
+                        style={
+                          errors.price
+                            ? { border: "0.09rem solid #b73e3a" }
+                            : {}
+                        }
                       />
+                      {errors.price && (
+                        <span className="field-error">{errors.price}</span>
+                      )}
                     </div>
                     <div className="field-group">
                       <label className="field-label">Size</label>
                       <select
                         className="field-input field-select"
                         onChange={(e) => setSize(e.target.value)}
+                        style={
+                          errors.size ? { border: "0.09rem solid #b73e3a" } : {}
+                        }
                       >
                         <option>XS</option>
                         <option>S</option>
@@ -216,6 +300,9 @@ export default function Profile() {
                         <option>L</option>
                         <option>XL</option>
                       </select>
+                      {errors.size && (
+                        <span className="field-error">{errors.size}</span>
+                      )}
                     </div>
                   </div>
 
@@ -225,22 +312,40 @@ export default function Profile() {
                       <select
                         className="field-input field-select"
                         onChange={(e) => setCategory(e.target.value)}
+                        style={
+                          errors.category
+                            ? { border: "0.09rem solid #b73e3a" }
+                            : {}
+                        }
                       >
                         <option>Women...</option>
                         <option>Men...</option>
                         <option>Kids...</option>
                       </select>
+                      {errors.category && (
+                        <span className="field-error">{errors.category}</span>
+                      )}
                     </div>
                     <div className="field-group">
                       <label className="field-label">Sub Category</label>
                       <select
                         className="field-input field-select"
                         onChange={(e) => setSubCategory(e.target.value)}
+                        style={
+                          errors.subCategory
+                            ? { border: "0.09rem solid #b73e3a" }
+                            : {}
+                        }
                       >
                         <option>Sneakers...</option>
                         <option>Boots...</option>
                         <option>Sandals...</option>
                       </select>
+                      {errors.subCategory && (
+                        <span className="field-error">
+                          {errors.subCategory}
+                        </span>
+                      )}
                     </div>
                   </div>
 

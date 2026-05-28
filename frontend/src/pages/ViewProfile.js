@@ -213,37 +213,6 @@ export default function Profile() {
           ) : (
             <div></div>
           )}
-          <div id="pageContainer">
-            {(activeTab === "activeListing" ||
-              activeTab === "previousListing" ||
-              activeTab === "viewLiked" ||
-              activeTab === "ratingsComments") && (
-              <>
-                <button
-                  id="pageOne"
-                  className={activePage === 1 ? "active" : ""}
-                  onClick={() => setActivePage(1)}
-                >
-                  1
-                </button>
-                <button
-                  id="pageTwo"
-                  className={activePage === 2 ? "active" : ""}
-                  onClick={() => setActivePage(2)}
-                >
-                  2
-                </button>
-                <button
-                  id="pageThree"
-                  className={activePage === 3 ? "active" : ""}
-                  onClick={() => setActivePage(3)}
-                >
-                  3
-                </button>
-                <img id="arrowBottom" src="/arrow.png" alt="arrow" />
-              </>
-            )}
-          </div>
         </div>
       </div>
     </div>
