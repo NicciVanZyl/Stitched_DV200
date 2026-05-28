@@ -16,11 +16,17 @@ export default function Profile() {
             <p>Doe</p>
           </div>
           <div id="profile-button">
-            {["activeListing", "previousListing", "viewLiked"].map((tab) => {
+            {[
+              "activeListing",
+              "previousListing",
+              "viewLiked",
+              "ratingsComments",
+            ].map((tab) => {
               const tabLabels = {
                 activeListing: "Active Listings",
                 previousListing: "Previous Listings",
                 viewLiked: "View Liked",
+                ratingsComments: "Ratings & Comments",
               };
               const isActive = activeTab === tab;
 
@@ -153,13 +159,65 @@ export default function Profile() {
                 </button>
               </div>
             </>
+          ) : activeTab === "ratingsComments" ? (
+            <>
+              <div id="ratings-comments-title" className="ratingsComments">
+                Ratings & Comments
+              </div>
+              <div className="comment-row">
+                <div className="comment-product-image"></div>
+                <div className="comment-content">
+                  <div className="comment-product-title">
+                    Burgundy Fabric Collection
+                  </div>
+                  <div className="comment-rating">★★★★★ 5.0</div>
+                  <div className="comment-text">
+                    "Amazing quality and fast shipping! Highly recommend this
+                    seller."
+                  </div>
+                </div>
+              </div>
+              <div className="comment-row">
+                <div className="comment-product-image"></div>
+                <div className="comment-content">
+                  <div className="comment-product-title">Denim Jacket</div>
+                  <div className="comment-rating">★★★★☆ 4.0</div>
+                  <div className="comment-text">
+                    "Great product, though sizing runs a bit small. Otherwise
+                    excellent."
+                  </div>
+                </div>
+              </div>
+              <div className="comment-row">
+                <div className="comment-product-image"></div>
+                <div className="comment-content">
+                  <div className="comment-product-title">Soft Peach Blouse</div>
+                  <div className="comment-rating">★★★★★ 5.0</div>
+                  <div className="comment-text">
+                    "Beautiful piece! Perfect fit and the color is exactly as
+                    pictured."
+                  </div>
+                </div>
+              </div>
+              <div className="comment-row">
+                <div className="comment-product-image"></div>
+                <div className="comment-content">
+                  <div className="comment-product-title">Terracotta Scarf</div>
+                  <div className="comment-rating">★★★☆☆ 3.0</div>
+                  <div className="comment-text">
+                    "Good quality but took longer to arrive than expected."
+                  </div>
+                </div>
+              </div>
+            </>
           ) : (
             <div></div>
           )}
           <div id="pageContainer">
             {(activeTab === "activeListing" ||
               activeTab === "previousListing" ||
-              activeTab === "viewLiked") && (
+              activeTab === "viewLiked" ||
+              activeTab === "ratingsComments") && (
               <>
                 <button
                   id="pageOne"

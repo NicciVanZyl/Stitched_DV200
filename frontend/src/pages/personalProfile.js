@@ -291,6 +291,33 @@ export default function Profile() {
                 </button>
               </div>
             </>
+          ) : activeTab === "signOut" ? (
+            <>
+              <div id="sign-out-title" className="signOut">
+                Sign Out
+              </div>
+              <div className="sign-out-container">
+                <div className="sign-out-message">
+                  <p className="sign-out-text">
+                    Are you sure you want to sign out?
+                  </p>
+                </div>
+                <div className="sign-out-buttons">
+                  <button
+                    className="sign-out-cancel-btn"
+                    onClick={() => setActiveTab("activeListing")}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className="sign-out-confirm-btn"
+                    onClick={() => navigate("/")}
+                  >
+                    Sign Out
+                  </button>
+                </div>
+              </div>
+            </>
           ) : (
             <div></div>
           )}

@@ -56,7 +56,7 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  margin-top: 3.37rem;
+  margin-top: 1.5rem;
   width: 25rem;
   gap: 0.5rem;
 }
@@ -132,7 +132,9 @@
 #previous-listings-title,
 #view-liked-title,
 #edit-profile-title,
-#product-information-title {
+#product-information-title,
+#ratings-comments-title,
+#sign-out-title {
   color: #763433;
   font-family: "Pinyon Script", sans-serif;
   font-size: 3.75rem;
@@ -148,6 +150,127 @@
   display: block;
   margin: 0;
   margin-right: 1.5rem;
+}
+
+.comment-row {
+  width: 100%;
+  min-height: 10.375rem;
+  background: linear-gradient(90deg, #e8b098 0%, #b73e3a 100%);
+  margin-top: 1.25rem;
+  display: flex;
+  align-items: center;
+  padding: 1.25rem 1rem;
+  position: relative;
+  gap: 1.5rem;
+}
+
+.comment-row:first-of-type {
+  margin-top: 1.56rem;
+}
+
+.comment-product-image {
+  width: 8.375rem;
+  height: 8.375rem;
+  border-radius: 2rem;
+  background: #fff;
+  flex-shrink: 0;
+}
+
+.comment-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+  gap: 0.5rem;
+}
+
+.comment-product-title {
+  color: #421918;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.618rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.comment-rating {
+  color: #fff;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.comment-text {
+  color: #421918;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  font-style: italic;
+  margin: 0;
+  max-width: 60rem;
+}
+
+.sign-out-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 3rem 2rem;
+  gap: 3rem;
+}
+
+.sign-out-message {
+  background: linear-gradient(90deg, #e8b098 0%, #b73e3a 100%);
+  padding: 3rem;
+  border-radius: 1rem;
+  text-align: center;
+  width: 100%;
+  max-width: 50rem;
+}
+
+.sign-out-text {
+  color: #fff;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.618rem;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.sign-out-buttons {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.sign-out-cancel-btn,
+.sign-out-confirm-btn {
+  padding: 1rem 2.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.sign-out-cancel-btn {
+  background: #e6a5a4;
+  color: #fff;
+}
+
+.sign-out-cancel-btn:hover {
+  background: #d98e8c;
+}
+
+.sign-out-confirm-btn {
+  background: #b73e3a;
+  color: #fff;
+}
+
+.sign-out-confirm-btn:hover {
+  background: #8e2f2c;
 }
 
 #listing-row-1,
@@ -328,7 +451,9 @@
   #previous-listings-title,
   #view-liked-title,
   #edit-profile-title,
-  #product-information-title {
+  #product-information-title,
+  #ratings-comments-title,
+  #sign-out-title {
     font-size: 1.75rem !important;
     margin-left: 0rem !important;
     margin-top: 1.5rem !important;
@@ -338,7 +463,8 @@
   #listing-row-1,
   #listing-row-2,
   #listing-row-3,
-  #listing-row-4 {
+  #listing-row-4,
+  .comment-row {
     width: 100% !important;
     height: auto !important;
     margin-top: 1rem !important;
@@ -349,7 +475,8 @@
   #listing-1-image,
   #listing-2-image,
   #listing-3-image,
-  #listing-4-image {
+  #listing-4-image,
+  .comment-product-image {
     width: 40% !important;
     height: auto !important;
     aspect-ratio: 1;
@@ -358,7 +485,8 @@
   #listing-1-title,
   #listing-2-title,
   #listing-3-title,
-  #listing-4-title {
+  #listing-4-title,
+  .comment-product-title {
     width: 50% !important;
     margin-top: 0rem !important;
     margin-left: 0 !important;
@@ -379,6 +507,17 @@
     padding: 0 0 0.5rem 1rem;
   }
 
+  .comment-content {
+    flex-direction: column;
+    width: 100% !important;
+    padding: 0.5rem 0 0 1rem;
+  }
+
+  .comment-rating,
+  .comment-text {
+    font-size: 0.9rem !important;
+  }
+
   #pageOne,
   #pageTwo,
   #pageThree {
@@ -397,6 +536,32 @@
   #pageContainer {
     padding-bottom: 1rem !important;
     margin-top: 1rem !important;
+  }
+
+  .sign-out-container {
+    padding: 2rem 1rem !important;
+    gap: 2rem !important;
+  }
+
+  .sign-out-message {
+    padding: 2rem 1rem !important;
+  }
+
+  .sign-out-text {
+    font-size: 1.25rem !important;
+  }
+
+  .sign-out-buttons {
+    flex-direction: column !important;
+    gap: 1rem !important;
+    width: 100% !important;
+  }
+
+  .sign-out-cancel-btn,
+  .sign-out-confirm-btn {
+    width: 100% !important;
+    padding: 0.75rem 1.5rem !important;
+    font-size: 1rem !important;
   }
 }
 
