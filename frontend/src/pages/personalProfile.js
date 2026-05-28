@@ -291,39 +291,36 @@ export default function Profile() {
                 </button>
               </div>
             </>
+          ) : activeTab === "signOut" ? (
+            <>
+              <div id="sign-out-title" className="signOut">
+                Sign Out
+              </div>
+              <div className="sign-out-container">
+                <div className="sign-out-message">
+                  <p className="sign-out-text">
+                    Are you sure you want to sign out?
+                  </p>
+                </div>
+                <div className="sign-out-buttons">
+                  <button
+                    className="sign-out-cancel-btn"
+                    onClick={() => setActiveTab("activeListing")}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className="sign-out-confirm-btn"
+                    onClick={() => navigate("/")}
+                  >
+                    Sign Out
+                  </button>
+                </div>
+              </div>
+            </>
           ) : (
             <div></div>
           )}
-          <div id="pageContainer">
-            {(activeTab === "activeListing" ||
-              activeTab === "previousListing" ||
-              activeTab === "viewLiked") && (
-              <>
-                <button
-                  id="pageOne"
-                  className={activePage === 1 ? "active" : ""}
-                  onClick={() => setActivePage(1)}
-                >
-                  1
-                </button>
-                <button
-                  id="pageTwo"
-                  className={activePage === 2 ? "active" : ""}
-                  onClick={() => setActivePage(2)}
-                >
-                  2
-                </button>
-                <button
-                  id="pageThree"
-                  className={activePage === 3 ? "active" : ""}
-                  onClick={() => setActivePage(3)}
-                >
-                  3
-                </button>
-                <img id="arrowBottom" src="/arrow.png" alt="arrow" />
-              </>
-            )}
-          </div>
         </div>
       </div>
     </div>
