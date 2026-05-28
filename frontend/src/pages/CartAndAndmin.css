@@ -1,10 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,500;1,600&display=swap');
 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 .cart-page {
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(180deg, #ead4a8 0%, #9b2e25 100%);
+  background: #B73E3A;
+  background: linear-gradient(0deg, rgba(183, 62, 58, 1) 0%, rgba(239, 227, 199, 1) 100%);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #2b2118;
 }
@@ -96,10 +100,11 @@
 .order-summary {
   flex: 1;
   background: linear-gradient(180deg, #f6f1e8 0%, #dbba9e 100%);
-  padding: 40px 30px;
+  padding: 40px 30px 80px 30px; 
   border-radius: 40px;
   min-width: 380px;
   box-shadow: 15px 15px 40px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
 }
 
 .order-summary h3 {
@@ -142,22 +147,13 @@
   margin: 20px 0;
 }
 
-.checkout-btn {
+.checkoutBtn{
+  border-radius: 2rem;
   width: 100%;
-  padding: 18px;
-  border: none;
-  border-radius: 50px;
-  background: linear-gradient(90deg, #f7bc54 0%, #e27a58 100%);
-  color: #2b2118;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.3s ease;
 }
 
-.checkout-btn:hover {
-  filter: brightness(1.1);
-  transform: translateY(-2px);
+.checkoutBtn:hover{
+  border-radius: 2rem;
 }
 
 @media (max-width: 900px) {
@@ -170,227 +166,190 @@
   }
 }
 
-/* Admin Page Styles */
+/*Testing styles for admin page*/
 
-
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Pinyon+Script&display=swap');
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+/* Layout and Containers */
+#main-wrapper {
+  background: linear-gradient(180deg, rgba(239, 227, 199, 1), rgba(237, 120, 73, 1));
+  min-height: 100vh;
 }
 
-body{
-  font-family:'Montserrat',sans-serif;
+#content-container {
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  width: fit-content;
 }
 
-/* Admin page background */
-
-.admin-page{
-  width:100%;
-  min-height:100vh;
-
-  background: linear-gradient(
-    180deg,
-    #ead4a8 0%,
-    #9b2e25 100%
-  );
-
-  padding:2rem 0;
+#right-panel {
+  display: flex;
+  flex-direction: column;
 }
 
-/* Main card */
-
-.dashboard-card{
-  width:90%;
-  min-height:82vh;
-  margin:0 auto;
-
-  background:#EFE3C7;
-
-  border-radius:2.5rem;
-  overflow:hidden;
-
-  display:flex;
-
-  box-shadow:0 20px 45px rgba(0,0,0,0.18);
+.empty-spacer {
+  flex: 1;
 }
 
-/* Sidebar */
-
-.sidebar-panel{
-  width:32%;
-  min-width:320px;
-
-  background:#EB7747;
-
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-
-  padding-top:4rem;
-
-  position:relative;
+/* Sidebar Styling */
+#name-container .first-name {
+  margin-top: 0.25rem;
+  margin-bottom: 0rem;
 }
 
-/* Profile image */
-
-.avatar-circle{
-  width:10rem;
-  height:10rem;
-
-  border-radius:50%;
-
-  background-size:cover;
-  background-position:center;
-
-  margin-bottom:2rem;
-
-  flex-shrink:0;
+#name-container .last-name {
+  margin-top: 0.10rem;
 }
 
-/* Name */
-
-.admin-name{
-  color:white;
-  font-size:4rem;
-  font-weight:500;
-
-  text-align:center;
-
-  margin-bottom:4rem;
-
-  line-height:1;
+/* Tab Headers */
+.header-title {
+  color: #421918;
+  font-family: "Pinyon Script";
+  font-size: 3.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 1.62rem;
+  margin-left: 16.5rem;
 }
 
-/* Sidebar tabs */
-
-.sidebar-tabs{
-  width:100%;
-  display:flex;
-  flex-direction:column;
-  margin-top:1rem;
+.header-title.center-title {
+  margin-left: 0;
+  width: 100%;
+  text-align: center;
 }
 
-.sidebar-tab-btn{
-  width:100%;
-  min-height:95px;
-
-  border:none;
-  background:transparent;
-
-  font-size:2rem;
-  color:#421918;
-
-  font-family:'Montserrat',sans-serif;
-  font-weight:500;
-
-  cursor:pointer;
-
-  transition:0.25s ease;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  position:relative;
+/* Listings Structures */
+.listing-row {
+  width: 53rem;
+  height: 10.375rem;
+  background: linear-gradient(90deg, #E8B098 0%, #B73E3A 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
 }
 
-.sidebar-tab-btn:hover{
-  background:#D76448;
-  color:white;
+/* Apply margins dynamically to mimic your specific markup rules */
+#listing-row-1 {
+  margin-top: 1.56rem;
+}
+#listing-row-2, #listing-row-3, #listing-row-4 {
+  margin-top: 1.25rem;
 }
 
-.sidebar-tab-btn.active{
-  background:#CB5A40;
-  color:white;
+.listing-image {
+  width: 8.375rem;
+  height: 8.375rem;
+  border-radius: 2rem;
+  background: #fff;
+  position: relative; 
 }
 
-.sidebar-tab-btn.active::before{
-  content:"";
-
-  position:absolute;
-  left:0;
-  top:0;
-
-  width:24px;
-  height:100%;
-
-  background:#B84038;
+.listing-title {
+  width: 20rem;
+  margin-top: 1rem;
+  margin-left: 9.375rem;
+  color: #421918;
+  font-family: "Montserrat";
+  font-size: 1.618rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  position: absolute;
 }
 
-/* Right panel */
-
-.content-window{
-  flex:1;
-  padding:3rem 4rem;
+.listing-price {
+  width: 20rem;
+  margin-top: 3.2rem;
+  margin-left: 9.375rem;
+  color: #ffffff;
+  font-family: "Montserrat";
+  font-size: 2.61813rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  position: absolute;
 }
 
-/* Title */
-
-.dashboard-title{
-  font-family:'Pinyon Script',cursive;
-
-  text-align:center;
-
-  font-size:5rem;
-  color:#421918;
-
-  font-weight:400;
-
-  margin-bottom:3rem;
+/* Pagination Section */
+#pageContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  padding-bottom: 2rem;
 }
 
-/* Input fields */
-
-.profile-fields-grid{
-  display:flex;
-  flex-direction:column;
-  gap:1.7rem;
+.page-btn {
+  width: 3.9375rem;
+  height: 3.9375rem;
+  margin-top: 1.12rem;
+  border: none;
+  cursor: pointer;
+  color: #FFF;
+  font-family: "Montserrat";
+  font-size: 2.61813rem;
+  font-weight: 700;
+  transition: background-color 0.3s ease;
 }
 
-.profile-field-row{
-  display:flex;
-  gap:1.7rem;
-  align-items:center;
+.active-page {
+  background: #B73E3A;
 }
 
-.field-label-pill{
-  width:220px;
-  height:70px;
-
-  background:#EB7747;
-
-  border-radius:1.4rem;
-
-  color:white;
-
-  font-size:1.4rem;
-  font-weight:600;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
+.inactive-page {
+  background: #E6A5A4;
 }
 
-.field-value-pill{
-  flex:1;
+#arrowBottom {
+  height: 3rem;
+  width: 4rem;
+  margin-top: 1.5rem;
+}
 
-  height:70px;
+.admin-page {
+  padding: 2.2rem;
+  width: 53rem;
+  box-sizing: border-box;
+}
 
-  border:none;
-  outline:none;
+.profile-fields-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem; /* Balanced gap value to spread elements perfectly */
+  margin-top: 1.5rem;
+}
 
-  border-radius:2rem;
+.profile-field-row {
+  display: flex;
+  gap: 1.7rem;
+  align-items: center;
+}
 
-  padding:0 2rem;
+.field-label-pill {
+  width: 220px;
+  height: 62px; /* Restored size for robust presence */
+  background: #EB7747;
+  border-radius: 1.4rem;
+  color: white;
+  font-size: 1.3rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  font-size:1.2rem;
-  font-family:'Montserrat',sans-serif;
-
-  color:#421918;
-
+.field-value-pill {
+  flex: 1;
+  height: 62px; /* Restored to match visual balance */
+  border: none;
+  outline: none;
+  border-radius: 2rem;
+  padding: 0 2rem;
+  font-size: 1.2rem;
+  font-family: 'Montserrat', sans-serif;
+  color: #421918;
   background: linear-gradient(
     90deg,
     #E2AF96 0%,
@@ -398,279 +357,190 @@ body{
   );
 }
 
-.field-value-pill::placeholder{
-  color:#5b2c2c;
-  opacity:0.8;
+.field-value-pill::placeholder {
+  color: #5b2c2c;
+  opacity: 0.8;
 }
 
-/* Buttons */
-
-.profile-actions-row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-
-  margin-top:3rem;
-
-  gap:2rem;
+/* Buttons Container Row Layout */
+.profile-buttons-row {
+  display: flex;
+  gap: 1.7rem;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 1.8rem;
+  padding-bottom: 0.5rem;
 }
 
-/* Cancel button */
-
-.cancelBtn{
-  width:220px;
-  height:75px;
-
-  border-radius:1.4rem;
-
-  border:3px solid #421918;
-
-  background:transparent;
-
-  color:#421918;
-
-  font-size:1.4rem;
-  font-weight:600;
-  font-family:'Montserrat',sans-serif;
-
-  cursor:pointer;
-
-  transition:0.3s ease;
+/* Cancel button style */
+.cancelBtn {
+  width: 220px;
+  height: 66px; /* Dynamically adjusted height profile */
+  border-radius: 1.4rem;
+  border: 3px solid #421918;
+  background: transparent;
+  color: #421918;
+  font-size: 1.4rem;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+  transition: 0.3s ease;
+  box-sizing: border-box;
 }
 
-.cancelBtn:hover{
-  background:#421918;
-  color:white;
+.cancelBtn:hover {
+  background: #421918;
+  color: white;
 }
 
-/* Save button */
-
-.customBtn{
-  width:28rem;
-  height:4.7rem;
-
-  color:#421918;
-
-  padding:0.5rem 1rem;
-
-  font-family:"Montserrat",sans-serif;
-  font-size:1.35rem;
-  font-weight:700;
-
-  cursor:pointer;
-
-  transition:all 0.3s ease;
-
-  position:relative;
-
-  display:inline-block;
-
-  box-shadow:
-    inset 2px 2px 2px 0px rgba(255,255,255,.5),
-    7px 7px 20px 0px rgba(0,0,0,.1),
-    4px 4px 5px 0px rgba(0,0,0,.1);
-
-  outline:none;
-
-  background:linear-gradient(
-    180deg,
-    rgba(255,206,113,1) 0%,
-    rgba(241,160,9,1) 100%
-  );
-
-  border:none;
-
-  border-radius:1.4rem;
-
-  z-index:1;
+/* Save Details button style */
+.customBtn.saveProfileBtn {
+  width: 450px;
+  height: 66px;
+  border-radius: 0.5rem;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-.customBtn:after{
-  position:absolute;
-
-  content:"";
-
-  width:0;
-  height:100%;
-
-  top:0;
-  right:0;
-
-  z-index:-1;
-
-  border-radius:1.4rem;
-
-  background:linear-gradient(
-    180deg,
-    rgba(237,120,73,1) 0%,
-    rgba(211,89,40,1) 100%
-  );
-
-  box-shadow:
-    inset 2px 2px 2px 0px rgba(255,255,255,.5),
-    7px 7px 20px 0px rgba(0,0,0,.1),
-    4px 4px 5px 0px rgba(0,0,0,.1);
-
-  transition:all 0.3s ease;
+.customBtn.saveProfileBtn:hover {
+  transform: translateY(-1px);
+  opacity: 0.95;
 }
 
-.customBtn:hover{
-  color:#fff;
+/* Main Container panel layout box for the Flags page layout view */
+.flags-container {
+  padding: 0 4rem 2rem 4rem;
+  width: 53rem;
+  box-sizing: border-box;
 }
 
-.customBtn:hover:after{
-  left:0;
-  width:100%;
+/* Row wrapper for each reported product item container */
+.flag-row-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 2rem 0 1.5rem 0;
+  border-bottom: 2px solid #421918;
 }
 
-.customBtn:active{
-  top:2px;
+/* Text elements grouping container box block alignment */
+.flag-info-side {
+  display: flex;
+  flex-direction: column;
+  max-width: 70%;
 }
 
-/* Tablet */
-
-@media(max-width:1200px){
-
-  .dashboard-card{
-    flex-direction:column;
-  }
-
-  .sidebar-panel{
-    width:100%;
-    min-width:100%;
-
-    padding:3rem 2rem;
-  }
-
-  .admin-name{
-    font-size:3rem;
-    margin-bottom:2rem;
-  }
-
-  .sidebar-tabs{
-    gap:0.5rem;
-  }
-
-  .sidebar-tab-btn{
-    border-radius:1rem;
-
-    min-height:80px;
-
-    font-size:1.6rem;
-  }
-
-  .sidebar-tab-btn.active::before{
-    width:0;
-  }
-
-  .profile-field-row{
-    flex-direction:column;
-    align-items:stretch;
-  }
-
-  .field-label-pill{
-    width:100%;
-  }
-
-  .profile-actions-row{
-    flex-direction:column;
-  }
-
-  .customBtn,
-  .cancelBtn{
-    width:100%;
-  }
+.flag-product-name {
+  color: #421918;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.85rem;
+  font-weight: 700;
+  margin: 0 0 0.6rem 0;
 }
 
-/* Mobile */
-
-@media(max-width:768px){
-
-  .dashboard-card{
-    width:95%;
-    border-radius:2rem;
-  }
-
-  .sidebar-panel{
-    padding:2rem 1rem;
-  }
-
-  .avatar-circle{
-    width:8rem;
-    height:8rem;
-  }
-
-  .admin-name{
-    font-size:2.3rem;
-  }
-
-  .sidebar-tabs{
-    width:100%;
-    gap:0.75rem;
-  }
-
-  .sidebar-tab-btn{
-    min-height:70px;
-
-    font-size:1.2rem;
-
-    border-radius:1rem;
-
-    padding:0 1rem;
-  }
-
-  .content-window{
-    padding:2rem 1.5rem;
-  }
-
-  .dashboard-title{
-    font-size:3rem;
-    margin-bottom:2rem;
-  }
-
-  .profile-field-row{
-    flex-direction:column;
-    align-items:stretch;
-    gap:1rem;
-  }
-
-  .field-label-pill{
-    width:100%;
-    height:60px;
-    font-size:1.1rem;
-  }
-
-  .field-value-pill{
-    width:100%;
-    height:60px;
-    font-size:1rem;
-  }
-
-  .profile-actions-row{
-    flex-direction:column;
-    gap:1rem;
-  }
-
-  .customBtn,
-  .cancelBtn{
-    width:100%;
-  }
-
-  .customBtn{
-    height:70px;
-    font-size:1.1rem;
-  }
-
-  .cancelBtn{
-    height:70px;
-    font-size:1.1rem;
-  }
+.flag-reporter-comment {
+  color: #421918;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  line-height: 1.4;
+  margin: 0 0 1rem 0;
+  opacity: 0.85;
 }
 
-.admin-page {
+/* Badges collection display layout element */
+.flag-badges-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+/* Individual warning badge configuration pill style details */
+.flag-pill-badge {
+  background: #B73E3A;
+  color: #FFFFFF;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.45rem 1.2rem;
+  border-radius: 0.6rem;
+}
+
+/* Dropdown Wrapper & Context Placement Configuration */
+.dropdown-wrapper {
+  position: relative;
+  width: 11.5rem;
+  margin-top: 0.2rem;
+}
+
+/* Main Header Button Trigger Control Item */
+.dropdown-trigger-btn {
   width: 100%;
-  min-height: 100vh;
-  background: linear-gradient(180deg, #ead4a8 0%, #9b2e25 100%);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #2b2118;
+  height: 2.8rem;
+  background: #F2B954;
+  border: none;
+  border-radius: 0.6rem;
+  color: #421918;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.2rem;
+  cursor: pointer;
+  box-sizing: border-box;
+  box-shadow: 0px 2px 5px rgba(0,0,0,0.05);
+}
+
+/* Arrow indicators selector item styling rules */
+.dropdown-arrow-icon {
+  font-size: 0.75rem;
+  margin-left: 0.5rem;
+}
+
+/* Menu Dropdown Popup List Container Body */
+.dropdown-menu-box {
+  position: absolute;
+  top: 2.8rem;
+  left: 0;
+  width: 100%;
+  background: #F2B954;
+  border-top: 1px solid rgba(66, 25, 24, 0.15);
+  border-radius: 0 0 0.6rem 0.6rem;
+  display: flex;
+  flex-direction: column;
+  z-index: 99;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+}
+
+/* Dropdown Interior Action Interactive Options Components */
+.dropdown-action-item {
+  background: transparent;
+  border: none;
+  padding: 0.75rem 1.2rem;
+  color: #421918;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.dropdown-action-item:hover {
+  background: rgba(66, 25, 24, 0.08);
+}
+
+/* Highlighting border layout division parameter separator for delete */
+.dropdown-action-item.delete-action {
+  border-top: 2px solid #421918;
+  font-weight: 700;
+  padding-top: 0.8rem;
+  padding-bottom: 0.8rem;
 }

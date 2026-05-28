@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../components/navbar";
 import { Trash } from "react-bootstrap-icons";
 import './CartAndAndmin.css';
+import RedFooter from "../components/RedFooter";
 
 function Cart() {
   return (
@@ -71,13 +72,14 @@ function Cart() {
               <strong>R0.00</strong>
             </div>
 
-            <button className="customBtn">
+            <button className="customBtn checkoutBtn">
               Checkout
             </button>
           </div>
 
         </div>
       </div>
+      <RedFooter />
     </div>
   );
 
