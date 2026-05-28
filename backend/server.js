@@ -28,22 +28,19 @@ mongoose
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log(err));
 
-app.listen(5001, () => {
-  console.log("Server running on port 5000");
-});
+const PORT = process.env.PORT || 5009;
+app.listen(PORT, () => 
+  console.log(`Server running on port ${PORT}`)
+);
 
 const commentsRoutes = require("./routes/commentsRoute");
-
 app.use("/api/comment", commentsRoutes);
 
 const flagRoutes = require("./routes/flagRoute");
-
 app.use("/api/flag", flagRoutes);
 
-const userRoutes = require("./routes/users");
-
+const userRoutes = require("./routes/usersRoute");
 app.use("/api/user", userRoutes);
 
 const listingRoutes = require("./routes/listingsRoute");
-
 app.use("/api/listing", listingRoutes);

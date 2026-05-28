@@ -2,9 +2,10 @@ import '../App.css';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-function PantoneCard() {
+function PantoneCard({onSelect}) {
     return (
-        <div className="pantoneComponent">
+        <div className="pantoneComponent" onClick={() => onSelect("#8B1A1A")} 
+            style={{ cursor: 'pointer' }}>
             <div className="pantoneCard">
                 <div className="swatchColour burgundy"></div>
                 <div className="pantoneName">
