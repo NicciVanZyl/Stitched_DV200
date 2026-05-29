@@ -1,63 +1,22 @@
 const express = require('express');
 const router = express.Router();
-const Flag = require ('../models/flags');
-
+const { AddFlag, GetAllFlags, EditFlag, DeleteFlag } = require('../controllers/flagsController')
+const verifyToken = require('../middleware/verifyToken');
+const requireAdmin = require('../middleware/requireAdmin');
 
 //add new flag
-router.post('/add', async (req, res) => {
-   try {
-    const newFlag = new Flag (req.body);
-    const saved = await newFlag.save();
-
-    res.status(201).json(saved);
-}catch (error) {
-    res.status(400).json({ message: error.message });
-}
-});
+router.post('/add', verifyToken,AddFlag);
 
 //Get all flags 
 
-router.get('/all', async (req, res) => {
-    try {
-        const flags = await Flag.find();
-        res.status(200).json(flags);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-});
+router.get('/all', verifyToken,requireAdmin,GetAllFlags);
 
 //Edit flag
 
-router.put('/:id', async (req, res) => {
-    try {
-        const updatedFlag = await Flag.findByIdAndUpdate(
-            req.params.id, 
-            req.body, 
-            { new: true, runValidators: true });
-
-        if (!updatedFlag) {
-            return res.status(404).json({ message: 'Flag not found' });
-        }
-        res.status(200).json(updatedFlag);
-    } catch (error) {
-        res.status(400).json({ message: error.message });
-    }
-});
+router.patch('/:id', verifyToken, requireAdmin,EditFlag);
 
 //Delete flag
 
-router.delete('/:id', async (req, res) => {
-    try {
-        const deletedFlag = await Flag.findByIdAndDelete(req.params.id);
-
-        if (!deletedFlag) {
-            return res.status(404).json({ message: 'Flag not found' });
-        }
-
-        res.status(200).json({ message: 'Flag deleted successfully' });
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-});
+router.delete('/:id', verifyToken,requireAdmin,DeleteFlag);
 
 module.exports = router;

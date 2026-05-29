@@ -1,95 +1,34 @@
 const express = require("express");
 const router = express.Router();
-const Listing = require("../models/listing");
-const multer = require("multer");
-const { CloudinaryStorage } = require("multer-storage-cloudinary");
-const cloudinary = require("./cloudinary");
+const { AddListing, GetAllListing, GetListing, UpdateListing, ListingSold, ApproveListing, ToggleLike, GetLikedListings, DeleteListing } = require('../controllers/listingsController')
+const verifyToken = require('../middleware/verifyToken');
+const requireAdmin = require('../middleware/requireAdmin');
 
-//Cloudinary for img upload
-const storage = new CloudinaryStorage({
-  cloudinary,
-  params: { folder: "listings" },
-});
+//add new listing
+router.post('/add', verifyToken,AddListing);
 
-const upload = multer({ storage });
+//get all listings
+router.get('/all', GetAllListing);
 
-router.post("/image", upload.single("image"), async (req, res) => {
-  try {
-    const imageUrl = req.file.path;
-    console.log(req.file);
-    res.json({ success: true, imageUrl });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
+//get a specific listing
+router.get('/:id', GetListing);
 
-//Add new listing
-router.post("/add", async (req, res) => {
-  try {
-    const newListing = new Listing(req.body);
-    const saved = await newListing.save();
+//get user's liked listings
+router.get('/:id', verifyToken,GetLikedListings);
 
-    res.status(201).json(saved);
-  } catch (error) {
-    console.error("Error adding listing:", error);
-    res.status(500).json({ message: error.message });
-  }
-});
+//add/remove likes
+router.patch('/:id', verifyToken,ToggleLike);
 
-//Get all listings
-router.get("/all", async (req, res) => {
-  try {
-    const listings = await Listing.find();
-    res.status(200).json(listings);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
+//Approve listing - Admin
+router.patch('/:id', verifyToken, requireAdmin, ApproveListing);
 
-//Get a specific listing
-router.get("/:id", async (req, res) => {
-  try {
-    const listing = await Listing.findById(req.params.id);
-    if (!listing) {
-      return res.status(404).json({ message: "Listing not found" });
-    }
-    res.status(200).json(listing);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
+//Mark as sold - after cart
+router.patch('/:id', verifyToken,ListingSold);
 
-//Update Listing
-router.put("/:id", async (req, res) => {
-  try {
-    const updatedListing = await Listing.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true, runValidators: true },
-    );
+//Update Listing - only if not sold or if admin wants to update it
+router.put('/:id', verifyToken,UpdateListing);
 
-    if (!updatedListing) {
-      return res.status(404).json({ message: "Listing not found" });
-    }
-    res.status(200).json(updatedListing);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-});
-
-//Delete Listing
-router.delete("/:id", async (req, res) => {
-  try {
-    const deletedListing = await Listing.findByIdAndDelete(req.params.id);
-
-    if (!deletedListing) {
-      return res.status(404).json({ message: "Listing not found" });
-    }
-
-    res.status(200).json({ message: "Listing deleted successfully" });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
+//Delete Listing - if not sold or if admin wants to remove it
+router.delete('/:id', verifyToken,DeleteListing);
 
 module.exports = router;
