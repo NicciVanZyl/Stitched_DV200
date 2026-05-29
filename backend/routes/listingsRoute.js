@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 const { AddListing, GetAllListing, GetListing, UpdateListing, ListingSold, ApproveListing, ToggleLike, GetLikedListings, DeleteListing } = require('../controllers/listingsController')
 const verifyToken = require('../middleware/verifyToken');
