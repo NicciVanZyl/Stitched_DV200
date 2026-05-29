@@ -4,7 +4,7 @@ const flagSchema = new mongoose.Schema(
     {
         reason: { type: Array, required: true },
         listingId: { type: String, required: true },
-        flagBody: { type: String, required: true }
+        flagBody: { type: String, required: true, maxlength: 1000 }
     },
 );
 
