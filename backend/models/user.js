@@ -2,15 +2,18 @@ const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema(
     {
-        name: { type: String, required: true },
-        email: { type: String, required: true },
-        // dateOfBirth: { type: String, required: true },
-        password: { type: String, required: true },
-        // address: { type: String, required: true },
-        // number: { type: String, required: true },
-        // likedListings: { type: Array, required: true },
-        // rating: { type: Float, default: 0 }
+        name: { type: String, required: true, trim: true },
+        email: { type: String, required: true, trim: true, unique: true, lowercase: true },
+        dateOfBirth: { type: String, },
+        password: { type: String, required: true, trim: true },
+        address: { type: String, trim: true},
+        number: { type: String, },
+        likedListings: { type: Array, },
+        rating: { type: String, default: 0 },
+        creativePassword: { type: String, required: true },
+        role: { type: String, enum: ['user', 'admin'], default: 'user' },  
     },
+    { timestamps: true }
 );
 
 const Users = mongoose.model("Users", userSchema);

@@ -3,6 +3,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { List } from "react-bootstrap-icons";
+import { useLocation } from "react-router-dom";
 import StitchedRedLogo from "../images/StitchedRedLogo.png";
 import CartIcon from "../images/CartIcon.png";
 import ProfileIcon from "../images/ProfileIcon.png";
@@ -10,6 +11,9 @@ import WishlistIcon from "../images/WishlistIcon.png";
 import FlagIcon from "../images/FlagIcon.png";
 
 function Navigation() {
+  const location = useLocation();
+  if (location.pathname === "/") return null;
+
   return (
     <Navbar
       expand="lg"

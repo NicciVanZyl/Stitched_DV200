@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Stack from 'react-bootstrap/Stack';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -13,6 +13,7 @@ import FlagIcon from '@mui/icons-material/Flag';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react'
 import './PDP.css'
+import FlagModal from '../components/flagModal';
 
 //Custom styling for Icon Buttons
 const theme = createTheme({
@@ -52,10 +53,21 @@ function ProductDetails() {
 
   const [selectedFlag, setSelectedFlag] = useState(false);
   const [selectedLike, setSelectedLike] = useState(false);
+  const [showCartModal, setShowCartModal] = useState(false);
+  const [showLikeModal, setShowLikeModal] = useState(false);
+  const [showFlagModal, setShowFlagModal] = useState(false);
+
+  useEffect(() => {
+    if (showFlagModal) {
+      setSelectedFlag(true)
+    } else {
+      setSelectedFlag(false)
+    }
+  }, [showFlagModal])
 
   return (
     <div className='loginContainer'>
-
+      <FlagModal isOpen={showFlagModal} setClosed={setShowFlagModal}></FlagModal>
       <Container fluid>
         <Row>
           <Col sm={12} className='mx-auto productDetails' >
@@ -92,7 +104,10 @@ function ProductDetails() {
                         <FavoriteIcon />
                       </IconButton>
                       <IconButton
-                        onClick={() => setSelectedFlag(!selectedFlag)}
+                        onClick={() => {
+                          setSelectedFlag(!selectedFlag)
+                          setShowFlagModal(true);
+                        }}
                         sx={{
                           '& .MuiSvgIcon-root': {
                             color: selectedFlag ? '#B73E3A' : '#F5BD54',
