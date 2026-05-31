@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./CartAndAndmin.css";
 import FlaggedRowItem from "../components/ViewFlagsListingcard";
@@ -32,7 +32,7 @@ export default function Profile() {
 
   useEffect(() => {
     // Fetches the database items when the page loads
-    axios.get("http://localhost:5000/api/flags") // <-- Update this URL to match your backend port/route
+    axios.get("http://localhost:5000/api/flags") // <-- Update this URL to match the backend port/route
       .then((response) => {
         setFlaggedProducts(response.data);
       })
