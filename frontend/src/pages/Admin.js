@@ -1,80 +1,361 @@
-import React from "react";
-import Navbar from "../components/navbar";
-import { Trash } from "react-bootstrap-icons";
-import './CartAndAndmin.css';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom"; // Imported Link for routing
+import "./CartAndAndmin.css";
+import FlaggedRowItem from "../components/ViewFlagsListingcard";
 
+export default function Profile() {
+  const [activeTab, setActiveTab] = useState("viewFlags");
+  const [openDropdownId, setOpenDropdownId] = useState(null);
 
-function AdminPage() {
-  return (
-    <div className="admin-page">
+  // Profile Form State
+  const [profile, setProfile] = useState({
+    address: "",
+    firstName: "",
+    surname: "",
+    birthDate: "",
+    email: "",
+    mobile: "",
+    password: "",
+  });
+
+  const tabs = ["viewFlags", "approveListings", "editProfile", "addListing", "switchProfile"];
+  
+  const tabLabels = {
+    viewFlags: "View Flags",
+    approveListings: "Approve Listings",
+    editProfile: "Edit Profile Details",
+    addListing: "Add Listing",
+    switchProfile: "Switch Profile",
+  };
+
+  const [flaggedProducts, setFlaggedProducts] = useState([]);
+
+  // Handles the profile switching delay and auto-redirect logic
+  useEffect(() => {
+    if (activeTab === "switchProfile") {
+      const timer = setTimeout(() => {
+        setActiveTab("viewFlags"); // Links back to the main profile layout dashboard view
+      }, 3000); // 3 seconds wait time
       
-      <Navbar />
+      return () => clearTimeout(timer);
+    }
+  }, [activeTab]);
 
-      <div className="admin-wrapper">
+  useEffect(() => {
+    // Fetches the database items when the page loads
+    axios.get("http://localhost:5000/api/flags") 
+      .then((response) => {
+        setFlaggedProducts(response.data);
+      })
+      .catch((error) => console.error("Error fetching data:", error));
+  }, []);
 
-        {/* SIDEBAR */}
-        <div className="admin-sidebar">
+  function handleInputChange(e) {
+    const { name, value } = e.target;
+    setProfile((prev) => ({ ...prev, [name]: value }));
+  }
 
-          <div className="admin-profile-img"></div>
+  const handleCancel = () => {
+    setProfile({
+      address: "",
+      firstName: "",
+      surname: "",
+      birthDate: "",
+      email: "",
+      mobile: "",
+      password: "",
+    });
+    setActiveTab("viewFlags");
+  };
 
-          <h2 className="admin-name">Jane Doe</h2>
+  function handleProfileSubmit(e) {
+    e.preventDefault();
+    console.log("Updated Profile Data: ", profile);
+  }
 
-          <div className="admin-nav">
-            <button>View Flags</button>
+  // Toggles the dropdown for a specific row id, closing others
+  const toggleDropdown = (id) => {
+    if (openDropdownId === id) {
+      setOpenDropdownId(null);
+    } else {
+      setOpenDropdownId(id);
+    }
+  };
 
-            <button className="active-admin-btn">
-              Approve Listings
-            </button>
+  const handleDropdownAction = async (actionType, productId) => {
+    try {
+      if (actionType === "dismiss") {
+        await axios.patch(`http://localhost:5000/api/flags/${productId}`, { status: "dismissed" });
+      } else if (actionType === "delete") {
+        await axios.delete(`http://localhost:5000/api/flags/${productId}`);
+      }
+      
+      setFlaggedProducts((prev) => prev.filter((product) => (product._id || product.id) !== productId));
+      setOpenDropdownId(null); 
+      
+    } catch (error) {
+      console.error(`Error performing ${actionType}:`, error);
+    }
+  };
 
-            <button>Edit Profile</button>
-
-            <button>Sign Out</button>
+  return (
+    <div id="main-wrapper">
+      <div id="content-container">
+        
+        {/* Left Sidebar */}
+        <div id="yellow-section">
+          <div id="profile-circle"></div>
+          <div id="name-container">
+            <p className="first-name">Jane</p>
+            <p className="last-name">Doe</p>
           </div>
+          <div id="profile-button">
+            {tabs.map((tab) => {
+              const isActive = activeTab === tab;
 
+              // Conditionally render Link for switchProfile tab
+              if (tab === "switchProfile") {
+                return (
+                  <Link
+                    to="/personalProfile"
+                    className={`tab-button ${isActive ? "active" : ""}`}
+                    key={tab}
+                    onClick={() => {
+                      setActiveTab(tab);
+                      setOpenDropdownId(null);
+                    }}
+                    style={{ textDecoration: "none", display: "block" }} // Resets link defaults
+                  >
+                    <div className="tab-label">{tabLabels[tab]}</div>
+                  </Link>
+                );
+              }
+
+              // Default button rendering for all other tabs
+              return (
+                <button
+                  className={`tab-button ${isActive ? "active" : ""}`}
+                  key={tab}
+                  onClick={() => {
+                    setActiveTab(tab);
+                    setOpenDropdownId(null); // Close dropdowns on nav change
+                  }}
+                >
+                  <div className="tab-label">{tabLabels[tab]}</div>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
-        {/* MAIN CONTENT */}
-        <div className="admin-content">
-          <h1 className="admin-title">
-            Approve Listings
-          </h1>
-
-          <div className="listings-container">
-
-            {[1, 2, 3, 4].map((item) => (
-              <div className="listing-card" key={item}>
-
-                {/* PRODUCT IMAGE */}
-                <div className="listing-image"></div>
-
-                {/* INFO */}
-                <div className="listing-info">
-                  <h3>Product Listing Name</h3>
-                  <p>R000.00</p>
-                </div>
-
-                {/* ACTIONS */}
-                <div className="listing-actions">
-                  <button className="approve-btn">
-                    Approve
-                  </button>
-
-                  <button className="delete-btn">
-                    Delete
-                  </button>
-                </div>
-
+        {/* Right Content Panel */}
+        <div id="right-panel">
+          
+          {/* View Flags Tab */}
+          {activeTab === "viewFlags" && (
+            <div className="flags-container">
+              <div className="header-title" style={{ marginLeft: "0px" }}>
+                Admin Dashboard
               </div>
-            ))}
+              
+              {flaggedProducts.map((product) => {
+                const isDropdownOpen = openDropdownId === product.id;
+                return (
+                  <div key={product.id} className="flag-row-item">
+                    
+                    {/* Left Meta Section */}
+                    <div className="flag-info-side">
+                      <h3 className="flag-product-name">{product.name}</h3>
+                      <p className="flag-reporter-comment">{product.comment}</p>
+                      <div className="flag-badges-row">
+                        {product.badges.map((badge, index) => (
+                          <span key={index} className="flag-pill-badge">
+                            {badge}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
 
-          </div>
+                    {/* Right Interactive Actions Dropdown */}
+                    <div className={`dropdown-wrapper ${isDropdownOpen ? "open" : ""}`}>
+                      <button 
+                        type="button" 
+                        className="dropdown-action-item" 
+                        onClick={() => handleDropdownAction("dismiss", product._id || product.id)}
+                      >
+                        Dismiss
+                      </button>
+
+                      <button type="button" className="dropdown-action-item">Ban User</button>
+                      <button type="button" className="dropdown-action-item">View Full</button>
+
+                      <button 
+                        type="button" 
+                        className="dropdown-action-item delete-action"
+                        onClick={() => handleDropdownAction("delete", product._id || product.id)}
+                      >
+                        Delete Listing
+                      </button>
+                      
+                      {isDropdownOpen && (
+                        <div className="dropdown-menu-box">
+                          <button type="button" className="dropdown-action-item">Dismiss</button>
+                          <button type="button" className="dropdown-action-item">Ban User</button>
+                          <button type="button" className="dropdown-action-item">View Full</button>
+                          <button type="button" className="dropdown-action-item delete-action">Delete Listing</button>
+                        </div>
+                      )}
+                    </div>
+
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+          {/* Approve Listings Tab */}
+          {activeTab === "approveListings" && (
+            <div className="admin-page">
+              <div className="header-title" style={{ marginLeft: "0px" }}>
+                Approve Listings
+              </div>
+              {/* Insert implementation components for your listings here */}
+            </div>
+          )}
+
+          {/* Edit Profile Tab */}
+          {activeTab === "editProfile" && (
+            <div className="admin-page">
+              <div className="header-title" style={{ marginLeft: "0px" }}>
+                Edit Profile Details
+              </div>
+              
+              <form onSubmit={handleProfileSubmit} className="profile-fields-grid">
+                <div className="profile-field-row">
+                  <div className="field-label-pill">First Name</div>
+                  <input
+                    type="text"
+                    name="firstName"
+                    className="field-value-pill"
+                    value={profile.firstName}
+                    onChange={handleInputChange}
+                    placeholder="Enter first name"
+                  />
+                </div>
+
+                <div className="profile-field-row">
+                  <div className="field-label-pill">Surname</div>
+                  <input
+                    type="text"
+                    name="surname"
+                    className="field-value-pill"
+                    value={profile.surname}
+                    onChange={handleInputChange}
+                    placeholder="Enter surname"
+                  />
+                </div>
+
+                <div className="profile-field-row">
+                  <div className="field-label-pill">Email Address</div>
+                  <input
+                    type="email"
+                    name="email"
+                    className="field-value-pill"
+                    value={profile.email}
+                    onChange={handleInputChange}
+                    placeholder="Enter email"
+                  />
+                </div>
+
+                <div className="profile-field-row">
+                  <div className="field-label-pill">Mobile Number</div>
+                  <input
+                    type="tel"
+                    name="mobile"
+                    className="field-value-pill"
+                    value={profile.mobile}
+                    onChange={handleInputChange}
+                    placeholder="Enter mobile number"
+                  />
+                </div>
+
+                <div className="profile-field-row">
+                  <div className="field-label-pill">Birth Date</div>
+                  <input
+                    type="date"
+                    name="birthDate"
+                    className="field-value-pill"
+                    value={profile.birthDate}
+                    onChange={handleInputChange}
+                  />
+                </div>
+
+                <div className="profile-field-row">
+                  <div className="field-label-pill">Address</div>
+                  <input
+                    type="text"
+                    name="address"
+                    className="field-value-pill"
+                    value={profile.address}
+                    onChange={handleInputChange}
+                    placeholder="Enter home address"
+                  />
+                </div>
+
+                <div className="profile-field-row">
+                  <div className="field-label-pill">Password</div>
+                  <input
+                    type="password"
+                    name="password"
+                    className="field-value-pill"
+                    value={profile.password}
+                    onChange={handleInputChange}
+                    placeholder="Enter new password"
+                  />
+                </div>
+
+                <div className="profile-buttons-row">
+                  <button type="button" className="cancelBtn" onClick={handleCancel}>
+                    Cancel
+                  </button>
+                  <button type="submit" className="customBtn saveProfileBtn">
+                    Save Details
+                  </button>
+                </div>
+              </form>
+            </div>
+          )}
+
+          {/* Add Listing Tab */}
+          {activeTab === "addListing" && (
+            <div className="admin-page">
+              <div className="header-title" style={{ marginLeft: "0px" }}>
+                Add Listing
+              </div>
+              {/* Insert input components for creating a listing items layout here */}
+            </div>
+          )}
+
+          {/* Switch Profile Tab */}
+          {activeTab === "switchProfile" && (
+            <div className="admin-page">
+              <div className="header-title" style={{ marginLeft: "0px" }}>
+                Switch Profile
+              </div>
+              <div className="switch-profile-notice">
+                Please wait a moment while we switch back to the profile page...
+              </div>
+            </div>
+          )}
+
+          {/* Fallback empty view spacer */}
+          {!["viewFlags", "approveListings", "editProfile", "addListing", "switchProfile"].includes(activeTab) && (
+            <div className="empty-spacer"></div>
+          )}
 
         </div>
-
       </div>
     </div>
   );
 }
-
-export default AdminPage;
-

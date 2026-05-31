@@ -221,7 +221,7 @@
   background: linear-gradient(180deg, rgba(255, 206, 113, 1) 0%, rgba(241, 160, 9, 1) 100%);
   outline: none;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 2rem !important;
   z-index: 1;
   margin: 0 auto;
   display: block;
@@ -236,9 +236,11 @@
   top: 0;
   right: 0;
   z-index: -1;
-  border-radius: 0.5rem;
-  background: #ED7849;
-  background: linear-gradient(180deg, rgba(237, 120, 73, 1) 0%, rgba(165, 57, 14, 1) 100%);
+  border-radius: 2rem;
+  background: #ed7849;
+  background: linear-gradient(180deg,
+      rgba(237, 120, 73, 1) 0%,
+      rgba(211, 89, 40, 1) 100%);
   box-shadow:
     inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
     7px 7px 20px 0px rgba(0, 0, 0, 0.1),
