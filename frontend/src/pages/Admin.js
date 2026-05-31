@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom"; // Imported Link for routing
 import "./CartAndAndmin.css";
 import FlaggedRowItem from "../components/ViewFlagsListingcard";
 
@@ -112,6 +113,26 @@ export default function Profile() {
           <div id="profile-button">
             {tabs.map((tab) => {
               const isActive = activeTab === tab;
+
+              // Conditionally render Link for switchProfile tab
+              if (tab === "switchProfile") {
+                return (
+                  <Link
+                    to="/personalProfile"
+                    className={`tab-button ${isActive ? "active" : ""}`}
+                    key={tab}
+                    onClick={() => {
+                      setActiveTab(tab);
+                      setOpenDropdownId(null);
+                    }}
+                    style={{ textDecoration: "none", display: "block" }} // Resets link defaults
+                  >
+                    <div className="tab-label">{tabLabels[tab]}</div>
+                  </Link>
+                );
+              }
+
+              // Default button rendering for all other tabs
               return (
                 <button
                   className={`tab-button ${isActive ? "active" : ""}`}
