@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,500;1,600&display=swap');
 
-
 .cart-page {
   width: 100%;
   min-height: 100vh;
@@ -154,18 +153,6 @@
   border-radius: 2rem;
 }
 
-@media (max-width: 900px) {
-  .cart-content {
-    flex-direction: column;
-  }
-  .order-summary {
-    width: 100%;
-    min-width: unset;
-  }
-}
-
-/*Testing styles for admin page*/
-
 /* Layout and Containers */
 #main-wrapper {
   background: linear-gradient(180deg, rgba(239, 227, 199, 1), rgba(237, 120, 73, 1));
@@ -227,7 +214,6 @@
   padding: 0 1rem;
 }
 
-/* Apply margins dynamically to mimic your specific markup rules */
 #listing-row-1 {
   margin-top: 1.56rem;
 }
@@ -315,7 +301,7 @@
 .profile-fields-grid {
   display: flex;
   flex-direction: column;
-  gap: 1.4rem; /* Balanced gap value to spread elements perfectly */
+  gap: 1.4rem; 
   margin-top: 1.5rem;
 }
 
@@ -327,7 +313,7 @@
 
 .field-label-pill {
   width: 220px;
-  height: 62px; /* Restored size for robust presence */
+  height: 62px; 
   background: #EB7747;
   border-radius: 1.4rem;
   color: white;
@@ -340,7 +326,7 @@
 
 .field-value-pill {
   flex: 1;
-  height: 62px; /* Restored to match visual balance */
+  height: 62px; 
   border: none;
   outline: none;
   border-radius: 2rem;
@@ -360,7 +346,6 @@
   opacity: 0.8;
 }
 
-/* Buttons Container Row Layout */
 .profile-buttons-row {
   display: flex;
   gap: 1.7rem;
@@ -370,10 +355,9 @@
   padding-bottom: 0.5rem;
 }
 
-/* Cancel button style */
 .cancelBtn {
   width: 220px;
-  height: 66px; /* Dynamically adjusted height profile */
+  height: 66px; 
   border-radius: 1.4rem;
   border: 3px solid #421918;
   background: transparent;
@@ -391,7 +375,6 @@
   color: white;
 }
 
-/* Save Details button style */
 .customBtn.saveProfileBtn {
   width: 450px;
   height: 66px;
@@ -409,14 +392,12 @@
   opacity: 0.95;
 }
 
-/* Main Container panel layout box for the Flags page layout view */
 .flags-container {
   padding: 0 4rem 2rem 4rem;
   width: 53rem;
   box-sizing: border-box;
 }
 
-/* Row wrapper for each reported product item container */
 .flag-row-item {
   display: flex;
   justify-content: space-between;
@@ -425,7 +406,6 @@
   border-bottom: 2px solid #421918;
 }
 
-/* Text elements grouping container box block alignment */
 .flag-info-side {
   display: flex;
   flex-direction: column;
@@ -450,14 +430,12 @@
   opacity: 0.85;
 }
 
-/* Badges collection display layout element */
 .flag-badges-row {
   display: flex;
   flex-wrap: wrap;
   gap: 0.8rem;
 }
 
-/* Individual warning badge configuration pill style details */
 .flag-pill-badge {
   background: #B73E3A;
   color: #FFFFFF;
@@ -468,14 +446,12 @@
   border-radius: 0.6rem;
 }
 
-/* Dropdown Wrapper & Context Placement Configuration */
 .dropdown-wrapper {
   position: relative;
   width: 11.5rem;
   margin-top: 0.2rem;
 }
 
-/* Main Header Button Trigger Control Item */
 .dropdown-trigger-btn {
   width: 100%;
   height: 2.8rem;
@@ -495,13 +471,11 @@
   box-shadow: 0px 2px 5px rgba(0,0,0,0.05);
 }
 
-/* Arrow indicators selector item styling rules */
 .dropdown-arrow-icon {
   font-size: 0.75rem;
   margin-left: 0.5rem;
 }
 
-/* Menu Dropdown Popup List Container Body */
 .dropdown-menu-box {
   position: absolute;
   top: 2.8rem;
@@ -517,7 +491,6 @@
   overflow: hidden;
 }
 
-/* Dropdown Interior Action Interactive Options Components */
 .dropdown-action-item {
   background: transparent;
   border: none;
@@ -535,10 +508,18 @@
   background: rgba(66, 25, 24, 0.08);
 }
 
-/* Highlighting border layout division parameter separator for delete */
 .dropdown-action-item.delete-action {
   border-top: 2px solid #421918;
   font-weight: 700;
   padding-top: 0.8rem;
   padding-bottom: 0.8rem;
+}
+
+/* Switch Profile Notice Styling */
+.switch-profile-notice {
+  margin-top: 2.5rem;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.25rem;
+  color: #421918;
+  font-weight: 500;
 }

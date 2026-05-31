@@ -18,26 +18,38 @@ export default function Profile() {
     password: "",
   });
 
-  const tabs = ["viewFlags", "approveListings", "editProfile", "addListing", "signOut"];
+  const tabs = ["viewFlags", "approveListings", "editProfile", "addListing", "switchProfile"];
   
   const tabLabels = {
     viewFlags: "View Flags",
     approveListings: "Approve Listings",
     editProfile: "Edit Profile Details",
     addListing: "Add Listing",
-    signOut: "Sign Out",
+    switchProfile: "Switch Profile",
   };
 
   const [flaggedProducts, setFlaggedProducts] = useState([]);
 
+  // Handles the profile switching delay and auto-redirect logic
+  useEffect(() => {
+    if (activeTab === "switchProfile") {
+      const timer = setTimeout(() => {
+        setActiveTab("viewFlags"); // Links back to the main profile layout dashboard view
+      }, 3000); // 3 seconds wait time
+      
+      return () => clearTimeout(timer);
+    }
+  }, [activeTab]);
+
   useEffect(() => {
     // Fetches the database items when the page loads
-    axios.get("http://localhost:5000/api/flags") // <-- Update this URL to match the backend port/route
+    axios.get("http://localhost:5000/api/flags") 
       .then((response) => {
         setFlaggedProducts(response.data);
       })
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
+
   function handleInputChange(e) {
     const { name, value } = e.target;
     setProfile((prev) => ({ ...prev, [name]: value }));
@@ -59,7 +71,7 @@ export default function Profile() {
   function handleProfileSubmit(e) {
     e.preventDefault();
     console.log("Updated Profile Data: ", profile);
-  };
+  }
 
   // Toggles the dropdown for a specific row id, closing others
   const toggleDropdown = (id) => {
@@ -69,19 +81,17 @@ export default function Profile() {
       setOpenDropdownId(id);
     }
   };
+
   const handleDropdownAction = async (actionType, productId) => {
     try {
       if (actionType === "dismiss") {
-        // Updates the database to dismiss the flag
         await axios.patch(`http://localhost:5000/api/flags/${productId}`, { status: "dismissed" });
       } else if (actionType === "delete") {
-        // Deletes the item from the database entirely
         await axios.delete(`http://localhost:5000/api/flags/${productId}`);
       }
       
-      // Instantly remove it from the UI (using _id for MongoDB or id for fallback)
       setFlaggedProducts((prev) => prev.filter((product) => (product._id || product.id) !== productId));
-      setOpenDropdownId(null); // Closes the dropdown
+      setOpenDropdownId(null); 
       
     } catch (error) {
       console.error(`Error performing ${actionType}:`, error);
@@ -156,7 +166,6 @@ export default function Profile() {
                         Dismiss
                       </button>
 
-                      {/* Keeping the Ban and View buttons exactly as you had them for later */}
                       <button type="button" className="dropdown-action-item">Ban User</button>
                       <button type="button" className="dropdown-action-item">View Full</button>
 
@@ -181,6 +190,16 @@ export default function Profile() {
                   </div>
                 );
               })}
+            </div>
+          )}
+
+          {/* Approve Listings Tab */}
+          {activeTab === "approveListings" && (
+            <div className="admin-page">
+              <div className="header-title" style={{ marginLeft: "0px" }}>
+                Approve Listings
+              </div>
+              {/* Insert implementation components for your listings here */}
             </div>
           )}
 
@@ -287,8 +306,30 @@ export default function Profile() {
             </div>
           )}
 
+          {/* Add Listing Tab */}
+          {activeTab === "addListing" && (
+            <div className="admin-page">
+              <div className="header-title" style={{ marginLeft: "0px" }}>
+                Add Listing
+              </div>
+              {/* Insert input components for creating a listing items layout here */}
+            </div>
+          )}
+
+          {/* Switch Profile Tab */}
+          {activeTab === "switchProfile" && (
+            <div className="admin-page">
+              <div className="header-title" style={{ marginLeft: "0px" }}>
+                Switch Profile
+              </div>
+              <div className="switch-profile-notice">
+                Please wait a moment while we switch back to the profile page...
+              </div>
+            </div>
+          )}
+
           {/* Fallback empty view spacer */}
-          {!["viewFlags", "editProfile"].includes(activeTab) && (
+          {!["viewFlags", "approveListings", "editProfile", "addListing", "switchProfile"].includes(activeTab) && (
             <div className="empty-spacer"></div>
           )}
 
