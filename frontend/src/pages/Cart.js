@@ -1,12 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../components/navbar";
-import { Trash } from "react-bootstrap-icons";
 import './CartAndAndmin.css';
 import RedFooter from "../components/RedFooter";
+import CartCard from "../components/cartCard"; 
 
 function Cart() {
+  // 2. State initialized with mock data matching your original layout.
+  // Swap the initial array out later for your LocalStorage/SessionStorage data!
+  const [cartItems, setCartItems] = useState([
+    { id: 1, name: "Lorem ipsum", price: "R0.00" },
+    { id: 2, name: "Lorem ipsum", price: "R0.00" },
+    { id: 3, name: "Lorem ipsum", price: "R0.00" },
+  ]);
+
+  // Handler to delete items from the UI state
+  const handleDeleteCartItem = (id) => {
+    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+    // NOTE: You can also clear it from your local/session storage here later!
+  };
+
   return (
-   <div className="cart-page">
+    <div className="cart-page">
       <div className="cart-wrapper">
         <h1 className="cart-title">Your Cart</h1>
 
@@ -21,22 +35,15 @@ function Cart() {
               <span></span>
             </div>
 
-            {[1, 2, 3].map((item) => (
-              <div className="cart-item" key={item}>
-                <div className="product-image"></div>
-
-                <div className="product-name">
-                  Lorem ipsum
-                </div>
-
-                <div className="product-price">
-                  R0.00
-                </div>
-
-                <button className="delete-btn">
-                  <Trash size={18} />
-                </button>
-              </div>
+            {/* 3. Replaced the hardcoded loop with your dynamic component rendering */}
+            {cartItems.map((item) => (
+              <CartCard
+                key={item.id}
+                id={item.id}
+                name={item.name}
+                price={item.price}
+                onDelete={handleDeleteCartItem}
+              />
             ))}
           </div>
 
@@ -82,7 +89,6 @@ function Cart() {
       <RedFooter />
     </div>
   );
-
 }
 
 export default Cart;

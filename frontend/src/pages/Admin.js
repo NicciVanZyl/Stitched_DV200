@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import "./CartAndAndmin.css";
 import FlaggedRowItem from "../components/ViewFlagsListingcard";
 
@@ -27,37 +28,20 @@ export default function Profile() {
     signOut: "Sign Out",
   };
 
-  const flaggedProducts = [
-    {
-      id: 1,
-      name: "Product Listing Name",
-      comment: "Reporter comment and a small snippet of why they reported it...",
-      badges: ["Counterfeit", "Misleading"]
-    },
-    {
-      id: 2,
-      name: "Product Listing Name",
-      comment: "Reporter comment and a small snippet of why they reported it...",
-      badges: ["Prohibited Item"]
-    },
-    {
-      id: 3,
-      name: "Product Listing Name",
-      comment: "Reporter comment and a small snippet of why they reported it...",
-      badges: ["Harassment"]
-    },
-    {
-      id: 4,
-      name: "Product Listing Name",
-      comment: "Reporter comment and a small snippet of why they reported it...",
-      badges: ["Misleading", "Counterfeit"]
-    }
-  ];
+  const [flaggedProducts, setFlaggedProducts] = useState([]);
 
-  const handleInputChange = (e) => {
+  useEffect(() => {
+    // Fetches the database items when the page loads
+    axios.get("http://localhost:5000/api/flags") // <-- Update this URL to match your backend port/route
+      .then((response) => {
+        setFlaggedProducts(response.data);
+      })
+      .catch((error) => console.error("Error fetching data:", error));
+  }, []);
+  function handleInputChange(e) {
     const { name, value } = e.target;
     setProfile((prev) => ({ ...prev, [name]: value }));
-  };
+  }
 
   const handleCancel = () => {
     setProfile({
@@ -72,7 +56,7 @@ export default function Profile() {
     setActiveTab("viewFlags");
   };
 
-  const handleProfileSubmit = (e) => {
+  function handleProfileSubmit(e) {
     e.preventDefault();
     console.log("Updated Profile Data: ", profile);
   };
@@ -83,6 +67,24 @@ export default function Profile() {
       setOpenDropdownId(null);
     } else {
       setOpenDropdownId(id);
+    }
+  };
+  const handleDropdownAction = async (actionType, productId) => {
+    try {
+      if (actionType === "dismiss") {
+        // Updates the database to dismiss the flag
+        await axios.patch(`http://localhost:5000/api/flags/${productId}`, { status: "dismissed" });
+      } else if (actionType === "delete") {
+        // Deletes the item from the database entirely
+        await axios.delete(`http://localhost:5000/api/flags/${productId}`);
+      }
+      
+      // Instantly remove it from the UI (using _id for MongoDB or id for fallback)
+      setFlaggedProducts((prev) => prev.filter((product) => (product._id || product.id) !== productId));
+      setOpenDropdownId(null); // Closes the dropdown
+      
+    } catch (error) {
+      console.error(`Error performing ${actionType}:`, error);
     }
   };
 
@@ -148,10 +150,22 @@ export default function Profile() {
                     <div className={`dropdown-wrapper ${isDropdownOpen ? "open" : ""}`}>
                       <button 
                         type="button" 
-                        className="dropdown-trigger-btn"
-                        onClick={() => toggleDropdown(product.id)}
+                        className="dropdown-action-item" 
+                        onClick={() => handleDropdownAction("dismiss", product._id || product.id)}
                       >
-                        Actions <span className="dropdown-arrow-icon">▼</span>
+                        Dismiss
+                      </button>
+
+                      {/* Keeping the Ban and View buttons exactly as you had them for later */}
+                      <button type="button" className="dropdown-action-item">Ban User</button>
+                      <button type="button" className="dropdown-action-item">View Full</button>
+
+                      <button 
+                        type="button" 
+                        className="dropdown-action-item delete-action"
+                        onClick={() => handleDropdownAction("delete", product._id || product.id)}
+                      >
+                        Delete Listing
                       </button>
                       
                       {isDropdownOpen && (
