@@ -8,7 +8,7 @@ const listingSchema = new mongoose.Schema(
     size: { type: String, required: true },
     imageUrl: { type: String, required: true },
     isActive: { type: Boolean, default: false },
-    customerID: { type: String, required: false },
+    customerID: { type: String, required: true },
     isSold: { type: Boolean, default: false },
     postedBy: {
       type: mongoose.Schema.Types.ObjectId,
