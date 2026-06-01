@@ -1,22 +1,18 @@
-const express = require('express');
-const router = express.Router();
-const Flag = require ('../models/flags');
+const Flag = require('../models/flags');
 
-
-//Add new flag
-exports.AddFlag = async (req, res) => {
-   try {
-    const newFlag = new Flag (req.body);
-    const saved = await newFlag.save();
-
-    res.status(201).json(saved);
-}catch (error) {
-    res.status(400).json({ message: error.message });
-}
+// Add new flag
+const AddFlag = async (req, res) => {
+    try {
+        const newFlag = new Flag(req.body);
+        const saved = await newFlag.save();
+        res.status(201).json(saved);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
 };
 
-//Get all flags 
-exports.GetAllFlags = async (req, res) => {
+// Get all flags
+const GetAllFlags = async (req, res) => {
     try {
         const flags = await Flag.find();
         res.status(200).json(flags);
@@ -25,13 +21,13 @@ exports.GetAllFlags = async (req, res) => {
     }
 };
 
-//Edit flag
-exports.EditFlag = async (req, res) => {
+// Edit flag
+const EditFlag = async (req, res) => {
     try {
-        const updatedFlag = await Flag.findByIdAndUpdate(
-            req.params.id, 
-            req.body, 
-            { new: true, runValidators: true });
+        const updatedFlag = await Flag.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+            runValidators: true,
+        });
 
         if (!updatedFlag) {
             return res.status(404).json({ message: 'Flag not found' });
@@ -42,19 +38,17 @@ exports.EditFlag = async (req, res) => {
     }
 };
 
-//Delete flag
-exports.DeleteFlag = async (req, res) => {
+// Delete flag
+const DeleteFlag = async (req, res) => {
     try {
         const deletedFlag = await Flag.findByIdAndDelete(req.params.id);
-
         if (!deletedFlag) {
             return res.status(404).json({ message: 'Flag not found' });
         }
-
         res.status(200).json({ message: 'Flag deleted successfully' });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
 
-module.exports = router;
+module.exports = { AddFlag, GetAllFlags, EditFlag, DeleteFlag };

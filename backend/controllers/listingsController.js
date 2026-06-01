@@ -1,10 +1,7 @@
-const express = require('express');
-const router = express.Router();
 const Listing = require('../models/listing');
 
-
-//Add a new listing
-exports.AddListing = async (req, res) => {
+// Add a new listing
+const AddListing = async (req, res) => {
     try {
         const newListing = new Listing(req.body);
         const saved = await newListing.save();
@@ -15,8 +12,8 @@ exports.AddListing = async (req, res) => {
     }
 };
 
-//Get all listings
-exports.GetAllListing = async (req, res) => {
+// Get all listings
+const GetAllListing = async (req, res) => {
     try {
         const listings = await Listing.find();
         res.status(200).json(listings);
@@ -25,11 +22,11 @@ exports.GetAllListing = async (req, res) => {
     }
 };
 
-//Get a specific listing
-exports.GetListing = async (req, res) => {
+// Get a specific listing
+const GetListing = async (req, res) => {
     try {
         const listing = await Listing.findById(req.params.id);
-        if (!user) {
+        if (!listing) {
             return res.status(404).json({ message: 'Listing not found' });
         }
         res.status(200).json(listing);
@@ -39,7 +36,7 @@ exports.GetListing = async (req, res) => {
 };
 
 //Update Listing
-exports.UpdateListing = async (req, res) => {
+const UpdateListing = async (req, res) => {
     try {
         const updatedListing = await Listing.findByIdAndUpdate(
             req.params.id,
@@ -55,7 +52,7 @@ exports.UpdateListing = async (req, res) => {
     }
 };
 
-exports.ListingSold = async (req, res) => {
+const ListingSold = async (req, res) => {
     try {
         const soldListing = await Listing.findById(
             req.params.id)
@@ -67,7 +64,7 @@ exports.ListingSold = async (req, res) => {
     }
 };
 
-exports.ApproveListing = async (req, res) => {
+const ApproveListing = async (req, res) => {
     try {
         const approvedListing = await Listing.findById(
             req.params.id)
@@ -79,7 +76,7 @@ exports.ApproveListing = async (req, res) => {
     }
 };
 
-exports.ToggleLike = async (req, res) => {
+const ToggleLike = async (req, res) => {
   try {
     const listing = await Listing.findById(req.params.id);
     if (!listing) return res.status(404).json({ message: 'Listing not found' });
@@ -104,7 +101,7 @@ exports.ToggleLike = async (req, res) => {
   }
 };
 
-exports.GetLikedListings = async (req, res) => {
+const GetLikedListings = async (req, res) => {
   try {
     const listings = await Listing.find({ likes: req.user._id });
     if (!listings) return res.status(404).json({ message: 'No listings found' });
@@ -118,8 +115,8 @@ exports.GetLikedListings = async (req, res) => {
   }
 };
 
-//Delete Listing
-exports.DeleteListing = async (req, res) => {
+// Delete Listing
+const DeleteListing = async (req, res) => {
     try {
         const deletedListing = await Listing.findByIdAndDelete(req.params.id);
 
@@ -133,4 +130,14 @@ exports.DeleteListing = async (req, res) => {
     }
 };
 
-module.exports = router;
+module.exports = {
+    AddListing,
+    GetAllListing,
+    GetListing,
+    UpdateListing,
+    ListingSold,
+    ApproveListing,
+    ToggleLike,
+    GetLikedListings,
+    DeleteListing,
+};
