@@ -1,11 +1,9 @@
-const express = require("express");
-const router = express.Router();
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-//Add new user
-exports.RegisterUser = async (req, res) => {
+// Add new user
+const RegisterUser = async (req, res) => {
   try {
     const { name, email, password, creativePassword } = req.body;
 
@@ -40,8 +38,8 @@ exports.RegisterUser = async (req, res) => {
   }
 };
 
-//Login user
-exports.LoginUser =  async (req, res) => {
+// Login user
+const LoginUser = async (req, res) => {
   try {
     const { email, password, creativePassword } = req.body;
 
@@ -72,8 +70,8 @@ exports.LoginUser =  async (req, res) => {
   }
 };
 
-//Get specific user
-exports.GetUser =  async (req, res) => {
+// Get specific user
+const GetUser = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
     if (!user) {
@@ -85,8 +83,8 @@ exports.GetUser =  async (req, res) => {
   }
 };
 
-//Update user
-exports.UpdateUser = async (req, res) => {
+// Update user
+const UpdateUser = async (req, res) => {
   try {
     const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
@@ -102,8 +100,8 @@ exports.UpdateUser = async (req, res) => {
   }
 };
 
-//Delete user
-exports.DeleteUser = async (req, res) => {
+// Delete user
+const DeleteUser = async (req, res) => {
   try {
     const deletedUser = await User.findByIdAndDelete(req.params.id);
 
@@ -117,4 +115,4 @@ exports.DeleteUser = async (req, res) => {
   }
 };
 
-module.exports = router;
+module.exports = { RegisterUser, LoginUser, GetUser, UpdateUser, DeleteUser };
