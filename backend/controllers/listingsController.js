@@ -91,7 +91,7 @@ const GetAwaitingApproval = async (req, res) => {
 // Get all Listings that have been approved
 const GetApproved = async (req, res) => {
   try {
-    const listings = await Listing.find({ isActive: true });
+    const listings = await Listing.find({ isActive: true, isSold: false });
     console.log(listings);
     
     if (!listings) {

@@ -526,6 +526,12 @@
   padding-bottom: 4rem;
 }
 
+.emptyListingsText{
+  font-family: "Montserrat", sans-serif;
+  color: #421918;
+
+}
+
 .homeHeroCard {
   background: #b73e3a;
   background: linear-gradient(
@@ -610,12 +616,19 @@
 }
 
 #productCard {
-  background-color: #b73e3a;
-  color: white;
+  color: #fff;
+  background: #B73E3A;
+  background: linear-gradient(180deg, rgba(183, 62, 58, 1) 70%, rgba(131, 29, 29, 1) 100%);
   font-family: "Montserrat", sans-serif;
   border: none;
   border-radius: 1.25rem;
   box-shadow: 0.2rem 0.5rem 1rem rgba(0, 0, 0, 0.3);
+}
+
+#productCard:hover{
+  transform: translateY(-7px);
+  transition: transform 0.4s ease-in-out;
+    box-shadow: 0.2rem 0.5rem 1rem rgba(0, 0, 0, 0.6);
 }
 
 #cardTitle {
