@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "./CartAndAndmin.css";
 
-export default function Profile() {
+function AdminPage() {
   const [activeTab, setActiveTab] = useState("viewFlags");
   const [openDropdownId, setOpenDropdownId] = useState(null);
 
@@ -151,6 +151,10 @@ export default function Profile() {
     }
   };
 
+  const toggleDropdown = (productId) => {
+    setOpenDropdownId((prevId) => (prevId === productId ? null : productId));
+  };
+
   return (
     <div id="main-wrapper">
       <div id="content-container">
@@ -211,6 +215,7 @@ export default function Profile() {
               );
             })}
           </div>
+
         </div>
         
 
@@ -240,23 +245,32 @@ export default function Profile() {
                         </div>
                       </div>
 
-                      <div className={`dropdown-wrapper ${isDropdownOpen ? "open" : ""}`}>
+                      <div className="dropdown-action-container">
                         <button
                           type="button"
-                          className="dropdown-action-item"
-                          onClick={() => handleDropdownAction("dismiss", product._id || product.id)}
+                          className="dropdown-trigger-btn"
+                          onClick={() => toggleDropdown(product._id || product.id)}
                         >
-                          Dismiss
+                          Actions
                         </button>
-                        <button type="button" className="dropdown-action-item">Ban User</button>
-                        <button type="button" className="dropdown-action-item">View Full</button>
-                        <button
-                          type="button"
-                          className="dropdown-action-item delete-action"
-                          onClick={() => handleDropdownAction("delete", product._id || product.id)}
-                        >
-                          Delete Flag
-                        </button>
+                        <div className={`dropdown-wrapper ${isDropdownOpen ? "open" : ""}`}>
+                          <button
+                            type="button"
+                            className="dropdown-action-item"
+                            onClick={() => handleDropdownAction("dismiss", product._id || product.id)}
+                          >
+                            Dismiss
+                          </button>
+                          <button type="button" className="dropdown-action-item">Ban User</button>
+                          <button type="button" className="dropdown-action-item">View Full</button>
+                          <button
+                            type="button"
+                            className="dropdown-action-item delete-action"
+                            onClick={() => handleDropdownAction("delete", product._id || product.id)}
+                          >
+                            Delete Flag
+                          </button>
+                        </div>
                       </div>
                     </div>
                   );
@@ -322,83 +336,14 @@ export default function Profile() {
                   />
                 </div>
 
-                <div className="profile-field-row">
-                  <div className="field-label-pill">Surname</div>
-                  <input
-                    type="text"
-                    name="surname"
-                    className="field-value-pill"
-                    value={profile.surname}
-                    onChange={handleInputChange}
-                    placeholder="Enter surname"
-                  />
-                </div>
-
-                <div className="profile-field-row">
-                  <div className="field-label-pill">Email Address</div>
-                  <input
-                    type="email"
-                    name="email"
-                    className="field-value-pill"
-                    value={profile.email}
-                    onChange={handleInputChange}
-                    placeholder="Enter email"
-                  />
-                </div>
-
-                <div className="profile-field-row">
-                  <div className="field-label-pill">Mobile Number</div>
-                  <input
-                    type="tel"
-                    name="mobile"
-                    className="field-value-pill"
-                    value={profile.mobile}
-                    onChange={handleInputChange}
-                    placeholder="Enter mobile number"
-                  />
-                </div>
-
-                <div className="profile-field-row">
-                  <div className="field-label-pill">Birth Date</div>
-                  <input
-                    type="date"
-                    name="birthDate"
-                    className="field-value-pill"
-                    value={profile.birthDate}
-                    onChange={handleInputChange}
-                  />
-                </div>
-
-                <div className="profile-field-row">
-                  <div className="field-label-pill">Address</div>
-                  <input
-                    type="text"
-                    name="address"
-                    className="field-value-pill"
-                    value={profile.address}
-                    onChange={handleInputChange}
-                    placeholder="Enter home address"
-                  />
-                </div>
-
-                <div className="profile-field-row">
-                  <div className="field-label-pill">Password</div>
-                  <input
-                    type="password"
-                    name="password"
-                    className="field-value-pill"
-                    value={profile.password}
-                    onChange={handleInputChange}
-                    placeholder="Enter new password"
-                  />
-                </div>
-
-                <div className="profile-buttons-row">
-                  <button type="button" className="cancelBtn" onClick={handleCancel}>
-                    Cancel
+                {/* ACTIONS */}
+                <div className="listing-actions">
+                  <button className="approve-btn">
+                    Approve
                   </button>
-                  <button type="submit" className="customBtn saveProfileBtn">
-                    Save Details
+
+                  <button className="delete-btn">
+                    Delete
                   </button>
                 </div>
               </form>
@@ -430,7 +375,11 @@ export default function Profile() {
             "switchProfile",
           ].includes(activeTab) && <div className="empty-spacer"></div>}
         </div>
+
       </div>
     </div>
   );
-} 
+}
+
+export default AdminPage;
+

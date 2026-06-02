@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "../components/navbar.js";
+import Navbar from "../components/navbar";
 import './CartAndAndmin.css';
 import RedFooter from "../components/RedFooter";
 import CartCard from "../components/cartCard"; 
 import RatingSellerCard from "../components/RatingSellerCard"; 
+import {TrashIcon} from "react-bootstrap-icons";
 
 function Cart() {
   const [cartItems, setCartItems] = useState([]);
