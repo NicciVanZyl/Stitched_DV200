@@ -26,8 +26,10 @@ import RedFooter from "../components/RedFooter";
 import axios from "axios";
 import BackToTop from "../components/btt";
 import NotificationModal from "../components/modal";
+import { useAuth } from '../context/authContext';
 
 function Login() {
+  const { login } = useAuth();
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState("signup");
   const [name, setName] = useState("");
@@ -64,6 +66,11 @@ function Login() {
   const isPasswordInvalid = password.length > 0 && password.length < 6;
   const isNameInvalid = name.length > 0 && name.trim().length < 2;
 
+  const SetLoginData = (userData, Token) => {
+    // Stores JWT token and user data in local storage
+    login(userData, Token);
+  }
+
   const Register = async () => {
     try {
       const res = await axios.post("http://localhost:5009/api/user/register", {
@@ -73,10 +80,7 @@ function Login() {
         creativePassword: selectedColours.join(""),
       });
 
-      // Stores JWT token in local storage
-      // const token = res.data.token;
-      // localStorage.setItem("token", res.data.token);
-      // console.log("JWT Token:", token);
+      SetLoginData(res.data.user, res.data.token);
 
       setUserName(name);
       setMessage("You're all set! Your account has been created.");
@@ -84,7 +88,8 @@ function Login() {
     } catch (error) {
       setMessage(
         error.response?.data?.message ||
-          "Registration failed. Please try again.",
+        "Registration failed. Please try again.",
+        
       );
       setShowModal(true);
     }
@@ -98,9 +103,8 @@ function Login() {
         creativePassword: selectedColours.join(""),
       });
 
-      // const token = res.data.token;
-      // localStorage.setItem("token", res.data.token);
-      // console.log("JWT Token:", token);
+      SetLoginData(res.data.user, res.data.token);
+
 
       setUserName(res.data.user.name);
       setMessage(`Welcome back, we're happy to see you!`);

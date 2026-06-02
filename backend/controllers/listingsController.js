@@ -4,7 +4,18 @@ const cloudinary = require("../routes/cloudinary");
 // Add a new listing
 const AddListing = async (req, res) => {
   try {
-    const newListing = new Listing(req.body);
+    const newListing = new Listing({
+      name: req.body.name,
+      price: req.body.price,
+      description: req.body.description,
+      size: req.body.size,
+      imageUrl: req.body.ImgUrl,
+      category: req.body.category,
+      subCategory: req.body.subCategory,
+      isActive: false,
+      isSold: false,
+      postedBy: req.body.userId,
+    });
     const saved = await newListing.save();
 
     res.status(201).json(saved);
@@ -64,15 +75,17 @@ const GetListing = async (req, res) => {
 
 // Get all Listings that have to be approved
 const GetAwaitingApproval = async (req, res) => {
-    try {
-        const listings = await Listing.find({isActive:false});
-        if (!listing) {
-            return res.status(404).json({ message: 'Listing not found' });
-        }
-        res.status(200).json(listing);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
+  try {
+    const listings = await Listing.find({ isActive: false });
+    console.log(listings);
+    
+    if (!listings) {
+      return res.status(404).json({ message: 'Listing not found' });
     }
+    res.status(200).json(listings);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
 //Update Listing
@@ -175,16 +188,16 @@ const DeleteListing = async (req, res) => {
 };
 
 module.exports = {
-    AddListing,
-    GetAllListing,
-    GetListing,
-    UpdateListing,
-    ListingSold,
-    ApproveListing,
-    ToggleLike,
-    GetLikedListings,
-    DeleteListing,
-    UploadImage,
-    GetAwaitingApproval
+  AddListing,
+  GetAllListing,
+  GetListing,
+  UpdateListing,
+  ListingSold,
+  ApproveListing,
+  ToggleLike,
+  GetLikedListings,
+  DeleteListing,
+  UploadImage,
+  GetAwaitingApproval
 };
 
