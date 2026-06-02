@@ -143,7 +143,7 @@ function Home() {
               ) : (
                 activeListings.slice(0, 9).map((listing) => (
                   <Col lg={4} md={6} className="mb-4" key={ listing.id}>
-                    <ProductCard product={listing} />
+                    <ProductCard listing={listing} />
                   </Col>
                 ))
               )}
