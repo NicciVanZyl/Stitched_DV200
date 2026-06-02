@@ -50,15 +50,19 @@
   }
 }
 
-.pdImageContainer {
+#pdImageContainer {
+  object-fit: contain;
+  height:fit-content;
   display: flex;
   justify-content: center;
-  max-height: 42em;
+  max-height: 40rem;
+  height: 40rem;
 }
 
-.pdImage {
-  object-fit: contain;
-  max-width: 100%;
+#pdImage {
+  object-fit: cover;
+  border-radius: 32px;
+  width: 90%;
 }
 
 .test {

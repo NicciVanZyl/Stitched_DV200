@@ -9,6 +9,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 import FlagSelector from './flagSelector';
 import Form from 'react-bootstrap/Form';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import axios from "axios";
+import { useAuth } from '../context/authContext';
 
 const theme = createTheme({
     components: {
@@ -53,10 +55,10 @@ const theme = createTheme({
 
     },
 });
-export default function FlagModal({ isOpen, setClosed }) {
+export default function FlagModal({ isOpen, setClosed, postID }) {
     const [open, setOpen] = React.useState(isOpen);
     const [selectedFlags, setSelectedFlag] = React.useState([])
-
+    const { token } = useAuth();
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -68,6 +70,22 @@ export default function FlagModal({ isOpen, setClosed }) {
         }
     };
 
+    const createFlagEntry = async (reason, body) => {
+        try {
+            const res = await axios.post(`http://localhost:5009/api/flag/add`, {
+                reason: reason,
+                listingId: postID,
+                flagBody: body
+            }, { headers: { authorization: `Bearer ${token}` } });
+
+            console.log(res.data);
+
+        } catch (error) {
+            console.log(error.response?.data?.message);
+
+        }
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
@@ -76,6 +94,7 @@ export default function FlagModal({ isOpen, setClosed }) {
         console.log(reasons);
         const body = formJson.flagBody;
         console.log(body);
+        createFlagEntry(reasons, body)
         handleClose();
     };
 

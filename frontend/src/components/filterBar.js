@@ -51,7 +51,7 @@ const theme = createTheme({
                 root: {
                     padding: '0 8px',
                     marginBottom: '2px',
-                    paddingTop:20,
+                    paddingTop: 20,
                 },
             },
         },
@@ -63,7 +63,7 @@ const theme = createTheme({
 function FilterBar({ children }) {
     const DRAWER_WIDTH = 280;
     const FilterContent = (
-        <Box sx={{ width: DRAWER_WIDTH, p: 3, marginTop:3}}>
+        <Box sx={{ width: DRAWER_WIDTH, p: 3, marginTop: 3 }}>
             <h5 className='filterTitle'>Filter</h5>
             <Divider sx={{ mb: 2 }} />
             {children}
@@ -140,7 +140,7 @@ function FilterBar({ children }) {
                                 boxshadow: '0.2rem 0.5rem 0.8rem rgba(0, 0, 0, 0.5)',
                                 borderRadius: 8,
                                 padding: 2,
-                                height: '45em',
+                                height: 'fit-content',
                                 textAlign: 'center',
                             }}
                         >

@@ -13,6 +13,7 @@ const listingSchema = new mongoose.Schema(
     isSold: { type: Boolean, default: false },
     postedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true, },
     likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    userRating: { type: String, default: 0 },
   },
   { timestamps: true },
 );

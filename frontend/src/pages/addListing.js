@@ -79,6 +79,7 @@ export default function Profile() {
           subCategory: subCategory,
           ImgUrl: data.imageUrl,
           userId: user.id,
+          userRating: user.rating,
         }),
       });
 

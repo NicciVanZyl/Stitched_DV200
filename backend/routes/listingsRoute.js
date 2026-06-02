@@ -36,11 +36,11 @@ router.get("/approved", GetApproved);
 //get listings awaiting approval - Admin Display
 router.get("/awaitingApproval",verifyToken,requireAdmin, GetAwaitingApproval);
 
+//get user's liked listings
+router.get("/getUserLikes", verifyToken, GetLikedListings);
+
 //get a specific listing
 router.get("/:id", GetListing);
-
-//get user's liked listings
-router.get("/:id", verifyToken, GetLikedListings);
 
 //add/remove likes
 router.patch("/:id", verifyToken, ToggleLike);
