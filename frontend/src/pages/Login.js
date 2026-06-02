@@ -37,44 +37,55 @@ function Login() {
   const [userName, setUserName] = useState("");
   const [selectedColours, setSelectedColours] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  
 
   const allCards = [
-    PantoneCardSlateSilk, PantoneCardMutedClay, PantoneCardSoftPeach,
-    PantoneCardBurgundy, PantoneCardSunset, PantoneCardPaleHaze,
-    PantoneCardTerracotta, PantoneCardDustRose, PantoneCardPetal,
-    PantoneCardMocha, PantoneCardSepia, PantoneCardDenim
+    PantoneCardSlateSilk,
+    PantoneCardMutedClay,
+    PantoneCardSoftPeach,
+    PantoneCardBurgundy,
+    PantoneCardSunset,
+    PantoneCardPaleHaze,
+    PantoneCardTerracotta,
+    PantoneCardDustRose,
+    PantoneCardPetal,
+    PantoneCardMocha,
+    PantoneCardSepia,
+    PantoneCardDenim,
   ];
 
-   // Shuffle Cards
+  // Shuffle Cards
   const [shuffledCards, setShuffledCards] = useState(() => {
     return [...allCards].sort(() => Math.random() - 0.5);
   });
 
   // Validation
-  const isEmailInvalid = email.length > 0 && !email.includes("@") && !email.includes(".");
+  const isEmailInvalid =
+    email.length > 0 && !email.includes("@") && !email.includes(".");
   const isPasswordInvalid = password.length > 0 && password.length < 6;
   const isNameInvalid = name.length > 0 && name.trim().length < 2;
 
   const Register = async () => {
     try {
-      const res =await axios.post("http://localhost:5009/api/user/register", {
+      const res = await axios.post("http://localhost:5009/api/user/register", {
         name,
         email,
         password,
-        creativePassword: selectedColours.join('')
+        creativePassword: selectedColours.join(""),
       });
-      
+
       // Stores JWT token in local storage
-      const token = res.data.token;
-      localStorage.setItem("token", res.data.token);
-      console.log("JWT Token:", token);
+      // const token = res.data.token;
+      // localStorage.setItem("token", res.data.token);
+      // console.log("JWT Token:", token);
 
       setUserName(name);
       setMessage("You're all set! Your account has been created.");
       setShowModal(true);
     } catch (error) {
-      setMessage(error.response?.data?.message || "Registration failed. Please try again.");
+      setMessage(
+        error.response?.data?.message ||
+          "Registration failed. Please try again.",
+      );
       setShowModal(true);
     }
   };
@@ -84,18 +95,20 @@ function Login() {
       const res = await axios.post("http://localhost:5009/api/user/login", {
         email,
         password,
-        creativePassword: selectedColours.join('')
+        creativePassword: selectedColours.join(""),
       });
 
-      const token = res.data.token;
-      localStorage.setItem("token", res.data.token);
-      console.log("JWT Token:", token);
+      // const token = res.data.token;
+      // localStorage.setItem("token", res.data.token);
+      // console.log("JWT Token:", token);
 
       setUserName(res.data.user.name);
       setMessage(`Welcome back, we're happy to see you!`);
       setShowModal(true);
     } catch (error) {
-      setMessage(error.response?.data?.message || "Login failed. Please try again.");
+      setMessage(
+        error.response?.data?.message || "Login failed. Please try again.",
+      );
       setShowModal(true);
     }
   };
@@ -116,15 +129,17 @@ function Login() {
 
   // Modal
   const handleModalClose = () => {
-  setShowModal(false);
-  if (currentPage === "signup" && message.includes("all set")) {
-    setCurrentPage("login");
-    setSelectedColours([]);
-  } else if (currentPage === "login" && message.includes("happy to see you")) {
-    navigate("/Home");
-  }
-};
-
+    setShowModal(false);
+    if (currentPage === "signup" && message.includes("all set")) {
+      setCurrentPage("login");
+      setSelectedColours([]);
+    } else if (
+      currentPage === "login" &&
+      message.includes("happy to see you")
+    ) {
+      navigate("/Home");
+    }
+  };
 
   // Toggle between Login/Sign Up
   const renderPage = (activePage) => {
@@ -133,7 +148,11 @@ function Login() {
         <>
           <div className="loginHeader">
             <h1 className="loginText">Welcome Back!</h1>
-            <img src={StitchedRedLogo} alt="Stitched Logo" className="stitchedLogo"></img>
+            <img
+              src={StitchedRedLogo}
+              alt="Stitched Logo"
+              className="stitchedLogo"
+            ></img>
           </div>
 
           <div className="textFieldsContainer">
@@ -148,7 +167,9 @@ function Login() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 error={isEmailInvalid}
-                helperText={isEmailInvalid ? "Please enter a valid email address" : ""}
+                helperText={
+                  isEmailInvalid ? "Please enter a valid email address" : ""
+                }
               />
               <TextField
                 id="outlined-basic"
@@ -160,11 +181,17 @@ function Login() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 error={password.length > 0 && password.length < 6}
-                helperText={password.length > 0 && password.length < 6 ? "Password must be at least 6 characters" : ""}
+                helperText={
+                  password.length > 0 && password.length < 6
+                    ? "Password must be at least 6 characters"
+                    : ""
+                }
               />
 
               <div className="d-flex flex-column align-items-center my-3 w-100">
-                <p className="passwordPaletteText">Select your unique colour palette~</p>
+                <p className="passwordPaletteText">
+                  Select your unique colour palette~
+                </p>
                 <div className="d-flex justify-content-center gap-2 mb-1">
                   {[...Array(5)].map((_, i) => (
                     <div
@@ -173,15 +200,20 @@ function Login() {
                         width: "3rem",
                         height: "3rem",
                         borderRadius: "8px",
-                        backgroundColor: selectedColours[i] || "#0a233f23", 
-                        border: selectedColours[i] ? "1.5px solid #0A233F" : "1.2px dashed #b1afaf",
-                        transition: "background-color 0.2s ease"
+                        backgroundColor: selectedColours[i] || "#0a233f23",
+                        border: selectedColours[i]
+                          ? "1.5px solid #0A233F"
+                          : "1.2px dashed #b1afaf",
+                        transition: "background-color 0.2s ease",
                       }}
                     />
                   ))}
                 </div>
                 {selectedColours.length > 0 && (
-                  <button className="removeColourBtn" onClick={handleUndoColour} >
+                  <button
+                    className="removeColourBtn"
+                    onClick={handleUndoColour}
+                  >
                     X Undo Last Color
                   </button>
                 )}
@@ -194,7 +226,7 @@ function Login() {
           </div>
 
           <div className="loginFooter w-100">
-            <div className="loginDivider" style={{marginTop: "2rem"}}>
+            <div className="loginDivider" style={{ marginTop: "2rem" }}>
               <span>OR</span>
             </div>
 
@@ -202,8 +234,10 @@ function Login() {
               <p>Not yet a member?</p>
               <Button
                 onClick={() => setCurrentPage("signup")}
-                variant="outline-dark" className="customBtn"
-                id="signUpBtnOutline">
+                variant="outline-dark"
+                className="customBtn"
+                id="signUpBtnOutline"
+              >
                 Sign Up
               </Button>
             </div>
@@ -215,7 +249,11 @@ function Login() {
         <>
           <div className="loginHeader">
             <h1 className="loginText">Welcome To!</h1>
-            <img src={StitchedRedLogo} alt="Stitched Logo" className="stitchedLogo"></img>
+            <img
+              src={StitchedRedLogo}
+              alt="Stitched Logo"
+              className="stitchedLogo"
+            ></img>
           </div>
 
           <div className="textFieldsContainer">
@@ -230,7 +268,11 @@ function Login() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 error={name.length > 0 && name.trim().length < 2}
-                helperText={name.length > 0 && name.trim().length < 2 ? "Name must be at least 2 characters" : ""}
+                helperText={
+                  name.length > 0 && name.trim().length < 2
+                    ? "Name must be at least 2 characters"
+                    : ""
+                }
               />
               <TextField
                 id="outlined-basic"
@@ -242,7 +284,9 @@ function Login() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 error={isEmailInvalid}
-                helperText={isEmailInvalid ? "Please enter a valid email address" : ""}
+                helperText={
+                  isEmailInvalid ? "Please enter a valid email address" : ""
+                }
               />
               <TextField
                 id="outlined-basic"
@@ -254,14 +298,19 @@ function Login() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 error={password.length > 0 && password.length < 6}
-                helperText={password.length > 0 && password.length < 6 ? "Password must be at least 6 characters" : ""}
+                helperText={
+                  password.length > 0 && password.length < 6
+                    ? "Password must be at least 6 characters"
+                    : ""
+                }
               />
-            
 
               <div className="d-flex flex-column align-items-center my-3 w-100">
-                <p className="passwordPaletteText"> Select your unique colour palette~ </p>
+                <p className="passwordPaletteText">
+                  {" "}
+                  Select your unique colour palette~{" "}
+                </p>
                 <div className="d-flex justify-content-center gap-2 mb-1">
-                  
                   {[...Array(5)].map((_, i) => (
                     <div
                       key={i}
@@ -269,15 +318,20 @@ function Login() {
                         width: "3rem",
                         height: "3rem",
                         borderRadius: "8px",
-                        backgroundColor: selectedColours[i] || "#0a233f23", 
-                        border: selectedColours[i] ? "1.5px solid #0A233F" : "1.2px dashed #b1afaf",
-                        transition: "background-color 0.2s ease"
+                        backgroundColor: selectedColours[i] || "#0a233f23",
+                        border: selectedColours[i]
+                          ? "1.5px solid #0A233F"
+                          : "1.2px dashed #b1afaf",
+                        transition: "background-color 0.2s ease",
                       }}
                     />
                   ))}
                 </div>
                 {selectedColours.length > 0 && (
-                  <button className="removeColourBtn" onClick={handleUndoColour} >
+                  <button
+                    className="removeColourBtn"
+                    onClick={handleUndoColour}
+                  >
                     X Undo Last Color
                   </button>
                 )}
@@ -290,7 +344,7 @@ function Login() {
           </div>
 
           <div className="loginFooter w-100">
-            <div className="loginDivider" style={{marginTop: "2rem"}}>
+            <div className="loginDivider" style={{ marginTop: "2rem" }}>
               <span>OR</span>
             </div>
 
@@ -298,8 +352,10 @@ function Login() {
               <p>Already a member?</p>
               <Button
                 onClick={() => setCurrentPage("login")}
-                variant="outline-dark" className="customBtn"
-                id="signUpBtnOutline">
+                variant="outline-dark"
+                className="customBtn"
+                id="signUpBtnOutline"
+              >
                 Login
               </Button>
             </div>
@@ -313,7 +369,6 @@ function Login() {
     <div className="loginContainer">
       <Container fluid>
         <Row className="justify-content-center align-items-stretch">
-          
           {/* Pantone Cards */}
           <Col lg={6} md={12}>
             <Row className="mx-2 h-100">
@@ -332,12 +387,12 @@ function Login() {
         </Row>
       </Container>
 
-      <NotificationModal 
-        show={showModal} 
-        message={message} 
+      <NotificationModal
+        show={showModal}
+        message={message}
         userName={userName}
-        onClose={handleModalClose} />
-
+        onClose={handleModalClose}
+      />
     </div>
   );
 }

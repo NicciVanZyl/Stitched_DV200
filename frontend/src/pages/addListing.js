@@ -64,7 +64,10 @@ export default function Profile() {
 
       const responsePost = await fetch("/api/listing/add", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          // Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
         body: JSON.stringify({
           name,
           price,
@@ -83,6 +86,7 @@ export default function Profile() {
       const listingData = await responsePost.json();
       console.log("Listing created successfully:", listingData);
       setSubmitStatus("success");
+
       // Reset form
       setName("");
       setPrice("");
