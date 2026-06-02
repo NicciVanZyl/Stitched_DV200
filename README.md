@@ -146,13 +146,13 @@ To construct an intuitive, visually appealing e-commerce application that resolv
 ## Future Implementation:
 
 ### Community Features & Social Styling:
-Expanding the platform to integrate localized social interactions would greatly amplify sustainable engagement. Users could build personalized digital lookbooks, follow alternative thrifters whose style alignment matches their own, and comment directly on product racks to negotiate bundles. Integrating community hubs or message groups focused on sub-fashion trends (such as streetwear or vintage tailoring) would allow enthusiasts to share sustainable styling tips, increasing daily application interaction loop metrics.
+Expanding the platform to integrate social interactions would greatly amplify sustainable engagement. Users could build personalised digital lookbooks, follow other users whose style alignment matches their own and have an integrated chat feature so that they are able to message the seller directly to negotiate prices or build connections. Integrating community hubs or message groups focused on fashion trends (such as streetwear or vintage tailoring) would allow enthusiasts to share sustainable styling tips.
 
 ### Advanced Predictive Curation:
-Incorporating advanced predictive metadata algorithms will enable Stitched to offer personalized shopping recommendations derived entirely from individual user activity. By analyzing structural metrics such as category searches, saved wishlist tracking data, and historical cart conversions, the application could provide tailored outfit inspirations on the home menu interface. Future iterations could predict a user's size and aesthetic preference parameters to automatically structure custom-curated digital shopping corridors.
+Incorporating personalised shopping recommendations derived entirely from individual user activity. By analysing structural metrics such as category searches, saved wishlist tracking data and historical cart conversions, the application could provide tailored outfit inspirations on the home menu interface. Future iterations could predict a user's size and aesthetic preference parameters to automatically structure a custom curated digital shopping experience.
 
 ### Integration with Secure Shipping APIs:
-Connecting the system with external webhooks and smart multi-carrier shipping provider portals represents a major progression toward structural transaction processing. Integrating live fulfillment updates directly into the application framework would establish immediate shipping calculations, printable waybill barcodes for sellers, and end-to-end delivery map updates for consumers. This removes third-party payment anxiety, seamlessly turning Stitched from a school prototype into a highly competitive marketplace.
+Integrating live fulfillment updates directly into the application framework would establish immediate shipping calculations, printable waybill barcodes for sellers and end-to-end delivery map updates for consumers. This removes third party payment anxiety.
 
 ---
 
