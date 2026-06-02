@@ -14,6 +14,10 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react'
 import './PDP.css'
 import FlagModal from '../components/flagModal';
+import { useLocation } from 'react-router-dom';
+import axios from "axios";
+import { useAuth } from '../context/authContext';
+
 
 //Custom styling for Icon Buttons
 const theme = createTheme({
@@ -50,12 +54,64 @@ const theme = createTheme({
 
 
 function ProductDetails() {
+  const { state } = useLocation();
+  const { listing } = state;
+
+  const { user, token } = useAuth();
 
   const [selectedFlag, setSelectedFlag] = useState(false);
   const [selectedLike, setSelectedLike] = useState(false);
   const [showCartModal, setShowCartModal] = useState(false);
   const [showLikeModal, setShowLikeModal] = useState(false);
   const [showFlagModal, setShowFlagModal] = useState(false);
+  const [sellerName, setSellerName] = useState();
+  const [sellerRating, setSellerRating] = useState();
+
+  const GetSellerInfo = async () => {
+    try {
+      const res = await axios.get(`http://localhost:5009/api/user/` + listing.postedBy);
+      setSellerName(res.data.name)
+      setSellerRating(res.data.rating)
+    } catch (error) {
+      console.log(error.response?.data?.message);
+
+    }
+  };
+  const GetBuyerLikes = async () => {
+    try {
+      const res = await axios.get(`http://localhost:5009/api/listing/getUserLikes`, { headers: { authorization: `Bearer ${token}` } });
+      res.data.data.listings.forEach(listings => {
+        if (listings._id == listing._id) {
+          setSelectedLike(true);
+        }
+      });
+    } catch (error) {
+      console.log(error.response?.data?.message);
+
+    }
+  };
+
+  const SetAsLiked = async () => {
+    try {
+      const res = await axios.patch(`http://localhost:5009/api/listing/${listing._id}`, {}, { headers: { authorization: `Bearer ${token}` } });
+      console.log(res.data);
+
+    } catch (error) {
+      console.log(error.response?.data?.message);
+
+    }
+  };
+
+  const setLiked = () => {
+    setSelectedLike(!selectedLike);
+    SetAsLiked();
+  }
+
+  useEffect(() => {
+    GetSellerInfo();
+    GetBuyerLikes();
+  }, [])
+
 
   useEffect(() => {
     if (showFlagModal) {
@@ -67,33 +123,39 @@ function ProductDetails() {
 
   return (
     <div className='loginContainer'>
-      <FlagModal isOpen={showFlagModal} setClosed={setShowFlagModal}></FlagModal>
+      <FlagModal isOpen={showFlagModal} setClosed={setShowFlagModal} postID={listing._id}></FlagModal>
       <Container fluid>
         <Row>
           <Col sm={12} className='mx-auto productDetails' >
             <Row>
-              <Col lg={6} md={12} className='mb-3 mb-lg-0 pdImageContainer'>
-                <img className='pdImage' src={placeholderImage}></img>
+              <Col lg={6} md={12} className='mb-3 mb-lg-0 mx-auto'>
+                <div id='pdImageContainer'>
+                  <img id='pdImage' src={listing.imageUrl}></img>
+                </div>
               </Col>
               <Col lg={6} md={12} className='pdDetails'>
                 <Stack gap={5} >
                   <Stack gap={4}>
                     <div>
-                      <h1>Product Name</h1>
-                      <h2>R000000.00</h2>
+                      <h1>{listing.name}</h1>
+                      <h2>R{listing.price}</h2>
                     </div>
                     <div>
-                      <h3>Seller Name</h3>
-                      <Rating name="size-medium" value={2.5} precision={0.5} readOnly />
+                      <h3>{sellerName}</h3>
+                      <Rating name="size-medium" value={sellerRating} precision={0.5} readOnly />
                     </div>
                   </Stack>
-                  <p>Product details: description & size Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet orci neque. Aenean non sem ut massa interdum ultrices quis posuere purus. Ut ullamcorper magna non nunc fringilla, id sodales turpis laoreet. Mauris rutrum risus tristique, cursus eros in, tincidunt odio. Nunc non gravida purus. Morbi pretium arcu eu commodo tempor. Praesent euismod rutrum lorem, at tincidunt magna laoreet id.magna non nunc fringilla, id sodales turpis laoreet. Mauris rutrum risus tristique, cursus eros in, tincidunt odio. Nunc non gravida purus. Morbi pretium arcu eu commodo tempor. Praesent euismod rutrum lorem, at tincidunt magna laoreet ide
-                  </p>
+                  <Stack>
+                    <p>Size: {listing.size}</p>
+                    <p>Category: {listing.category}</p>
+                    <p>Sub-Category: {listing.subCategory}</p>
+                    <p>Description: {listing.description}</p>
+                  </Stack>
                   <Stack direction='horizontal' gap={4}>
                     <button className="customBtn pdButton">Add to Cart</button>
                     <ThemeProvider theme={theme}>
                       <IconButton
-                        onClick={() => setSelectedLike(!selectedLike)}
+                        onClick={() => setLiked()}
                         sx={{
                           '& .MuiSvgIcon-root': {
                             color: selectedLike ? '#B73E3A' : '#F5BD54',

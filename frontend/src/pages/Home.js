@@ -115,7 +115,7 @@ function Home() {
               </Col>
             </Row>
 
-            <Row className="justify-content-center mt-5">
+            {/* <Row className="justify-content-center mt-5">
               <Col lg={4} md={6} className="mb-4">
                 <ProductCard />
               </Col>
@@ -139,7 +139,7 @@ function Home() {
               <Col lg={4} md={6} className="mb-4">
                 <ProductCard />
               </Col>
-            </Row>
+            </Row> */}
 
             <Row>
               <Col lg={12} className="align-items-center mt-5">
