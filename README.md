@@ -56,12 +56,12 @@ Stitched is a pre-loved thrifting online website, wherein users can post their s
 
 ### How to install:
 
-* React Bootstrap <br> `npm install react-bootstrap bootstrap`
-* React Router DOM <br> `npm i react-router-dom`
-* Axios <br> `npm i axios`
-* Material UI <br> `npm i @mui/material @mui/icons-material @emotion/react @emotion/styled`
-* Express <br> `npm i express`
-* Multer & Cloudinary <br> `npm i multer cloudinary`
+* React Bootstrap <br> ```npm install react-bootstrap bootstrap```
+* React Router DOM <br> ```npm i react-router-dom```
+* Axios <br> ```npm i axios```
+* Material UI <br> ```npm i @mui/material @mui/icons-material @emotion/react @emotion/styled```
+* Express <br> ```npm i express```
+* Multer & Cloudinary <br> ```npm i multer cloudinary```
 
 ### File Structure:
 ```text
