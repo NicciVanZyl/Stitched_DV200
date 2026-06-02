@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom"; // Imported Link for routing
+import { Link } from "react-router-dom";
 import "./CartAndAndmin.css";
-import FlaggedRowItem from "../components/ViewFlagsListingcard";
 
 export default function Profile() {
   const [activeTab, setActiveTab] = useState("viewFlags");
@@ -19,8 +18,14 @@ export default function Profile() {
     password: "",
   });
 
-  const tabs = ["viewFlags", "approveListings", "editProfile", "addListing", "switchProfile"];
-  
+  const tabs = [
+    "viewFlags",
+    "approveListings",
+    "editProfile",
+    "addListing",
+    "switchProfile",
+  ];
+
   const tabLabels = {
     viewFlags: "View Flags",
     approveListings: "Approve Listings",
@@ -30,25 +35,40 @@ export default function Profile() {
   };
 
   const [flaggedProducts, setFlaggedProducts] = useState([]);
+  const [listings, setListings] = useState([]);
 
   // Handles the profile switching delay and auto-redirect logic
   useEffect(() => {
     if (activeTab === "switchProfile") {
       const timer = setTimeout(() => {
-        setActiveTab("viewFlags"); // Links back to the main profile layout dashboard view
-      }, 3000); // 3 seconds wait time
-      
+        setActiveTab("viewFlags");
+      }, 3000);
       return () => clearTimeout(timer);
     }
   }, [activeTab]);
 
+  // Initial Data Fetching for Flags and Awaiting Approval Listings
   useEffect(() => {
-    // Fetches the database items when the page loads
-    axios.get("http://localhost:5000/api/flags") 
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: { Authorization: `Bearer ${token}` }
+    };
+
+    // SECURE FLAGS API CALL 1: Fetch all flags via router.get('/all', ...)
+    axios
+      .get("http://localhost:5000/api/flags/all", config)
       .then((response) => {
         setFlaggedProducts(response.data);
       })
-      .catch((error) => console.error("Error fetching data:", error));
+      .catch((error) => console.error("Error fetching flags data:", error));
+
+    // LISTINGS API CALL 1: Fetch listings awaiting approval
+    axios
+      .get("http://localhost:5000/api/listings/awaitingApproval")
+      .then((response) => {
+        setListings(response.data);
+      })
+      .catch((error) => console.error("Error fetching listings awaiting approval:", error));
   }, []);
 
   function handleInputChange(e) {
@@ -74,35 +94,66 @@ export default function Profile() {
     console.log("Updated Profile Data: ", profile);
   }
 
-  // Toggles the dropdown for a specific row id, closing others
-  const toggleDropdown = (id) => {
-    if (openDropdownId === id) {
+  // SECURE FLAGS API CALL 2 & 3: Handle individual flag actions (Edit/Patch or Delete)
+  const handleDropdownAction = async (actionType, productId) => {
+    try {
+      const token = localStorage.getItem("token");
+      const config = {
+        headers: { Authorization: `Bearer ${token}` }
+      };
+
+      if (actionType === "dismiss") {
+        // Matches your: router.patch('/:id', verifyToken, requireAdmin, EditFlag);
+        await axios.patch(`http://localhost:5000/api/flags/${productId}`, {
+          status: "dismissed",
+        }, config);
+      } else if (actionType === "delete") {
+        // Matches your: router.delete('/:id', verifyToken, requireAdmin, DeleteFlag);
+        await axios.delete(`http://localhost:5000/api/flags/${productId}`, config);
+      }
+
+      setFlaggedProducts((prev) =>
+        prev.filter((product) => (product._id || product.id) !== productId),
+      );
       setOpenDropdownId(null);
-    } else {
-      setOpenDropdownId(id);
+    } catch (error) {
+      console.error(`Error performing ${actionType} on flag:`, error);
     }
   };
 
-  const handleDropdownAction = async (actionType, productId) => {
+  // LISTINGS API CALL 2: Approve Listing Handler
+  const handleApproveListing = async (listingId) => {
     try {
-      if (actionType === "dismiss") {
-        await axios.patch(`http://localhost:5000/api/flags/${productId}`, { status: "dismissed" });
-      } else if (actionType === "delete") {
-        await axios.delete(`http://localhost:5000/api/flags/${productId}`);
-      }
+      const token = localStorage.getItem("token");
+      const config = {
+        headers: { Authorization: `Bearer ${token}` }
+      };
       
-      setFlaggedProducts((prev) => prev.filter((product) => (product._id || product.id) !== productId));
-      setOpenDropdownId(null); 
-      
+      await axios.patch(`http://localhost:5000/api/listings/${listingId}`, {}, config);
+      setListings((prev) => prev.filter((item) => (item._id || item.id) !== listingId));
     } catch (error) {
-      console.error(`Error performing ${actionType}:`, error);
+      console.error("Error approving listing:", error);
+    }
+  };
+
+  // LISTINGS API CALL 3: Delete / Reject Listing Handler
+  const handleDeleteListing = async (listingId) => {
+    try {
+      const token = localStorage.getItem("token");
+      const config = {
+        headers: { Authorization: `Bearer ${token}` }
+      };
+
+      await axios.delete(`http://localhost:5000/api/listings/${listingId}`, config);
+      setListings((prev) => prev.filter((item) => (item._id || item.id) !== listingId));
+    } catch (error) {
+      console.error("Error deleting listing:", error);
     }
   };
 
   return (
     <div id="main-wrapper">
       <div id="content-container">
-        
         {/* Left Sidebar */}
         <div id="yellow-section">
           <div id="profile-circle"></div>
@@ -114,32 +165,45 @@ export default function Profile() {
             {tabs.map((tab) => {
               const isActive = activeTab === tab;
 
-              // Conditionally render Link for switchProfile tab
               if (tab === "switchProfile") {
                 return (
-                  <Link
-                    to="/personalProfile"
-                    className={`tab-button ${isActive ? "active" : ""}`}
-                    key={tab}
-                    onClick={() => {
-                      setActiveTab(tab);
-                      setOpenDropdownId(null);
-                    }}
-                    style={{ textDecoration: "none", display: "block" }} // Resets link defaults
-                  >
-                    <div className="tab-label">{tabLabels[tab]}</div>
+                  <Link to="/personalProfile" className="tab-routing-link" key={tab}>
+                    <button
+                      className={`tab-button ${isActive ? "active" : ""}`}
+                      onClick={() => {
+                        setActiveTab(tab);
+                        setOpenDropdownId(null);
+                      }}
+                    >
+                      <div className="tab-label">{tabLabels[tab]}</div>
+                    </button>
                   </Link>
                 );
               }
 
-              // Default button rendering for all other tabs
+              if (tab === "addListing") {
+                return (
+                  <Link to="/addListing" className="tab-routing-link" key={tab}>
+                    <button
+                      className={`tab-button ${isActive ? "active" : ""}`}
+                      onClick={() => {
+                        setActiveTab(tab);
+                        setOpenDropdownId(null);
+                      }}
+                    >
+                      <div className="tab-label">{tabLabels[tab]}</div>
+                    </button>
+                  </Link>
+                );
+              }
+
               return (
                 <button
                   className={`tab-button ${isActive ? "active" : ""}`}
                   key={tab}
                   onClick={() => {
                     setActiveTab(tab);
-                    setOpenDropdownId(null); // Close dropdowns on nav change
+                    setOpenDropdownId(null);
                   }}
                 >
                   <div className="tab-label">{tabLabels[tab]}</div>
@@ -148,89 +212,103 @@ export default function Profile() {
             })}
           </div>
         </div>
+        
 
         {/* Right Content Panel */}
         <div id="right-panel">
-          
           {/* View Flags Tab */}
           {activeTab === "viewFlags" && (
             <div className="flags-container">
-              <div className="header-title" style={{ marginLeft: "0px" }}>
-                Admin Dashboard
-              </div>
-              
-              {flaggedProducts.map((product) => {
-                const isDropdownOpen = openDropdownId === product.id;
-                return (
-                  <div key={product.id} className="flag-row-item">
-                    
-                    {/* Left Meta Section */}
-                    <div className="flag-info-side">
-                      <h3 className="flag-product-name">{product.name}</h3>
-                      <p className="flag-reporter-comment">{product.comment}</p>
-                      <div className="flag-badges-row">
-                        {product.badges.map((badge, index) => (
-                          <span key={index} className="flag-pill-badge">
-                            {badge}
-                          </span>
-                        ))}
+              <div className="header-title flags-header-align">Admin Dashboard</div>
+
+              {flaggedProducts.length === 0 ? (
+                <p className="switch-profile-notice">No system flags reported.</p>
+              ) : (
+                flaggedProducts.map((product) => {
+                  const isDropdownOpen = openDropdownId === (product._id || product.id);
+                  return (
+                    <div key={product._id || product.id} className="flag-row-item">
+                      <div className="flag-info-side">
+                        <h3 className="flag-product-name">{product.name}</h3>
+                        <p className="flag-reporter-comment">{product.comment}</p>
+                        <div className="flag-badges-row">
+                          {product.badges && product.badges.map((badge, index) => (
+                            <span key={index} className="flag-pill-badge">
+                              {badge}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className={`dropdown-wrapper ${isDropdownOpen ? "open" : ""}`}>
+                        <button
+                          type="button"
+                          className="dropdown-action-item"
+                          onClick={() => handleDropdownAction("dismiss", product._id || product.id)}
+                        >
+                          Dismiss
+                        </button>
+                        <button type="button" className="dropdown-action-item">Ban User</button>
+                        <button type="button" className="dropdown-action-item">View Full</button>
+                        <button
+                          type="button"
+                          className="dropdown-action-item delete-action"
+                          onClick={() => handleDropdownAction("delete", product._id || product.id)}
+                        >
+                          Delete Flag
+                        </button>
                       </div>
                     </div>
-
-                    {/* Right Interactive Actions Dropdown */}
-                    <div className={`dropdown-wrapper ${isDropdownOpen ? "open" : ""}`}>
-                      <button 
-                        type="button" 
-                        className="dropdown-action-item" 
-                        onClick={() => handleDropdownAction("dismiss", product._id || product.id)}
-                      >
-                        Dismiss
-                      </button>
-
-                      <button type="button" className="dropdown-action-item">Ban User</button>
-                      <button type="button" className="dropdown-action-item">View Full</button>
-
-                      <button 
-                        type="button" 
-                        className="dropdown-action-item delete-action"
-                        onClick={() => handleDropdownAction("delete", product._id || product.id)}
-                      >
-                        Delete Listing
-                      </button>
-                      
-                      {isDropdownOpen && (
-                        <div className="dropdown-menu-box">
-                          <button type="button" className="dropdown-action-item">Dismiss</button>
-                          <button type="button" className="dropdown-action-item">Ban User</button>
-                          <button type="button" className="dropdown-action-item">View Full</button>
-                          <button type="button" className="dropdown-action-item delete-action">Delete Listing</button>
-                        </div>
-                      )}
-                    </div>
-
-                  </div>
-                );
-              })}
+                  );
+                })
+              )}
             </div>
           )}
 
           {/* Approve Listings Tab */}
           {activeTab === "approveListings" && (
             <div className="admin-page">
-              <div className="header-title" style={{ marginLeft: "0px" }}>
-                Approve Listings
+              <div className="header-title listings-header-align">Approve Listings</div>
+              
+              <div className="listings-approval-container">
+                {listings.length === 0 ? (
+                  <p className="switch-profile-notice">No listings awaiting approval.</p>
+                ) : (
+                  listings.map((item) => (
+                    <div key={item._id || item.id} className="flag-row-item">
+                      <div className="flag-info-side">
+                        <h3 className="flag-product-name">{item.name || item.title}</h3>
+                        <p className="flag-reporter-comment">{item.description}</p>
+                      </div>
+                      
+                      <div className="action-buttons-group">
+                        <button
+                          type="button"
+                          className="customBtn saveProfileBtn compact-action-btn"
+                          onClick={() => handleApproveListing(item._id || item.id)}
+                        >
+                          Approve
+                        </button>
+                        <button
+                          type="button"
+                          className="cancelBtn reset-margin compact-action-btn"
+                          onClick={() => handleDeleteListing(item._id || item.id)}
+                        >
+                          Reject
+                        </button>
+                      </div>
+                    </div>
+                  ))
+                )}
               </div>
-              {/* Insert implementation components for your listings here */}
             </div>
           )}
 
           {/* Edit Profile Tab */}
           {activeTab === "editProfile" && (
             <div className="admin-page">
-              <div className="header-title" style={{ marginLeft: "0px" }}>
-                Edit Profile Details
-              </div>
-              
+              <div className="header-title profile-header-align">Edit Profile Details</div>
+
               <form onSubmit={handleProfileSubmit} className="profile-fields-grid">
                 <div className="profile-field-row">
                   <div className="field-label-pill">First Name</div>
@@ -330,32 +408,29 @@ export default function Profile() {
           {/* Add Listing Tab */}
           {activeTab === "addListing" && (
             <div className="admin-page">
-              <div className="header-title" style={{ marginLeft: "0px" }}>
-                Add Listing
-              </div>
-              {/* Insert input components for creating a listing items layout here */}
+              <div className="header-title listings-header-align">Add Listing</div>
             </div>
           )}
 
           {/* Switch Profile Tab */}
           {activeTab === "switchProfile" && (
             <div className="admin-page">
-              <div className="header-title" style={{ marginLeft: "0px" }}>
-                Switch Profile
-              </div>
+              <div className="header-title profileswitch-header-align">Switch Profile</div>
               <div className="switch-profile-notice">
                 Please wait a moment while we switch back to the profile page...
               </div>
             </div>
           )}
 
-          {/* Fallback empty view spacer */}
-          {!["viewFlags", "approveListings", "editProfile", "addListing", "switchProfile"].includes(activeTab) && (
-            <div className="empty-spacer"></div>
-          )}
-
+          {![
+            "viewFlags",
+            "approveListings",
+            "editProfile",
+            "addListing",
+            "switchProfile",
+          ].includes(activeTab) && <div className="empty-spacer"></div>}
         </div>
       </div>
     </div>
   );
-}
+} 

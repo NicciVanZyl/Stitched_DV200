@@ -1,34 +1,48 @@
 const express = require("express");
 const router = express.Router();
-const { AddListing, GetAllListing, GetListing, UpdateListing, ListingSold, ApproveListing, ToggleLike, GetLikedListings, DeleteListing } = require('../controllers/listingsController')
-const verifyToken = require('../middleware/verifyToken');
-const requireAdmin = require('../middleware/requireAdmin');
+const {
+  AddListing,
+  GetAllListing,
+  GetListing,
+  UpdateListing,
+  ListingSold,
+  ApproveListing,
+  ToggleLike,
+  GetLikedListings,
+  DeleteListing,
+  GetAwaitingApproval,
+} = require("../controllers/listingsController");
+const verifyToken = require("../middleware/verifyToken");
+const requireAdmin = require("../middleware/requireAdmin");
 
 //add new listing
-router.post('/add', verifyToken,AddListing);
+router.post("/add", verifyToken, AddListing);
 
 //get all listings
-router.get('/all', GetAllListing);
+router.get("/all", GetAllListing);
 
 //get a specific listing
-router.get('/:id', GetListing);
+router.get("/:id", GetListing);
+
+//get listings awaiting approval - Admin Display
+router.get("/awaitingApproval", GetAwaitingApproval);
 
 //get user's liked listings
-router.get('/:id', verifyToken,GetLikedListings);
+router.get("/:id", verifyToken, GetLikedListings);
 
 //add/remove likes
-router.patch('/:id', verifyToken,ToggleLike);
+router.patch("/:id", verifyToken, ToggleLike);
 
 //Approve listing - Admin
-router.patch('/:id', verifyToken, requireAdmin, ApproveListing);
+router.patch("/:id", verifyToken, requireAdmin, ApproveListing);
 
 //Mark as sold - after cart
-router.patch('/:id', verifyToken,ListingSold);
+router.patch("/:id", verifyToken, ListingSold);
 
 //Update Listing - only if not sold or if admin wants to update it
-router.put('/:id', verifyToken,UpdateListing);
+router.put("/:id", verifyToken, UpdateListing);
 
 //Delete Listing - if not sold or if admin wants to remove it
-router.delete('/:id', verifyToken,DeleteListing);
+router.delete("/:id", verifyToken, DeleteListing);
 
 module.exports = router;
