@@ -3,7 +3,7 @@ import "./Profile.css";
 import { useAuth } from '../context/authContext';
 
 export default function Profile() {
-  const { user } = useAuth();
+  const { user,token } = useAuth();
   const [activePage, setActivePage] = useState(1);
   const [activeTab, setActiveTab] = useState("addListing");
   const [hoverTab, setHoverTab] = useState(null);
@@ -68,7 +68,7 @@ export default function Profile() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          // Authorization: `Bearer ${localStorage.getItem("token")}`,
+          authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           name:name,
