@@ -2,8 +2,15 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "./CartAndAndmin.css";
+import { useAuth } from '../context/authContext';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+
 
 function AdminPage() {
+  const { user, token } = useAuth();
+
   const [activeTab, setActiveTab] = useState("viewFlags");
   const [openDropdownId, setOpenDropdownId] = useState(null);
 
@@ -47,6 +54,24 @@ function AdminPage() {
     }
   }, [activeTab]);
 
+  const GetFlags = async () => {
+    try {
+      const res = await axios.get("http://localhost:5009/api/flag/all", { headers: { authorization: `Bearer ${token}` } });
+      setFlaggedProducts(res.data);
+    } catch (error) {
+      console.error("Error fetching flags data:", error)
+    }
+  };
+
+  const GetListings = async () => {
+    try {
+      const res = await axios.get("http://localhost:5009/api/listing/awaitingApproval",{ headers: { authorization: `Bearer ${token}` } });
+      setListings(res.data);
+    } catch (error) {
+      console.error("Error fetching listings awaiting approval:", error)
+    }
+  }
+
   // Initial Data Fetching for Flags and Awaiting Approval Listings
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -55,20 +80,21 @@ function AdminPage() {
     };
 
     // SECURE FLAGS API CALL 1: Fetch all flags via router.get('/all', ...)
-    axios
-      .get("http://localhost:5000/api/flags/all", config)
-      .then((response) => {
-        setFlaggedProducts(response.data);
-      })
-      .catch((error) => console.error("Error fetching flags data:", error));
-
+    // axios
+    //   .get("http://localhost:5009/api/flag/all")
+    //   .then((response) => {
+    //     setFlaggedProducts(response.data);
+    //   })
+    //   .catch((error) => console.error("Error fetching flags data:", error));
+    GetFlags();
+    GetListings()
     // LISTINGS API CALL 1: Fetch listings awaiting approval
-    axios
-      .get("http://localhost:5000/api/listings/awaitingApproval")
-      .then((response) => {
-        setListings(response.data);
-      })
-      .catch((error) => console.error("Error fetching listings awaiting approval:", error));
+    // axios
+    //   .get("http://localhost:5009/api/listing/awaitingApproval")
+    //   .then((response) => {
+    //     setListings(response.data);
+    //   })
+    //   .catch((error) => console.error("Error fetching listings awaiting approval:", error));
   }, []);
 
   function handleInputChange(e) {
@@ -104,12 +130,12 @@ function AdminPage() {
 
       if (actionType === "dismiss") {
         // Matches your: router.patch('/:id', verifyToken, requireAdmin, EditFlag);
-        await axios.patch(`http://localhost:5000/api/flags/${productId}`, {
+        await axios.patch(`http://localhost:5009/api/flag/${productId}`, {
           status: "dismissed",
         }, config);
       } else if (actionType === "delete") {
         // Matches your: router.delete('/:id', verifyToken, requireAdmin, DeleteFlag);
-        await axios.delete(`http://localhost:5000/api/flags/${productId}`, config);
+        await axios.delete(`http://localhost:5009/api/flag/${productId}`, config);
       }
 
       setFlaggedProducts((prev) =>
@@ -128,8 +154,8 @@ function AdminPage() {
       const config = {
         headers: { Authorization: `Bearer ${token}` }
       };
-      
-      await axios.patch(`http://localhost:5000/api/listings/${listingId}`, {}, config);
+
+      await axios.patch(`http://localhost:5009/api/listing/${listingId}`, {}, config);
       setListings((prev) => prev.filter((item) => (item._id || item.id) !== listingId));
     } catch (error) {
       console.error("Error approving listing:", error);
@@ -144,7 +170,7 @@ function AdminPage() {
         headers: { Authorization: `Bearer ${token}` }
       };
 
-      await axios.delete(`http://localhost:5000/api/listings/${listingId}`, config);
+      await axios.delete(`http://localhost:5009/api/listing/${listingId}`, config);
       setListings((prev) => prev.filter((item) => (item._id || item.id) !== listingId));
     } catch (error) {
       console.error("Error deleting listing:", error);
@@ -217,7 +243,7 @@ function AdminPage() {
           </div>
 
         </div>
-        
+
 
         {/* Right Content Panel */}
         <div id="right-panel">
@@ -283,7 +309,7 @@ function AdminPage() {
           {activeTab === "approveListings" && (
             <div className="admin-page">
               <div className="header-title listings-header-align">Approve Listings</div>
-              
+
               <div className="listings-approval-container">
                 {listings.length === 0 ? (
                   <p className="switch-profile-notice">No listings awaiting approval.</p>
@@ -294,15 +320,34 @@ function AdminPage() {
                         <h3 className="flag-product-name">{item.name || item.title}</h3>
                         <p className="flag-reporter-comment">{item.description}</p>
                       </div>
-                      
+
                       <div className="action-buttons-group">
-                        <button
+                        <div className="customBtn compact-action-btn">
+                        {['Actions'].map(
+                          (variant) => (
+                            <DropdownButton
+                              as={ButtonGroup}
+                              key={variant}
+                              id={`dropdown-variants-${variant}`}
+                              variant={variant.toLowerCase()}
+                              title={variant}
+                            >
+                              <Dropdown.Item eventKey="1">Reject</Dropdown.Item>
+                              <Dropdown.Item eventKey="2">Edit</Dropdown.Item>
+                              <Dropdown.Item eventKey="3">View Listing</Dropdown.Item>
+                              <Dropdown.Divider />
+                              <Dropdown.Item eventKey="4" onClick={() => handleApproveListing(item._id || item.id)}>Approve</Dropdown.Item>
+                            </DropdownButton>
+                          ),
+                        )}
+                        </div>
+                        {/* <button
                           type="button"
                           className="customBtn saveProfileBtn compact-action-btn"
                           onClick={() => handleApproveListing(item._id || item.id)}
                         >
                           Approve
-                        </button>
+                        </button> */}
                         <button
                           type="button"
                           className="cancelBtn reset-margin compact-action-btn"

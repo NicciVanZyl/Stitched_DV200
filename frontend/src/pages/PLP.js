@@ -23,11 +23,11 @@ function valueLabelFormat(value1, value2) {
 function ProductListing() {
   const [value, setValue] = React.useState([0, 10000]);
   const [selectedItemCategory, setSelectedItemCategory] = React.useState('');
-  const [categoryList, setCategoryList] = React.useState([{ label: 'shirt', id: 0 }, { label: 'pants', id: 1 }, { label: 'Dresses', id: 2 }]);
+  const [categoryList, setCategoryList] = React.useState([{ label: 'shirts', id: 0 }, { label: 'pants', id: 1 }, { label: 'dresses', id: 2 }, { label: 'skirts', id: 3 }, { label: 'sandals', id: 4 }, { label: 'shoes', id: 5 }, { label: 'boots', id: 6 },, { label: 'womans', id: 7 }, { label: 'mens', id: 8 }, { label: 'kids', id: 9 }, { label: 'accessories', id: 10 }]);
   const [selectedItemRating, setSelectedItemRating] = React.useState('');
   const [ratingList, setRatingList] = React.useState([{ label: '0-1', id: 0 }, { label: '1.1-2', id: 1 }, { label: '2.1-3', id: 2 }, { label: '3.1-4', id: 3 }, { label: '4.1-5', id: 4 }]);
   const [selectedItemSize, setSelectedItemSize] = React.useState('');
-  const [sizeList, setSizeList] = React.useState([{ label: '> XS', id: 0 }, { label: 'XS', id: 1 }, { label: 'S', id: 2 }, { label: 'M', id: 3 }, { label: 'L', id: 4 }, { label: 'XL', id: 5 }, { label: '< XL', id: 6 }]);
+  const [sizeList, setSizeList] = React.useState([{ label: 'XXXS', id: 0 },{ label: 'XXS', id: 1 }, { label: 'XS', id: 2 }, { label: 'S', id: 3 }, { label: 'M', id: 4 }, { label: 'L', id: 5 }, { label: 'XL', id: 6 }, { label: '2XL', id: 7 },{ label: '3XL', id: 8 }]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

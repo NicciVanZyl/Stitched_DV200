@@ -34,7 +34,10 @@ const RegisterUser = async (req, res) => {
 
     return res.status(201).json({ message: "User registered successfully", data: saved, token });
   } catch (error) {
+    console.log(error.message, "You're a weiner!!" );
+    
     return res.status(400).json({ message: error.message });
+
   }
 };
 
@@ -63,7 +66,7 @@ const LoginUser = async (req, res) => {
     );
 
     return res.status(200).json({ message: "Login successful", token,
-      user: { id: loggedInUser._id, name: loggedInUser.name, email: loggedInUser.email }
+      user: { id: loggedInUser._id, name: loggedInUser.name, email: loggedInUser.email, role: loggedInUser.role}
  });
   } catch (error) {
     return res.status(400).json({ message: error.message });

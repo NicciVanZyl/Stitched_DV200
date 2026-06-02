@@ -362,9 +362,9 @@
 }
 
 .cancelBtn {
-  width: 220px;
-  height: 66px;
-  border-radius: 1.4rem;
+  width: 9rem;
+  height: 3rem;
+  border-radius: 0.5rem;
   border: 3px solid #421918;
   background: transparent;
   color: #421918;

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import "./Profile.css";
+import { useAuth } from '../context/authContext';
 
 export default function Profile() {
+  const { user } = useAuth();
   const [activePage, setActivePage] = useState(1);
   const [activeTab, setActiveTab] = useState("addListing");
   const [hoverTab, setHoverTab] = useState(null);
@@ -69,13 +71,14 @@ export default function Profile() {
           // Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         body: JSON.stringify({
-          name,
-          price,
-          description,
-          size,
-          category,
-          subCategory,
-          imageUrl: data.imageUrl,
+          name:name,
+          price:price,
+          description:description,
+          size:size,
+          category: category,
+          subCategory: subCategory,
+          ImgUrl: data.imageUrl,
+          userId: user.id,
         }),
       });
 
@@ -298,11 +301,15 @@ export default function Profile() {
                           errors.size ? { border: "0.09rem solid #b73e3a" } : {}
                         }
                       >
+                        <option>XXXS</option>
+                        <option>XXS</option>
                         <option>XS</option>
                         <option>S</option>
                         <option>M</option>
                         <option>L</option>
                         <option>XL</option>
+                        <option>2XL</option>
+                        <option>3XL</option>
                       </select>
                       {errors.size && (
                         <span className="field-error">{errors.size}</span>
@@ -322,9 +329,9 @@ export default function Profile() {
                             : {}
                         }
                       >
-                        <option>Women...</option>
-                        <option>Men...</option>
-                        <option>Kids...</option>
+                        <option>womans</option>
+                        <option>mens</option>
+                        <option>kids</option>
                       </select>
                       {errors.category && (
                         <span className="field-error">{errors.category}</span>
@@ -341,9 +348,14 @@ export default function Profile() {
                             : {}
                         }
                       >
-                        <option>Sneakers...</option>
-                        <option>Boots...</option>
-                        <option>Sandals...</option>
+                        <option>shoes</option>
+                        <option>boots</option>
+                        <option>sandals</option>
+                        <option>shirts</option>
+                        <option>pants</option>
+                        <option>dresses</option>
+                        <option>skirts</option>
+                        <option>accessories</option>
                       </select>
                       {errors.subCategory && (
                         <span className="field-error">

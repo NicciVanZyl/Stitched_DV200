@@ -29,11 +29,11 @@ router.post("/add", AddListing);
 //get all listings
 router.get("/all", GetAllListing);
 
+//get listings awaiting approval - Admin Display
+router.get("/awaitingApproval",verifyToken,requireAdmin, GetAwaitingApproval);
+
 //get a specific listing
 router.get("/:id", GetListing);
-
-//get listings awaiting approval - Admin Display
-router.get("/awaitingApproval", GetAwaitingApproval);
 
 //get user's liked listings
 router.get("/:id", verifyToken, GetLikedListings);
