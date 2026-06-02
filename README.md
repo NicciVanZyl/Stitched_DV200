@@ -143,31 +143,31 @@ To construct an intuitive, visually appealing e-commerce application that resolv
 
 ---
 
-### Future Implementation:
+## Future Implementation:
 
-## Community Features & Social Styling:
+### Community Features & Social Styling:
 Expanding the platform to integrate localized social interactions would greatly amplify sustainable engagement. Users could build personalized digital lookbooks, follow alternative thrifters whose style alignment matches their own, and comment directly on product racks to negotiate bundles. Integrating community hubs or message groups focused on sub-fashion trends (such as streetwear or vintage tailoring) would allow enthusiasts to share sustainable styling tips, increasing daily application interaction loop metrics.
 
-## Advanced Predictive Curation:
+### Advanced Predictive Curation:
 Incorporating advanced predictive metadata algorithms will enable Stitched to offer personalized shopping recommendations derived entirely from individual user activity. By analyzing structural metrics such as category searches, saved wishlist tracking data, and historical cart conversions, the application could provide tailored outfit inspirations on the home menu interface. Future iterations could predict a user's size and aesthetic preference parameters to automatically structure custom-curated digital shopping corridors.
 
-## Integration with Secure Shipping APIs:
+### Integration with Secure Shipping APIs:
 Connecting the system with external webhooks and smart multi-carrier shipping provider portals represents a major progression toward structural transaction processing. Integrating live fulfillment updates directly into the application framework would establish immediate shipping calculations, printable waybill barcodes for sellers, and end-to-end delivery map updates for consumers. This removes third-party payment anxiety, seamlessly turning Stitched from a school prototype into a highly competitive marketplace.
 
 ---
 
-### Final Outcome:
+## Final Outcome:
 
-## Mockups
+### Mockups
 To be add soon...
 
-## Presentation:
+### Presentation:
 [Google Slides]([https://drive.google.com/file/d/136giKXQF_lpRwwaefeg5wgBg3Ob_i5Sv/view?usp=sharing](https://docs.google.com/presentation/d/e/2PACX-1vQ-M0Th6eNv9HQ59XZeFUv6ZDA3GsxP2Gl17jnraLrNO8AuHeBSyPbq_Bamb718k1sw3L9_sGlT9vQu/pub?start=true&loop=true&delayms=10000))
 
 ---
 
-## Authors
+### Authors
 Eunice van Zyl 251023, Kiera Poley 251197, Leandre Nel 251139 & Danika Rood 251165
 
-## Acknowledgements
+### Acknowledgements
 MongoDB, Cloudinary and our lecturer, Tsungai Katsuro
