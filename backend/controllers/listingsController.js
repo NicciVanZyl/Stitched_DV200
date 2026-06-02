@@ -88,6 +88,21 @@ const GetAwaitingApproval = async (req, res) => {
   }
 };
 
+// Get all Listings that have been approved
+const GetApproved = async (req, res) => {
+  try {
+    const listings = await Listing.find({ isActive: true });
+    console.log(listings);
+    
+    if (!listings) {
+      return res.status(404).json({ message: 'Listing not found' });
+    }
+    res.status(200).json(listings);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 //Update Listing
 const UpdateListing = async (req, res) => {
   try {
@@ -198,6 +213,7 @@ module.exports = {
   GetLikedListings,
   DeleteListing,
   UploadImage,
-  GetAwaitingApproval
+  GetAwaitingApproval,
+  GetApproved
 };
 

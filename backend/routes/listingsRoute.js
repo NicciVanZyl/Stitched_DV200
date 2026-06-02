@@ -13,6 +13,7 @@ const {
   DeleteListing,
   UploadImage,
    GetAwaitingApproval,
+   GetApproved
 } = require("../controllers/listingsController");
 const verifyToken = require("../middleware/verifyToken");
 const requireAdmin = require("../middleware/requireAdmin");
@@ -24,10 +25,13 @@ const upload = multer({ storage: multer.memoryStorage() });
 router.post("/image", upload.single("image"), UploadImage);
 
 //add new listing
-router.post("/add", AddListing);
+router.post("/add",verifyToken, AddListing);
 
 //get all listings
 router.get("/all", GetAllListing);
+
+//get all listings
+router.get("/approved", GetApproved);
 
 //get listings awaiting approval - Admin Display
 router.get("/awaitingApproval",verifyToken,requireAdmin, GetAwaitingApproval);

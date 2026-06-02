@@ -29,6 +29,31 @@ function ProductListing() {
   const [selectedItemSize, setSelectedItemSize] = React.useState('');
   const [sizeList, setSizeList] = React.useState([{ label: 'XXXS', id: 0 },{ label: 'XXS', id: 1 }, { label: 'XS', id: 2 }, { label: 'S', id: 3 }, { label: 'M', id: 4 }, { label: 'L', id: 5 }, { label: 'XL', id: 6 }, { label: '2XL', id: 7 },{ label: '3XL', id: 8 }]);
 
+ const GetListings = async () => {
+    try {
+      const res = await axios.post("http://localhost:5009/api/user/register", {
+        name,
+        email,
+        password,
+        creativePassword: selectedColours.join(""),
+      });
+
+      SetLoginData(res.data.user, res.data.token);
+
+      setUserName(name);
+      setMessage("You're all set! Your account has been created.");
+      setShowModal(true);
+    } catch (error) {
+      setMessage(
+        error.response?.data?.message ||
+        "Registration failed. Please try again.",
+        
+      );
+      setShowModal(true);
+    }
+  };
+
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
