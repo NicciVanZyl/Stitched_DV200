@@ -1,56 +1,339 @@
-import React from "react";
-import Navbar from "../components/navbar";
-import { Trash } from "react-bootstrap-icons";
-import './CartAndAndmin.css';
-
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import "./CartAndAndmin.css";
 
 function AdminPage() {
-  return (
-    <div className="admin-page">
+  const [activeTab, setActiveTab] = useState("viewFlags");
+  const [openDropdownId, setOpenDropdownId] = useState(null);
+
+  // Profile Form State
+  const [profile, setProfile] = useState({
+    address: "",
+    firstName: "",
+    surname: "",
+    birthDate: "",
+    email: "",
+    mobile: "",
+    password: "",
+  });
+
+  const tabs = [
+    "viewFlags",
+    "approveListings",
+    "editProfile",
+    "addListing",
+    "switchProfile",
+  ];
+
+  const tabLabels = {
+    viewFlags: "View Flags",
+    approveListings: "Approve Listings",
+    editProfile: "Edit Profile Details",
+    addListing: "Add Listing",
+    switchProfile: "Switch Profile",
+  };
+
+  const [flaggedProducts, setFlaggedProducts] = useState([]);
+  const [listings, setListings] = useState([]);
+
+  // Handles the profile switching delay and auto-redirect logic
+  useEffect(() => {
+    if (activeTab === "switchProfile") {
+      const timer = setTimeout(() => {
+        setActiveTab("viewFlags");
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [activeTab]);
+
+  // Initial Data Fetching for Flags and Awaiting Approval Listings
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: { Authorization: `Bearer ${token}` }
+    };
+
+    // SECURE FLAGS API CALL 1: Fetch all flags via router.get('/all', ...)
+    axios
+      .get("http://localhost:5000/api/flags/all", config)
+      .then((response) => {
+        setFlaggedProducts(response.data);
+      })
+      .catch((error) => console.error("Error fetching flags data:", error));
+
+    // LISTINGS API CALL 1: Fetch listings awaiting approval
+    axios
+      .get("http://localhost:5000/api/listings/awaitingApproval")
+      .then((response) => {
+        setListings(response.data);
+      })
+      .catch((error) => console.error("Error fetching listings awaiting approval:", error));
+  }, []);
+
+  function handleInputChange(e) {
+    const { name, value } = e.target;
+    setProfile((prev) => ({ ...prev, [name]: value }));
+  }
+
+  const handleCancel = () => {
+    setProfile({
+      address: "",
+      firstName: "",
+      surname: "",
+      birthDate: "",
+      email: "",
+      mobile: "",
+      password: "",
+    });
+    setActiveTab("viewFlags");
+  };
+
+  function handleProfileSubmit(e) {
+    e.preventDefault();
+    console.log("Updated Profile Data: ", profile);
+  }
+
+  // SECURE FLAGS API CALL 2 & 3: Handle individual flag actions (Edit/Patch or Delete)
+  const handleDropdownAction = async (actionType, productId) => {
+    try {
+      const token = localStorage.getItem("token");
+      const config = {
+        headers: { Authorization: `Bearer ${token}` }
+      };
+
+      if (actionType === "dismiss") {
+        // Matches your: router.patch('/:id', verifyToken, requireAdmin, EditFlag);
+        await axios.patch(`http://localhost:5000/api/flags/${productId}`, {
+          status: "dismissed",
+        }, config);
+      } else if (actionType === "delete") {
+        // Matches your: router.delete('/:id', verifyToken, requireAdmin, DeleteFlag);
+        await axios.delete(`http://localhost:5000/api/flags/${productId}`, config);
+      }
+
+      setFlaggedProducts((prev) =>
+        prev.filter((product) => (product._id || product.id) !== productId),
+      );
+      setOpenDropdownId(null);
+    } catch (error) {
+      console.error(`Error performing ${actionType} on flag:`, error);
+    }
+  };
+
+  // LISTINGS API CALL 2: Approve Listing Handler
+  const handleApproveListing = async (listingId) => {
+    try {
+      const token = localStorage.getItem("token");
+      const config = {
+        headers: { Authorization: `Bearer ${token}` }
+      };
       
-      <Navbar />
+      await axios.patch(`http://localhost:5000/api/listings/${listingId}`, {}, config);
+      setListings((prev) => prev.filter((item) => (item._id || item.id) !== listingId));
+    } catch (error) {
+      console.error("Error approving listing:", error);
+    }
+  };
 
-      <div className="admin-wrapper">
+  // LISTINGS API CALL 3: Delete / Reject Listing Handler
+  const handleDeleteListing = async (listingId) => {
+    try {
+      const token = localStorage.getItem("token");
+      const config = {
+        headers: { Authorization: `Bearer ${token}` }
+      };
 
-        {/* SIDEBAR */}
-        <div className="admin-sidebar">
+      await axios.delete(`http://localhost:5000/api/listings/${listingId}`, config);
+      setListings((prev) => prev.filter((item) => (item._id || item.id) !== listingId));
+    } catch (error) {
+      console.error("Error deleting listing:", error);
+    }
+  };
 
-          <div className="admin-profile-img"></div>
+  const toggleDropdown = (productId) => {
+    setOpenDropdownId((prevId) => (prevId === productId ? null : productId));
+  };
 
-          <h2 className="admin-name">Jane Doe</h2>
+  return (
+    <div id="main-wrapper">
+      <div id="content-container">
+        {/* Left Sidebar */}
+        <div id="yellow-section">
+          <div id="profile-circle"></div>
+          <div id="name-container">
+            <p className="first-name">Jane</p>
+            <p className="last-name">Doe</p>
+          </div>
+          <div id="profile-button">
+            {tabs.map((tab) => {
+              const isActive = activeTab === tab;
 
-          <div className="admin-nav">
-            <button>View Flags</button>
+              if (tab === "switchProfile") {
+                return (
+                  <Link to="/personalProfile" className="tab-routing-link" key={tab}>
+                    <button
+                      className={`tab-button ${isActive ? "active" : ""}`}
+                      onClick={() => {
+                        setActiveTab(tab);
+                        setOpenDropdownId(null);
+                      }}
+                    >
+                      <div className="tab-label">{tabLabels[tab]}</div>
+                    </button>
+                  </Link>
+                );
+              }
 
-            <button className="active-admin-btn">
-              Approve Listings
-            </button>
+              if (tab === "addListing") {
+                return (
+                  <Link to="/addListing" className="tab-routing-link" key={tab}>
+                    <button
+                      className={`tab-button ${isActive ? "active" : ""}`}
+                      onClick={() => {
+                        setActiveTab(tab);
+                        setOpenDropdownId(null);
+                      }}
+                    >
+                      <div className="tab-label">{tabLabels[tab]}</div>
+                    </button>
+                  </Link>
+                );
+              }
 
-            <button>Edit Profile</button>
-
-            <button>Sign Out</button>
+              return (
+                <button
+                  className={`tab-button ${isActive ? "active" : ""}`}
+                  key={tab}
+                  onClick={() => {
+                    setActiveTab(tab);
+                    setOpenDropdownId(null);
+                  }}
+                >
+                  <div className="tab-label">{tabLabels[tab]}</div>
+                </button>
+              );
+            })}
           </div>
 
         </div>
+        
 
-        {/* MAIN CONTENT */}
-        <div className="admin-content">
-          <h1 className="admin-title">
-            Approve Listings
-          </h1>
+        {/* Right Content Panel */}
+        <div id="right-panel">
+          {/* View Flags Tab */}
+          {activeTab === "viewFlags" && (
+            <div className="flags-container">
+              <div className="header-title flags-header-align">Admin Dashboard</div>
 
-          <div className="listings-container">
+              {flaggedProducts.length === 0 ? (
+                <p className="switch-profile-notice">No system flags reported.</p>
+              ) : (
+                flaggedProducts.map((product) => {
+                  const isDropdownOpen = openDropdownId === (product._id || product.id);
+                  return (
+                    <div key={product._id || product.id} className="flag-row-item">
+                      <div className="flag-info-side">
+                        <h3 className="flag-product-name">{product.name}</h3>
+                        <p className="flag-reporter-comment">{product.comment}</p>
+                        <div className="flag-badges-row">
+                          {product.badges && product.badges.map((badge, index) => (
+                            <span key={index} className="flag-pill-badge">
+                              {badge}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
 
-            {[1, 2, 3, 4].map((item) => (
-              <div className="listing-card" key={item}>
+                      <div className="dropdown-action-container">
+                        <button
+                          type="button"
+                          className="dropdown-trigger-btn"
+                          onClick={() => toggleDropdown(product._id || product.id)}
+                        >
+                          Actions
+                        </button>
+                        <div className={`dropdown-wrapper ${isDropdownOpen ? "open" : ""}`}>
+                          <button
+                            type="button"
+                            className="dropdown-action-item"
+                            onClick={() => handleDropdownAction("dismiss", product._id || product.id)}
+                          >
+                            Dismiss
+                          </button>
+                          <button type="button" className="dropdown-action-item">Ban User</button>
+                          <button type="button" className="dropdown-action-item">View Full</button>
+                          <button
+                            type="button"
+                            className="dropdown-action-item delete-action"
+                            onClick={() => handleDropdownAction("delete", product._id || product.id)}
+                          >
+                            Delete Flag
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })
+              )}
+            </div>
+          )}
 
-                {/* PRODUCT IMAGE */}
-                <div className="listing-image"></div>
+          {/* Approve Listings Tab */}
+          {activeTab === "approveListings" && (
+            <div className="admin-page">
+              <div className="header-title listings-header-align">Approve Listings</div>
+              
+              <div className="listings-approval-container">
+                {listings.length === 0 ? (
+                  <p className="switch-profile-notice">No listings awaiting approval.</p>
+                ) : (
+                  listings.map((item) => (
+                    <div key={item._id || item.id} className="flag-row-item">
+                      <div className="flag-info-side">
+                        <h3 className="flag-product-name">{item.name || item.title}</h3>
+                        <p className="flag-reporter-comment">{item.description}</p>
+                      </div>
+                      
+                      <div className="action-buttons-group">
+                        <button
+                          type="button"
+                          className="customBtn saveProfileBtn compact-action-btn"
+                          onClick={() => handleApproveListing(item._id || item.id)}
+                        >
+                          Approve
+                        </button>
+                        <button
+                          type="button"
+                          className="cancelBtn reset-margin compact-action-btn"
+                          onClick={() => handleDeleteListing(item._id || item.id)}
+                        >
+                          Reject
+                        </button>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
+          )}
 
-                {/* INFO */}
-                <div className="listing-info">
-                  <h3>Product Listing Name</h3>
-                  <p>R000.00</p>
+          {/* Edit Profile Tab */}
+          {activeTab === "editProfile" && (
+            <div className="admin-page">
+              <div className="header-title profile-header-align">Edit Profile Details</div>
+
+              <form onSubmit={handleProfileSubmit} className="profile-fields-grid">
+                <div className="profile-field-row">
+                  <div className="field-label-pill">First Name</div>
+                  <input
+                    type="text"
+                    name="firstName"
+                    className="field-value-pill"
+                    value={profile.firstName}
+                    onChange={handleInputChange}
+                    placeholder="Enter first name"
+                  />
                 </div>
 
                 {/* ACTIONS */}
@@ -63,12 +346,34 @@ function AdminPage() {
                     Delete
                   </button>
                 </div>
+              </form>
+            </div>
+          )}
 
+          {/* Add Listing Tab */}
+          {activeTab === "addListing" && (
+            <div className="admin-page">
+              <div className="header-title listings-header-align">Add Listing</div>
+            </div>
+          )}
+
+          {/* Switch Profile Tab */}
+          {activeTab === "switchProfile" && (
+            <div className="admin-page">
+              <div className="header-title profileswitch-header-align">Switch Profile</div>
+              <div className="switch-profile-notice">
+                Please wait a moment while we switch back to the profile page...
               </div>
-            ))}
+            </div>
+          )}
 
-          </div>
-
+          {![
+            "viewFlags",
+            "approveListings",
+            "editProfile",
+            "addListing",
+            "switchProfile",
+          ].includes(activeTab) && <div className="empty-spacer"></div>}
         </div>
 
       </div>

@@ -62,6 +62,19 @@ const GetListing = async (req, res) => {
   }
 };
 
+// Get all Listings that have to be approved
+const GetAwaitingApproval = async (req, res) => {
+    try {
+        const listings = await Listing.find({isActive:false});
+        if (!listing) {
+            return res.status(404).json({ message: 'Listing not found' });
+        }
+        res.status(200).json(listing);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 //Update Listing
 const UpdateListing = async (req, res) => {
   try {
@@ -162,14 +175,16 @@ const DeleteListing = async (req, res) => {
 };
 
 module.exports = {
-  AddListing,
-  GetAllListing,
-  GetListing,
-  UpdateListing,
-  ListingSold,
-  ApproveListing,
-  ToggleLike,
-  GetLikedListings,
-  DeleteListing,
-  UploadImage,
+    AddListing,
+    GetAllListing,
+    GetListing,
+    UpdateListing,
+    ListingSold,
+    ApproveListing,
+    ToggleLike,
+    GetLikedListings,
+    DeleteListing,
+    UploadImage,
+    GetAwaitingApproval
 };
+

@@ -12,6 +12,7 @@ const {
   GetLikedListings,
   DeleteListing,
   UploadImage,
+   GetAwaitingApproval,
 } = require("../controllers/listingsController");
 const verifyToken = require("../middleware/verifyToken");
 const requireAdmin = require("../middleware/requireAdmin");
@@ -30,6 +31,9 @@ router.get("/all", GetAllListing);
 
 //get a specific listing
 router.get("/:id", GetListing);
+
+//get listings awaiting approval - Admin Display
+router.get("/awaitingApproval", GetAwaitingApproval);
 
 //get user's liked listings
 router.get("/:id", verifyToken, GetLikedListings);
