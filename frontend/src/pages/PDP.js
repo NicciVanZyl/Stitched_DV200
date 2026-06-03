@@ -19,6 +19,7 @@ import axios from "axios";
 import { useAuth } from '../context/authContext';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { useCart } from "../context/cartContext";
 
 //Custom styling for Icon Buttons
 const theme = createTheme({
@@ -55,6 +56,7 @@ const theme = createTheme({
 
 
 function ProductDetails() {
+  const { addToCart } = useCart();
   const { state } = useLocation();
   const { listing } = state;
   const navigate = useNavigate();
@@ -156,7 +158,9 @@ function ProductDetails() {
                     <p>Description: {listing.description}</p>
                   </Stack>
                   <Stack direction='horizontal' gap={4}>
-                    <button className="customBtn pdButton">Add to Cart</button>
+                    <button className="customBtn pdButton" onClick={() => {
+                      addToCart(listing._id, sellerName, listing.postedBy);
+                    }}>Add to Cart</button>
                     <ThemeProvider theme={theme}>
                       <IconButton
                         onClick={() => setLiked()}

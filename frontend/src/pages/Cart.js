@@ -2,60 +2,74 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../components/navbar";
 import './CartAndAndmin.css';
 import RedFooter from "../components/RedFooter";
-import CartCard from "../components/cartCard"; 
-import RatingSellerCard from "../components/RatingSellerCard"; 
-import {TrashIcon} from "react-bootstrap-icons";
+import CartCard from "../components/cartCard";
+import RatingSellerCard from "../components/RatingSellerCard";
+import { TrashIcon } from "react-bootstrap-icons";
+import { useCart } from "../context/cartContext";
+import { useAuth } from '../context/authContext';
+import axios from "axios";
 
 function Cart() {
+  const { cartData, removeFromCart } = useCart();
+  const { user, token } = useAuth();
+
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  
+
   // Modal toggle and data tracking states
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [uniqueSellers, setUniqueSellers] = useState([]);
 
-  const token = localStorage.getItem("token"); 
+  const GetItemData = async () => {
+    try {
+      const res = await Promise.all(
+        cartData.map((data) => {
+          return axios.get(`http://localhost:5009/api/listing/${data.id}`)
+        })
+      )
+      setCartItems(res.map((result) => result.data));
+    } catch (error) {
+      console.log(error.response?.data?.message);
+    }
+  }
 
   useEffect(() => {
-    const localCart = localStorage.getItem("cart");
-    if (localCart) {
-      setCartItems(JSON.parse(localCart));
-    } else {
-      // Fallback Visual Mock Data (Includes Seller ID structures for dynamic loops)
-      setCartItems([
-        { _id: "1", name: "Sample Item 1", price: 150, sellerId: "s1", sellerName: "Alpha Trader" },
-        { _id: "2", name: "Sample Item 2", price: 250, sellerId: "s2", sellerName: "Beta Goods" }
-      ]);
-    }
+    GetItemData();
     setLoading(false);
   }, []);
 
   const handleDeleteCartItem = (id) => {
     const updatedCart = cartItems.filter((item) => (item._id || item.id) !== id);
     setCartItems(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    removeFromCart(id);
   };
 
-  // Intercept the traditional checkout button path
   const handleCheckoutClick = () => {
     const sellersMap = {};
+
     cartItems.forEach(item => {
-      const sId = item.sellerId || item.seller?._id || "unknown_seller";
-      const sName = item.sellerName || item.seller?.name || "Independent Seller";
-      
+      const sId = item.postedBy;
+      let sName;
+      cartData.forEach(data => {
+        if (data.sellerId == item.postedBy) {
+          sName = data.sellerName;
+          
+          return;
+        }
+      })
       if (!sellersMap[sId]) {
         sellersMap[sId] = { id: sId, name: sName };
       }
     });
 
     setUniqueSellers(Object.values(sellersMap));
-    setIsModalOpen(true); 
+    setIsModalOpen(true);
   };
 
   // Triggers when user hits submit inside the pop-up panel
   const handleFinalCheckout = async (ratingsReceived) => {
     setIsModalOpen(false);
-    
+
     // Optional destination: Put a fetch call here if you want to POST ratings to backend
     console.log("Captured Feedback State:", ratingsReceived);
 
@@ -94,8 +108,8 @@ function Cart() {
   };
 
   const subTotal = calculateSubtotal();
-  const discount = 0.00; 
-  const deliveryFee = subTotal > 0 ? 50.00 : 0.00; 
+  const discount = 0.00;
+  const deliveryFee = subTotal > 0 ? 50.00 : 0.00;
   const total = subTotal - discount + deliveryFee;
 
   if (loading) return <div className="cart-page"><p>Loading your cart...</p></div>;
@@ -105,7 +119,7 @@ function Cart() {
       <div className="cart-wrapper">
         <h1 className="cart-title">Your Cart</h1>
         <div className="cart-content">
-          
+
           {/* LEFT SIDE: ITEMS */}
           <div className="cart-items">
             <div className="cart-header">
@@ -123,7 +137,7 @@ function Cart() {
                   key={item._id || item.id}
                   id={item._id || item.id}
                   name={item.name}
-                  price={`R${Number(item.price).toFixed(2)}`} 
+                  price={`R${Number(item.price).toFixed(2)}`}
                   onDelete={handleDeleteCartItem}
                 />
               ))
@@ -160,9 +174,9 @@ function Cart() {
 
         </div>
       </div>
-      
+
       {/* Structural placement of the Rating overlay overlay card */}
-      <RatingSellerCard 
+      <RatingSellerCard
         isOpen={isModalOpen}
         sellers={uniqueSellers}
         onSubmit={handleFinalCheckout}

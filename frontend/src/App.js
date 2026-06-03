@@ -13,10 +13,12 @@ import AddListing from "./pages/addListing";
 import Admin from "./pages/Admin";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { AuthProvider } from "./context/authContext";
+import { CartProvider } from "./context/cartContext";
 
 function App() {
-    return (
-      <AuthProvider>
+  return (
+    <AuthProvider>
+      <CartProvider>
         <BrowserRouter>
           <Navigation></Navigation>
           <Routes>
@@ -31,8 +33,9 @@ function App() {
             <Route path="/Admin" element={<Admin />}></Route>
           </Routes>
         </BrowserRouter>
-      </AuthProvider>
-    );
-  }
+      </CartProvider>
+    </AuthProvider>
+  );
+}
 
 export default App;
