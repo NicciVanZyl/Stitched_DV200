@@ -170,8 +170,18 @@ Integrating live fulfillment updates directly into the application framework wou
 
 ## Final Outcome:
 
-### Mockups
-To be add soon...
+### Mockups:
+
+## Desktop
+<p align="center"><img src="[https://github.com/NicciVanZyl/Stitched_DV200/blob/e0d20c5885d031bdff478e19d13dd38a1a2cc546/frontend/src/Github_assets/Desktop%20Mockup%20Stitched.png] width="600" /></p>
+
+## Tablet
+<p align="center"><img src="[https://github.com/NicciVanZyl/Stitched_DV200/blob/e0d20c5885d031bdff478e19d13dd38a1a2cc546/frontend/src/Github_assets/Tablet%20Mockup%20Stitched.png] width="600" /></p>
+
+## Mobile
+<p align="center"><img src="[https://github.com/NicciVanZyl/Stitched_DV200/blob/e0d20c5885d031bdff478e19d13dd38a1a2cc546/frontend/src/Github_assets/Mobile%20Mockup%20Stitched.png] width="600" /></p>
+
+---
 
 ### Presentation:
 [Google Slides](https://docs.google.com/presentation/d/e/2PACX-1vQ-M0Th6eNv9HQ59XZeFUv6ZDA3GsxP2Gl17jnraLrNO8AuHeBSyPbq_Bamb718k1sw3L9_sGlT9vQu/pub?start=true&loop=true&delayms=10000)
