@@ -130,7 +130,6 @@ export default function Profile() {
     <div id="main-wrapper">
       <div id="content-container">
         <div id="yellow-section">
-          <div id="profile-circle"></div>
           <div id="name-container">
             <p>{profileData.firstName}</p>
             <p>{profileData.lastName}</p>
