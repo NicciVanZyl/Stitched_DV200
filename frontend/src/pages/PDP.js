@@ -97,7 +97,7 @@ function ProductDetails() {
 
   const SetAsLiked = async () => {
     try {
-      const res = await axios.patch(`http://localhost:5009/api/listing/${listing._id}`, {}, { headers: { authorization: `Bearer ${token}` } });
+      const res = await axios.patch(`http://localhost:5009/api/listing/${listing._id}/like`, {}, { headers: { authorization: `Bearer ${token}` } });
       console.log(res.data);
 
     } catch (error) {

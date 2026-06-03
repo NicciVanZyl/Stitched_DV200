@@ -62,7 +62,7 @@ function Cart() {
     try {
       const promises = cartItems.map(async (item) => {
         const itemId = item._id || item.id;
-        const response = await fetch(`http://localhost:5009/api/listing/${itemId}`, {
+        const response = await fetch(`http://localhost:5009/api/listing/${itemId}/sold`, {
           method: "PATCH",
           headers: {
             "Authorization": `Bearer ${token}`,

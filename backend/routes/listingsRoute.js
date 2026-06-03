@@ -52,13 +52,13 @@ router.get("/getUserLikes", verifyToken, GetLikedListings);
 router.get("/:id", GetListing);
 
 //add/remove likes
-router.patch("/:id", verifyToken, ToggleLike);
+router.patch('/:id/like', verifyToken, ToggleLike);
 
 //Approve listing - Admin
-router.patch("/:id", verifyToken, requireAdmin, ApproveListing);
+router.patch('/:id/approve', verifyToken, requireAdmin, ApproveListing);
 
 //Mark as sold - after cart
-router.patch("/:id", verifyToken, ListingSold);
+router.patch('/:id/sold', verifyToken, ListingSold);
 
 //Update Listing - only if not sold or if admin wants to update it
 router.put("/:id", verifyToken, UpdateListing);

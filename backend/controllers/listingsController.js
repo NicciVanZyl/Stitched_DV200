@@ -123,10 +123,13 @@ const UpdateListing = async (req, res) => {
 
 const ListingSold = async (req, res) => {
   try {
-    const soldListing = await Listing.findById(req.params.id);
+    const soldListing = await Listing.findByIdAndUpdate(
+      req.params.id,
+      { isSold: true, isActive: false },
+      { new: true, runValidators: true },
+    );
     if (!soldListing)
       return res.status(404).json({ message: "Listing not found" });
-    await soldListing.save();
     res.status(200).json(soldListing);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -135,10 +138,13 @@ const ListingSold = async (req, res) => {
 
 const ApproveListing = async (req, res) => {
   try {
-    const approvedListing = await Listing.findById(req.params.id);
+    const approvedListing = await Listing.findByIdAndUpdate(
+      req.params.id,
+      { isActive: true },
+      { new: true, runValidators: true },
+    );
     if (!approvedListing)
       return res.status(404).json({ message: "Listing not found" });
-    await approvedListing.save();
     res.status(200).json(approvedListing);
   } catch (error) {
     res.status(400).json({ message: error.message });

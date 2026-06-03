@@ -15,20 +15,9 @@ function AdminPage() {
   const [openDropdownId, setOpenDropdownId] = useState(null);
 
   // Profile Form State
-  const [profile, setProfile] = useState({
-    address: "",
-    firstName: "",
-    surname: "",
-    birthDate: "",
-    email: "",
-    mobile: "",
-    password: "",
-  });
-
   const tabs = [
     "viewFlags",
     "approveListings",
-    "editProfile",
     "addListing",
     "switchProfile",
   ];
@@ -36,7 +25,6 @@ function AdminPage() {
   const tabLabels = {
     viewFlags: "View Flags",
     approveListings: "Approve Listings",
-    editProfile: "Edit Profile Details",
     addListing: "Add Listing",
     switchProfile: "Switch Profile",
   };
@@ -97,29 +85,6 @@ function AdminPage() {
     //   .catch((error) => console.error("Error fetching listings awaiting approval:", error));
   }, []);
 
-  function handleInputChange(e) {
-    const { name, value } = e.target;
-    setProfile((prev) => ({ ...prev, [name]: value }));
-  }
-
-  const handleCancel = () => {
-    setProfile({
-      address: "",
-      firstName: "",
-      surname: "",
-      birthDate: "",
-      email: "",
-      mobile: "",
-      password: "",
-    });
-    setActiveTab("viewFlags");
-  };
-
-  function handleProfileSubmit(e) {
-    e.preventDefault();
-    console.log("Updated Profile Data: ", profile);
-  }
-
   // SECURE FLAGS API CALL 2 & 3: Handle individual flag actions (Edit/Patch or Delete)
   const handleDropdownAction = async (actionType, productId) => {
     try {
@@ -155,7 +120,7 @@ function AdminPage() {
         headers: { Authorization: `Bearer ${token}` }
       };
 
-      await axios.patch(`http://localhost:5009/api/listing/${listingId}`, {}, config);
+      await axios.patch(`http://localhost:5009/api/listing/${listingId}/approve`, {}, config);
       setListings((prev) => prev.filter((item) => (item._id || item.id) !== listingId));
     } catch (error) {
       console.error("Error approving listing:", error);
@@ -255,52 +220,41 @@ function AdminPage() {
               {flaggedProducts.length === 0 ? (
                 <p className="switch-profile-notice">No system flags reported.</p>
               ) : (
-                flaggedProducts.map((product) => {
-                  const isDropdownOpen = openDropdownId === (product._id || product.id);
-                  return (
-                    <div key={product._id || product.id} className="flag-row-item">
-                      <div className="flag-info-side">
-                        <h3 className="flag-product-name">{product.name}</h3>
-                        <p className="flag-reporter-comment">{product.comment}</p>
-                        <div className="flag-badges-row">
-                          {product.badges && product.badges.map((badge, index) => (
-                            <span key={index} className="flag-pill-badge">
-                              {badge}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="dropdown-action-container">
-                        <button
-                          type="button"
-                          className="dropdown-trigger-btn"
-                          onClick={() => toggleDropdown(product._id || product.id)}
-                        >
-                          Actions
-                        </button>
-                        <div className={`dropdown-wrapper ${isDropdownOpen ? "open" : ""}`}>
-                          <button
-                            type="button"
-                            className="dropdown-action-item"
-                            onClick={() => handleDropdownAction("dismiss", product._id || product.id)}
-                          >
-                            Dismiss
-                          </button>
-                          <button type="button" className="dropdown-action-item">Ban User</button>
-                          <button type="button" className="dropdown-action-item">View Full</button>
-                          <button
-                            type="button"
-                            className="dropdown-action-item delete-action"
-                            onClick={() => handleDropdownAction("delete", product._id || product.id)}
-                          >
-                            Delete Flag
-                          </button>
-                        </div>
+                flaggedProducts.map((product) => (
+                  <div key={product._id || product.id} className="flag-row-item">
+                    <div className="flag-info-side">
+                      <h3 className="flag-product-name">{product.name}</h3>
+                      <p className="flag-reporter-comment">{product.comment}</p>
+                      <div className="flag-badges-row">
+                        {product.badges && product.badges.map((badge, index) => (
+                          <span key={index} className="flag-pill-badge">
+                            {badge}
+                          </span>
+                        ))}
                       </div>
                     </div>
-                  );
-                })
+
+                    <div className="action-buttons-group">
+                      <div className="customBtn compact-action-btn">
+                        {['Actions'].map((variant) => (
+                          <DropdownButton
+                            as={ButtonGroup}
+                            key={variant}
+                            id={`dropdown-variants-${variant}`}
+                            variant={variant.toLowerCase()}
+                            title={variant}
+                          >
+                            <Dropdown.Item eventKey="1" onClick={() => handleDropdownAction('dismiss', product._id || product.id)}>Dismiss</Dropdown.Item>
+                            <Dropdown.Item eventKey="3">Ban User</Dropdown.Item>
+                            <Dropdown.Item eventKey="2">View Full</Dropdown.Item>
+                            <Dropdown.Item eventKey="5" onClick={() => handleDropdownAction('delete', product._id || product.id)}>Delete Flag</Dropdown.Item>
+                            <Dropdown.Divider />
+                          </DropdownButton>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))
               )}
             </div>
           )}
@@ -333,7 +287,6 @@ function AdminPage() {
                               title={variant}
                             >
                               <Dropdown.Item eventKey="1">Reject</Dropdown.Item>
-                              <Dropdown.Item eventKey="2">Edit</Dropdown.Item>
                               <Dropdown.Item eventKey="3">View Listing</Dropdown.Item>
                               <Dropdown.Divider />
                               <Dropdown.Item eventKey="4" onClick={() => handleApproveListing(item._id || item.id)}>Approve</Dropdown.Item>
@@ -341,13 +294,6 @@ function AdminPage() {
                           ),
                         )}
                         </div>
-                        {/* <button
-                          type="button"
-                          className="customBtn saveProfileBtn compact-action-btn"
-                          onClick={() => handleApproveListing(item._id || item.id)}
-                        >
-                          Approve
-                        </button> */}
                         <button
                           type="button"
                           className="cancelBtn reset-margin compact-action-btn"
@@ -360,38 +306,6 @@ function AdminPage() {
                   ))
                 )}
               </div>
-            </div>
-          )}
-
-          {/* Edit Profile Tab */}
-          {activeTab === "editProfile" && (
-            <div className="admin-page">
-              <div className="header-title profile-header-align">Edit Profile Details</div>
-
-              <form onSubmit={handleProfileSubmit} className="profile-fields-grid">
-                <div className="profile-field-row">
-                  <div className="field-label-pill">First Name</div>
-                  <input
-                    type="text"
-                    name="firstName"
-                    className="field-value-pill"
-                    value={profile.firstName}
-                    onChange={handleInputChange}
-                    placeholder="Enter first name"
-                  />
-                </div>
-
-                {/* ACTIONS */}
-                <div className="listing-actions">
-                  <button className="approve-btn">
-                    Approve
-                  </button>
-
-                  <button className="delete-btn">
-                    Delete
-                  </button>
-                </div>
-              </form>
             </div>
           )}
 
@@ -415,7 +329,6 @@ function AdminPage() {
           {![
             "viewFlags",
             "approveListings",
-            "editProfile",
             "addListing",
             "switchProfile",
           ].includes(activeTab) && <div className="empty-spacer"></div>}
