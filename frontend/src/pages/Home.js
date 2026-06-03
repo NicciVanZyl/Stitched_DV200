@@ -24,8 +24,8 @@ import BackToTop from "../components/btt";
 function Home() {
   const navigate = useNavigate();
   const [activeListings, setActiveListings] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
 
+  // Gets approved listings to display on the cards
   const GetApprovedListings = async () => {
     try {
       const res = await axios.get("http://localhost:5009/api/listing/approved");
@@ -46,6 +46,7 @@ function Home() {
         <div className="homeContainer">
           <Container>
             <Row className="justify-content-center">
+
               {/* Hero Card */}
               <Col lg={10} className="homeHeroCard mt-3 ms-mx-5">
                 <Row className="align-items-center align-content-center">

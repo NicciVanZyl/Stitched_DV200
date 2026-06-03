@@ -60,7 +60,7 @@ function Login() {
     return [...allCards].sort(() => Math.random() - 0.5);
   });
 
-  // Validation
+  // Form Validation
   const isEmailInvalid =
     email.length > 0 && !email.includes("@") && !email.includes(".");
   const isPasswordInvalid = password.length > 0 && password.length < 6;
@@ -89,7 +89,6 @@ function Login() {
       setMessage(
         error.response?.data?.message ||
         "Registration failed. Please try again.",
-        
       );
       setShowModal(true);
     }
@@ -104,7 +103,6 @@ function Login() {
       });
 
       SetLoginData(res.data.user, res.data.token);
-
 
       setUserName(res.data.user.name);
       setMessage(`Welcome back, we're happy to see you!`);
