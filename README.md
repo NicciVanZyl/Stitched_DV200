@@ -173,13 +173,13 @@ Integrating live fulfillment updates directly into the application framework wou
 ### Mockups:
 
 ## Desktop
-<p align="center"><img src="[https://github.com/NicciVanZyl/Stitched_DV200/blob/e0d20c5885d031bdff478e19d13dd38a1a2cc546/frontend/src/Github_assets/Desktop%20Mockup%20Stitched.png] width="600" /></p>
+<p align="center"><img src="https://github.com/NicciVanZyl/Stitched_DV200/blob/e0d20c5885d031bdff478e19d13dd38a1a2cc546/frontend/src/Github_assets/Desktop%20Mockup%20Stitched.png" width="600" /></p>
 
 ## Tablet
-<p align="center"><img src="[https://github.com/NicciVanZyl/Stitched_DV200/blob/e0d20c5885d031bdff478e19d13dd38a1a2cc546/frontend/src/Github_assets/Tablet%20Mockup%20Stitched.png] width="600" /></p>
+<p align="center"><img src="https://github.com/NicciVanZyl/Stitched_DV200/blob/e0d20c5885d031bdff478e19d13dd38a1a2cc546/frontend/src/Github_assets/Tablet%20Mockup%20Stitched.png" width="600" /></p>
 
 ## Mobile
-<p align="center"><img src="[https://github.com/NicciVanZyl/Stitched_DV200/blob/e0d20c5885d031bdff478e19d13dd38a1a2cc546/frontend/src/Github_assets/Mobile%20Mockup%20Stitched.png] width="600" /></p>
+<p align="center"><img src="https://github.com/NicciVanZyl/Stitched_DV200/blob/e0d20c5885d031bdff478e19d13dd38a1a2cc546/frontend/src/Github_assets/Mobile%20Mockup%20Stitched.png" width="600" /></p>
 
 ---
 
