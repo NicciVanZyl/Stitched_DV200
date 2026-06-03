@@ -295,6 +295,8 @@
   background: #fff;
   flex-shrink: 0;
   object-fit: cover;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .listing-1-title,
