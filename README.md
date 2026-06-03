@@ -23,6 +23,7 @@
 * [Final Outcome](#final-outcome)
     * [Mockups](#mockups)
     * [Presentation](#presentation)
+    * [Demo Video](#demo-video)
 * [Conclusion](#conclusion)
 * [Acknowledgements](#acknowledgements)
 
@@ -174,6 +175,9 @@ To be add soon...
 
 ### Presentation:
 [Google Slides](https://docs.google.com/presentation/d/e/2PACX-1vQ-M0Th6eNv9HQ59XZeFUv6ZDA3GsxP2Gl17jnraLrNO8AuHeBSyPbq_Bamb718k1sw3L9_sGlT9vQu/pub?start=true&loop=true&delayms=10000)
+
+### Demo Video:
+[Google Drive Link]()
 
 ---
 
