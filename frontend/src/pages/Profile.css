@@ -430,11 +430,17 @@
 
   #profile-button {
     height: auto !important;
-    width: 100% !important;
-    margin: 1rem auto !important;
-    margin-bottom: 0rem !important;
+    width: calc(100% - 2rem) !important;
+    margin: 1rem 1rem !important;
+    margin-bottom: 1rem !important;
     border-radius: 1rem !important;
-    padding: 0 1rem;
+    padding: 0 !important;
+  }
+
+  .tab-button {
+    width: 100% !important;
+    height: 3.5rem !important;
+    font-size: 0.95rem !important;
   }
 
   #right-panel {
@@ -465,11 +471,12 @@
   #listing-row-3,
   #listing-row-4,
   .comment-row {
-    width: 100% !important;
+    width: calc(100% - 2rem) !important;
     height: auto !important;
-    margin-top: 1rem !important;
+    margin: 1rem 1rem !important;
     padding: 1rem !important;
-    flex-wrap: wrap;
+    flex-direction: column !important;
+    align-items: flex-start !important;
   }
 
   #listing-1-image,
@@ -477,9 +484,10 @@
   #listing-3-image,
   #listing-4-image,
   .comment-product-image {
-    width: 40% !important;
-    height: auto !important;
-    aspect-ratio: 1;
+    width: 100% !important;
+    height: 8rem !important;
+    aspect-ratio: 1 !important;
+    margin-bottom: 1rem !important;
   }
 
   #listing-1-title,
@@ -487,30 +495,30 @@
   #listing-3-title,
   #listing-4-title,
   .comment-product-title {
-    width: 50% !important;
-    margin-top: 0rem !important;
-    margin-left: 0 !important;
-    font-size: 1.25rem !important;
+    width: 100% !important;
+    margin: 0 !important;
+    font-size: 1.1rem !important;
     position: static !important;
-    padding: 0.5rem 0 0 1rem;
+    padding: 0 !important;
+    margin-bottom: 0.5rem !important;
   }
 
   #listing-1-price,
   #listing-2-price,
   #listing-3-price,
   #listing-4-price {
-    width: 50% !important;
-    margin-top: 0 !important;
-    margin-left: 0 !important;
-    font-size: 1.25rem !important;
+    width: 100% !important;
+    margin: 0 !important;
+    font-size: 1.1rem !important;
     position: static !important;
-    padding: 0 0 0.5rem 1rem;
+    padding: 0 !important;
   }
 
   .comment-content {
     flex-direction: column;
     width: 100% !important;
-    padding: 0.5rem 0 0 1rem;
+    padding: 0 !important;
+    margin-top: 1rem !important;
   }
 
   .comment-rating,
@@ -603,11 +611,16 @@
   }
 
   #profile-button {
-    width: 100% !important;
-    margin: 1.5rem auto !important;
+    width: calc(100% - 3rem) !important;
+    margin: 2rem 1.5rem !important;
     margin-bottom: 0rem !important;
     border-radius: 2rem !important;
-    padding: 0 1rem;
+    padding: 0 !important;
+  }
+
+  .tab-button {
+    width: 100% !important;
+    height: 3.75rem !important;
   }
 
   #right-panel {
@@ -633,19 +646,21 @@
   #listing-row-2,
   #listing-row-3,
   #listing-row-4 {
-    width: 100% !important;
+    width: calc(100% - 2rem) !important;
     height: auto !important;
-    margin-top: 1.5rem !important;
-    padding: 1rem !important;
-    flex-wrap: wrap;
+    margin: 1.5rem 1rem !important;
+    padding: 1.5rem !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
   }
 
   #listing-1-image,
   #listing-2-image,
   #listing-3-image,
   #listing-4-image {
-    width: 20% !important;
-    height: 8rem !important;
+    width: 100% !important;
+    height: 10rem !important;
+    margin-bottom: 1rem !important;
   }
 
   #listing-1-title,
@@ -653,9 +668,11 @@
   #listing-3-title,
   #listing-4-title {
     width: 100% !important;
-    margin-left: 0 !important;
+    margin: 0 !important;
     position: static !important;
-    padding: 0.5rem 0 0 1rem;
+    padding: 0 !important;
+    margin-bottom: 0.5rem !important;
+    font-size: 1.25rem !important;
   }
 
   #listing-1-price,
@@ -663,9 +680,10 @@
   #listing-3-price,
   #listing-4-price {
     width: 100% !important;
-    margin-left: 0 !important;
+    margin: 0 !important;
     position: static !important;
-    padding: 0 0 0.5rem 1rem;
+    padding: 0 !important;
+    font-size: 1.25rem !important;
   }
 
   #pageOne,

@@ -1,68 +1,73 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useAuth } from "../context/authContext";
 import { useNavigate } from "react-router-dom";
 import "./Profile.css";
 import "../App.css";
 import ProfileTextFields from "../components/textField";
+import axios from "axios";
 
 export default function Profile() {
   const navigate = useNavigate();
-  const [activePage, setActivePage] = useState(1);
   const [activeTab, setActiveTab] = useState("activeListing");
   const [hoverTab, setHoverTab] = useState(null);
-  const [hoverAddButton, setHoverAddButton] = useState(false);
-  const [profileData, setProfileData] = useState({
-    // firstName: "Jane",
-    // lastName: "Doe",
-    // email: "janedoe@gmail.com",
-    // phone: "067 676 6767",
-    // address: "Unknown 123",
-    // city: "Cape Town",
-    // postalCode: "8000",
-    // birthDate: "",
-    // password: "",
-  });
-  const handleProfileChange = (e) => {
-    const { name, value } = e.target;
-    setProfileData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+  const [profileData, setProfileData] = useState({});
+  const [listings, setListings] = useState([]);
+  const { user, token } = useAuth();
+
+  const getProfile = async () => {
+    try {
+      const res = await axios.get(`http://localhost:5009/api/user/profile`, {
+        headers: { authorization: `Bearer ${token}` },
+      });
+      setProfileData(res.data);
+    } catch (error) {
+      console.error("Error fetching profile:", error);
+    }
   };
 
+  const getActiveListings = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:5009/api/listing/user/${user?.id}`,
+        { headers: { authorization: `Bearer ${token}` } },
+      );
+      setListings(res.data);
+    } catch (error) {
+      console.error("Error fetching listings:", error);
+    }
+  };
+
+  const saveProfile = async () => {
+    try {
+      const res = await axios.put(
+        `http://localhost:5009/api/user/${user?.id}`,
+        profileData,
+        { headers: { authorization: `Bearer ${token}` } },
+      );
+      console.log("Profile saved successfully:", res.data);
+    } catch (error) {
+      console.error("Error saving profile:", error);
+    }
+  };
+
+  useEffect(() => {
+    getProfile();
+    getActiveListings();
+  }, []);
+
+  useEffect(() => {
+    if (activeTab === "addListing") {
+      navigate("/addListing");
+    }
+  }, [activeTab, navigate]);
   return (
     <div id="main-wrapper">
       <div id="content-container">
         <div id="yellow-section">
           <div id="profile-circle"></div>
-          <button
-            className="add-listing-circle-btn"
-            onClick={() => navigate("/addListing")}
-            style={{
-              width: "60px",
-              height: "60px",
-              borderRadius: "50%",
-              backgroundColor: hoverAddButton
-                ? "rgba(237, 120, 73, 0.35)"
-                : "#FFD700",
-              border: "none",
-              fontSize: "32px",
-              color: "#333",
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              margin: "10px auto 0 auto",
-              fontWeight: "bold",
-              transition: "all 0.3s ease",
-            }}
-            onMouseEnter={() => setHoverAddButton(true)}
-            onMouseLeave={() => setHoverAddButton(false)}
-          >
-            +
-          </button>
           <div id="name-container">
-            <p>Jane</p>
-            <p>Doe</p>
+            <p>{profileData.firstName}</p>
+            <p>{profileData.lastName}</p>
           </div>
           <div id="profile-button">
             {[
@@ -70,6 +75,7 @@ export default function Profile() {
               "previousListing",
               "viewLiked",
               "editProfile",
+              "addListing",
               "signOut",
             ].map((tab) => {
               const tabLabels = {
@@ -77,6 +83,7 @@ export default function Profile() {
                 previousListing: "Previous Listings",
                 viewLiked: "View Liked",
                 editProfile: "Edit Profile Details",
+                addListing: "Add Listing",
                 signOut: "Sign Out",
               };
               const isActive = activeTab === tab;
@@ -267,7 +274,16 @@ export default function Profile() {
                 ].map(({ label, name, type, placeholder }) => (
                   <div className="profile-field-row" key={name}>
                     <span className="profile-field-label">{label}</span>
-                    <ProfileTextFields label={label}></ProfileTextFields>
+                    <ProfileTextFields
+                      label={label}
+                      value={profileData[name] || ""}
+                      onChangeValue={(value) =>
+                        setProfileData((prev) => ({
+                          ...prev,
+                          [name]: value,
+                        }))
+                      }
+                    ></ProfileTextFields>
                   </div>
                 ))}
               </div>
@@ -280,17 +296,20 @@ export default function Profile() {
                     width: "11.75rem",
                     height: "4.44rem",
                   }}
+                  onClick={() => {
+                    getProfile();
+                  }}
                 >
                   Cancel
                 </button>
-                <button
-                  className="btn-post"
-                  style={{ width: "21.5rem", height: "4.44rem" }}
-                >
-                  Save Details
+                <button className="btn-post" onClick={saveProfile}>
+                  {" "}
+                  Save Details{" "}
                 </button>
               </div>
             </>
+          ) : activeTab === "addListing" ? (
+            <div></div>
           ) : activeTab === "signOut" ? (
             <>
               <div id="sign-out-title" className="signOut">
