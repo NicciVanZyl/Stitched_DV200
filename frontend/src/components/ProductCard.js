@@ -11,7 +11,7 @@ function BasicExample({ listing }) {
   };
   return (
     <Card style={{ width: '100%' }} id='productCard'>
-      <Card.Img variant="top" src={listing.imageUrl} style={{ borderTopLeftRadius: "1.25rem", borderTopRightRadius: "1.25rem" }} />
+      <Card.Img variant="top" src={listing.imageUrl} style={{ borderTopLeftRadius: "1.25rem", borderTopRightRadius: "1.25rem", objectFit: "cover", height: "30rem" }} />
       <Card.Body>
         <Card.Title id='cardTitle'>{listing.name}</Card.Title>
         <Card.Text id='cardPrice'>
