@@ -55,7 +55,11 @@ const theme = createTheme({
   },
 });
 
-export default function ProfileTextFields({ label, onChangeValue }) {
+export default function ProfileTextFields({
+  label,
+  onChangeValue,
+  value = "",
+}) {
   return (
     <ThemeProvider theme={theme}>
       <TextField
@@ -63,8 +67,8 @@ export default function ProfileTextFields({ label, onChangeValue }) {
         variant="outlined"
         fullWidth
         margin="normal"
+        value={value}
         onChange={(event) => {
-          if (!event.target.value) return;
           if (onChangeValue) onChangeValue(event.target.value);
         }}
         sx={{ margin: 0, padding: 0 }}

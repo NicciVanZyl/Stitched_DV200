@@ -176,14 +176,14 @@ const theme = createTheme({
   },
 });
 
-function Selector({ defaultVal, onSelectItem, options }) {
+function Selector({multiple, defaultVal, onSelectItem, options }) {
 
   return (
     <ThemeProvider theme={theme}>
 
       <Autocomplete className="selector"
         defaultValue={[]}
-        multiple
+        multiple = {multiple}
         limitTags={1}
         onChange={(event, value) => {
           if (!value) return;
