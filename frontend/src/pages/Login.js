@@ -39,6 +39,7 @@ function Login() {
   const [userName, setUserName] = useState("");
   const [selectedColours, setSelectedColours] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const allCards = [
     PantoneCardSlateSilk,
