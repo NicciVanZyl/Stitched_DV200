@@ -428,6 +428,15 @@
     margin-left: 0 !important;
   }
 
+  .viewlistingBtn {
+    display: block;
+    margin: 0;
+    margin-right: 1.5rem;
+    margin-top: 4rem;
+    width: 6rem;
+    height: 4rem;
+  }
+
   #profile-circle {
     width: 5rem !important;
     height: 5rem !important;
