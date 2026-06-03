@@ -23,24 +23,16 @@
 }
 
 #profile-circle {
-  margin-top: 3.81rem;
-  width: 10.25rem;
-  height: 10.25rem;
-  border-radius: 50%;
-  background: #ffffff;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: none;
 }
 
 #name-container {
-  text-align: left;
+  text-align: center;
   width: 11.3125rem;
   height: auto;
   color: #fff;
   font-family: Montserrat;
-  font-size: 4.23613rem;
+  font-size: 2rem;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
@@ -72,6 +64,7 @@
   border-top-left-radius: 32px;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   flex-shrink: 0;
 }
 
@@ -427,7 +420,7 @@
     width: 100% !important;
     height: auto !important;
     margin-top: 0.75rem !important;
-    text-align: left !important;
+    text-align: center !important;
   }
 
   #profile-button {
@@ -611,7 +604,7 @@
     width: 100% !important;
     height: auto !important;
     margin-top: 1rem !important;
-    text-align: left !important;
+    text-align: center !important;
   }
 
   #profile-button {
