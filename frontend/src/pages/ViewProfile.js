@@ -13,6 +13,7 @@ export default function Profile() {
   const [activeTab, setActiveTab] = useState("activeListing");
   const [hoverTab, setHoverTab] = useState(null);
   const [listings, setListings] = useState([]);
+  const [profileData, setProfileData] = useState({});
   const [previouslistings, setPreviousListings] = useState([]);
   const [likedListings, setLikedListings] = useState([]);
   const [ratingsComments, setRatingsComments] = useState([]);

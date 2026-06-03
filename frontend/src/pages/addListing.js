@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import "./Profile.css";
-import { useAuth } from '../context/authContext';
+import { useAuth } from "../context/authContext";
+import axios from "axios";
 
 export default function Profile() {
-  const { user,token } = useAuth();
+  const { user, token } = useAuth();
   const [activePage, setActivePage] = useState(1);
   const [activeTab, setActiveTab] = useState("addListing");
   const [hoverTab, setHoverTab] = useState(null);
@@ -12,12 +13,49 @@ export default function Profile() {
   const [errors, setErrors] = useState({});
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
+  const [sellerId, setSellerId] = useState();
+  const [profileData, setProfileData] = useState({});
+  const [sellerName, setSellerName] = useState();
   const [description, setDescription] = useState("");
   const [size, setSize] = useState("");
   const [category, setCategory] = useState("");
   const [subCategory, setSubCategory] = useState("");
+
   const [uploadedImageFiles, setUploadedImageFiles] = useState([]);
 
+  const getProfile = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:5009/api/user/${user?.id}`,
+        {
+          headers: { authorization: `Bearer ${token}` },
+        },
+      );
+      const spacePos = res.data.name.indexOf(" ");
+      let firstName;
+      let lastName;
+      if (spacePos == -1) {
+        firstName = res.data.name;
+        lastName = "";
+      } else {
+        firstName = res.data.name.slice(0, spacePos);
+        lastName = res.data.name.slice(spacePos + 1, res.data.name.length);
+      }
+      setProfileData({
+        address: res.data.address,
+        firstName: firstName,
+        lastName: lastName,
+        dateOfBirth: res.data.dateOfBirth,
+        email: res.data.email,
+        number: res.data.number,
+        password: res.data.password,
+      });
+
+      console.log(res.data);
+    } catch (error) {
+      console.error("Error fetching profile:", error);
+    }
+  };
   const handleImageUpload = (event) => {
     const files = Array.from(event.target.files);
     files.forEach((file) => {
@@ -71,10 +109,10 @@ export default function Profile() {
           authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          name:name,
-          price:price,
-          description:description,
-          size:size,
+          name: name,
+          price: price,
+          description: description,
+          size: size,
           category: category,
           subCategory: subCategory,
           ImgUrl: data.imageUrl,
@@ -105,14 +143,14 @@ export default function Profile() {
       setSubmitStatus("error");
     }
   };
+
   return (
     <div id="main-wrapper">
       <div id="content-container">
         <div id="yellow-section">
           <div id="profile-circle"></div>
           <div id="name-container">
-            <p>Jane</p>
-            <p>Doe</p>
+            <p>{user.name}</p>
           </div>
           <div id="profile-button">
             {["addListing"].map((tab) => {
