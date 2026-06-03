@@ -8,6 +8,7 @@
 
 * [About the Project](#about-the-project)
   * [App description](#app-description)
+  * [Creative Login Description](#creative-login-description)
   * [Built With](#built-with)
   * [ERD](#erd)
 * [Getting Started](#getting-started)
@@ -40,6 +41,11 @@ This project is built using JavaScript and spanning across the entire MERN ecosy
 
 ### App Description:
 Stitched is a pre-loved thrifting online website, wherein users can post their second hand clothing and accessories for a little side cash or buy reasonably priced second hand items
+
+## Creative Login Description:
+This project incorporates a creative authentication challenging the paradigm of traditional text-based passwords, this system introduces a **Colour Sequence Memory Login**. 
+
+Instead of typing a traditional password, users interact with a beautifully curated grid of Pantone™ colour cards. During registration, users select a personalised 5 colour sequence that acts as their secure key. Upon logging in, the user must remember and click their unique 5 colour sequence from the palette grid to gain entry. This brings a visual, highly intuitive and gamified memory twist to security, making it ideal for visual thinkers while preserving strong core authentication principles.
 
 ### ERD:
 <p align="center"><img src="https://github.com/NicciVanZyl/Stitched_DV200/blob/main/frontend/src/Github_assets/ERD.png" width="600" /></p>
