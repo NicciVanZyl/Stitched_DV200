@@ -64,7 +64,7 @@ function ProductDetails() {
       state: { sellerId: listing.postedBy, sellerName: sellerName },
     });
   };
-  const { user, token } = useAuth();
+  const { user, token, isUser, isAdmin } = useAuth();
 
   const [selectedFlag, setSelectedFlag] = useState(false);
   const [selectedLike, setSelectedLike] = useState(false);
@@ -134,44 +134,60 @@ function ProductDetails() {
   }, [showFlagModal]);
 
   const renderPage = () => {
+    console.log("UserID: " + user?.id);
+    console.log("PostedBy: " + listing.postedBy);
+
     if (listing.isSold == true) {
       return (<Stack direction='horizontal' gap={4}>
         <h2>This listing has been sold</h2>
       </Stack>)
+    } else if (isUser || isAdmin) {
+      if (user?.id === listing.postedBy) {
+        return (
+          <Stack direction='horizontal' gap={4}>
+            <h3>You own this post.</h3>
+          </Stack>
+        )
+      } else {
+
+        return (<Stack direction='horizontal' gap={4}>
+          <button className="customBtn pdButton" onClick={() => {
+            addToCart(listing._id, sellerName, listing.postedBy);
+            setConfirmMessage("Item added to cart!");
+            setShowConfirm(true);
+          }}>Add to Cart</button>
+          <ThemeProvider theme={theme}>
+            <IconButton
+              onClick={() => setLiked()}
+              sx={{
+                "& .MuiSvgIcon-root": {
+                  color: selectedLike ? "#B73E3A" : "#F5BD54",
+                  transition: "0.2s",
+                },
+              }}
+            >
+              <FavoriteIcon />
+            </IconButton>
+            <IconButton
+              onClick={() => {
+                setSelectedFlag(!selectedFlag);
+                setShowFlagModal(true);
+              }}
+              sx={{
+                "& .MuiSvgIcon-root": {
+                  color: selectedFlag ? "#B73E3A" : "#F5BD54",
+                  transition: "0.2s",
+                },
+              }}
+            >
+              <FlagIcon />
+            </IconButton>
+          </ThemeProvider>
+        </Stack>)
+      }
     } else {
       return (<Stack direction='horizontal' gap={4}>
-        <button className="customBtn pdButton" onClick={() => {
-          addToCart(listing._id, sellerName, listing.postedBy);
-          setConfirmMessage("Item added to cart!");
-          setShowConfirm(true);
-        }}>Add to Cart</button>
-        <ThemeProvider theme={theme}>
-          <IconButton
-            onClick={() => setLiked()}
-            sx={{
-              "& .MuiSvgIcon-root": {
-                color: selectedLike ? "#B73E3A" : "#F5BD54",
-                transition: "0.2s",
-              },
-            }}
-          >
-            <FavoriteIcon />
-          </IconButton>
-          <IconButton
-            onClick={() => {
-              setSelectedFlag(!selectedFlag);
-              setShowFlagModal(true);
-            }}
-            sx={{
-              "& .MuiSvgIcon-root": {
-                color: selectedFlag ? "#B73E3A" : "#F5BD54",
-                transition: "0.2s",
-              },
-            }}
-          >
-            <FlagIcon />
-          </IconButton>
-        </ThemeProvider>
+        <h3>You must be logged in to interact with this post</h3>
       </Stack>)
     }
   }
@@ -230,7 +246,7 @@ function ProductDetails() {
             </Row>
           </Col>
         </Row>
-        <ConfirmModal show={showConfirm} message={confirmMessage} userName={user.name} onClose={() => {
+        <ConfirmModal show={showConfirm} message={confirmMessage} userName={user?.name} onClose={() => {
           setShowConfirm(false);
         }}>
 
