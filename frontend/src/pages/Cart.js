@@ -44,7 +44,6 @@ function Cart() {
   useEffect(() => {
     GetItemData();
     setLoading(false);
-    CalculateUserRating();
   }, []);
 
   const handleDeleteCartItem = (id) => {
@@ -106,11 +105,26 @@ function Cart() {
 
   }, [sellerComments]);
 
+  const SetAsSold = async (Data) => {
+    try {
+      const res = await Promise.all(
+        Data.map((data) => {
+          return axios.patch(`http://localhost:5009/api/listing/sold/${data.id}`, {}, { headers: { authorization: `Bearer ${token}` } })
+        })
+      )
+      console.log(res.map(r => r.data));
+
+    } catch (error) {
+      console.log(error.response?.data?.message);
+    }
+  }
+
   const CloseRateModal = async (message) => {
     setIsModalOpen(false);
     if (message === "Rate") {
       //Calculate sellers new ratings
       await CalculateUserRating(uniqueSellers); //still doing shit out of order :(
+      await SetAsSold(cartData)
     } else {
 
     }
