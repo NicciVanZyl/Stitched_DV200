@@ -46,10 +46,10 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  overflow: hidden;  
+  overflow: hidden;
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
-  color: #0A233F;
+  color: #0a233f;
 }
 
 .pantoneCard:hover {
@@ -70,7 +70,7 @@
   height: 100%;
 }
 
-.swatchColour{
+.swatchColour {
   width: 100%;
   height: 70%;
   border-radius: 0.5rem 0.5rem 0 0;
@@ -136,8 +136,12 @@
 /* LOGIN/REGISTER PAGE */
 /* Login */
 .loginContainer {
-  background: #E8B098;
-  background: linear-gradient(180deg, rgba(232, 176, 152, 1) 0%, rgba(183, 62, 58, 1) 100%);
+  background: #e8b098;
+  background: linear-gradient(
+    180deg,
+    rgba(232, 176, 152, 1) 0%,
+    rgba(183, 62, 58, 1) 100%
+  );
   min-height: 100vh;
   display: block;
   justify-content: center;
@@ -217,8 +221,12 @@
 }
 
 .customBtn {
-  background: #FFCE71;
-  background: linear-gradient(180deg, rgba(255, 206, 113, 1) 0%, rgba(241, 160, 9, 1) 100%);
+  background: #ffce71;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 206, 113, 1) 0%,
+    rgba(241, 160, 9, 1) 100%
+  );
   outline: none;
   border: none;
   border-radius: 0.5rem;
@@ -237,8 +245,12 @@
   right: 0;
   z-index: -1;
   border-radius: 0.5rem;
-  background: #ED7849;
-  background: linear-gradient(180deg, rgba(237, 120, 73, 1) 0%, rgba(165, 57, 14, 1) 100%);
+  background: #ed7849;
+  background: linear-gradient(
+    180deg,
+    rgba(237, 120, 73, 1) 0%,
+    rgba(165, 57, 14, 1) 100%
+  );
   box-shadow:
     inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
     7px 7px 20px 0px rgba(0, 0, 0, 0.1),
@@ -249,7 +261,7 @@
 .customBtn:hover {
   color: #fff;
   font-weight: 800;
-  border-color: none
+  border-color: none;
 }
 
 .customBtn:hover:after {
@@ -315,8 +327,8 @@
 
 #signUpBtnOutline:hover {
   color: #ffff;
-  background: #ED7849;
-  border-color: #ED7849;
+  background: #ed7849;
+  border-color: #ed7849;
   font-weight: 700;
 }
 
@@ -343,13 +355,13 @@
   margin: 0;
 }
 
-.removeColourBtn{
+.removeColourBtn {
   font-size: 0.8rem;
-  color: #EA6659;
+  color: #ea6659;
   font-family: "Montserrat", sans-serif;
-  border: none; 
-  background: none; 
-  cursor: pointer; 
+  border: none;
+  background: none;
+  cursor: pointer;
   margin-top: 3%;
   font-weight: 500;
 }
@@ -402,13 +414,23 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes popIn {
-  from { transform: scale(0.8); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 /* Red Footer */
@@ -727,3 +749,33 @@
   margin-top: -2px;
 }
 
+/* RESPONSIVE NAVBAR */
+@media (max-width: 768px) {
+  .navbarLogo {
+    width: 5rem;
+  }
+
+  .navIcons {
+    width: 1rem;
+    height: auto;
+  }
+
+  .navbar {
+    padding: 0.75rem 0 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbarLogo {
+    width: 4rem;
+  }
+
+  .navIcons {
+    width: 0.9rem;
+    height: auto;
+  }
+
+  .navbar {
+    padding: 0.5rem 0 !important;
+  }
+}

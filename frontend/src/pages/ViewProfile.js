@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useAuth } from "../context/authContext";
 import "./Profile.css";
+import axios from "axios";
 
 export default function Profile() {
   const [activePage, setActivePage] = useState(1);
