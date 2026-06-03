@@ -2,100 +2,169 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../components/navbar";
 import './CartAndAndmin.css';
 import RedFooter from "../components/RedFooter";
-import CartCard from "../components/cartCard"; 
-import RatingSellerCard from "../components/RatingSellerCard"; 
-import {TrashIcon} from "react-bootstrap-icons";
+import CartCard from "../components/cartCard";
+import RatingSellerCard from "../components/RatingSellerCard";
+import { TrashIcon } from "react-bootstrap-icons";
+import { useAuth } from '../context/authContext';
+import axios from "axios";
+import CmntRateModal from "../components/commentRateModal";
+import { useCart } from "../context/cartContext";
+import Modal from "../components/modal"
+import { useNavigate } from "react-router-dom";
+
 
 function Cart() {
+
+  const navigate = useNavigate();
+  const { cartData, removeFromCart, emptyCart } = useCart();
+  const { user, token } = useAuth();
+
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  
+
   // Modal toggle and data tracking states
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [doneModal, setDoneModal] = useState(false);
   const [uniqueSellers, setUniqueSellers] = useState([]);
+  const [sellerComments, setSellerComments] = useState([]);
 
-  const token = localStorage.getItem("token"); 
+  const GetItemData = async () => {
+    try {
+      const res = await Promise.all(
+        cartData.map((data) => {
+          return axios.get(`http://localhost:5009/api/listing/${data.id}`)
+        })
+      )
+      setCartItems(res.map((result) => result.data));
+    } catch (error) {
+      console.log(error.response?.data?.message);
+    }
+  }
 
   useEffect(() => {
-    const localCart = localStorage.getItem("cart");
-    if (localCart) {
-      setCartItems(JSON.parse(localCart));
-    } else {
-      // Fallback Visual Mock Data (Includes Seller ID structures for dynamic loops)
-      setCartItems([
-        { _id: "1", name: "Sample Item 1", price: 150, sellerId: "s1", sellerName: "Alpha Trader" },
-        { _id: "2", name: "Sample Item 2", price: 250, sellerId: "s2", sellerName: "Beta Goods" }
-      ]);
-    }
+    GetItemData();
     setLoading(false);
   }, []);
 
   const handleDeleteCartItem = (id) => {
     const updatedCart = cartItems.filter((item) => (item._id || item.id) !== id);
     setCartItems(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    removeFromCart(id);
   };
 
-  // Intercept the traditional checkout button path
+  const CalculateUserRating = async (sellers) => {
+    try {
+      const res = await Promise.all(
+        sellers.map((seller) => {
+          return axios.get(`http://localhost:5009/api/comment/seller/${seller.id}`, { headers: { authorization: `Bearer ${token}` } })
+        })
+      )
+      setSellerComments(res.map((result) => result.data));
+      console.log(res.map((result) => result.data));
+
+    } catch (error) {
+      console.log(error.response?.data?.message);
+    }
+  }
+
+
+  useEffect(() => {
+    if (sellerComments?.length === 0) return;
+
+    const updateAllSellerRatings = async () => {
+      try {
+        const res = await Promise.all(
+          sellerComments.map((sellerCommentArray, index) => {
+
+            // Calculate average ratings
+            const total = sellerCommentArray.reduce((sum, comment) => {
+              return sum + parseFloat(comment.rating);  //make strings floats otherwise math doesn't math
+            }, 0);
+            const avgRating = parseFloat((total / sellerCommentArray.length).toFixed(1));
+
+
+            const seller = uniqueSellers[index];
+            console.log(`Updating seller ${seller.name} with rating ${avgRating}`);
+
+            return axios.patch(
+              `http://localhost:5009/api/user/${seller.id}`,
+              { rating: avgRating },
+              { headers: { authorization: `Bearer ${token}` } }
+            );
+          })
+        );
+
+        console.log('All sellers updated:', res.map(r => r.data));
+
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    updateAllSellerRatings();
+
+  }, [sellerComments]);
+
+  const SetAsSold = async (Data) => {
+    try {
+      const res = await Promise.all(
+        Data.map((data) => {
+          return axios.patch(`http://localhost:5009/api/listing/sold/${data.id}`, {}, { headers: { authorization: `Bearer ${token}` } })
+        })
+      )
+      console.log(res.map(r => r.data));
+
+    } catch (error) {
+      console.log(error.response?.data?.message);
+    }
+  }
+
+  const CloseRateModal = async (message) => {
+    setIsModalOpen(false);
+    if (message === "Rate") {
+      //Calculate sellers new ratings
+      await CalculateUserRating(uniqueSellers); //still doing shit out of order :(
+      await SetAsSold(cartData)
+    } else {
+
+    }
+    setDoneModal(true);
+  }
+
   const handleCheckoutClick = () => {
     const sellersMap = {};
+
     cartItems.forEach(item => {
-      const sId = item.sellerId || item.seller?._id || "unknown_seller";
-      const sName = item.sellerName || item.seller?.name || "Independent Seller";
-      
+      const sId = item.postedBy;
+      let sName;
+      cartData.forEach(data => {
+        if (data.sellerId == item.postedBy) {
+          sName = data.sellerName;
+
+          return;
+        }
+      })
       if (!sellersMap[sId]) {
         sellersMap[sId] = { id: sId, name: sName };
       }
     });
 
     setUniqueSellers(Object.values(sellersMap));
-    setIsModalOpen(true); 
   };
 
-  // Triggers when user hits submit inside the pop-up panel
-  const handleFinalCheckout = async (ratingsReceived) => {
-    setIsModalOpen(false);
-    
-    // Optional destination: Put a fetch call here if you want to POST ratings to backend
-    console.log("Captured Feedback State:", ratingsReceived);
-
-    try {
-      const promises = cartItems.map(async (item) => {
-        const itemId = item._id || item.id;
-        const response = await fetch(`http://localhost:5009/api/listing/${itemId}`, {
-          method: "PATCH",
-          headers: {
-            "Authorization": `Bearer ${token}`,
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ sold: true })
-        });
-        return response;
-      });
-
-      const results = await Promise.all(promises);
-      const allSuccessful = results.every(res => res.ok);
-
-      if (allSuccessful) {
-        alert("Checkout successful! Thank you for rating the sellers.");
-        setCartItems([]);
-        localStorage.removeItem("cart");
-      } else {
-        alert("Some items failed to process during checkout.");
-      }
-    } catch (err) {
-      console.error("Checkout error:", err);
-      alert("An error occurred connecting to the server.");
+  useEffect(() => {
+    if (uniqueSellers.length > 0) {
+      setIsModalOpen(true);
     }
-  };
+  }, [uniqueSellers]);
 
   const calculateSubtotal = () => {
     return cartItems.reduce((acc, item) => acc + Number(item.price || 0), 0);
   };
 
   const subTotal = calculateSubtotal();
-  const discount = 0.00; 
-  const deliveryFee = subTotal > 0 ? 50.00 : 0.00; 
+  const discount = 0.00;
+  const deliveryFee = subTotal > 0 ? 50.00 : 0.00;
   const total = subTotal - discount + deliveryFee;
 
   if (loading) return <div className="cart-page"><p>Loading your cart...</p></div>;
@@ -105,7 +174,7 @@ function Cart() {
       <div className="cart-wrapper">
         <h1 className="cart-title">Your Cart</h1>
         <div className="cart-content">
-          
+
           {/* LEFT SIDE: ITEMS */}
           <div className="cart-items">
             <div className="cart-header">
@@ -123,8 +192,9 @@ function Cart() {
                   key={item._id || item.id}
                   id={item._id || item.id}
                   name={item.name}
-                  price={`R${Number(item.price).toFixed(2)}`} 
+                  price={`R${Number(item.price).toFixed(2)}`}
                   onDelete={handleDeleteCartItem}
+                  imgUrl={item.imageUrl}
                 />
               ))
             )}
@@ -160,14 +230,25 @@ function Cart() {
 
         </div>
       </div>
-      
-      {/* Structural placement of the Rating overlay overlay card */}
-      <RatingSellerCard 
+
+      <CmntRateModal
         isOpen={isModalOpen}
+        onClose={(message) => CloseRateModal(message)}
         sellers={uniqueSellers}
-        onSubmit={handleFinalCheckout}
-        onClose={() => setIsModalOpen(false)}
       />
+      <Modal
+        show={doneModal}
+        message={"Purchase and ratings successful! Thank you for your support."}
+        userName={user.name}
+        onClose={() => {
+          setDoneModal(false);
+          //clear cart
+          emptyCart()
+          //navigate to home page 
+          navigate("/Home");
+        }}
+      />
+
 
       <RedFooter />
     </div>

@@ -16,9 +16,11 @@ import "./PDP.css";
 import FlagModal from "../components/flagModal";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-import { useAuth } from "../context/authContext";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useAuth } from '../context/authContext';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useCart } from "../context/cartContext";
+import ConfirmModal from "../components/modal"
 
 //Custom styling for Icon Buttons
 const theme = createTheme({
@@ -53,6 +55,7 @@ const theme = createTheme({
 });
 
 function ProductDetails() {
+  const { addToCart } = useCart();
   const { state } = useLocation();
   const { listing } = state;
   const navigate = useNavigate();
@@ -61,15 +64,15 @@ function ProductDetails() {
       state: { sellerId: listing.postedBy, sellerName: sellerName },
     });
   };
-  const { user, token } = useAuth();
+  const { user, token, isUser, isAdmin } = useAuth();
 
   const [selectedFlag, setSelectedFlag] = useState(false);
   const [selectedLike, setSelectedLike] = useState(false);
-  const [showCartModal, setShowCartModal] = useState(false);
-  const [showLikeModal, setShowLikeModal] = useState(false);
   const [showFlagModal, setShowFlagModal] = useState(false);
   const [sellerName, setSellerName] = useState();
   const [sellerRating, setSellerRating] = useState();
+  const [confirmMessage, setConfirmMessage] = useState('');
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const GetSellerInfo = async () => {
     try {
@@ -126,14 +129,78 @@ function ProductDetails() {
       setSelectedFlag(true);
     } else {
       setSelectedFlag(false);
+
     }
   }, [showFlagModal]);
+
+  const renderPage = () => {
+    console.log("UserID: " + user?.id);
+    console.log("PostedBy: " + listing.postedBy);
+
+    if (listing.isSold == true) {
+      return (<Stack direction='horizontal' gap={4}>
+        <h2>This listing has been sold</h2>
+      </Stack>)
+    } else if (isUser || isAdmin) {
+      if (user?.id === listing.postedBy) {
+        return (
+          <Stack direction='horizontal' gap={4}>
+            <h3>You own this post.</h3>
+          </Stack>
+        )
+      } else {
+
+        return (<Stack direction='horizontal' gap={4}>
+          <button className="customBtn pdButton" onClick={() => {
+            addToCart(listing._id, sellerName, listing.postedBy);
+            setConfirmMessage("Item added to cart!");
+            setShowConfirm(true);
+          }}>Add to Cart</button>
+          <ThemeProvider theme={theme}>
+            <IconButton
+              onClick={() => setLiked()}
+              sx={{
+                "& .MuiSvgIcon-root": {
+                  color: selectedLike ? "#B73E3A" : "#F5BD54",
+                  transition: "0.2s",
+                },
+              }}
+            >
+              <FavoriteIcon />
+            </IconButton>
+            <IconButton
+              onClick={() => {
+                setSelectedFlag(!selectedFlag);
+                setShowFlagModal(true);
+              }}
+              sx={{
+                "& .MuiSvgIcon-root": {
+                  color: selectedFlag ? "#B73E3A" : "#F5BD54",
+                  transition: "0.2s",
+                },
+              }}
+            >
+              <FlagIcon />
+            </IconButton>
+          </ThemeProvider>
+        </Stack>)
+      }
+    } else {
+      return (<Stack direction='horizontal' gap={4}>
+        <h3>You must be logged in to interact with this post</h3>
+      </Stack>)
+    }
+  }
 
   return (
     <div className="loginContainer">
       <FlagModal
         isOpen={showFlagModal}
-        setClosed={setShowFlagModal}
+        setClosed={() => {
+          setShowFlagModal(false);
+          setConfirmMessage("Flag submitted.");
+          setShowConfirm(true);
+        }}
         postID={listing._id}
       ></FlagModal>
       <Container fluid>
@@ -156,12 +223,15 @@ function ProductDetails() {
                       <Button id="sellerNameLink" onClick={handleViewSeller}>
                         <h3>{sellerName}</h3>
                       </Button>
-                      <Rating
-                        name="size-medium"
-                        value={sellerRating}
-                        precision={0.5}
-                        readOnly
-                      />
+                      <Stack direction="horizontal" className="my-auto" gap={2}>
+                        <Rating
+                          name="size-medium"
+                          value={parseFloat(sellerRating)}
+                          precision={0.5}
+                          readOnly
+                        />
+                        <p style={{ "margin": 0 }}>{sellerRating}</p>
+                      </Stack>
                     </Stack>
                   </Stack>
                   <Stack>
@@ -170,41 +240,17 @@ function ProductDetails() {
                     <p>Sub-Category: {listing.subCategory}</p>
                     <p>Description: {listing.description}</p>
                   </Stack>
-                  <Stack direction="horizontal" gap={4}>
-                    <button className="customBtn pdButton">Add to Cart</button>
-                    <ThemeProvider theme={theme}>
-                      <IconButton
-                        onClick={() => setLiked()}
-                        sx={{
-                          "& .MuiSvgIcon-root": {
-                            color: selectedLike ? "#B73E3A" : "#F5BD54",
-                            transition: "0.2s",
-                          },
-                        }}
-                      >
-                        <FavoriteIcon />
-                      </IconButton>
-                      <IconButton
-                        onClick={() => {
-                          setSelectedFlag(!selectedFlag);
-                          setShowFlagModal(true);
-                        }}
-                        sx={{
-                          "& .MuiSvgIcon-root": {
-                            color: selectedFlag ? "#B73E3A" : "#F5BD54",
-                            transition: "0.2s",
-                          },
-                        }}
-                      >
-                        <FlagIcon />
-                      </IconButton>
-                    </ThemeProvider>
-                  </Stack>
+                  {renderPage()}
                 </Stack>
               </Col>
             </Row>
           </Col>
         </Row>
+        <ConfirmModal show={showConfirm} message={confirmMessage} userName={user?.name} onClose={() => {
+          setShowConfirm(false);
+        }}>
+
+        </ConfirmModal>
         <Footer />
       </Container>
     </div>

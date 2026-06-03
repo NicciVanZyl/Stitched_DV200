@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { RegisterUser, LoginUser, GetUser, UpdateUser, DeleteUser } = require('../controllers/usersController')
+const { RegisterUser, LoginUser, GetUser, UpdateUser, DeleteUser,UpdateRating } = require('../controllers/usersController')
 const verifyToken = require('../middleware/verifyToken');
 const requireAdmin = require('../middleware/requireAdmin');
 
@@ -15,6 +15,9 @@ router.get("/:id", GetUser);
 
 //Update user
 router.put("/:id", verifyToken, UpdateUser);
+
+//Update user rating
+router.patch("/:id", verifyToken, UpdateRating);
 
 //Delete user
 router.delete("/:id", verifyToken, requireAdmin, DeleteUser);

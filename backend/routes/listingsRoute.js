@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
+
 const {
   AddListing,
   GetAllListing,
@@ -57,7 +58,7 @@ router.patch("/:id", verifyToken, ToggleLike);
 router.patch("/:id", verifyToken, requireAdmin, ApproveListing);
 
 //Mark as sold - after cart
-router.patch("/:id", verifyToken, ListingSold);
+router.patch("/sold/:id", verifyToken, ListingSold);
 
 //Update Listing - only if not sold or if admin wants to update it
 router.put("/:id", verifyToken, UpdateListing);

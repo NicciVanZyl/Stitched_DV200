@@ -23,12 +23,32 @@ import BackToTop from "../components/btt";
 
 function Home() {
   const navigate = useNavigate();
-  
+  const [activeListings, setActiveListings] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Gets approved listings to display on the cards
+  const GetApprovedListings = async () => {
+    try {
+      const res = await axios.get("http://localhost:5009/api/listing/approved");
+      setActiveListings(res.data);
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error retrieving marketplace items:", error);
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    GetApprovedListings();
+  }, []);
+
     return(
       <>
         <div className="homeContainer">
           <Container>
             <Row className="justify-content-center">
+
+              {/* Hero Card */}
               <Col lg={10} className="homeHeroCard mt-3 ms-mx-5">
                 <Row className="align-items-center align-content-center">
                   <Col lg={6} md={12} className="homeHeroText">
@@ -59,6 +79,7 @@ function Home() {
               </Col>
             </Row>
 
+            {/* Category Section */}
             <Row>
               <Col lg={12} className="categoryContainer mt-3 ms-mx-5">
                 <Row className="align-items-center">
@@ -115,32 +136,22 @@ function Home() {
               </Col>
             </Row>
 
-            {/* <Row className="justify-content-center mt-5">
-              <Col lg={4} md={6} className="mb-4">
-                <ProductCard />
-              </Col>
+            {/* Product Listings */}
+            <Row className="justify-content-center mt-5">
+              {activeListings.length === 0 ? (
+                <div className="text-center w-100 my-5">
+                  <p className="emptyListingsText">No approved listings are currently active on the storefront.</p>
+                </div>
+              ) : (
+                activeListings.slice(0, 9).map((listing) => (
+                  <Col lg={4} md={6} className="mb-4" key={ listing.id}>
+                    <ProductCard listing={listing} />
+                  </Col>
+                ))
+              )}
+            </Row>
 
-              <Col lg={4} md={6} className="mb-4">
-                <ProductCard />
-              </Col>
-
-              <Col lg={4} md={6} className="mb-4">
-                <ProductCard />
-              </Col>
-
-              <Col lg={4} md={6} className="mb-4">
-                <ProductCard />
-              </Col>
-
-              <Col lg={4} md={6} className="mb-4">
-                <ProductCard />
-              </Col>
-
-              <Col lg={4} md={6} className="mb-4">
-                <ProductCard />
-              </Col>
-            </Row> */}
-
+            {/* Promotional Banner */}
             <Row>
               <Col lg={12} className="align-items-center mt-5">
                 <div className="promoBanner">
