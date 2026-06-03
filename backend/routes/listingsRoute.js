@@ -12,8 +12,10 @@ const {
   GetLikedListings,
   DeleteListing,
   UploadImage,
-   GetAwaitingApproval,
-   GetApproved
+  GetAwaitingApproval,
+  GetApproved,
+  GetPrevious,
+  GetActive,
 } = require("../controllers/listingsController");
 const verifyToken = require("../middleware/verifyToken");
 const requireAdmin = require("../middleware/requireAdmin");
@@ -25,16 +27,22 @@ const upload = multer({ storage: multer.memoryStorage() });
 router.post("/image", upload.single("image"), UploadImage);
 
 //add new listing
-router.post("/add",verifyToken, AddListing);
+router.post("/add", verifyToken, AddListing);
 
 //get all listings
 router.get("/all", GetAllListing);
+
+//get previous listings
+router.get("/previous/:id", verifyToken, GetPrevious);
+
+//get active listings
+router.get("/active/:id", verifyToken, GetActive);
 
 //get all listings
 router.get("/approved", GetApproved);
 
 //get listings awaiting approval - Admin Display
-router.get("/awaitingApproval",verifyToken,requireAdmin, GetAwaitingApproval);
+router.get("/awaitingApproval", verifyToken, requireAdmin, GetAwaitingApproval);
 
 //get user's liked listings
 router.get("/getUserLikes", verifyToken, GetLikedListings);

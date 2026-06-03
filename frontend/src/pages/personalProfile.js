@@ -5,6 +5,7 @@ import "./Profile.css";
 import "../App.css";
 import ProfileTextFields from "../components/textField";
 import axios from "axios";
+import ProfileCards from "../components/profileCards";
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -12,14 +13,39 @@ export default function Profile() {
   const [hoverTab, setHoverTab] = useState(null);
   const [profileData, setProfileData] = useState({});
   const [listings, setListings] = useState([]);
-  const { user, token } = useAuth();
+  const [likedListings, setLikedListings] = useState([]);
+  const [previousListings, setPreviousListings] = useState([]);
+  const { user, token, logout } = useAuth();
 
   const getProfile = async () => {
     try {
-      const res = await axios.get(`http://localhost:5009/api/user/profile`, {
-        headers: { authorization: `Bearer ${token}` },
+      const res = await axios.get(
+        `http://localhost:5009/api/user/${user?.id}`,
+        {
+          headers: { authorization: `Bearer ${token}` },
+        },
+      );
+      const spacePos = res.data.name.indexOf(" ");
+      let firstName;
+      let lastName;
+      if (spacePos == -1) {
+        firstName = res.data.name;
+        lastName = "";
+      } else {
+        firstName = res.data.name.slice(0, spacePos);
+        lastName = res.data.name.slice(spacePos + 1, res.data.name.length);
+      }
+      setProfileData({
+        address: res.data.address,
+        firstName: firstName,
+        lastName: lastName,
+        dateOfBirth: res.data.dateOfBirth,
+        email: res.data.email,
+        number: res.data.number,
+        password: res.data.password,
       });
-      setProfileData(res.data);
+
+      console.log(res.data);
     } catch (error) {
       console.error("Error fetching profile:", error);
     }
@@ -28,10 +54,37 @@ export default function Profile() {
   const getActiveListings = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:5009/api/listing/user/${user?.id}`,
+        `http://localhost:5009/api/listing/active/${user?.id}`,
         { headers: { authorization: `Bearer ${token}` } },
       );
       setListings(res.data);
+      console.log(res.data);
+    } catch (error) {
+      console.error("Error fetching listings:", error);
+    }
+  };
+
+  const getLikedListings = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:5009/api/listing/getUserLikes`,
+        { headers: { authorization: `Bearer ${token}` } },
+      );
+      setLikedListings(res.data.data.listings);
+      console.log(res.data.data.listings);
+    } catch (error) {
+      console.error("Error fetching listings:", error);
+    }
+  };
+
+  const getPreviousListings = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:5009/api/listing/previous/${user?.id}`,
+        { headers: { authorization: `Bearer ${token}` } },
+      );
+      setPreviousListings(res.data);
+      console.log(res.data);
     } catch (error) {
       console.error("Error fetching listings:", error);
     }
@@ -41,7 +94,14 @@ export default function Profile() {
     try {
       const res = await axios.put(
         `http://localhost:5009/api/user/${user?.id}`,
-        profileData,
+        {
+          name: profileData.firstName + " " + profileData.lastName,
+          email: profileData.email,
+          dateOfBirth: profileData.dateOfBirth,
+          password: profileData.password,
+          address: profileData.address,
+          number: profileData.number,
+        },
         { headers: { authorization: `Bearer ${token}` } },
       );
       console.log("Profile saved successfully:", res.data);
@@ -50,9 +110,15 @@ export default function Profile() {
     }
   };
 
+  const RenderItems = (listings) => {
+    return listings.map((listing) => <ProfileCards listing={listing} />);
+  };
+
   useEffect(() => {
     getProfile();
     getActiveListings();
+    getLikedListings();
+    getPreviousListings();
   }, []);
 
   useEffect(() => {
@@ -108,114 +174,21 @@ export default function Profile() {
               <div id="active-listings-title" className="activeListings">
                 Active Listings
               </div>
-              <div id="listing-row-1">
-                <div id="listing-1-image"></div>
-                <div id="listing-1-title">Placeholder for listing</div>
-                <div id="listing-1-price">R00 000</div>
-                <button className="customBtn viewlistingBtn">
-                  View Listing
-                </button>
-              </div>
-              <div id="listing-row-2">
-                <div id="listing-2-image"></div>
-                <div id="listing-2-title">Placeholder for listing</div>
-                <div id="listing-2-price">R00 000</div>
-                <button className="customBtn viewlistingBtn">
-                  View Listing
-                </button>
-              </div>
-              <div id="listing-row-3">
-                <div id="listing-3-image"></div>
-                <div id="listing-3-title">Placeholder for listing</div>
-                <div id="listing-3-price">R00 000</div>
-                <button className="customBtn viewlistingBtn">
-                  View Listing
-                </button>
-              </div>
-              <div id="listing-row-4">
-                <div id="listing-4-image"></div>
-                <div id="listing-4-title">Placeholder for listing</div>
-                <div id="listing-4-price">R00 000</div>
-                <button className="customBtn viewlistingBtn">
-                  View Listing
-                </button>
-              </div>
+              {RenderItems(listings)}
             </>
           ) : activeTab === "previousListing" ? (
             <>
               <div id="previous-listings-title" className="previousListings">
                 Previous Listings
               </div>
-              <div id="listing-row-1">
-                <div id="listing-1-image"></div>
-                <div id="listing-1-title">Placeholder for listing</div>
-                <div id="listing-1-price">R00 000</div>
-                <button className="customBtn viewlistingBtn">
-                  View Listing
-                </button>
-              </div>
-              <div id="listing-row-2">
-                <div id="listing-2-image"></div>
-                <div id="listing-2-title">Placeholder for listing</div>
-                <div id="listing-2-price">R00 000</div>
-                <button className="customBtn viewlistingBtn">
-                  View Listing
-                </button>
-              </div>
-              <div id="listing-row-3">
-                <div id="listing-3-image"></div>
-                <div id="listing-3-title">Placeholder for listing</div>
-                <div id="listing-3-price">R00 000</div>
-                <button className="customBtn viewlistingBtn">
-                  View Listing
-                </button>
-              </div>
-              <div id="listing-row-4">
-                <div id="listing-4-image"></div>
-                <div id="listing-4-title">Placeholder for listing</div>
-                <div id="listing-4-price">R00 000</div>
-                <button className="customBtn viewlistingBtn">
-                  View Listing
-                </button>
-              </div>
+              {RenderItems(previousListings)}
             </>
           ) : activeTab === "viewLiked" ? (
             <>
               <div id="view-liked-title" className="viewLiked">
                 View Liked
               </div>
-              <div id="listing-row-1">
-                <div id="listing-1-image"></div>
-                <div id="listing-1-title">Placeholder for listing</div>
-                <div id="listing-1-price">R00 000</div>
-                <button className="customBtn viewlistingBtn">
-                  View Listing
-                </button>
-              </div>
-              <div id="listing-row-2">
-                <div id="listing-2-image"></div>
-                <div id="listing-2-title">Placeholder for listing</div>
-                <div id="listing-2-price">R00 000</div>
-                <button className="customBtn viewlistingBtn">
-                  View Listing
-                </button>
-              </div>
-              <div id="listing-row-3">
-                <div id="listing-3-image"></div>
-                <div id="listing-3-title">Placeholder for listing</div>
-                <div id="listing-3-price">R00 000</div>
-                <button className="customBtn viewlistingBtn">
-                  View Listing
-                </button>
-              </div>
-              <div id="listing-row-4">
-                <div id="listing-4-image"></div>
-                <div id="listing-4-title">Placeholder for listing</div>
-                <div id="listing-4-price">R00 000</div>
-                <button className="customBtn viewlistingBtn">
-                  View Listing
-                </button>
-              </div>
+              {RenderItems(likedListings)}
             </>
           ) : activeTab === "editProfile" ? (
             <>
@@ -249,7 +222,7 @@ export default function Profile() {
                   },
                   {
                     label: "Birth Date",
-                    name: "birthDate",
+                    name: "dateOfBirth",
                     type: "text",
                     placeholder: "DD/MM/YYYY",
                   },
@@ -261,7 +234,7 @@ export default function Profile() {
                   },
                   {
                     label: "Mobile Number",
-                    name: "phone",
+                    name: "number",
                     type: "text",
                     placeholder: "Your mobile number",
                   },
@@ -330,7 +303,10 @@ export default function Profile() {
                   </button>
                   <button
                     className="sign-out-confirm-btn"
-                    onClick={() => navigate("/")}
+                    onClick={() => {
+                      navigate("/");
+                      logout();
+                    }}
                   >
                     Sign Out
                   </button>

@@ -273,7 +273,7 @@
   background: #8e2f2c;
 }
 
-#listing-row-1,
+.listing-row-1,
 #listing-row-2,
 #listing-row-3,
 #listing-row-4 {
@@ -288,11 +288,11 @@
   position: relative;
 }
 
-#listing-row-1 {
+.listing-row-1 {
   margin-top: 1.56rem;
 }
 
-#listing-1-image,
+.listing-1-image,
 #listing-2-image,
 #listing-3-image,
 #listing-4-image {
@@ -301,9 +301,10 @@
   border-radius: 2rem;
   background: #fff;
   flex-shrink: 0;
+  object-fit: cover;
 }
 
-#listing-1-title,
+.listing-1-title,
 #listing-2-title,
 #listing-3-title,
 #listing-4-title {
@@ -319,7 +320,7 @@
   position: absolute;
 }
 
-#listing-1-price,
+.listing-1-price,
 #listing-2-price,
 #listing-3-price,
 #listing-4-price {
