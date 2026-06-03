@@ -23,15 +23,7 @@
 }
 
 #profile-circle {
-  margin-top: 3.81rem;
-  width: 10.25rem;
-  height: 10.25rem;
-  border-radius: 50%;
-  background: #ffffff;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: none;
 }
 
 #name-container {
@@ -40,7 +32,7 @@
   height: auto;
   color: #fff;
   font-family: Montserrat;
-  font-size: 4.23613rem;
+  font-size: 2rem;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
@@ -72,6 +64,7 @@
   border-top-left-radius: 32px;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   flex-shrink: 0;
 }
 
@@ -124,7 +117,7 @@
   display: flex;
   flex-direction: column;
   box-shadow: -5px 0 40px 0 rgba(0, 0, 0, 0.15);
-  overflow-y: hidden;
+  overflow-y: auto;
   padding-right: 0;
 }
 
@@ -427,6 +420,7 @@
     width: 100% !important;
     height: auto !important;
     margin-top: 0.75rem !important;
+    text-align: center !important;
   }
 
   #profile-button {
@@ -452,6 +446,7 @@
     border-radius: 1rem !important;
     box-shadow: none !important;
     margin-top: 0 !important;
+    overflow-y: auto !important;
   }
 
   #active-listings-title,
@@ -609,6 +604,7 @@
     width: 100% !important;
     height: auto !important;
     margin-top: 1rem !important;
+    text-align: center !important;
   }
 
   #profile-button {
@@ -631,6 +627,7 @@
     border-radius: 2rem !important;
     box-shadow: none !important;
     margin-top: 0 !important;
+    overflow-y: auto !important;
   }
 
   #active-listings-title,

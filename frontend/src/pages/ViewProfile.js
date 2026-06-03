@@ -1,25 +1,107 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { useAuth } from "../context/authContext";
 import "./Profile.css";
 import axios from "axios";
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
+import ProfileCards from "../components/profileCards";
 
 export default function Profile() {
   const { state } = useLocation();
   const { sellerId } = state;
-
   const [activePage, setActivePage] = useState(1);
   const [activeTab, setActiveTab] = useState("activeListing");
   const [hoverTab, setHoverTab] = useState(null);
+  const [listings, setListings] = useState([]);
+  const [previouslistings, setPreviousListings] = useState([]);
+  const [likedListings, setLikedListings] = useState([]);
+  const [ratingsComments, setRatingsComments] = useState([]);
+  const { user, token } = useAuth();
+  const [sellerName, setSellerName] = useState();
+  const RenderItems = (listings) => {
+    return listings.map((listing) => <ProfileCards listing={listing} />);
+  };
 
+  const getProfile = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:5009/api/user/${sellerId}`,
+        {
+          headers: { authorization: `Bearer ${token}` },
+        },
+      );
+
+      setSellerName(res.data.name);
+      console.log(res.data);
+    } catch (error) {
+      console.error("Error fetching profile:", error);
+    }
+  };
+  const getActiveListings = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:5009/api/listing/active/${sellerId}`,
+        { headers: { authorization: `Bearer ${token}` } },
+      );
+      setListings(res.data);
+      console.log(res.data);
+    } catch (error) {
+      console.error("Error fetching listings:", error);
+    }
+  };
+
+  const getLikedListings = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:5009/api/listing/getUserLikes`,
+        { headers: { authorization: `Bearer ${token}` } },
+      );
+      setLikedListings(res.data.data.listings);
+      console.log(res.data.data.listings);
+    } catch (error) {
+      console.error("Error fetching listings:", error);
+    }
+  };
+
+  const getPreviousListings = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:5009/api/listing/previous/${user?.id}`,
+        { headers: { authorization: `Bearer ${token}` } },
+      );
+      setPreviousListings(res.data);
+      console.log(res.data);
+    } catch (error) {
+      console.error("Error fetching listings:", error);
+    }
+  };
+
+  const getRatingsComments = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:5009/api/rating-comment/${sellerId}`,
+        { headers: { authorization: `Bearer ${token}` } },
+      );
+      setRatingsComments(res.data);
+      console.log(res.data);
+    } catch (error) {
+      console.error("Error fetching ratings and comments:", error);
+    }
+  };
+
+  useEffect(() => {
+    getProfile();
+    getActiveListings();
+    getLikedListings();
+    getPreviousListings();
+    getRatingsComments();
+  }, []);
   return (
     <div id="main-wrapper">
       <div id="content-container">
         <div id="yellow-section">
-          <div id="profile-circle"></div>
           <div id="name-container">
-            <p>Jane</p>
-            <p>Doe</p>
+            <p>{sellerName}</p>
           </div>
           <div id="profile-button">
             {[
@@ -56,165 +138,28 @@ export default function Profile() {
               <div id="active-listings-title" className="activeListings">
                 Active Listings
               </div>
-              <div id="listing-row-1">
-                <div id="listing-1-image"></div>
-                <div id="listing-1-title">Placeholder for listing</div>
-                <div id="listing-1-price">R00 000</div>
-                <button className="customBtn viewlistingBtn">
-                  View Listing
-                </button>
-              </div>
-              <div id="listing-row-2">
-                <div id="listing-2-image"></div>
-                <div id="listing-2-title">Placeholder for listing</div>
-                <div id="listing-2-price">R00 000</div>
-                <button className="customBtn viewlistingBtn">
-                  View Listing
-                </button>
-              </div>
-              <div id="listing-row-3">
-                <div id="listing-3-image"></div>
-                <div id="listing-3-title">Placeholder for listing</div>
-                <div id="listing-3-price">R00 000</div>
-                <button className="customBtn viewlistingBtn">
-                  View Listing
-                </button>
-              </div>
-              <div id="listing-row-4">
-                <div id="listing-4-image"></div>
-                <div id="listing-4-title">Placeholder for listing</div>
-                <div id="listing-4-price">R00 000</div>
-                <button className="customBtn viewlistingBtn">
-                  View Listing
-                </button>
-              </div>
+              {RenderItems(listings)}
             </>
           ) : activeTab === "previousListing" ? (
             <>
               <div id="previous-listings-title" className="previousListings">
                 Previous Listings
               </div>
-              <div id="listing-row-1">
-                <div id="listing-1-image"></div>
-                <div id="listing-1-title">Placeholder for listing</div>
-                <div id="listing-1-price">R00 000</div>
-                <button className="customBtn viewlistingBtn">
-                  View Listing
-                </button>
-              </div>
-              <div id="listing-row-2">
-                <div id="listing-2-image"></div>
-                <div id="listing-2-title">Placeholder for listing</div>
-                <div id="listing-2-price">R00 000</div>
-                <button className="customBtn viewlistingBtn">
-                  View Listing
-                </button>
-              </div>
-              <div id="listing-row-3">
-                <div id="listing-3-image"></div>
-                <div id="listing-3-title">Placeholder for listing</div>
-                <div id="listing-3-price">R00 000</div>
-                <button className="customBtn viewlistingBtn">
-                  View Listing
-                </button>
-              </div>
-              <div id="listing-row-4">
-                <div id="listing-4-image"></div>
-                <div id="listing-4-title">Placeholder for listing</div>
-                <div id="listing-4-price">R00 000</div>
-                <button className="customBtn viewlistingBtn">
-                  View Listing
-                </button>
-              </div>
+              {RenderItems(previouslistings)}
             </>
           ) : activeTab === "viewLiked" ? (
             <>
               <div id="view-liked-title" className="viewLiked">
                 View Liked
               </div>
-              <div id="listing-row-1">
-                <div id="listing-1-image"></div>
-                <div id="listing-1-title">Placeholder for listing</div>
-                <div id="listing-1-price">R00 000</div>
-                <button className="customBtn viewlistingBtn">
-                  View Listing
-                </button>
-              </div>
-              <div id="listing-row-2">
-                <div id="listing-2-image"></div>
-                <div id="listing-2-title">Placeholder for listing</div>
-                <div id="listing-2-price">R00 000</div>
-                <button className="customBtn viewlistingBtn">
-                  View Listing
-                </button>
-              </div>
-              <div id="listing-row-3">
-                <div id="listing-3-image"></div>
-                <div id="listing-3-title">Placeholder for listing</div>
-                <div id="listing-3-price">R00 000</div>
-                <button className="customBtn viewlistingBtn">
-                  View Listing
-                </button>
-              </div>
-              <div id="listing-row-4">
-                <div id="listing-4-image"></div>
-                <div id="listing-4-title">Placeholder for listing</div>
-                <div id="listing-4-price">R00 000</div>
-                <button className="customBtn viewlistingBtn">
-                  View Listing
-                </button>
-              </div>
+              {RenderItems(likedListings)}
             </>
           ) : activeTab === "ratingsComments" ? (
             <>
               <div id="ratings-comments-title" className="ratingsComments">
                 Ratings & Comments
               </div>
-              <div className="comment-row">
-                <div className="comment-product-image"></div>
-                <div className="comment-content">
-                  <div className="comment-product-title">
-                    Burgundy Fabric Collection
-                  </div>
-                  <div className="comment-rating">★★★★★ 5.0</div>
-                  <div className="comment-text">
-                    "Amazing quality and fast shipping! Highly recommend this
-                    seller."
-                  </div>
-                </div>
-              </div>
-              <div className="comment-row">
-                <div className="comment-product-image"></div>
-                <div className="comment-content">
-                  <div className="comment-product-title">Denim Jacket</div>
-                  <div className="comment-rating">★★★★☆ 4.0</div>
-                  <div className="comment-text">
-                    "Great product, though sizing runs a bit small. Otherwise
-                    excellent."
-                  </div>
-                </div>
-              </div>
-              <div className="comment-row">
-                <div className="comment-product-image"></div>
-                <div className="comment-content">
-                  <div className="comment-product-title">Soft Peach Blouse</div>
-                  <div className="comment-rating">★★★★★ 5.0</div>
-                  <div className="comment-text">
-                    "Beautiful piece! Perfect fit and the color is exactly as
-                    pictured."
-                  </div>
-                </div>
-              </div>
-              <div className="comment-row">
-                <div className="comment-product-image"></div>
-                <div className="comment-content">
-                  <div className="comment-product-title">Terracotta Scarf</div>
-                  <div className="comment-rating">★★★☆☆ 3.0</div>
-                  <div className="comment-text">
-                    "Good quality but took longer to arrive than expected."
-                  </div>
-                </div>
-              </div>
+              {RenderItems(ratingsComments)}
             </>
           ) : (
             <div></div>

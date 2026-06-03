@@ -5,13 +5,16 @@ import RedFooter from "../components/RedFooter";
 import CartCard from "../components/cartCard"; 
 import RatingSellerCard from "../components/RatingSellerCard"; 
 import {TrashIcon} from "react-bootstrap-icons";
+import { useAuth } from '../context/authContext';
+import axios from "axios";
+import CmntRateModal from "../components/commentRateModal";
 
 function Cart() {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
   
   // Modal toggle and data tracking states
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(true);
   const [uniqueSellers, setUniqueSellers] = useState([]);
 
   const token = localStorage.getItem("token"); 
@@ -161,14 +164,10 @@ function Cart() {
         </div>
       </div>
       
-      {/* Structural placement of the Rating overlay overlay card */}
-      <RatingSellerCard 
-        isOpen={isModalOpen}
-        sellers={uniqueSellers}
-        onSubmit={handleFinalCheckout}
-        onClose={() => setIsModalOpen(false)}
-      />
-
+      <CmntRateModal
+      isOpen={isModalOpen}
+      onClose={() => setIsModalOpen(false)} />
+ 
       <RedFooter />
     </div>
   );

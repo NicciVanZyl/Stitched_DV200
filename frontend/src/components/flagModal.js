@@ -106,7 +106,7 @@ export default function FlagModal({ isOpen, setClosed, postID }) {
     return (
         <ThemeProvider theme={theme}>
             <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Flag This Post</DialogTitle>
+                <DialogTitle style={{ color: '#421918', fontWeight: 700, fontSize: '2rem' }}>Flag This Post</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
                         Flagging this post means it will be put under review by our admins and could potentially be removed.
