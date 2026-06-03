@@ -24,6 +24,7 @@ import BackToTop from "../components/btt";
 function Home() {
   const navigate = useNavigate();
   const [activeListings, setActiveListings] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   // Gets approved listings to display on the cards
   const GetApprovedListings = async () => {
