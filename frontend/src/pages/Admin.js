@@ -8,7 +8,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 
 function AdminPage() {
-  const { user, token } = useAuth();
+  const { user, token, isAdmin } = useAuth();
 
   const [activeTab, setActiveTab] = useState("viewFlags");
   const [openDropdownId, setOpenDropdownId] = useState(null);
@@ -207,7 +207,7 @@ function AdminPage() {
       console.error("Error rejecting listing:", error);
     }
   };
-
+ if (isAdmin) {
   return (
     <div id="main-wrapper">
       <div id="content-container">
@@ -223,62 +223,46 @@ function AdminPage() {
               const isActive = activeTab === tab;
               {isActive && <div className="active-indicator-bar" />}
 
-              if (tab === "switchProfile") {
-                return (
-                  <Link to="/personalProfile" className="tab-routing-link" key={tab}>
-                    <button
-                      className={`tab-button ${isActive ? "active" : ""}`}
-                      onClick={() => {
-                        setActiveTab(tab);
-                        setOpenDropdownId(null);
-                      }}
-                    >
-                      <div className="tab-label">{tabLabels[tab]}</div>
-                    </button>
-                  </Link>
-                );
-              }
+                if (tab === "addListing") {
+                  return (
+                    <Link to="/addListing" className="tab-routing-link" key={tab}>
+                      <button
+                        className={`tab-button ${isActive ? "active" : ""}`}
+                        onClick={() => {
+                          setActiveTab(tab);
+                          setOpenDropdownId(null);
+                        }}
+                      >
+                        <div className="tab-label">{tabLabels[tab]}</div>
+                      </button>
+                    </Link>
+                  );
+                }
 
-              if (tab === "addListing") {
                 return (
-                  <Link to="/addListing" className="tab-routing-link" key={tab}>
-                    <button
-                      className={`tab-button ${isActive ? "active" : ""}`}
-                      onClick={() => {
-                        setActiveTab(tab);
-                        setOpenDropdownId(null);
-                      }}
-                    >
-                      <div className="tab-label">{tabLabels[tab]}</div>
-                    </button>
-                  </Link>
+                  <button
+                    className={`tab-button ${isActive ? "active" : ""}`}
+                    key={tab}
+                    onClick={() => {
+                      setActiveTab(tab);
+                      setOpenDropdownId(null);
+                    }}
+                  >
+                    <div className="tab-label">{tabLabels[tab]}</div>
+                  </button>
                 );
-              }
+              })}
+            </div>
 
-              return (
-                <button
-                  className={`tab-button ${isActive ? "active" : ""}`}
-                  key={tab}
-                  onClick={() => {
-                    setActiveTab(tab);
-                    setOpenDropdownId(null);
-                  }}
-                >
-                  <div className="tab-label">{tabLabels[tab]}</div>
-                </button>
-              );
-            })}
           </div>
 
-        </div>
 
-
-        {/* Right Content Panel */}
-        <div id="right-panel">
-          {/* View Flags Tab */}
-          {activeTab === "viewFlags" && (
-            <div className="flags-container">
-              <div className="header-title flags-header-align">Admin Dashboard</div>
+          {/* Right Content Panel */}
+          <div id="right-panel">
+            {/* View Flags Tab */}
+            {activeTab === "viewFlags" && (
+              <div className="flags-container">
+                <div className="header-title flags-header-align">Admin Dashboard</div>
 
               {flaggedProducts.length === 0 ? (
                 <p className="switch-profile-notice">No system flags reported.</p>
@@ -419,9 +403,22 @@ function AdminPage() {
           ].includes(activeTab) && <div className="empty-spacer"></div>}
         </div>
 
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div id="main-wrapper">
+        <div id="content-container">
+          <div style={{ 'marginTop': "10%" }}>
+
+            <h2>You are not an admin</h2>
+            <button className="customBtn" style={{ 'height': "fit-content", textDecoration: 'none' }}><Link style={{ 'color': "#000", textDecoration: 'none' }} to="/Home">Return to Home Page</Link></button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default AdminPage;

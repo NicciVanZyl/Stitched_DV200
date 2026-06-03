@@ -265,8 +265,6 @@ export default function Profile() {
                   className="btn-cancel"
                   style={{
                     marginLeft: "5.5rem",
-                    width: "11.75rem",
-                    height: "4.44rem",
                   }}
                   onClick={() => {
                     getProfile();

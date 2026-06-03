@@ -123,11 +123,7 @@ const UpdateListing = async (req, res) => {
 
 const ListingSold = async (req, res) => {
   try {
-    const soldListing = await Listing.findByIdAndUpdate(
-      req.params.id,
-      { isSold: true, isActive: false },
-      { new: true, runValidators: true },
-    );
+    const soldListing = await Listing.findByIdAndUpdate(req.params.id, { isSold: true }, { new: true });
     if (!soldListing)
       return res.status(404).json({ message: "Listing not found" });
     res.status(200).json(soldListing);
@@ -209,7 +205,7 @@ const ToggleLike = async (req, res) => {
 
 const GetLikedListings = async (req, res) => {
   try {
-    const listings = await Listing.find({ likes: req.user._id });
+    const listings = await Listing.find({ likes: req.user._id, isSold: false });
     if (!listings)
       return res.status(404).json({ message: "No listings found" });
 

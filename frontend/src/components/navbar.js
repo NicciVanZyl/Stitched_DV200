@@ -7,17 +7,54 @@ import StitchedRedLogo from "../images/StitchedRedLogo.png";
 import CartIcon from "../images/CartIcon.png";
 import ProfileIcon from "../images/ProfileIcon.png";
 import WishlistIcon from "../images/WishlistIcon.png";
+import { useAuth } from "../context/authContext";
 
 function Navigation() {
   const location = useLocation();
+  const { isAdmin, isUser } = useAuth();
   if (location.pathname === "/") return null;
 
+  const renderIcons = () => {
+    if (isAdmin) {
+      return (
+        <div style={{ display: "flex", alignItems: "center", gap: "1.2rem" }}>
+          <Nav.Link as={Link} to="/Cart" style={{ padding: 0 }}>
+            <img src={CartIcon} alt="Cart" className="navIcons" />
+          </Nav.Link>
+          <Nav.Link
+            as={Link}
+            to="/Admin"
+            style={{ padding: 0, display: "flex", alignItems: "center" }}
+          >
+            <Shield size={24} className="navIcons" />
+          </Nav.Link>
+          <Nav.Link as={Link} to="/personalProfile" style={{ padding: 0 }}>
+            <img src={ProfileIcon} alt="Profile" className="navIcons" />
+          </Nav.Link>
+        </div>
+      )
+    } else if (isUser) {
+      return (<div style={{ display: "flex", alignItems: "center", gap: "1.2rem" }}>
+        <Nav.Link as={Link} to="/Cart" style={{ padding: 0 }}>
+          <img src={CartIcon} alt="Cart" className="navIcons" />
+        </Nav.Link>
+        <Nav.Link as={Link} to="/personalProfile" style={{ padding: 0 }}>
+          <img src={ProfileIcon} alt="Profile" className="navIcons" />
+        </Nav.Link>
+      </div>)
+    } else {
+      return (<div style={{ display: "flex", alignItems: "center", gap: "1.2rem" }}>
+       
+        <Nav.Link as={Link} to="/" style={{ padding: 0 }}>
+          <img src={ProfileIcon} alt="Profile" className="navIcons" />
+        </Nav.Link>
+      </div>)
+    }
+
+  }
+
   return (
-    <Navbar
-      expand="lg"
-      className="navBackground navbar"
-      style={{ position: "sticky", top: 0, zIndex: 1000, padding: "1rem 0" }}
-    >
+    <Navbar expand="lg" className="navBackground navbar">
       {/* Full navbar layout — 3 columns: left links | center logo | right icons */}
       <div
         style={{
@@ -64,21 +101,7 @@ function Navigation() {
         </div>
 
         {/* Right — icons */}
-        <div style={{ display: "flex", alignItems: "center", gap: "1.2rem" }}>
-          <Nav.Link as={Link} to="/Cart" style={{ padding: 0 }}>
-            <img src={CartIcon} alt="Cart" className="navIcons" />
-          </Nav.Link>
-          <Nav.Link
-            as={Link}
-            to="/Admin"
-            style={{ padding: 0, display: "flex", alignItems: "center" }}
-          >
-            <Shield size={24} className="navIcons" />
-          </Nav.Link>
-          <Nav.Link as={Link} to="/personalProfile" style={{ padding: 0 }}>
-            <img src={ProfileIcon} alt="Profile" className="navIcons" />
-          </Nav.Link>
-        </div>
+        {renderIcons()}
       </div>
     </Navbar>
   );
