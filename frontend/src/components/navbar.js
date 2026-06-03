@@ -13,11 +13,7 @@ function Navigation() {
   if (location.pathname === "/") return null;
 
   return (
-    <Navbar
-      expand="lg"
-      className="navBackground navbar"
-      style={{ position: "sticky", top: 0, zIndex: 1000, padding: "1rem 0" }}
-    >
+    <Navbar expand="lg" className="navBackground navbar">
       {/* Full navbar layout — 3 columns: left links | center logo | right icons */}
       <div
         style={{
