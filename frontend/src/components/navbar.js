@@ -1,14 +1,12 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import { List } from "react-bootstrap-icons";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { List, Search, Shield } from "react-bootstrap-icons";
 import StitchedRedLogo from "../images/StitchedRedLogo.png";
 import CartIcon from "../images/CartIcon.png";
 import ProfileIcon from "../images/ProfileIcon.png";
 import WishlistIcon from "../images/WishlistIcon.png";
-import FlagIcon from "../images/FlagIcon.png";
 
 function Navigation() {
   const location = useLocation();
@@ -18,59 +16,70 @@ function Navigation() {
     <Navbar
       expand="lg"
       className="navBackground navbar"
-      margin-top="8rem"
-      position="fixed"
-      // variant="light"
+      style={{ position: "sticky", top: 0, zIndex: 1000, padding: "1rem 0" }}
     >
-      <Container>
-        <Navbar.Brand></Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav">
-          <List color="white" size={30} />
-        </Navbar.Toggle>
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link as={Link} to="/Home">
-              Home
-            </Nav.Link>
-            <Nav.Link as={Link} to="/ProductListing">
-              Shop
-            </Nav.Link>
-            <Nav.Link as={Link} to="/personalProfile">
-              Personal Profile
-            </Nav.Link>
-            <Link className="link Logo" to="/Home">
-              <img
-                src={StitchedRedLogo}
-                alt="Stitched Logo"
-                className="navbarLogo"
-              />
-            </Link>
-            <Nav.Link as={Link} to="/">
-              Login
-            </Nav.Link>
+      {/* Full navbar layout — 3 columns: left links | center logo | right icons */}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          width: "100%",
+          padding: "0 2rem",
+        }}
+      >
+        {/* Left — text links */}
+        <div style={{ display: "flex", alignItems: "center", gap: "2rem" }}>
+          <Nav.Link
+            as={Link}
+            to="/Home"
+            style={{ fontWeight: "600", padding: 0 }}
+          >
+            Home
+          </Nav.Link>
+          <Nav.Link
+            as={Link}
+            to="/ProductListing"
+            style={{ fontWeight: "600", padding: 0 }}
+          >
+            Shop
+          </Nav.Link>
+        </div>
 
-            <Nav.Link as={Link} to="/ProductDetails">
-              Product Details
-            </Nav.Link>
+        {/* Center — logo */}
+        <div
+          style={{
+            position: "absolute",
+            left: "50%",
+            transform: "translateX(-50%)",
+          }}
+        >
+          <Link to="/Home">
+            <img
+              src={StitchedRedLogo}
+              alt="Stitched Logo"
+              className="navbarLogo"
+            />
+          </Link>
+        </div>
 
-            <Nav.Link as={Link} to="/Flag">
-              <img src={FlagIcon} alt="Profile Icon" className="navIcons" />
-            </Nav.Link>
-            <Nav.Link as={Link} to="/Wishlist">
-              <img src={WishlistIcon} alt="Cart Icon" className="navIcons" />
-            </Nav.Link>
-            <Nav.Link as={Link} to="/Cart">
-              <img src={CartIcon} alt="Cart Icon" className="navIcons" />
-            </Nav.Link>
-            <Nav.Link as={Link} to="/Profile">
-              <img src={ProfileIcon} alt="Profile Icon" className="navIcons" />
-            </Nav.Link>
-            <Nav.Link as={Link} to="/Admin">
-              Admin
-            </Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
+        {/* Right — icons */}
+        <div style={{ display: "flex", alignItems: "center", gap: "1.2rem" }}>
+          <Nav.Link as={Link} to="/Cart" style={{ padding: 0 }}>
+            <img src={CartIcon} alt="Cart" className="navIcons" />
+          </Nav.Link>
+          <Nav.Link
+            as={Link}
+            to="/Admin"
+            style={{ padding: 0, display: "flex", alignItems: "center" }}
+          >
+            <Shield size={24} className="navIcons" />
+          </Nav.Link>
+          <Nav.Link as={Link} to="/personalProfile" style={{ padding: 0 }}>
+            <img src={ProfileIcon} alt="Profile" className="navIcons" />
+          </Nav.Link>
+        </div>
+      </div>
     </Navbar>
   );
 }

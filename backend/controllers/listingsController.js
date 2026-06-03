@@ -78,9 +78,9 @@ const GetAwaitingApproval = async (req, res) => {
   try {
     const listings = await Listing.find({ isActive: false });
     console.log(listings);
-    
+
     if (!listings) {
-      return res.status(404).json({ message: 'Listing not found' });
+      return res.status(404).json({ message: "Listing not found" });
     }
     res.status(200).json(listings);
   } catch (error) {
@@ -93,9 +93,9 @@ const GetApproved = async (req, res) => {
   try {
     const listings = await Listing.find({ isActive: true, isSold: false });
     console.log(listings);
-    
+
     if (!listings) {
-      return res.status(404).json({ message: 'Listing not found' });
+      return res.status(404).json({ message: "Listing not found" });
     }
     res.status(200).json(listings);
   } catch (error) {
@@ -140,6 +140,35 @@ const ApproveListing = async (req, res) => {
       return res.status(404).json({ message: "Listing not found" });
     await approvedListing.save();
     res.status(200).json(approvedListing);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+const GetPrevious = async (req, res) => {
+  try {
+    const previousListing = await Listing.find({
+      postedBy: req.params.id,
+      isSold: true,
+    });
+    if (!previousListing)
+      return res.status(404).json({ message: "Listing not found" });
+    res.status(200).json(previousListing);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+const GetActive = async (req, res) => {
+  try {
+    const activeListing = await Listing.find({
+      postedBy: req.params.id,
+      isSold: false,
+      isActive: true,
+    });
+    if (!activeListing)
+      return res.status(404).json({ message: "Listing not found" });
+    res.status(200).json(activeListing);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -214,6 +243,7 @@ module.exports = {
   DeleteListing,
   UploadImage,
   GetAwaitingApproval,
-  GetApproved
+  GetApproved,
+  GetPrevious,
+  GetActive,
 };
-
