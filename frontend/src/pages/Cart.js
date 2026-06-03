@@ -17,21 +17,65 @@ function Cart() {
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [uniqueSellers, setUniqueSellers] = useState([]);
 
-  const token = localStorage.getItem("token"); 
+  const { user, token } = useAuth();
+
+  const GetCartItems = async () => {
+    try {
+      const localCart = localStorage.getItem("cart");
+      const parsedCart = localCart ? JSON.parse(localCart) : [];
+
+      if (!Array.isArray(parsedCart) || parsedCart.length === 0) {
+        setCartItems([]);
+        return;
+      }
+
+      const enrichedCart = await Promise.all(
+        parsedCart.map(async (item) => {
+          const itemId = item._id || item.id;
+          if (!itemId) return item;
+
+          try {
+            const res = await axios.get(`http://localhost:5009/api/listing/${itemId}`, {
+              headers: { authorization: `Bearer ${token}` },
+            });
+            return { ...item, ...res.data, _id: itemId };
+          } catch (error) {
+            console.error(`Error fetching listing ${itemId}:`, error);
+            return item;
+          }
+        }),
+      );
+
+      setCartItems(enrichedCart);
+    } catch (error) {
+      console.error("Error fetching cart items:", error);
+      const localCart = localStorage.getItem("cart");
+      if (localCart) {
+        setCartItems(JSON.parse(localCart));
+      } else {
+        setCartItems([]);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const localCart = localStorage.getItem("cart");
-    if (localCart) {
-      setCartItems(JSON.parse(localCart));
+    if (token) {
+      GetCartItems();
     } else {
-      // Fallback Visual Mock Data (Includes Seller ID structures for dynamic loops)
-      setCartItems([
-        { _id: "1", name: "Sample Item 1", price: 150, sellerId: "s1", sellerName: "Alpha Trader" },
-        { _id: "2", name: "Sample Item 2", price: 250, sellerId: "s2", sellerName: "Beta Goods" }
-      ]);
+      const localCart = localStorage.getItem("cart");
+      if (localCart) {
+        setCartItems(JSON.parse(localCart));
+      } else {
+        setCartItems([
+          { _id: "1", name: "Sample Item 1", price: 150, sellerId: "s1", sellerName: "Alpha Trader" },
+          { _id: "2", name: "Sample Item 2", price: 250, sellerId: "s2", sellerName: "Beta Goods" }
+        ]);
+      }
+      setLoading(false);
     }
-    setLoading(false);
-  }, []);
+  }, [token]);
 
   const handleDeleteCartItem = (id) => {
     const updatedCart = cartItems.filter((item) => (item._id || item.id) !== id);
@@ -65,19 +109,20 @@ function Cart() {
     try {
       const promises = cartItems.map(async (item) => {
         const itemId = item._id || item.id;
-        const response = await fetch(`http://localhost:5009/api/listing/${itemId}/sold`, {
-          method: "PATCH",
-          headers: {
-            "Authorization": `Bearer ${token}`,
-            "Content-Type": "application/json"
+        return axios.patch(
+          `http://localhost:5009/api/listing/${itemId}/sold`,
+          { sold: true },
+          {
+            headers: {
+              authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
           },
-          body: JSON.stringify({ sold: true })
-        });
-        return response;
+        );
       });
 
       const results = await Promise.all(promises);
-      const allSuccessful = results.every(res => res.ok);
+      const allSuccessful = results.every((res) => res.status >= 200 && res.status < 300);
 
       if (allSuccessful) {
         alert("Checkout successful! Thank you for rating the sellers.");
