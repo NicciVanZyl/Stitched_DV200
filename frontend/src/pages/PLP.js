@@ -69,7 +69,7 @@ function ProductListing() {
     GetAllListings();
   }, [])
 
-//filters have to be reapplied every time you filter in any way because it hates me. Thus it's a function
+  //filters have to be reapplied every time you filter in any way because it hates me. Thus it's a function
   const applyFilters = (category, rating, size, priceRange, search) => {
     if (listings.length === 0) return;
 
@@ -94,9 +94,13 @@ function ProductListing() {
       tempListings = tempListings.filter(listing => labels.includes(listing.size));
     }
 
-    tempListings = tempListings.filter(listing =>
-      listing.price >= priceRange[0] && listing.price <= priceRange[1]
-    );
+    if (priceRange?.length > 0) {
+      tempListings = tempListings.filter(listing => {
+        return listing.price <= priceRange[1] && listing.price >= priceRange[0]
+      }
+
+      );
+    }
 
     if (search) {
       tempListings = tempListings.filter(listing =>
@@ -108,14 +112,14 @@ function ProductListing() {
     setFiltered(true);
   };
 
-//apply filters for dropdowns and sliders
+  //apply filters for dropdowns and sliders
   useEffect(() => {
     applyFilters(selectedItemCategory, selectedItemRating, selectedItemSize, value, searchVal);
   }, [selectedItemCategory, selectedItemRating, selectedItemSize])
 
   const ChangeSliderVals = (newValues) => {
     setValue(newValues);
-    applyFilters(selectedItemCategory, selectedItemRating, selectedItemSize, value, newValues);
+    applyFilters(selectedItemCategory, selectedItemRating, selectedItemSize, newValues, searchVal);
   };
 
   //search filter stuff
