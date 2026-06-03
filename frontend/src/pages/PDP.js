@@ -17,7 +17,8 @@ import FlagModal from '../components/flagModal';
 import { useLocation } from 'react-router-dom';
 import axios from "axios";
 import { useAuth } from '../context/authContext';
-
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 //Custom styling for Icon Buttons
 const theme = createTheme({
@@ -56,7 +57,10 @@ const theme = createTheme({
 function ProductDetails() {
   const { state } = useLocation();
   const { listing } = state;
-
+  const navigate = useNavigate();
+  const handleViewSeller = () => {
+    navigate(`/Profile/${listing.postedBy}`, { state: { sellerId: listing.postedBy } });
+  };
   const { user, token } = useAuth();
 
   const [selectedFlag, setSelectedFlag] = useState(false);
@@ -140,10 +144,10 @@ function ProductDetails() {
                       <h1>{listing.name}</h1>
                       <h2>R{listing.price}</h2>
                     </div>
-                    <div>
-                      <h3>{sellerName}</h3>
+                    <Stack>
+                      <Button id='sellerNameLink' onClick={handleViewSeller}><h3>{sellerName}</h3></Button>
                       <Rating name="size-medium" value={sellerRating} precision={0.5} readOnly />
-                    </div>
+                    </Stack>
                   </Stack>
                   <Stack>
                     <p>Size: {listing.size}</p>

@@ -187,12 +187,14 @@ function Sliders({ onChangeValues }) {
     const [value1, setValue1] = React.useState(0);
     const [value2, setValue2] = React.useState(10000);
 
+
     const handleChange = (event, newValue, activeThumb) => {
         if (activeThumb === 0) {
             setValue([Math.min(newValue[0], value[1] - minDistance), value[1]]);
-
+            setValue1(Math.min(newValue[0], value[1] - minDistance))
         } else {
             setValue([value[0], Math.max(newValue[1], value[0] + minDistance)]);
+            setValue2(Math.max(newValue[1], value[0] + minDistance))
         }
         if (onChangeValues) {
             onChangeValues(value);
@@ -203,19 +205,25 @@ function Sliders({ onChangeValues }) {
         const newMin = event.target.value;
         setValue([newMin, value[1]]);
         setValue1(newMin);
+        if (onChangeValues) {
+            onChangeValues([newMin, value[1]]);
+        }
     };
 
     const handleChangeSelectorsMax = (event) => {
         const newMax = event.target.value;
         setValue([value[0], newMax]);
         setValue2(newMax);
+        if (onChangeValues) {
+            onChangeValues([value[0], newMax]);
+        }
     };
 
     useEffect(() => {
         if (onChangeValues) {
             onChangeValues(value);
         }
-    }, [value,value1,value2])
+    }, [value])
 
     return (
         <ThemeProvider theme={theme}>

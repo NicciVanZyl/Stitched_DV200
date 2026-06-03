@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import { useAuth } from "../context/authContext";
 import "./Profile.css";
 import axios from "axios";
+import { useLocation } from 'react-router-dom';
 
 export default function Profile() {
+  const { state } = useLocation();
+  const { sellerId } = state;
+
   const [activePage, setActivePage] = useState(1);
   const [activeTab, setActiveTab] = useState("activeListing");
   const [hoverTab, setHoverTab] = useState(null);
