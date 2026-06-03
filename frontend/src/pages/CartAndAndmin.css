@@ -149,12 +149,8 @@
 }
 
 .checkoutBtn {
-  border-radius: 2rem;
+  border-radius: 0.5rem;
   width: 100%;
-}
-
-.checkoutBtn:hover {
-  border-radius: 2rem;
 }
 
 /* Layout and Containers Admin Page */
@@ -715,4 +711,20 @@
 
 .close-modal-btn:hover {
   opacity: 1;
+}
+
+/* Comment & Rate Seller Modal */
+.cmntModalBtn{
+  color: #421918 !important;
+  border: transparent !important;
+  text-transform: none !important;
+  width: 12rem;
+  height: 2.5rem;
+  font-weight: 500;
+}
+
+.cmntModalBtn:hover {
+  color: #fff !important;
+  text-transform: none !important;
+  font-weight: 500;
 }
