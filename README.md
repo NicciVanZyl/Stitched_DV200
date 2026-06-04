@@ -187,7 +187,7 @@ Integrating live fulfillment updates directly into the application framework wou
 [Google Slides](https://docs.google.com/presentation/d/e/2PACX-1vQ-M0Th6eNv9HQ59XZeFUv6ZDA3GsxP2Gl17jnraLrNO8AuHeBSyPbq_Bamb718k1sw3L9_sGlT9vQu/pub?start=true&loop=true&delayms=10000)
 
 ### Demo Video:
-[Google Drive Link]()
+[Google Drive Link](https://drive.google.com/file/d/1MFGlMTD-Wddk2wVRpSoVfMzhoVKSx3fk/view?usp=drive_link)
 
 ---
 
