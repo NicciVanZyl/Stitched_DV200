@@ -5,6 +5,7 @@ import "./Profile.css";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import ProfileCards from "../components/profileCards";
+import CommentCards from "../components/commentCard"
 
 export default function Profile() {
   const { state } = useLocation();
@@ -19,8 +20,13 @@ export default function Profile() {
   const [ratingsComments, setRatingsComments] = useState([]);
   const { user, token } = useAuth();
   const [sellerName, setSellerName] = useState();
+
+
   const RenderItems = (listings) => {
     return listings.map((listing) => <ProfileCards listing={listing} />);
+  };
+  const RenderComments = (comments) => {
+    return comments.map((comment) => <CommentCards comment={comment} />);
   };
 
   const getProfile = async () => {
@@ -80,7 +86,7 @@ export default function Profile() {
   const getRatingsComments = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:5009/api/rating-comment/${sellerId}`,
+        `http://localhost:5009/api/comment/seller/${sellerId}`,
         { headers: { authorization: `Bearer ${token}` } },
       );
       setRatingsComments(res.data);
@@ -160,7 +166,7 @@ export default function Profile() {
               <div id="ratings-comments-title" className="ratingsComments">
                 Ratings & Comments
               </div>
-              {RenderItems(ratingsComments)}
+              {RenderComments(ratingsComments)}
             </>
           ) : (
             <div></div>
