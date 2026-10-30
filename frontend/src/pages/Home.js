@@ -1,15 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 import "../App.css";
 import Button from "react-bootstrap/Button";
 import HomeHeroImg from "../images/HomeHeroImg.png";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import StitchedWhiteLogo from "../images/StitchedWhiteLogo.png";
 import HeroTagline from "../images/HeroTagline.png";
 import OrangeFooter from "../components/OrangeFooter";
 import NewCtgryImg from "../images/NewCtgryImg.png";
@@ -66,54 +64,54 @@ function Home() {
                     <Col lg={12}>
                       <h2 className="categoryTitle mb-4">Shop by Category</h2>
                       
-                      <Row className="justify-content-between g-3"> 
-                        <Col xs={6} md={4} lg={2} className="d-flex flex-column align-items-center">
-                          <div className="categoryImgWrapper">
-                            <img src={NewCtgryImg} alt="New In" className="categoryImg"/>
-                          </div>
-                          <p className="categoryLabel">New</p>
-                        </Col>
+                      <Col xs={6} md={4} lg={2} className="d-flex flex-column align-items-center" style={{ cursor: 'pointer' }} onClick={() => navigate('/ProductListing')}>
+                        <div className="categoryImgWrapper">
+                          <img src={NewCtgryImg} alt="New In" className="categoryImg"/>
+                        </div>
+                        <p className="categoryLabel">All</p>
+                      </Col>
 
-                        <Col xs={6} md={4} lg={2} className="d-flex flex-column align-items-center">
-                          <div className="categoryImgWrapper">
-                            <img src={WomenCtgryImg} alt="Women" className="categoryImg"/>
-                          </div>
-                          <p className="categoryLabel">Women</p>
-                        </Col>
+                      <Col xs={6} md={4} lg={2} className="d-flex flex-column align-items-center" style={{ cursor: 'pointer' }} onClick={() => handleCategoryClick('womans')}>
+                        <div className="categoryImgWrapper">
+                          <img src={WomenCtgryImg} alt="Women" className="categoryImg"/>
+                        </div>
+                        <p className="categoryLabel">Women</p>
+                      </Col>
 
-                        <Col xs={6} md={4} lg={2} className="d-flex flex-column align-items-center">
-                          <div className="categoryImgWrapper">
-                            <img src={MenCtgryImg} alt="Men" className="categoryImg"/>
-                          </div>
-                          <p className="categoryLabel">Men</p>
-                        </Col>
+                      <Col xs={6} md={4} lg={2} className="d-flex flex-column align-items-center" style={{ cursor: 'pointer' }} onClick={() => handleCategoryClick('mens')}>
+                        <div className="categoryImgWrapper">
+                          <img src={MenCtgryImg} alt="Men" className="categoryImg"/>
+                        </div>
+                        <p className="categoryLabel">Men</p>
+                      </Col>
 
-                        <Col xs={6} md={4} lg={2} className="d-flex flex-column align-items-center">
-                          <div className="categoryImgWrapper">
-                            <img src={KidsCtgryImg} alt="Kids" className="categoryImg"/>
-                          </div>
-                          <p className="categoryLabel">Kids</p>
-                        </Col>
+                      <Col xs={6} md={4} lg={2} className="d-flex flex-column align-items-center" style={{ cursor: 'pointer' }} onClick={() => handleCategoryClick('kids')}>
+                        <div className="categoryImgWrapper">
+                          <img src={KidsCtgryImg} alt="Kids" className="categoryImg"/>
+                        </div>
+                        <p className="categoryLabel">Kids</p>
+                      </Col>
 
-                        <Col xs={6} md={4} lg={2} className="d-flex flex-column align-items-center">
-                          <div className="categoryImgWrapper">
-                            <img src={ShoeCtgryImg} alt="Shoes" className="categoryImg"/>
-                          </div>
-                          <p className="categoryLabel">Shoes</p>
-                        </Col>
+                      <Col xs={6} md={4} lg={2} className="d-flex flex-column align-items-center" style={{ cursor: 'pointer' }} onClick={() => handleCategoryClick('shoes')}>
+                        <div className="categoryImgWrapper">
+                          <img src={ShoeCtgryImg} alt="Shoes" className="categoryImg"/>
+                        </div>
+                        <p className="categoryLabel">Shoes</p>
+                      </Col>
 
-                        <Col xs={6} md={4} lg={2} className="d-flex flex-column align-items-center">
-                          <div className="categoryImgWrapper">
-                            <img src={AccessCtgryImg} alt="Accessories" className="categoryImg"/>
-                          </div>
-                          <p className="categoryLabel">Accessories</p>
-                        </Col>
-                      </Row>
-                    </Col>
-                  </Row>
+                      <Col xs={6} md={4} lg={2} className="d-flex flex-column align-items-center" style={{ cursor: 'pointer' }} onClick={() => handleCategoryClick('accessories')}>
+                        <div className="categoryImgWrapper">
+                          <img src={AccessCtgryImg} alt="Accessories" className="categoryImg"/>
+                        </div>
+                        <p className="categoryLabel">Accessories</p>
+                      </Col>
+
+                    </Row>
+                  </Col>
                 </Row>
-              </Col>
-            </Row>
+              </Row>
+            </Col>
+          </Row>
 
             {/* <Row className="justify-content-center mt-5">
               <Col lg={4} md={6} className="mb-4">
@@ -153,13 +151,12 @@ function Home() {
               </Col>
             </Row>
 
-            <BackToTop />
-
-            <OrangeFooter />
-          </Container> 
-        </div>
-      </>
-    );
+          <BackToTop />
+          <OrangeFooter />
+        </Container>
+      </div>
+    </>
+  );
 }
 
 export default Home;
