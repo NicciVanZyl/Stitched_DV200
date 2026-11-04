@@ -10,7 +10,7 @@
   * [App description](#app-description)
   * [Creative Login Description](#creative-login-description)
   * [Built With](#built-with)
-  * [ERD](#erd)
+  * [Use Case Diagram](#use-case-diagram)
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
   * [How to install](#how-to-install)
@@ -48,7 +48,7 @@ This project incorporates a creative authentication challenging the paradigm of 
 
 Instead of typing a traditional password, users interact with a beautifully curated grid of Pantone™ colour cards. During registration, users select a personalised 5 colour sequence that acts as their secure key. Upon logging in, the user must remember and click their unique 5 colour sequence from the palette grid to gain entry. This brings a visual, highly intuitive and gamified memory twist to security, making it ideal for visual thinkers while preserving strong core authentication principles.
 
-### ERD:
+### Use Case Diagram:
 <p align="center"><img src="https://github.com/NicciVanZyl/Stitched_DV200/blob/main/frontend/src/Github_assets/ERD.png" width="600" /></p>
 
 ---
